@@ -37,6 +37,8 @@ dependencies {
     implementation(AndroidLibConfig.Dependencies.coreKtx)
     implementation(AndroidLibConfig.Dependencies.appCompat)
     implementation(AndroidLibConfig.Dependencies.constraintLayout)
+    implementation(AndroidLibConfig.Dependencies.recyclerView)
+    implementation(AndroidLibConfig.Dependencies.cardView)
 
     testImplementation(TestConfig.Dependencies.jUnit)
 }

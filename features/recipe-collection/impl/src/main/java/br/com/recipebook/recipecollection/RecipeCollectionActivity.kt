@@ -1,4 +1,4 @@
-package br.com.recipebook
+package br.com.recipebook.recipecollection
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

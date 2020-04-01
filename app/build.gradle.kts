@@ -39,4 +39,6 @@ dependencies {
     implementation(AndroidLibConfig.Dependencies.constraintLayout)
 
     testImplementation(TestConfig.Dependencies.jUnit)
+
+    implementation(project(":features:recipe-collection:impl"))
 }

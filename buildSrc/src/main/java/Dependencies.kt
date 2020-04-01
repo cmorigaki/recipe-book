@@ -25,12 +25,16 @@ object AndroidLibConfig {
     const val coreKtx = "1.2.0"
     const val appCompat = "1.1.0"
     const val constraintLayout = "1.1.3"
+    const val recyclerView = "1.1.0"
+    const val cardView = "1.0.0"
 
     object Dependencies {
         const val coreKtx = "androidx.core:core-ktx:${AndroidLibConfig.coreKtx}"
         const val appCompat = "androidx.appcompat:appcompat:${AndroidLibConfig.appCompat}"
         const val constraintLayout =
             "androidx.constraintlayout:constraintlayout:${AndroidLibConfig.constraintLayout}"
+        const val recyclerView = "androidx.recyclerview:recyclerview:${AndroidLibConfig.recyclerView}"
+        const val cardView = "androidx.cardview:cardview:${AndroidLibConfig.cardView}"
     }
 }
 
