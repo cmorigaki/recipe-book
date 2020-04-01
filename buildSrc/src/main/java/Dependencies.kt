@@ -1,6 +1,6 @@
 object EnvironmentConfig {
     const val kotlin = "1.3.71"
-    const val gradle = "4.1.0-alpha04"
+    const val gradle = "4.0.0-beta03"
     const val jvmTarget = "1.8"
 
     object Dependencies {
