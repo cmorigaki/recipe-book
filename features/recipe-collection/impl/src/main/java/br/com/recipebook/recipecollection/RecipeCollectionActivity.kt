@@ -23,7 +23,7 @@ class RecipeCollectionActivity : AppCompatActivity() {
         binding.recipeList.adapter = recipeCollectionAdapter
         binding.recipeList.addItemDecoration(
             MarginItemDecoration(
-                resources.getDimension(R.dimen.margin_components).toInt()
+                resources.getDimension(R.dimen.margin_components_default).toInt()
             )
         )
     }

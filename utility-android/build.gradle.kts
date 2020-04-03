@@ -46,7 +46,5 @@ dependencies {
 
     testImplementation(TestConfig.Dependencies.jUnit)
 
-    implementation(project(Project.utilityAndroid))
     implementation(project(Project.utilityKotlin))
-    implementation(project(Project.coreAndroid))
 }

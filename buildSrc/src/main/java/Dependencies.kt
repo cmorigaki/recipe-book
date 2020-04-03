@@ -1,12 +1,13 @@
 object EnvironmentConfig {
-    const val kotlin = "1.3.71"
-    const val gradle = "4.0.0-beta03"
+    private const val kotlin = "1.3.71"
+    private const val gradle = "4.0.0-beta03"
     const val jvmTarget = "1.8"
 
     object Dependencies {
-        const val gradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${EnvironmentConfig.kotlin}"
-        const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib:${EnvironmentConfig.kotlin}"
-        const val gradle = "com.android.tools.build:gradle:${EnvironmentConfig.gradle}"
+        const val gradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin"
+        const val kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib:$kotlin"
+        const val kotlinJdk = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin"
+        const val gradleTools = "com.android.tools.build:gradle:$gradle"
     }
 }
 
@@ -22,11 +23,11 @@ object AndroidConfig {
 }
 
 object AndroidLibConfig {
-    const val coreKtx = "1.2.0"
-    const val appCompat = "1.1.0"
-    const val constraintLayout = "1.1.3"
-    const val recyclerView = "1.1.0"
-    const val cardView = "1.0.0"
+    private const val coreKtx = "1.2.0"
+    private const val appCompat = "1.1.0"
+    private const val constraintLayout = "1.1.3"
+    private const val recyclerView = "1.1.0"
+    private const val cardView = "1.0.0"
 
     object Dependencies {
         const val coreKtx = "androidx.core:core-ktx:${AndroidLibConfig.coreKtx}"
@@ -38,8 +39,18 @@ object AndroidLibConfig {
     }
 }
 
+object Project {
+    const val utilityKotlin = ":utility-kotlin"
+    const val utilityAndroid = ":utility-android"
+    const val coreAndroid = ":core-android"
+}
+
+object Features {
+    const val recipeCollectionImpl = ":features:recipe-collection:impl"
+}
+
 object TestConfig {
-    const val jUnit = "4.12"
+    private const val jUnit = "4.12"
 
     object Dependencies {
         const val jUnit = "junit:junit:${TestConfig.jUnit}"

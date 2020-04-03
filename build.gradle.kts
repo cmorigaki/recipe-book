@@ -5,7 +5,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath (EnvironmentConfig.Dependencies.gradle)
+        classpath (EnvironmentConfig.Dependencies.gradleTools)
         classpath (EnvironmentConfig.Dependencies.gradlePlugin)
 
         // NOTE: Do not place your application dependencies here; they belong

@@ -33,12 +33,12 @@ android {
 }
 
 dependencies {
-    implementation(EnvironmentConfig.Dependencies.kotlin)
+    implementation(EnvironmentConfig.Dependencies.kotlinStdLib)
     implementation(AndroidLibConfig.Dependencies.coreKtx)
     implementation(AndroidLibConfig.Dependencies.appCompat)
     implementation(AndroidLibConfig.Dependencies.constraintLayout)
 
     testImplementation(TestConfig.Dependencies.jUnit)
 
-    implementation(project(":features:recipe-collection:impl"))
+    implementation(project(Features.recipeCollectionImpl))
 }

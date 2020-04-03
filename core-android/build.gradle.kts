@@ -39,14 +39,6 @@ android {
 dependencies {
     implementation(EnvironmentConfig.Dependencies.kotlinStdLib)
     implementation(AndroidLibConfig.Dependencies.coreKtx)
-    implementation(AndroidLibConfig.Dependencies.appCompat)
-    implementation(AndroidLibConfig.Dependencies.constraintLayout)
-    implementation(AndroidLibConfig.Dependencies.recyclerView)
-    implementation(AndroidLibConfig.Dependencies.cardView)
 
     testImplementation(TestConfig.Dependencies.jUnit)
-
-    implementation(project(Project.utilityAndroid))
-    implementation(project(Project.utilityKotlin))
-    implementation(project(Project.coreAndroid))
 }
