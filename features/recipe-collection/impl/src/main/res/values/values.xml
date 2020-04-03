@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="portion_size">%s porções</string>
+
+    <dimen name="margin_components">6dp</dimen>
+</resources>
