@@ -1,9 +1,7 @@
 package br.com.recipebook.recipecollection
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ListView
 import androidx.recyclerview.widget.RecyclerView
 import br.com.recipebook.recipecollection.databinding.RecipeCardBinding
 import br.com.recipebook.recipecollection.view.RecipeItem
@@ -41,7 +39,7 @@ class RecipeCollectionAdapter : RecyclerView.Adapter<RecipeCollectionAdapter.Rec
                 title.text = item.title
                 category.text = item.category
                 recipeSize.text =
-                    root.context.getString(R.string.portion_size, item.portionSize.toString())
+                    root.context.getString(R.string.recipe_collection_portion_size, item.portionSize.toString())
             }
         }
     }

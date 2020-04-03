@@ -55,6 +55,6 @@
             android:layout_margin="5dp"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintTop_toBottomOf="@id/title"
-            tools:text="@string/portion_size"/>
+            tools:text="@string/recipe_collection_portion_size"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
