@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import br.com.recipebook.recipecollection.databinding.RecipeCollectionActivityBinding
 import br.com.recipebook.recipecollection.view.RecipeItem
+import br.com.recipebook.utilityandroid.MarginItemDecoration
 import java.math.BigDecimal
 
 class RecipeCollectionActivity : AppCompatActivity() {

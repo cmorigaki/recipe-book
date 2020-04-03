@@ -1,4 +1,4 @@
-package br.com.recipebook.recipecollection
+package br.com.recipebook.utilityandroid
 
 import android.graphics.Rect
 import android.view.View
