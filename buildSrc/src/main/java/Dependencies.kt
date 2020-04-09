@@ -24,6 +24,13 @@ object AndroidConfig {
 
 object AndroidLibConfig {
     private const val coreKtx = "1.2.0"
+    private const val coroutinesCore = "1.1.1"
+    private const val coroutinesAndroid = "1.1.1"
+
+    private const val retrofit = "2.8.1"
+    private const val moshi = "2.8.1"
+    private const val moshiCodeGen = "1.9.2"
+
     private const val appCompat = "1.1.0"
     private const val constraintLayout = "1.1.3"
     private const val recyclerView = "1.1.0"
@@ -31,10 +38,20 @@ object AndroidLibConfig {
 
     object Dependencies {
         const val coreKtx = "androidx.core:core-ktx:${AndroidLibConfig.coreKtx}"
+        const val coroutinesCore =
+            "org.jetbrains.kotlinx:kotlinx-coroutines-core:${AndroidLibConfig.coroutinesCore}"
+        const val coroutinesAndroid =
+            "org.jetbrains.kotlinx:kotlinx-coroutines-core:${AndroidLibConfig.coroutinesAndroid}"
+
+        const val retrofit = "com.squareup.retrofit2:retrofit:${AndroidLibConfig.retrofit}"
+        const val moshiConverter = "com.squareup.retrofit2:converter-moshi:${AndroidLibConfig.moshi}"
+        const val moshiCodeGen = "com.squareup.moshi:moshi-kotlin-codegen:${AndroidLibConfig.moshiCodeGen}"
+
         const val appCompat = "androidx.appcompat:appcompat:${AndroidLibConfig.appCompat}"
         const val constraintLayout =
             "androidx.constraintlayout:constraintlayout:${AndroidLibConfig.constraintLayout}"
-        const val recyclerView = "androidx.recyclerview:recyclerview:${AndroidLibConfig.recyclerView}"
+        const val recyclerView =
+            "androidx.recyclerview:recyclerview:${AndroidLibConfig.recyclerView}"
         const val cardView = "androidx.cardview:cardview:${AndroidLibConfig.cardView}"
     }
 }

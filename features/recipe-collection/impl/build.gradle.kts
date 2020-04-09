@@ -2,6 +2,7 @@ plugins {
     id("com.android.library")
     kotlin("android")
     kotlin("android.extensions")
+    kotlin("kapt")
 }
 
 android {
@@ -39,6 +40,13 @@ android {
 dependencies {
     implementation(EnvironmentConfig.Dependencies.kotlinStdLib)
     implementation(AndroidLibConfig.Dependencies.coreKtx)
+    implementation(AndroidLibConfig.Dependencies.coroutinesCore)
+    implementation(AndroidLibConfig.Dependencies.coroutinesAndroid)
+
+    implementation(AndroidLibConfig.Dependencies.retrofit)
+    implementation(AndroidLibConfig.Dependencies.moshiConverter)
+    kapt(AndroidLibConfig.Dependencies.moshiCodeGen)
+
     implementation(AndroidLibConfig.Dependencies.appCompat)
     implementation(AndroidLibConfig.Dependencies.constraintLayout)
     implementation(AndroidLibConfig.Dependencies.recyclerView)

@@ -32,31 +32,31 @@ class RecipeCollectionActivity : AppCompatActivity() {
     private fun mockList() {
         val list = arrayListOf(
             RecipeItem(
-                imgUrl = null,
+                imgPath = null,
                 title = "Feijoada",
                 category = "Brasileira",
                 portionSize = BigDecimal(4)
             ),
             RecipeItem(
-                imgUrl = null,
+                imgPath = null,
                 title = "Frango com purê",
                 category = "Brasileira",
                 portionSize = BigDecimal(2)
             ),
             RecipeItem(
-                imgUrl = null,
+                imgPath = null,
                 title = "Sashimi",
                 category = "Japonesa",
                 portionSize = BigDecimal(6)
             ),
             RecipeItem(
-                imgUrl = null,
+                imgPath = null,
                 title = "Macarrão a bolonhesa",
                 category = "Italiana",
                 portionSize = BigDecimal(4)
             ),
             RecipeItem(
-                imgUrl = null,
+                imgPath = null,
                 title = "Hamburguer Gordo",
                 category = "Americana",
                 portionSize = BigDecimal(1)
