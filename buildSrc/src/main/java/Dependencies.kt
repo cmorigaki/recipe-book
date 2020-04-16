@@ -54,9 +54,9 @@ object AndroidLibConfig {
         const val recyclerView =
             "androidx.recyclerview:recyclerview:${AndroidLibConfig.recyclerView}"
         const val cardView = "androidx.cardview:cardview:${AndroidLibConfig.cardView}"
-        const val lifecycle = "androidx.lifecycle:lifecycle-runtime-ktx:2.2.0"
         const val viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
         const val livedata = "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
+        const val fragment = "androidx.fragment:fragment-ktx:1.2.2"
     }
 }
 

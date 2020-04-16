@@ -1,27 +1,25 @@
 package br.com.recipebook.recipecollection
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import androidx.lifecycle.lifecycleScope
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.observe
 import br.com.recipebook.recipecollection.databinding.RecipeCollectionActivityBinding
-import br.com.recipebook.recipecollection.di.ServiceLocator
-import br.com.recipebook.recipecollection.view.RecipeItem
+import br.com.recipebook.recipecollection.presentation.RecipeCollectionViewModel
 import br.com.recipebook.utilityandroid.MarginItemDecoration
-import kotlinx.coroutines.launch
-import java.math.BigDecimal
-import br.com.recipebook.utilitykotlin.ResultWrapper
 
 class RecipeCollectionActivity : AppCompatActivity() {
 
+    private val viewModel: RecipeCollectionViewModel by viewModels()
     private val recipeCollectionAdapter by lazy { RecipeCollectionAdapter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         RecipeCollectionActivityBinding.inflate(layoutInflater).apply {
             initComponents(this)
-            setConcreteList()
             setContentView(root)
+            observeState()
         }
     }
 
@@ -34,53 +32,21 @@ class RecipeCollectionActivity : AppCompatActivity() {
         )
     }
 
-    private fun setConcreteList() {
-        lifecycleScope.launch {
-            when (val result = ServiceLocator.getRecipeCollectionRepository().getRecipeCollection()) {
-                is ResultWrapper.Success -> recipeCollectionAdapter.setData(result.data.map {
-                    RecipeItem(it.imgPath, it.title, it.category, it.portionSize)
-                })
-                is ResultWrapper.Failure -> {
-                    recipeCollectionAdapter.setData(emptyList())
-                    Toast.makeText(this@RecipeCollectionActivity, result.error::class.java.simpleName, Toast.LENGTH_SHORT).show()
-                }
+    private fun observeState() {
+        viewModel.viewState.recipes.observe(this) {
+            recipeCollectionAdapter.setData(it)
+        }
+        viewModel.viewState.hasError.observe(this) {
+            if (it) {
+                Toast.makeText(
+                    this@RecipeCollectionActivity,
+                    "Error... improve this",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
-    }
-
-    private fun mockList() {
-        val list = arrayListOf(
-            RecipeItem(
-                imgPath = null,
-                title = "Feijoada",
-                category = "Brasileira",
-                portionSize = BigDecimal(4)
-            ),
-            RecipeItem(
-                imgPath = null,
-                title = "Frango com purê",
-                category = "Brasileira",
-                portionSize = BigDecimal(2)
-            ),
-            RecipeItem(
-                imgPath = null,
-                title = "Sashimi",
-                category = "Japonesa",
-                portionSize = BigDecimal(6)
-            ),
-            RecipeItem(
-                imgPath = null,
-                title = "Macarrão a bolonhesa",
-                category = "Italiana",
-                portionSize = BigDecimal(4)
-            ),
-            RecipeItem(
-                imgPath = null,
-                title = "Hamburguer Gordo",
-                category = "Americana",
-                portionSize = BigDecimal(1)
-            )
-        )
-        recipeCollectionAdapter.setData(list)
+        viewModel.viewState.isLoading.observe(this) {
+            //
+        }
     }
 }

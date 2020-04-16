@@ -52,9 +52,9 @@ dependencies {
     implementation(AndroidLibConfig.Dependencies.constraintLayout)
     implementation(AndroidLibConfig.Dependencies.recyclerView)
     implementation(AndroidLibConfig.Dependencies.cardView)
-    implementation(AndroidLibConfig.Dependencies.lifecycle)
     implementation(AndroidLibConfig.Dependencies.viewmodel)
     implementation(AndroidLibConfig.Dependencies.livedata)
+    implementation(AndroidLibConfig.Dependencies.fragment)
 
     testImplementation(TestConfig.Dependencies.jUnit)
 
