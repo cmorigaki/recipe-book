@@ -1,6 +1,5 @@
 package br.com.recipebook.utilityandroid.network
 
-import br.com.recipebook.utilitykotlin.CommonError
 import br.com.recipebook.utilitykotlin.NetworkError
 import br.com.recipebook.utilitykotlin.Result
 import kotlinx.coroutines.CoroutineDispatcher
@@ -11,13 +10,13 @@ import java.io.IOException
 /**
  * FIXME: This class need some improvements
  */
-suspend inline fun <reified T> safeApiCall(
+suspend fun <T> safeApiCall(
     dispatcher: CoroutineDispatcher,
-    crossinline apiCall: suspend () -> T
+    apiCall: suspend () -> T
 ): Result<T, NetworkError> {
     return withContext(dispatcher) {
         try {
-            Result.Success(apiCall.invoke())
+            Result.Success(apiCall())
         } catch (throwable: Throwable) {
             when (throwable) {
                 is IOException -> Result.Failure(NetworkError.UnknownError)

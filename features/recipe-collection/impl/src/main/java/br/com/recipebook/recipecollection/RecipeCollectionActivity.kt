@@ -2,10 +2,15 @@ package br.com.recipebook.recipecollection
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
 import br.com.recipebook.recipecollection.databinding.RecipeCollectionActivityBinding
+import br.com.recipebook.recipecollection.di.ServiceLocator
 import br.com.recipebook.recipecollection.view.RecipeItem
 import br.com.recipebook.utilityandroid.MarginItemDecoration
+import kotlinx.coroutines.launch
 import java.math.BigDecimal
+import br.com.recipebook.utilitykotlin.Result
 
 class RecipeCollectionActivity : AppCompatActivity() {
 
@@ -15,7 +20,7 @@ class RecipeCollectionActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         RecipeCollectionActivityBinding.inflate(layoutInflater).apply {
             initComponents(this)
-            mockList()
+            setConcreteList()
             setContentView(root)
         }
     }
@@ -27,6 +32,20 @@ class RecipeCollectionActivity : AppCompatActivity() {
                 resources.getDimension(R.dimen.margin_components_default).toInt()
             )
         )
+    }
+
+    private fun setConcreteList() {
+        lifecycleScope.launch {
+            when (val result = ServiceLocator.getRecipeCollectionRepository().getRecipeCollection()) {
+                is Result.Success -> recipeCollectionAdapter.setData(result.data.map {
+                    RecipeItem(it.imgPath, it.title, it.category, it.portionSize)
+                })
+                is Result.Failure -> {
+                    recipeCollectionAdapter.setData(emptyList())
+                    Toast.makeText(this@RecipeCollectionActivity, result.error::class.java.simpleName, Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
     }
 
     private fun mockList() {

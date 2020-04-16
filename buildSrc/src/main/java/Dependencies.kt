@@ -1,6 +1,6 @@
 object EnvironmentConfig {
     private const val kotlin = "1.3.71"
-    private const val gradle = "4.0.0-beta03"
+    private const val gradle = "4.0.0-beta04"
     const val jvmTarget = "1.8"
 
     object Dependencies {
@@ -28,7 +28,7 @@ object AndroidLibConfig {
     private const val coroutinesAndroid = "1.1.1"
 
     private const val retrofit = "2.8.1"
-    private const val moshi = "2.8.1"
+    private const val moshiRetrofit = "2.8.1"
     private const val moshiCodeGen = "1.9.2"
 
     private const val appCompat = "1.1.0"
@@ -44,8 +44,9 @@ object AndroidLibConfig {
             "org.jetbrains.kotlinx:kotlinx-coroutines-core:${AndroidLibConfig.coroutinesAndroid}"
 
         const val retrofit = "com.squareup.retrofit2:retrofit:${AndroidLibConfig.retrofit}"
-        const val moshiConverter = "com.squareup.retrofit2:converter-moshi:${AndroidLibConfig.moshi}"
+        const val moshiConverter = "com.squareup.retrofit2:converter-moshi:${AndroidLibConfig.moshiRetrofit}"
         const val moshiCodeGen = "com.squareup.moshi:moshi-kotlin-codegen:${AndroidLibConfig.moshiCodeGen}"
+        const val moshi = "com.squareup.moshi:moshi:${AndroidLibConfig.moshiCodeGen}"
 
         const val appCompat = "androidx.appcompat:appcompat:${AndroidLibConfig.appCompat}"
         const val constraintLayout =
@@ -53,6 +54,9 @@ object AndroidLibConfig {
         const val recyclerView =
             "androidx.recyclerview:recyclerview:${AndroidLibConfig.recyclerView}"
         const val cardView = "androidx.cardview:cardview:${AndroidLibConfig.cardView}"
+        const val lifecycle = "androidx.lifecycle:lifecycle-runtime-ktx:2.2.0"
+        const val viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
+        const val livedata = "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
     }
 }
 

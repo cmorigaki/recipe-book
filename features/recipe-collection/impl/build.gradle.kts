@@ -45,12 +45,16 @@ dependencies {
 
     implementation(AndroidLibConfig.Dependencies.retrofit)
     implementation(AndroidLibConfig.Dependencies.moshiConverter)
+    implementation(AndroidLibConfig.Dependencies.moshi)
     kapt(AndroidLibConfig.Dependencies.moshiCodeGen)
 
     implementation(AndroidLibConfig.Dependencies.appCompat)
     implementation(AndroidLibConfig.Dependencies.constraintLayout)
     implementation(AndroidLibConfig.Dependencies.recyclerView)
     implementation(AndroidLibConfig.Dependencies.cardView)
+    implementation(AndroidLibConfig.Dependencies.lifecycle)
+    implementation(AndroidLibConfig.Dependencies.viewmodel)
+    implementation(AndroidLibConfig.Dependencies.livedata)
 
     testImplementation(TestConfig.Dependencies.jUnit)
 
