@@ -4,20 +4,20 @@ import br.com.recipebook.recipecollection.data.RecipeCollectionDataSourceRemote
 import br.com.recipebook.recipecollection.domain.model.RecipeModel
 import br.com.recipebook.utilityandroid.network.safeApiCall
 import br.com.recipebook.utilitykotlin.CommonError
-import br.com.recipebook.utilitykotlin.Result
+import br.com.recipebook.utilitykotlin.ResultWrapper
 import kotlinx.coroutines.Dispatchers
 import retrofit2.http.GET
 
 internal class RecipeCollectionDataSourceRemoteImpl(
     private val api: RecipeCollectionApi
 ) : RecipeCollectionDataSourceRemote {
-    override suspend fun getRecipeCollection(): Result<List<RecipeModel>, CommonError> {
+    override suspend fun getRecipeCollection(): ResultWrapper<List<RecipeModel>, CommonError> {
         val result = safeApiCall(Dispatchers.IO) {
             api.getData()
         }
         return when (result) {
-            is Result.Success -> Result.Success(result.data.recipeList.map(::mapRecipeToModel))
-            is Result.Failure -> Result.Failure(result.error)
+            is ResultWrapper.Success -> ResultWrapper.Success(result.data.recipeList.map(::mapRecipeToModel))
+            is ResultWrapper.Failure -> ResultWrapper.Failure(result.error)
         }
     }
 

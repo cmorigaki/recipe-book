@@ -10,7 +10,7 @@ import br.com.recipebook.recipecollection.view.RecipeItem
 import br.com.recipebook.utilityandroid.MarginItemDecoration
 import kotlinx.coroutines.launch
 import java.math.BigDecimal
-import br.com.recipebook.utilitykotlin.Result
+import br.com.recipebook.utilitykotlin.ResultWrapper
 
 class RecipeCollectionActivity : AppCompatActivity() {
 
@@ -37,10 +37,10 @@ class RecipeCollectionActivity : AppCompatActivity() {
     private fun setConcreteList() {
         lifecycleScope.launch {
             when (val result = ServiceLocator.getRecipeCollectionRepository().getRecipeCollection()) {
-                is Result.Success -> recipeCollectionAdapter.setData(result.data.map {
+                is ResultWrapper.Success -> recipeCollectionAdapter.setData(result.data.map {
                     RecipeItem(it.imgPath, it.title, it.category, it.portionSize)
                 })
-                is Result.Failure -> {
+                is ResultWrapper.Failure -> {
                     recipeCollectionAdapter.setData(emptyList())
                     Toast.makeText(this@RecipeCollectionActivity, result.error::class.java.simpleName, Toast.LENGTH_SHORT).show()
                 }
