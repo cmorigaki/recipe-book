@@ -41,7 +41,10 @@ dependencies {
     implementation(EnvironmentConfig.Dependencies.kotlinStdLib)
     implementation(AndroidLibConfig.Dependencies.coreKtx)
     implementation(AndroidLibConfig.Dependencies.coroutinesCore)
-    implementation(AndroidLibConfig.Dependencies.coroutinesAndroid)
+
+    implementation(AndroidLibConfig.Dependencies.koinLifecycle)
+    implementation(AndroidLibConfig.Dependencies.koinViewModel)
+    implementation(AndroidLibConfig.Dependencies.koinFragment)
 
     implementation(AndroidLibConfig.Dependencies.retrofit)
     implementation(AndroidLibConfig.Dependencies.moshiConverter)

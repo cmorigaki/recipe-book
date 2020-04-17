@@ -35,10 +35,8 @@ android {
 dependencies {
     implementation(EnvironmentConfig.Dependencies.kotlinStdLib)
     implementation(AndroidLibConfig.Dependencies.coreKtx)
-    implementation(AndroidLibConfig.Dependencies.appCompat)
-    implementation(AndroidLibConfig.Dependencies.constraintLayout)
 
-    testImplementation(TestConfig.Dependencies.jUnit)
+    implementation(AndroidLibConfig.Dependencies.koinAndroid)
 
     implementation(project(Features.recipeCollectionImpl))
 }
