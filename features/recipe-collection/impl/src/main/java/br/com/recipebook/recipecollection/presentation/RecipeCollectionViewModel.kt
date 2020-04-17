@@ -9,7 +9,8 @@ import br.com.recipebook.utilitykotlin.CommonError
 import br.com.recipebook.utilitykotlin.ResultWrapper
 import kotlinx.coroutines.launch
 
-class RecipeCollectionViewModel : BaseViewModel<RecipeCollectionViewState>() {
+class RecipeCollectionViewModel :
+    BaseViewModel<RecipeCollectionViewState, RecipeCollectionViewAction>() {
 
     override val viewState = RecipeCollectionViewState()
     private val getRecipeCollection = ServiceLocator.getRecipeCollection()
@@ -17,6 +18,10 @@ class RecipeCollectionViewModel : BaseViewModel<RecipeCollectionViewState>() {
     init {
         setInitialState()
         loadRecipeList()
+    }
+
+    override fun dispatchViewAction(action: RecipeCollectionViewAction) {
+
     }
 
     private fun setInitialState() {
