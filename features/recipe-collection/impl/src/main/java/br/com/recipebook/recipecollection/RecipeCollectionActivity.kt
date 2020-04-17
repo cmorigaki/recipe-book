@@ -2,16 +2,16 @@ package br.com.recipebook.recipecollection
 
 import android.os.Bundle
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.observe
 import br.com.recipebook.recipecollection.databinding.RecipeCollectionActivityBinding
 import br.com.recipebook.recipecollection.presentation.RecipeCollectionViewModel
 import br.com.recipebook.utilityandroid.MarginItemDecoration
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class RecipeCollectionActivity : AppCompatActivity() {
 
-    private val viewModel: RecipeCollectionViewModel by viewModels()
+    private val viewModel: RecipeCollectionViewModel by viewModel(clazz = RecipeCollectionViewModel::class)
     private val recipeCollectionAdapter by lazy { RecipeCollectionAdapter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {

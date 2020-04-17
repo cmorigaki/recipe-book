@@ -8,13 +8,11 @@ import br.com.recipebook.utilityandroid.presentation.BaseViewModel
 import br.com.recipebook.utilitykotlin.CommonError
 import br.com.recipebook.utilitykotlin.ResultWrapper
 import kotlinx.coroutines.launch
-import org.koin.java.KoinJavaComponent.getKoin
 
-class RecipeCollectionViewModel :
-    BaseViewModel<RecipeCollectionViewState, RecipeCollectionViewAction>() {
-
-    override val viewState = RecipeCollectionViewState()
-    private val getRecipeCollection: GetRecipeCollectionUseCase = getKoin().get()
+class RecipeCollectionViewModel(
+    override val viewState: RecipeCollectionViewState,
+    private val getRecipeCollection: GetRecipeCollectionUseCase
+) : BaseViewModel<RecipeCollectionViewState, RecipeCollectionViewAction>() {
 
     init {
         setInitialState()
