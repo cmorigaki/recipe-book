@@ -1,17 +1,17 @@
 package br.com.recipebook.recipecollection.presentation
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.com.recipebook.recipecollection.di.ServiceLocator
 import br.com.recipebook.recipecollection.domain.model.RecipeModel
 import br.com.recipebook.recipecollection.view.RecipeItem
+import br.com.recipebook.utilityandroid.presentation.BaseViewModel
 import br.com.recipebook.utilitykotlin.CommonError
 import br.com.recipebook.utilitykotlin.ResultWrapper
 import kotlinx.coroutines.launch
 
-class RecipeCollectionViewModel : ViewModel() {
+class RecipeCollectionViewModel : BaseViewModel<RecipeCollectionViewState>() {
 
-    val viewState = RecipeCollectionViewState()
+    override val viewState = RecipeCollectionViewState()
     private val getRecipeCollection = ServiceLocator.getRecipeCollection()
 
     init {
