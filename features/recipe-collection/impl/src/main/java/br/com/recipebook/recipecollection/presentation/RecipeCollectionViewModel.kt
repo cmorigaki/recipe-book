@@ -1,19 +1,20 @@
 package br.com.recipebook.recipecollection.presentation
 
 import androidx.lifecycle.viewModelScope
-import br.com.recipebook.recipecollection.di.ServiceLocator
 import br.com.recipebook.recipecollection.domain.model.RecipeModel
+import br.com.recipebook.recipecollection.domain.usecase.GetRecipeCollectionUseCase
 import br.com.recipebook.recipecollection.view.RecipeItem
 import br.com.recipebook.utilityandroid.presentation.BaseViewModel
 import br.com.recipebook.utilitykotlin.CommonError
 import br.com.recipebook.utilitykotlin.ResultWrapper
 import kotlinx.coroutines.launch
+import org.koin.java.KoinJavaComponent.getKoin
 
 class RecipeCollectionViewModel :
     BaseViewModel<RecipeCollectionViewState, RecipeCollectionViewAction>() {
 
     override val viewState = RecipeCollectionViewState()
-    private val getRecipeCollection = ServiceLocator.getRecipeCollection()
+    private val getRecipeCollection: GetRecipeCollectionUseCase = getKoin().get()
 
     init {
         setInitialState()

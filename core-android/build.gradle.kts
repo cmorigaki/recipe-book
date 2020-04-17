@@ -40,5 +40,14 @@ dependencies {
     implementation(EnvironmentConfig.Dependencies.kotlinStdLib)
     implementation(AndroidLibConfig.Dependencies.coreKtx)
 
+    implementation(AndroidLibConfig.Dependencies.koinAndroid)
+
+    implementation(AndroidLibConfig.Dependencies.retrofit)
+    implementation(AndroidLibConfig.Dependencies.moshiConverter)
+    implementation(AndroidLibConfig.Dependencies.moshi)
+
+    implementation(project(Project.utilityAndroid))
+    implementation(project(Project.utilityKotlin))
+
     testImplementation(TestConfig.Dependencies.jUnit)
 }

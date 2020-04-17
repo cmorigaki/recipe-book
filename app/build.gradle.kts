@@ -38,5 +38,8 @@ dependencies {
 
     implementation(AndroidLibConfig.Dependencies.koinAndroid)
 
+    implementation(project(Project.coreAndroid))
+    implementation(project(Project.utilityAndroid))
+    implementation(project(Project.utilityKotlin))
     implementation(project(Features.recipeCollectionImpl))
 }
