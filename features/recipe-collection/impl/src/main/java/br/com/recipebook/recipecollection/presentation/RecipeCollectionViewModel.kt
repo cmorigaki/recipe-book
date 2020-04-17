@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 class RecipeCollectionViewModel : ViewModel() {
 
     val viewState = RecipeCollectionViewState()
-    private val recipeCollectionRepository = ServiceLocator.getRecipeCollectionRepository()
+    private val getRecipeCollection = ServiceLocator.getRecipeCollection()
 
     init {
         setInitialState()
@@ -28,7 +28,7 @@ class RecipeCollectionViewModel : ViewModel() {
     private fun loadRecipeList() = viewModelScope.launch {
         viewState.isLoading.value = true
 
-        when (val result = recipeCollectionRepository.getRecipeCollection()) {
+        when (val result = getRecipeCollection()) {
             is ResultWrapper.Success -> onLoadRecipeListSuccess(result.data)
             is ResultWrapper.Failure -> onLoadRecipeListError(result.error)
         }

@@ -7,6 +7,8 @@ import br.com.recipebook.recipecollection.data.local.RecipeCollectionDataSourceL
 import br.com.recipebook.recipecollection.data.remote.RecipeCollectionApi
 import br.com.recipebook.recipecollection.data.remote.RecipeCollectionDataSourceRemoteImpl
 import br.com.recipebook.recipecollection.domain.RecipeCollectionRepository
+import br.com.recipebook.recipecollection.domain.usecase.GetRecipeCollection
+import br.com.recipebook.recipecollection.domain.usecase.GetRecipeCollectionUseCase
 import br.com.recipebook.utilityandroid.network.BigDecimalAdapter
 import com.squareup.moshi.Moshi
 import okhttp3.OkHttpClient
@@ -49,5 +51,9 @@ internal object ServiceLocator {
         return RecipeCollectionDataSourceRemoteImpl(
             api = getApi()
         )
+    }
+
+    fun getRecipeCollection(): GetRecipeCollectionUseCase {
+        return GetRecipeCollection(getRecipeCollectionRepository())
     }
 }
