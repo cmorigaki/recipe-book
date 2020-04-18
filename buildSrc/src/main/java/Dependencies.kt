@@ -39,6 +39,7 @@ object AndroidLibConfig {
         const val viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
         const val livedata = "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
         const val fragment = "androidx.fragment:fragment-ktx:1.2.2"
+        const val swipeRefresh = "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
 
         private const val koinVersion = "2.1.5"
         const val koinAndroid = "org.koin:koin-android:$koinVersion" // Koin for Android

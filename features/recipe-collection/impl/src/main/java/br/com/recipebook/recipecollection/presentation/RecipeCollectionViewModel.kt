@@ -20,7 +20,9 @@ class RecipeCollectionViewModel(
     }
 
     override fun dispatchViewAction(action: RecipeCollectionViewAction) {
-
+        when(action) {
+            is RecipeCollectionViewAction.Refresh -> loadRecipeList()
+        }
     }
 
     private fun setInitialState() {

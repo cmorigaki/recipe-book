@@ -58,6 +58,7 @@ dependencies {
     implementation(AndroidLibConfig.Dependencies.viewmodel)
     implementation(AndroidLibConfig.Dependencies.livedata)
     implementation(AndroidLibConfig.Dependencies.fragment)
+    implementation(AndroidLibConfig.Dependencies.swipeRefresh)
 
     implementation(AndroidLibConfig.Dependencies.fresco)
 

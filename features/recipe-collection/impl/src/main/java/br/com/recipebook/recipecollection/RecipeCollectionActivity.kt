@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.observe
 import br.com.recipebook.coreandroid.image.ImageResolver
 import br.com.recipebook.recipecollection.databinding.RecipeCollectionActivityBinding
+import br.com.recipebook.recipecollection.presentation.RecipeCollectionViewAction
 import br.com.recipebook.recipecollection.presentation.RecipeCollectionViewModel
 import br.com.recipebook.utilityandroid.MarginItemDecoration
 import org.koin.android.ext.android.getKoin
@@ -26,20 +27,27 @@ class RecipeCollectionActivity : AppCompatActivity() {
         RecipeCollectionActivityBinding.inflate(layoutInflater).apply {
             initComponents(this)
             setContentView(root)
-            observeState()
+            observeState(this)
         }
     }
 
     private fun initComponents(binding: RecipeCollectionActivityBinding) {
-        binding.recipeList.adapter = recipeCollectionAdapter
-        binding.recipeList.addItemDecoration(
-            MarginItemDecoration(
-                resources.getDimension(R.dimen.margin_components_default).toInt()
+        with(binding) {
+            recipeList.adapter = recipeCollectionAdapter
+            recipeList.addItemDecoration(
+                MarginItemDecoration(
+                    resources.getDimension(R.dimen.margin_components_default).toInt()
+                )
             )
-        )
+            swipeRefresh.setOnRefreshListener {
+                viewModel.dispatchViewAction(
+                    RecipeCollectionViewAction.Refresh
+                )
+            }
+        }
     }
 
-    private fun observeState() {
+    private fun observeState(binding: RecipeCollectionActivityBinding) {
         viewModel.viewState.recipes.observe(this) {
             recipeCollectionAdapter.setData(it)
         }
@@ -53,7 +61,7 @@ class RecipeCollectionActivity : AppCompatActivity() {
             }
         }
         viewModel.viewState.isLoading.observe(this) {
-            //
+            binding.swipeRefresh.isRefreshing = it
         }
     }
 }

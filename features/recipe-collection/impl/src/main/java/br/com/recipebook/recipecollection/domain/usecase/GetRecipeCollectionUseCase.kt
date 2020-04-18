@@ -13,6 +13,8 @@ class GetRecipeCollection(
     private val recipeCollectionRepository: RecipeCollectionRepository
 ) : GetRecipeCollectionUseCase {
     override suspend fun invoke(): ResultWrapper<List<RecipeModel>, CommonError> {
-        return recipeCollectionRepository.getRecipeCollection()
+        return recipeCollectionRepository.getRecipeCollection().mapSuccess {
+            it.shuffled()
+        }
     }
 }

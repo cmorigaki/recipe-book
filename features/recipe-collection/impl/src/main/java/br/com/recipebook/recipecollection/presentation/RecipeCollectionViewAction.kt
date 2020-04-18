@@ -1,3 +1,5 @@
 package br.com.recipebook.recipecollection.presentation
 
-sealed class RecipeCollectionViewAction
+sealed class RecipeCollectionViewAction {
+    object Refresh: RecipeCollectionViewAction()
+}
