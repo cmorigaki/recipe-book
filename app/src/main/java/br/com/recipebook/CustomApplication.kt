@@ -3,6 +3,7 @@ package br.com.recipebook
 import android.app.Application
 import br.com.recipebook.coreandroid.di.coreAndroidModule
 import br.com.recipebook.recipecollection.di.recipeCollectionModules
+import com.facebook.drawee.backends.pipeline.Fresco
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -20,5 +21,6 @@ class CustomApplication : Application() {
                         recipeCollectionModules
             )
         }
+        Fresco.initialize(this)
     }
 }

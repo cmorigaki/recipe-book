@@ -48,6 +48,8 @@ object AndroidLibConfig {
             "org.koin:koin-androidx-viewmodel:$koinVersion" // or Koin for Android Architecture ViewModel
         const val koinFragment =
             "org.koin:koin-androidx-fragment:$koinVersion" // or Koin for Android Fragment Factory (unstable version)
+
+        const val fresco = "com.facebook.fresco:fresco:2.2.0"
     }
 }
 

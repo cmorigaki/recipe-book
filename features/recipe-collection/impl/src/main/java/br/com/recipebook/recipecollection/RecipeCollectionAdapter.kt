@@ -3,10 +3,13 @@ package br.com.recipebook.recipecollection
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import br.com.recipebook.coreandroid.image.ImageResolver
 import br.com.recipebook.recipecollection.databinding.RecipeCardBinding
 import br.com.recipebook.recipecollection.view.RecipeItem
 
-class RecipeCollectionAdapter : RecyclerView.Adapter<RecipeCollectionAdapter.RecipeViewHolder>() {
+class RecipeCollectionAdapter(
+    private val imageResolver: ImageResolver
+) : RecyclerView.Adapter<RecipeCollectionAdapter.RecipeViewHolder>() {
 
     private var list = emptyList<RecipeItem>()
 
@@ -17,11 +20,12 @@ class RecipeCollectionAdapter : RecyclerView.Adapter<RecipeCollectionAdapter.Rec
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeViewHolder {
         return RecipeViewHolder(
-            RecipeCardBinding.inflate(
+            binding = RecipeCardBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
-            )
+            ),
+            imageResolver = imageResolver
         )
     }
 
@@ -31,7 +35,10 @@ class RecipeCollectionAdapter : RecyclerView.Adapter<RecipeCollectionAdapter.Rec
         holder.bind(list[position])
     }
 
-    class RecipeViewHolder(private val binding: RecipeCardBinding) :
+    class RecipeViewHolder(
+        private val binding: RecipeCardBinding,
+        private val imageResolver: ImageResolver
+    ) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: RecipeItem) {
@@ -39,7 +46,11 @@ class RecipeCollectionAdapter : RecyclerView.Adapter<RecipeCollectionAdapter.Rec
                 title.text = item.title
                 category.text = item.category
                 recipeSize.text =
-                    root.context.getString(R.string.recipe_collection_portion_size, item.portionSize.toString())
+                    root.context.getString(
+                        R.string.recipe_collection_portion_size,
+                        item.portionSize.toString()
+                    )
+                recipeImage.setImageURI(imageResolver.mountUrl(item.imgPath))
             }
         }
     }

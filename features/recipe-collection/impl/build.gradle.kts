@@ -59,6 +59,8 @@ dependencies {
     implementation(AndroidLibConfig.Dependencies.livedata)
     implementation(AndroidLibConfig.Dependencies.fragment)
 
+    implementation(AndroidLibConfig.Dependencies.fresco)
+
     testImplementation(TestConfig.Dependencies.jUnit)
 
     implementation(project(Project.utilityAndroid))
