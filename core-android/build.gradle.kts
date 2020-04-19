@@ -40,6 +40,9 @@ dependencies {
     implementation(EnvironmentConfig.Dependencies.kotlinStdLib)
     implementation(AndroidLibConfig.Dependencies.coreKtx)
 
+    // For theming
+    implementation(AndroidLibConfig.Dependencies.appCompat)
+
     implementation(AndroidLibConfig.Dependencies.koinAndroid)
 
     implementation(AndroidLibConfig.Dependencies.retrofit)
