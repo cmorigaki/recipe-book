@@ -1,12 +1,9 @@
 name: Release
 
 on:
-  pull_request:
-    branches:
-      - 'master'
   push:
     branches:
-      - 'master'
+      - 'release*'
 
 jobs:
   test:
@@ -20,7 +17,7 @@ jobs:
         with:
           java-version: 1.8
       - name: Unit tests
-        run: bash ./gradlew test --stacktrace
+        run: ./gradlew test --stacktrace
 
   apk:
     name: Generate APK
@@ -33,7 +30,7 @@ jobs:
         with:
           java-version: 1.8
       - name: Build debug APK
-        run: bash ./gradlew assembleDebug --stacktrace
+        run: ./gradlew assembleDebug --stacktrace
       - name: Upload APK
         uses: actions/upload-artifact@v1
         with:

@@ -84,7 +84,3 @@ lint/outputs/
 lint/tmp/
 # lint/reports/
 
-#gradle
-gradle/
-gradlew
-gradlew.bat
