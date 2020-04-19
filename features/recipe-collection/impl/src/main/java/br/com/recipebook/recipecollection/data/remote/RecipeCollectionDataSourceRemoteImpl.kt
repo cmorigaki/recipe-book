@@ -24,9 +24,7 @@ internal class RecipeCollectionDataSourceRemoteImpl(
     private fun mapRecipeToModel(recipe: RecipeResponse) =
         RecipeModel(
             imgPath = recipe.imgPath,
-            title = recipe.title,
-            category = recipe.category,
-            portionSize = recipe.portions
+            title = recipe.title
         )
 }
 

@@ -36,7 +36,8 @@ class RecipeCollectionActivity : AppCompatActivity() {
             recipeList.adapter = recipeCollectionAdapter
             recipeList.addItemDecoration(
                 MarginItemDecoration(
-                    resources.getDimension(R.dimen.margin_components_default).toInt()
+                    space = resources.getDimension(R.dimen.margin_components_default).toInt(),
+                    spanCount = 2
                 )
             )
             swipeRefresh.setOnRefreshListener {

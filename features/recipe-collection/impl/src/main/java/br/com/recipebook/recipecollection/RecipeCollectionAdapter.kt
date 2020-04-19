@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import br.com.recipebook.coreandroid.image.ImageResolver
+import br.com.recipebook.coreandroid.image.ImageSize
 import br.com.recipebook.recipecollection.databinding.RecipeCardBinding
 import br.com.recipebook.recipecollection.view.RecipeItem
 
@@ -44,13 +45,7 @@ class RecipeCollectionAdapter(
         fun bind(item: RecipeItem) {
             with(binding) {
                 title.text = item.title
-                category.text = item.category
-                recipeSize.text =
-                    root.context.getString(
-                        R.string.recipe_collection_portion_size,
-                        item.portionSize.toString()
-                    )
-                recipeImage.setImageURI(imageResolver.mountUrl(item.imgPath))
+                recipeImage.setImageURI(imageResolver.mountUrl(item.imgPath, ImageSize.SMALL))
             }
         }
     }
