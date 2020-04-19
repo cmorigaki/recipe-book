@@ -65,9 +65,8 @@ object Features {
 }
 
 object TestConfig {
-    private const val jUnit = "4.12"
-
     object Dependencies {
-        const val jUnit = "junit:junit:${TestConfig.jUnit}"
+        const val jUnit = "junit:junit:4.12"
+        const val mockk = "io.mockk:mockk:1.9.3"
     }
 }

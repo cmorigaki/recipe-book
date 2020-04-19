@@ -8,8 +8,7 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:elevation="0dp"
-    card_view:cardCornerRadius="4dp"
-    tools:layout_width="160dp">
+    card_view:cardCornerRadius="4dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
