@@ -51,7 +51,7 @@ class ImageResolverTest {
     fun `mountUrl with LARGE placeholder`() {
         val url = imageResolver.mountUrl("{size}/macarronada.png", ImageSize.LARGE)
 
-        val expected = Configuration.IMG_URL + "/macarronada.png"
+        val expected = Configuration.IMG_URL + "macarronada.png"
         assertEquals(expected, url)
     }
 }
