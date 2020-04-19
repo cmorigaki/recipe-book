@@ -45,7 +45,7 @@ class RecipeCollectionViewModel(
     private fun onLoadRecipeListSuccess(list: List<RecipeModel>) {
         viewState.hasError.value = false
         viewState.recipes.value = list.map {
-            RecipeItem(it.imgPath, it.title, it.category, it.portionSize)
+            RecipeItem(it.imgPath, it.title)
         }
     }
 

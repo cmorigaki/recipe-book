@@ -11,7 +11,5 @@ data class RecipeListResponse(
 @JsonClass(generateAdapter = true)
 data class RecipeResponse(
     val title: String,
-    val category: String?,
-    val portions: BigDecimal?,
     val imgPath: String?
 )

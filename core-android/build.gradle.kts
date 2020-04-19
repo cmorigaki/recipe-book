@@ -40,7 +40,7 @@ dependencies {
     implementation(EnvironmentConfig.Dependencies.kotlinStdLib)
     implementation(AndroidLibConfig.Dependencies.coreKtx)
 
-    // For theming
+    // For theme
     implementation(AndroidLibConfig.Dependencies.appCompat)
 
     implementation(AndroidLibConfig.Dependencies.koinAndroid)
@@ -53,4 +53,5 @@ dependencies {
     implementation(project(Project.utilityKotlin))
 
     testImplementation(TestConfig.Dependencies.jUnit)
+    testImplementation(TestConfig.Dependencies.mockk)
 }

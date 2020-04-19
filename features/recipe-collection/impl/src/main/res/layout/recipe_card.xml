@@ -30,7 +30,7 @@
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+            android:layout_margin="6dp"
             android:ellipsize="end"
             android:lines="2"
             android:textColor="?android:textColorPrimary"
@@ -38,28 +38,9 @@
             card_view:layout_constraintStart_toStartOf="parent"
             card_view:layout_constraintTop_toBottomOf="@id/recipe_image"
             card_view:layout_constraintWidth_default="wrap"
-            tools:text="@tools:sample/first_names" />
-
-        <TextView
-            android:id="@+id/category"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:textColor="?android:textColorSecondary"
-            android:textSize="14sp"
-            card_view:layout_constraintStart_toStartOf="parent"
-            card_view:layout_constraintTop_toBottomOf="@id/title"
-            tools:text="@tools:sample/first_names" />
-
-        <TextView
-            android:id="@+id/recipe_size"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:textColor="?android:textColorSecondary"
-            android:textSize="14sp"
+            card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintEnd_toEndOf="parent"
-            card_view:layout_constraintTop_toBottomOf="@id/title"
-            tools:text="@string/recipe_collection_portion_size" />
+            card_view:layout_constraintHorizontal_bias="0"
+            tools:text="@tools:sample/first_names" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
