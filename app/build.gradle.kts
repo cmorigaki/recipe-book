@@ -41,8 +41,10 @@ dependencies {
     implementation(project(Project.coreAndroid))
     implementation(project(Project.utilityAndroid))
     implementation(project(Project.utilityKotlin))
+    implementation(project(Project.navigation))
 
     implementation(AndroidLibConfig.Dependencies.fresco)
 
-    implementation(project(Features.recipeCollectionImpl))
+    implementation(project(Features.recipeCollection))
+    implementation(project(Features.recipeDetail))
 }

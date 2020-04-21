@@ -40,6 +40,8 @@ object AndroidLibConfig {
         const val livedata = "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
         const val fragment = "androidx.fragment:fragment-ktx:1.2.2"
         const val swipeRefresh = "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
+        const val coordinatorLayout = "androidx.coordinatorlayout:coordinatorlayout:1.1.0"
+        const val material = "com.google.android.material:material:1.1.0"
 
         private const val koinVersion = "2.1.5"
         const val koinAndroid = "org.koin:koin-android:$koinVersion" // Koin for Android
@@ -58,10 +60,12 @@ object Project {
     const val utilityKotlin = ":utility-kotlin"
     const val utilityAndroid = ":utility-android"
     const val coreAndroid = ":core-android"
+    const val navigation = ":navigation"
 }
 
 object Features {
-    const val recipeCollectionImpl = ":features:recipe-collection:impl"
+    const val recipeCollection = ":features:recipe-collection"
+    const val recipeDetail = ":features:recipe-detail"
 }
 
 object TestConfig {

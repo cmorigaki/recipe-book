@@ -1,8 +1,10 @@
-include(":utility-android")
-include(":utility-kotlin")
-include(":core-android")
 include(
     ":app",
-    ":features:recipe-collection:impl"
+    ":utility-android",
+    ":utility-kotlin",
+    ":core-android",
+    ":navigation",
+    ":features:recipe-collection",
+    ":features:recipe-detail"
 )
 rootProject.name = "Recipe Book"
