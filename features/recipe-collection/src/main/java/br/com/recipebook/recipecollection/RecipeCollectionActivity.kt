@@ -40,7 +40,7 @@ class RecipeCollectionActivity : AppCompatActivity() {
             recipeList.adapter = recipeCollectionAdapter
             recipeList.addItemDecoration(
                 MarginItemDecoration(
-                    space = resources.getDimension(R.dimen.margin_components_default).toInt(),
+                    space = resources.getDimension(R.dimen.margin_normal_100).toInt(),
                     spanCount = 2
                 )
             )

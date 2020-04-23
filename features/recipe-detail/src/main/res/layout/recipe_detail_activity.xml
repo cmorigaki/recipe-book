@@ -48,7 +48,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="?android:attr/actionBarSize"
                     android:gravity="center"
-                    android:textSize="18sp" />
+                    android:textAppearance="@style/TextAppearance.DS.Toolbar.Title" />
             </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
@@ -62,8 +62,8 @@
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:textSize="30sp"
+            android:textAppearance="@style/TextAppearance.DS.Headline"
+            android:layout_margin="@dimen/margin_normal_100"
             tools:text="Bolo de cenoura" />
     </LinearLayout>
 

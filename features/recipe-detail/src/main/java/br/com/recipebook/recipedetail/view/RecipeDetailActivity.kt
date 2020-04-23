@@ -49,11 +49,9 @@ class RecipeDetailActivity : AppCompatActivity() {
             }
             if (scrollRange + verticalOffset == 0){
                 binding.toolbarTitle.visibility = View.VISIBLE
-                binding.title.visibility = View.GONE
                 isShow = true
             } else if (isShow){
                 binding.toolbarTitle.visibility = View.GONE
-                binding.title.visibility = View.VISIBLE
                 isShow = false
             }
         })
