@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.observe
 import br.com.recipebook.coreandroid.image.ImageResolver
 import br.com.recipebook.coreandroid.image.ImageSize
+import br.com.recipebook.recipedetail.R
 import br.com.recipebook.recipedetail.databinding.RecipeDetailActivityBinding
 import br.com.recipebook.recipedetail.presentation.RecipeDetailViewModel
 import com.google.android.material.appbar.AppBarLayout
@@ -49,9 +50,11 @@ class RecipeDetailActivity : AppCompatActivity() {
             }
             if (scrollRange + verticalOffset == 0){
                 binding.toolbarTitle.visibility = View.VISIBLE
+                binding.toolbar.navigationIcon?.setTint(getColor(android.R.color.black))
                 isShow = true
             } else if (isShow){
                 binding.toolbarTitle.visibility = View.GONE
+                binding.toolbar.navigationIcon?.setTint(getColor(android.R.color.white))
                 isShow = false
             }
         })
