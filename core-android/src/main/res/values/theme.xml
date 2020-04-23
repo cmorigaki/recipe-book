@@ -1,16 +1,18 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
         <!--   color for the app bar and other primary UI elements -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <!--   a darker variant of the primary color, used for
             the status bar (on Android 5.0+) and contextual app bars -->
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimaryDark">@android:color/transparent</item>
         <!--   a secondary color for controls like checkboxes and text fields -->
         <item name="colorAccent">@color/colorAccent</item>
 
-        <item name="android:windowBackground">@color/ghostWhite</item>
-        <item name="android:statusBarColor">@color/ghostWhite</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <!--<item name="android:windowBackground">@color/ghostWhite</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>-->
 
         <item name="android:textColorPrimary">@color/colorPrimaryText</item>
         <item name="android:textColorSecondary">@color/colorSecondaryText</item>

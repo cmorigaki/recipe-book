@@ -53,20 +53,22 @@ class RecipeCollectionActivity : AppCompatActivity() {
     }
 
     private fun observeState(binding: RecipeCollectionActivityBinding) {
-        viewModel.viewState.recipes.observe(this) {
-            recipeCollectionAdapter.setData(it)
-        }
-        viewModel.viewState.hasError.observe(this) {
-            if (it) {
-                Toast.makeText(
-                    this@RecipeCollectionActivity,
-                    "Error... improve this",
-                    Toast.LENGTH_SHORT
-                ).show()
+        with(viewModel.viewState) {
+            recipes.observe(this@RecipeCollectionActivity) {
+                recipeCollectionAdapter.setData(it)
             }
-        }
-        viewModel.viewState.isLoading.observe(this) {
-            binding.swipeRefresh.isRefreshing = it
+            hasError.observe(this@RecipeCollectionActivity) {
+                if (it) {
+                    Toast.makeText(
+                        this@RecipeCollectionActivity,
+                        "Error... improve this",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+            isLoading.observe(this@RecipeCollectionActivity) {
+                binding.swipeRefresh.isRefreshing = it
+            }
         }
     }
 
