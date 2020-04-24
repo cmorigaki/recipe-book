@@ -20,7 +20,7 @@ class RecipeCollectionViewModel(
     }
 
     override fun dispatchViewAction(action: RecipeCollectionViewAction) {
-        when(action) {
+        when (action) {
             is RecipeCollectionViewAction.Refresh -> loadRecipeList()
         }
     }
@@ -45,7 +45,11 @@ class RecipeCollectionViewModel(
     private fun onLoadRecipeListSuccess(list: List<RecipeModel>) {
         viewState.hasError.value = false
         viewState.recipes.value = list.map {
-            RecipeItem(it.imgPath, it.title)
+            RecipeItem(
+                id = it.id,
+                imgPath = it.imgPath,
+                title = it.title
+            )
         }
     }
 

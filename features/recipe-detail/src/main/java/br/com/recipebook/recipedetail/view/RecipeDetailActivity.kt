@@ -27,9 +27,6 @@ class RecipeDetailActivity : AppCompatActivity() {
     }
 
     private fun initComponents(binding: RecipeDetailActivityBinding) {
-        viewModel.viewState.title.value = "Bolo de cenoura"
-        viewModel.viewState.recipeImage.value = "bolo_de_cenoura.jpg"
-
         setupHeader(binding)
         setupToolbar(binding)
     }

@@ -10,6 +10,7 @@ data class RecipeListResponse(
 
 @JsonClass(generateAdapter = true)
 data class RecipeResponse(
+    val id: String,
     val title: String,
     val imgPath: String?
 )

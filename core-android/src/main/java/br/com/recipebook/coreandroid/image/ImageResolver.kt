@@ -6,7 +6,7 @@ import br.com.recipebook.coreandroid.configuration.Configuration
 enum class ImageSize(val folder: String) {
     SMALL("400"),
     MEDIUM("800"),
-    LARGE("")
+    LARGE("original")
 }
 
 private const val SIZE_PLACEHOLDER = "{size}"

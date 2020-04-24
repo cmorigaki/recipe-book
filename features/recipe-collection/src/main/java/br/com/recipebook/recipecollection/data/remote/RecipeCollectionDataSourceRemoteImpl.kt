@@ -23,6 +23,7 @@ internal class RecipeCollectionDataSourceRemoteImpl(
 
     private fun mapRecipeToModel(recipe: RecipeResponse) =
         RecipeModel(
+            id = recipe.id,
             imgPath = recipe.imgPath,
             title = recipe.title
         )
