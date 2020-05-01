@@ -6,5 +6,15 @@ import com.squareup.moshi.JsonClass
 data class RecipeDetailResponse(
     val id: String,
     val name: String,
+    val imgPath: String?,
+    val prepTimeMin: Int?,
+    val cookTimeMin: Int?,
+    val ingredients: List<IngredientsResponse>,
+    val instructions: List<String>
+)
+
+@JsonClass(generateAdapter = true)
+data class IngredientsResponse(
+    val description: String,
     val imgPath: String?
 )

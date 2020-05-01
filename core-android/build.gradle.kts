@@ -42,6 +42,9 @@ dependencies {
 
     // For theme
     implementation(AndroidLibConfig.Dependencies.appCompat)
+    implementation(AndroidLibConfig.Dependencies.recyclerView)
+    implementation(AndroidLibConfig.Dependencies.constraintLayout)
+    implementation(AndroidLibConfig.Dependencies.material)
 
     implementation(AndroidLibConfig.Dependencies.koinAndroid)
 

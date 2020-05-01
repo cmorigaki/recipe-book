@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Text Appearance -->
+    <style name="TextAppearance.DS.List.Item.Description" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/title_item_normal_100</item>
+        <item name="android:textColor">?android:textColorSecondary</item>
+    </style>
+
+    <!-- Layout -->
+    <style name="TextAppearance.DS.List.SectionTitle" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/title_item_normal_125</item>
+        <item name="android:textColor">?android:textColorPrimary</item>
+    </style>
+
+    <style name="Style.DS.ListTextual.SectionHeader" parent="Theme.AppCompat">
+        <item name="android:textAppearance">@style/TextAppearance.DS.List.SectionTitle</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:layout_margin">@dimen/margin_small_100</item>
+    </style>
+
+    <style name="Style.DS.ListTextual.Item" parent="Theme.AppCompat">
+        <item name="android:textAppearance">@style/TextAppearance.DS.List.Item.Description</item>
+        <item name="android:layout_gravity">center_vertical</item>
+    </style>
+
+    <style name="Style.DS.ListTextual.Icon" parent="Theme.AppCompat">
+        <item name="android:layout_width">@dimen/icon_size</item>
+        <item name="android:layout_height">@dimen/icon_size</item>
+        <item name="android:scaleType">centerCrop</item>
+    </style>
+
+</resources>

@@ -2,6 +2,7 @@
 <resources>
     <dimen name="title_headline_normal_100">24sp</dimen>
     <dimen name="title_item_normal_100">16sp</dimen>
+    <dimen name="title_item_normal_125">20sp</dimen>
     <dimen name="title_toolbar_normal_100">18sp</dimen>
 
     <style name="TextAppearance.DS.Headline" parent="TextAppearance.AppCompat">
@@ -9,13 +10,4 @@
         <item name="android:textColor">?android:textColorPrimary</item>
     </style>
 
-    <style name="TextAppearance.DS.Toolbar.Title" parent="TextAppearance.AppCompat">
-        <item name="android:textSize">@dimen/title_toolbar_normal_100</item>
-        <item name="android:textColor">?android:textColorPrimary</item>
-    </style>
-
-    <style name="TextAppearance.DS.Item.Title" parent="TextAppearance.AppCompat">
-        <item name="android:textSize">@dimen/title_item_normal_100</item>
-        <item name="android:textColor">?android:textColorPrimary</item>
-    </style>
 </resources>

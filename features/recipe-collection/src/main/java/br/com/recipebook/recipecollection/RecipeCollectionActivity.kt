@@ -5,6 +5,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.observe
 import br.com.recipebook.coreandroid.image.ImageResolver
+import br.com.recipebook.coreandroid.view.ListMarginItemDecoration
 import br.com.recipebook.navigation.MainNavigator
 import br.com.recipebook.navigation.intent.RecipeDetailIntent
 import br.com.recipebook.recipecollection.databinding.RecipeCollectionActivityBinding
@@ -39,8 +40,8 @@ class RecipeCollectionActivity : AppCompatActivity() {
         with(binding) {
             recipeList.adapter = recipeCollectionAdapter
             recipeList.addItemDecoration(
-                MarginItemDecoration(
-                    space = resources.getDimension(R.dimen.margin_normal_100).toInt(),
+                ListMarginItemDecoration(
+                    resources = resources,
                     spanCount = 2
                 )
             )

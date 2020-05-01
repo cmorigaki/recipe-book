@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Text Appearance -->
+    <style name="TextAppearance.DS.Cards.Title" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/title_item_normal_100</item>
+        <item name="android:textColor">?android:textColorPrimary</item>
+    </style>
+
+    <!-- Layout -->
+    <style name="Style.DS.Card.Title" parent="Theme.AppCompat">
+        <item name="android:textAppearance">@style/TextAppearance.DS.Cards.Title</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:lines">2</item>
+        <item name="android:layout_margin">@dimen/margin_small_100</item>
+    </style>
+
+    <style name="Style.DS.Card.Image" parent="Theme.AppCompat">
+        <item name="android:layout_height">100dp</item>
+        <item name="android:scaleType">centerCrop</item>
+    </style>
+
+</resources>

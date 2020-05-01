@@ -1,6 +1,7 @@
 package br.com.recipebook.recipedetail.data.remote
 
 import br.com.recipebook.recipedetail.data.RecipeDetailDataSourceRemote
+import br.com.recipebook.recipedetail.domain.model.IngredientsModel
 import br.com.recipebook.recipedetail.domain.model.RecipeDetailModel
 import br.com.recipebook.utilityandroid.network.safeApiCall
 import br.com.recipebook.utilitykotlin.CommonError
@@ -26,7 +27,16 @@ internal class RecipeDetailDataSourceRemoteImpl(
         RecipeDetailModel(
             id = recipe.id,
             name = recipe.name,
-            imgPath = recipe.imgPath
+            imgPath = recipe.imgPath,
+            prepTimeMin = recipe.prepTimeMin,
+            cookTimeMin = recipe.cookTimeMin,
+            ingredients = recipe.ingredients.map {
+                IngredientsModel(
+                    description = it.description,
+                    imgPath = it.imgPath
+                )
+            },
+            instructions = recipe.instructions
         )
 }
 

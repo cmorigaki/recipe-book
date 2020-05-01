@@ -3,7 +3,6 @@
     <dimen name="margin_small_100">6dp</dimen>
     <dimen name="margin_normal_100">12dp</dimen>
 
-    <style name="Style.DS.Title" parent="Theme.AppCompat">
+    <dimen name="icon_size">40dp</dimen>
 
-    </style>
 </resources>
