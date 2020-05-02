@@ -1,5 +1,7 @@
 package br.com.recipebook.recipedetail.view
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -10,12 +12,17 @@ import br.com.recipebook.coreandroid.image.ImageSize
 import br.com.recipebook.coreandroid.view.ListMarginItemDecoration
 import br.com.recipebook.recipedetail.databinding.RecipeDetailActivityBinding
 import br.com.recipebook.recipedetail.presentation.RecipeDetailViewModel
+import br.com.recipebook.utilityandroid.view.activitySafeArgs
+import br.com.recipebook.utilityandroid.view.putSafeArgs
 import com.google.android.material.appbar.AppBarLayout
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class RecipeDetailActivity : AppCompatActivity() {
-    private val viewModel: RecipeDetailViewModel by viewModel(clazz = RecipeDetailViewModel::class)
+    private val safeArgs by activitySafeArgs<RecipeDetailSafeArgs>()
+
+    private val viewModel: RecipeDetailViewModel by viewModel(parameters = { parametersOf(safeArgs) })
     private val imageResolver: ImageResolver by inject()
     private val adapter by lazy { RecipeDetailListAdapter(imageResolver) }
 
@@ -77,6 +84,14 @@ class RecipeDetailActivity : AppCompatActivity() {
         }
         viewModel.viewState.listItems.observe(this) {
             adapter.setData(it)
+        }
+    }
+
+    companion object {
+        fun newIntent(context: Context, recipeId: String): Intent {
+            return Intent(context, RecipeDetailActivity::class.java).apply {
+                putSafeArgs(RecipeDetailSafeArgs(recipeId))
+            }
         }
     }
 }

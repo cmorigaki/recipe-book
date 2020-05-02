@@ -10,7 +10,7 @@ import br.com.recipebook.recipecollection.view.RecipeItem
 
 class RecipeCollectionAdapter(
     private val imageResolver: ImageResolver,
-    private val onRecipeClick: () -> Unit
+    private val onRecipeClick: (recipeId: String) -> Unit
 ) : RecyclerView.Adapter<RecipeCollectionAdapter.RecipeViewHolder>() {
 
     private var list = emptyList<RecipeItem>()
@@ -41,7 +41,7 @@ class RecipeCollectionAdapter(
     class RecipeViewHolder(
         private val binding: RecipeCardBinding,
         private val imageResolver: ImageResolver,
-        private val onRecipeClick: () -> Unit
+        private val onRecipeClick: (recipeId: String) -> Unit
     ) :
         RecyclerView.ViewHolder(binding.root) {
 
@@ -49,7 +49,7 @@ class RecipeCollectionAdapter(
             with(binding) {
                 title.text = item.title
                 recipeImage.setImageURI(imageResolver.mountUrl(item.imgPath, ImageSize.SMALL))
-                root.setOnClickListener { onRecipeClick() }
+                root.setOnClickListener { onRecipeClick(item.id) }
             }
         }
     }

@@ -7,17 +7,19 @@ import br.com.recipebook.recipedetail.presentation.model.DescriptionItem
 import br.com.recipebook.recipedetail.presentation.model.IngredientHeaderItem
 import br.com.recipebook.recipedetail.presentation.model.InstructionHeaderItem
 import br.com.recipebook.recipedetail.presentation.model.RecipeDetailItem
+import br.com.recipebook.recipedetail.view.RecipeDetailSafeArgs
 import br.com.recipebook.utilityandroid.presentation.BaseViewModel
 import kotlinx.coroutines.launch
 
 class RecipeDetailViewModel(
+    private val safeArgs: RecipeDetailSafeArgs,
     override val viewState: RecipeDetailViewState,
     private val getRecipeDetail: GetRecipeDetailUseCase
 ) : BaseViewModel<RecipeDetailViewState, RecipeDetailViewAction>() {
 
     init {
         viewModelScope.launch {
-            getRecipeDetail("bolo_de_cenoura").mapSuccess(::onLoadSuccess)
+            getRecipeDetail(safeArgs.recipeId).mapSuccess(::onLoadSuccess)
         }
     }
 

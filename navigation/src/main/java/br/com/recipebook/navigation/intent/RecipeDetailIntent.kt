@@ -1,3 +1,5 @@
 package br.com.recipebook.navigation.intent
 
-object RecipeDetailIntent : NavIntent
+data class RecipeDetailIntent(
+    val recipeId: String
+) : NavIntent

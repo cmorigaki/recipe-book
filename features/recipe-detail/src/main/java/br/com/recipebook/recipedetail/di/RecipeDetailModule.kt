@@ -11,6 +11,7 @@ import br.com.recipebook.recipedetail.domain.usecase.GetRecipeDetailUseCase
 import br.com.recipebook.recipedetail.presentation.RecipeDetailViewModel
 import br.com.recipebook.recipedetail.presentation.RecipeDetailViewState
 import br.com.recipebook.recipedetail.view.RecipeDetailNavigator
+import br.com.recipebook.recipedetail.view.RecipeDetailSafeArgs
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.bind
 import org.koin.dsl.module
@@ -23,8 +24,9 @@ val recipeDetailViewModule = module {
 }
 
 val recipeDetailPresentationModule = module {
-    viewModel {
+    viewModel { (safeArgs: RecipeDetailSafeArgs) ->
         RecipeDetailViewModel(
+            safeArgs = safeArgs,
             viewState = RecipeDetailViewState(),
             getRecipeDetail = get()
         )
