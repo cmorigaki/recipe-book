@@ -14,8 +14,6 @@ android {
         targetSdkVersion(AndroidConfig.targetSdk)
         versionCode = AndroidConfig.versionCode
         versionName = AndroidConfig.versionName
-
-        consumerProguardFile("consumer-rules.pro")
     }
 
     buildFeatures {
@@ -25,7 +23,10 @@ android {
     buildTypes {
         getByName("release") {
             isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android.txt"),
+                "${project.projectDir}/buildSrc/proguard-rules-network.pro"
+            )
         }
     }
     compileOptions {

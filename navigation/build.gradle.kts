@@ -13,20 +13,12 @@ android {
         targetSdkVersion(AndroidConfig.targetSdk)
         versionCode = AndroidConfig.versionCode
         versionName = AndroidConfig.versionName
-
-        consumerProguardFile("consumer-rules.pro")
     }
 
     buildFeatures {
         viewBinding = true
     }
 
-    buildTypes {
-        getByName("release") {
-            isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
-        }
-    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
