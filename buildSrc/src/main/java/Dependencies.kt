@@ -14,7 +14,7 @@ object EnvironmentConfig {
 object AndroidConfig {
     const val applicationId = "br.com.recipebook"
     const val versionCode = 1
-    const val versionName = "1.0"
+    const val versionName = "1.0.0"
 
     const val compileSdk = 29
     const val buildTools = "29.0.3"
