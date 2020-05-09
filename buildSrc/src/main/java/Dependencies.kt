@@ -1,6 +1,6 @@
 object EnvironmentConfig {
     private const val kotlin = "1.3.71"
-    private const val gradle = "4.0.0-beta04"
+    private const val gradle = "4.0.0-beta05"
     const val jvmTarget = "1.8"
 
     object Dependencies {
@@ -53,6 +53,8 @@ object AndroidLibConfig {
             "org.koin:koin-androidx-fragment:$koinVersion" // or Koin for Android Fragment Factory (unstable version)
 
         const val fresco = "com.facebook.fresco:fresco:2.2.0"
+
+        const val sentry ="io.sentry:sentry-android:2.1.0"
     }
 }
 

@@ -1,3 +1,6 @@
+import java.util.Properties
+import java.io.FileInputStream
+
 plugins {
     id("com.android.application")
     kotlin("android")
@@ -15,6 +18,12 @@ android {
         targetSdkVersion(AndroidConfig.targetSdk)
         versionCode = AndroidConfig.versionCode
         versionName = AndroidConfig.versionName
+
+        val apiProperties = Properties().apply {
+            load(FileInputStream("${rootDir.absolutePath}/buildSrc/api.properties"))
+        }
+
+        manifestPlaceholders["apiSentryDsn"] = apiProperties.getProperty("SENTRY_DSN")
     }
 
     buildTypes {
@@ -51,6 +60,7 @@ dependencies {
     implementation(project(Project.navigation))
 
     implementation(AndroidLibConfig.Dependencies.fresco)
+    implementation(AndroidLibConfig.Dependencies.sentry)
 
     implementation(project(Features.recipeCollection))
     implementation(project(Features.recipeDetail))

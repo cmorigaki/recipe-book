@@ -1,3 +1,4 @@
+<!-- Network config for Charles proxy -->
 <network-security-config>
     <debug-overrides>
         <trust-anchors>
