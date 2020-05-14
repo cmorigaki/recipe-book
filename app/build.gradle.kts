@@ -1,10 +1,11 @@
-import java.util.Properties
-import java.io.FileInputStream
-
 plugins {
     id("com.android.application")
     kotlin("android")
     kotlin("android.extensions")
+}
+
+apply {
+    from("$rootDir/buildSrc/api-properties.gradle")
 }
 
 android {
@@ -19,11 +20,9 @@ android {
         versionCode = AndroidConfig.versionCode
         versionName = AndroidConfig.versionName
 
-        val apiProperties = Properties().apply {
-            load(FileInputStream("${rootDir.absolutePath}/buildSrc/api.properties"))
+        ApiProperties.load("${rootDir.absolutePath}/buildSrc/api.properties").forEach {
+            manifestPlaceholders[it.key] = it.value
         }
-
-        manifestPlaceholders["apiSentryDsn"] = apiProperties.getProperty("SENTRY_DSN")
     }
 
     buildTypes {

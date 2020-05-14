@@ -1,11 +1,12 @@
 object EnvironmentConfig {
     private const val kotlin = "1.3.71"
-    private const val gradle = "4.0.0-beta05"
+    private const val gradle = "4.0.0-rc01"
     const val jvmTarget = "1.8"
 
     object Dependencies {
         const val gradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin"
         const val kotlinStdLib = "org.jetbrains.kotlin:kotlin-stdlib:$kotlin"
+        const val gradleApi = "com.android.tools.build:gradle-api:$gradle"
         const val kotlinJdk = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin"
         const val gradleTools = "com.android.tools.build:gradle:$gradle"
     }
