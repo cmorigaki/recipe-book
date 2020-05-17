@@ -1,0 +1,10 @@
+android {
+    defaultConfig {
+        def localProperties = new Properties()
+        localProperties.load(new FileInputStream("$project.rootDir/project-config/api.properties"))
+        localProperties.each {
+            prop -> project.ext.set(prop.key, prop.value)
+                manifestPlaceholders[prop.key] = prop.value
+        }
+    }
+}

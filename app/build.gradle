@@ -2,6 +2,8 @@ apply plugin: "com.android.application"
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
+apply from: "$rootDir/project-config/api-properties.gradle"
+
 android {
     compileSdkVersion AndroidConfig.compileSdk
     buildToolsVersion AndroidConfig.buildTools
@@ -13,11 +15,6 @@ android {
         targetSdkVersion AndroidConfig.targetSdk
         versionCode AndroidConfig.versionCode
         versionName AndroidConfig.versionName
-
-//
-//        ApiProperties.load("${rootDir.absolutePath}/buildSrc/api.properties").forEach {
-//            manifestPlaceholders[it.key] = it.value
-//        }
     }
 
     buildTypes {
