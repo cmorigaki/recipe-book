@@ -1,4 +1,4 @@
-apply plugin: "com.android.application"
+apply plugin: "com.android.library"
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
@@ -22,17 +22,17 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = EnvironmentConfig.jvmTarget
+        jvmTarget = jvmTargetVersion
     }
 }
 
 dependencies {
-    implementation EnvironmentConfig.Dependencies.kotlinStdLib
-    implementation AndroidLibConfig.Dependencies.coreKtx
+    implementation EnvironmentConfig.kotlinStdLib
+    implementation AndroidLibConfig.coreKtx
 
-    implementation AndroidLibConfig.Dependencies.koinAndroid
+    implementation AndroidLibConfig.koinAndroid
 
-    implementation project(Project.coreAndroid)
-    implementation project(Project.utilityAndroid)
-    implementation project(Project.utilityKotlin)
+    implementation project(ProjectConfig.coreAndroid)
+    implementation project(ProjectConfig.utilityAndroid)
+    implementation project(ProjectConfig.utilityKotlin)
 }

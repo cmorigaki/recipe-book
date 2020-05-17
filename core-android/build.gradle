@@ -22,29 +22,29 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = EnvironmentConfig.jvmTarget
+        jvmTarget = jvmTargetVersion
     }
 }
 
 dependencies {
-    implementation EnvironmentConfig.Dependencies.kotlinStdLib
-    implementation AndroidLibConfig.Dependencies.coreKtx
+    implementation EnvironmentConfig.kotlinStdLib
+    implementation AndroidLibConfig.coreKtx
 
     // For theme
-    implementation AndroidLibConfig.Dependencies.appCompat
-    implementation AndroidLibConfig.Dependencies.recyclerView
-    implementation AndroidLibConfig.Dependencies.constraintLayout
-    implementation AndroidLibConfig.Dependencies.material
+    implementation AndroidLibConfig.appCompat
+    implementation AndroidLibConfig.recyclerView
+    implementation AndroidLibConfig.constraintLayout
+    implementation AndroidLibConfig.material
 
-    implementation AndroidLibConfig.Dependencies.koinAndroid
+    implementation AndroidLibConfig.koinAndroid
 
-    implementation AndroidLibConfig.Dependencies.retrofit
-    implementation AndroidLibConfig.Dependencies.moshiConverter
-    implementation AndroidLibConfig.Dependencies.moshi
+    implementation AndroidLibConfig.retrofit
+    implementation AndroidLibConfig.moshiConverter
+    implementation AndroidLibConfig.moshi
 
-    implementation project(Project.utilityAndroid)
-    implementation project(Project.utilityKotlin)
+    implementation project(ProjectConfig.utilityAndroid)
+    implementation project(ProjectConfig.utilityKotlin)
 
-    testImplementation TestConfig.Dependencies.jUnit
-    testImplementation TestConfig.Dependencies.mockk
+    testImplementation TestConfig.jUnit
+    testImplementation TestConfig.mockk
 }

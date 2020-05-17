@@ -13,6 +13,7 @@ android {
         targetSdkVersion AndroidConfig.targetSdk
         versionCode AndroidConfig.versionCode
         versionName AndroidConfig.versionName
+
 //
 //        ApiProperties.load("${rootDir.absolutePath}/buildSrc/api.properties").forEach {
 //            manifestPlaceholders[it.key] = it.value
@@ -37,23 +38,32 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = EnvironmentConfig.jvmTarget
+        jvmTarget = jvmTargetVersion
     }
 }
 
 dependencies {
-    implementation EnvironmentConfig.Dependencies.kotlinStdLib
-    implementation AndroidLibConfig.Dependencies.coreKtx
+    implementation EnvironmentConfig.kotlinStdLib
+    //implementation "org.jetbrains.kotlin:kotlin-stdlib:1.3.72"
+    implementation AndroidLibConfig.coreKtx
+    //implementation "androidx.core:core-ktx:1.2.0"
 
-    implementation AndroidLibConfig.Dependencies.koinAndroid
+    //implementation AndroidLibConfig.koinAndroid
+    implementation "org.koin:koin-android:2.1.5"
 
-    implementation project(Project.coreAndroid)
-    implementation project(Project.utilityAndroid)
-    implementation project(Project.utilityKotlin)
-    implementation project(Project.navigation)
+    //implementation project(ProjectConfig.coreAndroid)
+    implementation project(":core-android")
+    //implementation project(ProjectConfig.utilityAndroid)
+    implementation project(":utility-android")
+    //implementation project(ProjectConfig.utilityKotlin)
+    implementation project(":utility-kotlin")
+    //implementation project(ProjectConfig.navigation)
+    implementation project(":navigation")
 
-    implementation AndroidLibConfig.Dependencies.fresco
-    implementation AndroidLibConfig.Dependencies.sentry
+    //implementation AndroidLibConfig.fresco
+    implementation "com.facebook.fresco:fresco:2.2.0"
+    //implementation AndroidLibConfig.sentry
+    implementation "io.sentry:sentry-android:2.1.0"
 
     implementation project(Features.recipeCollection)
     implementation project(Features.recipeDetail)

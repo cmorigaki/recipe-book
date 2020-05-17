@@ -5,7 +5,7 @@ repositories {
 }
 
 dependencies {
-    implementation kotlin("stdlib")
+    implementation EnvironmentConfig.kotlinJdk
 }
 
 java {
