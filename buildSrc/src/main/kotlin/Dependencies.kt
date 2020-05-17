@@ -1,5 +1,5 @@
 object EnvironmentConfig {
-    private const val kotlin = "1.3.71"
+    private const val kotlin = "1.3.72"
     private const val gradle = "4.0.0-rc01"
     const val jvmTarget = "1.8"
 

@@ -2,10 +2,7 @@ plugins {
     id("com.android.application")
     kotlin("android")
     kotlin("android.extensions")
-}
-
-apply {
-    from("$rootDir/buildSrc/api-properties.gradle")
+    id("api-properties")
 }
 
 android {
@@ -19,10 +16,10 @@ android {
         targetSdkVersion(AndroidConfig.targetSdk)
         versionCode = AndroidConfig.versionCode
         versionName = AndroidConfig.versionName
-
-        ApiProperties.load("${rootDir.absolutePath}/buildSrc/api.properties").forEach {
-            manifestPlaceholders[it.key] = it.value
-        }
+//
+//        ApiProperties.load("${rootDir.absolutePath}/buildSrc/api.properties").forEach {
+//            manifestPlaceholders[it.key] = it.value
+//        }
     }
 
     buildTypes {
