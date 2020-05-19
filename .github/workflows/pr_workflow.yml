@@ -20,6 +20,6 @@ jobs:
         with:
           java-version: 1.8
       - name: Decrypting api-properties
-        run: gpg -d --passphrase "${{ secrets.API_PROPERTIES_PASSPHRASE }}" project-config/api.properties.asc > project-config/api.properties
+        run: gpg --quiet --batch --yes --decrypt --passphrase "${{ secrets.API_PROPERTIES_PASSPHRASE }}" project-config/api.properties.asc > project-config/api.properties
       - name: Unit tests
         run: ./gradlew test --stacktrace
