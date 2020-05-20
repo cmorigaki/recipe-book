@@ -3,6 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 apply from: "$rootDir/project-config/api-properties.gradle"
+apply from: "$rootDir/quality/test-coverage.gradle"
 
 android {
     compileSdkVersion AndroidConfig.compileSdk
@@ -28,6 +29,9 @@ android {
             shrinkResources true
 
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+        }
+        debug {
+            testCoverageEnabled = true
         }
     }
     compileOptions {
