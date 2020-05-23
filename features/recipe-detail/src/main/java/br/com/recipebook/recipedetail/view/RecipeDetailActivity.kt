@@ -9,7 +9,7 @@ import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.recipebook.coreandroid.image.ImageResolver
 import br.com.recipebook.coreandroid.image.ImageSize
-import br.com.recipebook.coreandroid.view.ListMarginItemDecoration
+import br.com.recipebook.designsystem.ListMarginItemDecoration
 import br.com.recipebook.recipedetail.databinding.RecipeDetailActivityBinding
 import br.com.recipebook.recipedetail.presentation.RecipeDetailViewModel
 import br.com.recipebook.utilityandroid.view.activitySafeArgs

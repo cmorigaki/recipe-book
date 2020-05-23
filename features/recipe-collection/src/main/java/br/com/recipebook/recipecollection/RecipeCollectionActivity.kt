@@ -5,13 +5,12 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.observe
 import br.com.recipebook.coreandroid.image.ImageResolver
-import br.com.recipebook.coreandroid.view.ListMarginItemDecoration
+import br.com.recipebook.designsystem.ListMarginItemDecoration
 import br.com.recipebook.navigation.MainNavigator
 import br.com.recipebook.navigation.intent.RecipeDetailIntent
 import br.com.recipebook.recipecollection.databinding.RecipeCollectionActivityBinding
 import br.com.recipebook.recipecollection.presentation.RecipeCollectionViewAction
 import br.com.recipebook.recipecollection.presentation.RecipeCollectionViewModel
-import br.com.recipebook.utilityandroid.MarginItemDecoration
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

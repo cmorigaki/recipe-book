@@ -67,4 +67,5 @@ dependencies {
     implementation project(ProjectConfig.utilityKotlin)
     implementation project(ProjectConfig.coreAndroid)
     implementation project(ProjectConfig.navigation)
+    implementation project(ProjectConfig.designSystem)
 }

@@ -1,7 +1,7 @@
-package br.com.recipebook.coreandroid.view
+package br.com.recipebook.designsystem
 
 import android.content.res.Resources
-import br.com.recipebook.coreandroid.R
+import br.com.recipebook.navigation.R
 import br.com.recipebook.utilityandroid.MarginItemDecoration
 
 class ListMarginItemDecoration(resources: Resources, spanCount: Int = 1) :

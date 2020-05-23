@@ -2,8 +2,6 @@ apply plugin: "com.android.library"
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
-apply from: "$rootDir/quality/test-coverage.gradle"
-
 android {
     compileSdkVersion AndroidConfig.compileSdk
     buildToolsVersion AndroidConfig.buildTools
@@ -32,15 +30,10 @@ dependencies {
     implementation EnvironmentConfig.kotlinStdLib
     implementation AndroidLibConfig.coreKtx
 
-    implementation AndroidLibConfig.koinAndroid
-
-    implementation AndroidLibConfig.retrofit
-    implementation AndroidLibConfig.moshiConverter
-    implementation AndroidLibConfig.moshi
+    implementation AndroidLibConfig.appCompat
+    implementation AndroidLibConfig.recyclerView
+    implementation AndroidLibConfig.constraintLayout
+    implementation AndroidLibConfig.material
 
     implementation project(ProjectConfig.utilityAndroid)
-    implementation project(ProjectConfig.utilityKotlin)
-
-    testImplementation TestConfig.jUnit
-    testImplementation TestConfig.mockk
 }
