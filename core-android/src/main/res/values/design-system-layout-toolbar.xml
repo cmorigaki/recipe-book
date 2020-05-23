@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Text Appearance -->
-    <style name="TextAppearance.DS.Toolbar.Title" parent="TextAppearance.AppCompat">
+    <style name="TextAppearance.DS.Toolbar.Title" parent="TextAppearance.DS">
         <item name="android:textSize">@dimen/title_toolbar_normal_100</item>
         <item name="android:textColor">?android:textColorPrimary</item>
     </style>

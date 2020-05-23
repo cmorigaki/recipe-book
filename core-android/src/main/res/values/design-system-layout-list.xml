@@ -2,17 +2,17 @@
 <resources>
 
     <!-- Text Appearance -->
-    <style name="TextAppearance.DS.List.Item.Description" parent="TextAppearance.AppCompat">
+    <style name="TextAppearance.DS.List.Item.Description" parent="TextAppearance.DS">
         <item name="android:textSize">@dimen/title_item_normal_100</item>
         <item name="android:textColor">?android:textColorSecondary</item>
     </style>
 
-    <!-- Layout -->
-    <style name="TextAppearance.DS.List.SectionTitle" parent="TextAppearance.AppCompat">
+    <style name="TextAppearance.DS.List.SectionTitle" parent="TextAppearance.DS">
         <item name="android:textSize">@dimen/title_item_normal_125</item>
         <item name="android:textColor">?android:textColorPrimary</item>
     </style>
 
+    <!-- Layout -->
     <style name="Style.DS.ListTextual.SectionHeader" parent="Theme.AppCompat">
         <item name="android:textAppearance">@style/TextAppearance.DS.List.SectionTitle</item>
         <item name="android:layout_gravity">center_vertical</item>

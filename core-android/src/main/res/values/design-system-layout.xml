@@ -2,7 +2,8 @@
 <resources>
     <dimen name="margin_small_100">6dp</dimen>
     <dimen name="margin_normal_100">12dp</dimen>
+    <dimen name="margin_large_100">30dp</dimen>
 
-    <dimen name="icon_size">40dp</dimen>
+    <dimen name="icon_size">36dp</dimen>
 
 </resources>

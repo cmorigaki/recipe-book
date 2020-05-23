@@ -2,7 +2,7 @@
 <resources>
 
     <!-- Text Appearance -->
-    <style name="TextAppearance.DS.Cards.Title" parent="TextAppearance.AppCompat">
+    <style name="TextAppearance.DS.Cards.Title" parent="TextAppearance.DS">
         <item name="android:textSize">@dimen/title_item_normal_100</item>
         <item name="android:textColor">?android:textColorPrimary</item>
     </style>
