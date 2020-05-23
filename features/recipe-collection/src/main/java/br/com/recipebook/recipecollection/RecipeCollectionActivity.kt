@@ -73,7 +73,7 @@ class RecipeCollectionActivity : AppCompatActivity() {
         }
     }
 
-    private fun onRecipeClick(recipeId: String) {
-        mainNavigator.navigate(this, RecipeDetailIntent(recipeId))
+    private fun onRecipeClick(recipeId: String, title: String?) {
+        mainNavigator.navigate(this, RecipeDetailIntent(recipeId = recipeId, title = title))
     }
 }

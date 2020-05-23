@@ -76,6 +76,17 @@ class RecipeDetailActivity : AppCompatActivity() {
     }
 
     private fun observeState(binding: RecipeDetailActivityBinding) {
+        viewModel.viewState.isLoading.observe(this) {
+
+        }
+        viewModel.viewState.hasError.observe(this) {
+            if (it) {
+                binding.recipeDetailErrorState.visibility = View.VISIBLE
+                binding.appBarLayout.setExpanded(false)
+            } else {
+                binding.recipeDetailErrorState.visibility = View.GONE
+            }
+        }
         viewModel.viewState.title.observe(this) {
             binding.toolbarTitle.text = it
         }
@@ -83,14 +94,15 @@ class RecipeDetailActivity : AppCompatActivity() {
             binding.recipeImage.setImageURI(imageResolver.mountUrl(it, ImageSize.LARGE))
         }
         viewModel.viewState.listItems.observe(this) {
+            binding.recipeDetailList.visibility = if (it.isNotEmpty()) View.VISIBLE else View.GONE
             adapter.setData(it)
         }
     }
 
     companion object {
-        fun newIntent(context: Context, recipeId: String): Intent {
+        fun newIntent(context: Context, recipeId: String, title: String?): Intent {
             return Intent(context, RecipeDetailActivity::class.java).apply {
-                putSafeArgs(RecipeDetailSafeArgs(recipeId))
+                putSafeArgs(RecipeDetailSafeArgs(recipeId, title))
             }
         }
     }

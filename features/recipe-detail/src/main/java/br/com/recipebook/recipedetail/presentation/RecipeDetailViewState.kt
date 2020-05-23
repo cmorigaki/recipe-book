@@ -5,9 +5,12 @@ import br.com.recipebook.recipedetail.domain.model.IngredientsModel
 import br.com.recipebook.recipedetail.presentation.model.RecipeDetailItem
 
 class RecipeDetailViewState {
+    val isLoading = MutableLiveData<Boolean>()
+
+    val hasError = MutableLiveData<Boolean>()
+
     val recipeImage = MutableLiveData<String>()
     val title = MutableLiveData<String>()
-    val prepTimeMin = MutableLiveData<Int?>()
-    val cookTimeMin = MutableLiveData<Int?>()
     val listItems = MutableLiveData<List<RecipeDetailItem>>()
+
 }

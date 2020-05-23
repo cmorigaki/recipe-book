@@ -10,7 +10,11 @@ class RecipeDetailNavigator : Navigator {
 
     override fun navigate(context: Context, intent: NavIntent) {
         if (intent is RecipeDetailIntent) {
-            context.startActivity(RecipeDetailActivity.newIntent(context, intent.recipeId))
+            context.startActivity(RecipeDetailActivity.newIntent(
+                context = context,
+                recipeId = intent.recipeId,
+                title = intent.title
+            ))
         }
     }
 }

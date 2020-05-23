@@ -5,5 +5,6 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class RecipeDetailSafeArgs(
-    val recipeId: String
+    val recipeId: String,
+    val title: String?
 ) : Parcelable

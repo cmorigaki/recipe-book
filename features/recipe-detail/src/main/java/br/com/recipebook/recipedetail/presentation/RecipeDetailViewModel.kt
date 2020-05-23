@@ -9,6 +9,7 @@ import br.com.recipebook.recipedetail.presentation.model.InstructionHeaderItem
 import br.com.recipebook.recipedetail.presentation.model.RecipeDetailItem
 import br.com.recipebook.recipedetail.view.RecipeDetailSafeArgs
 import br.com.recipebook.utilityandroid.presentation.BaseViewModel
+import br.com.recipebook.utilitykotlin.CommonError
 import kotlinx.coroutines.launch
 
 class RecipeDetailViewModel(
@@ -19,12 +20,29 @@ class RecipeDetailViewModel(
 
     init {
         viewModelScope.launch {
-            getRecipeDetail(safeArgs.recipeId).mapSuccess(::onLoadSuccess)
+            viewState.title.value = safeArgs.title
+            setLoadingState()
+            getRecipeDetail(safeArgs.recipeId).mapSuccess(::onLoadSuccess).mapError(::setErrorState)
         }
     }
 
     override fun dispatchViewAction(action: RecipeDetailViewAction) {
 
+    }
+
+    private fun setLoadingState() {
+        viewState.isLoading.value = true
+        viewState.hasError.value = false
+    }
+
+    private fun setErrorState(error: CommonError) {
+        viewState.isLoading.value = false
+        viewState.hasError.value = true
+    }
+
+    private fun setSuccessState() {
+        viewState.isLoading.value = false
+        viewState.hasError.value = false
     }
 
     private fun onLoadSuccess(detail: RecipeDetailModel) {
@@ -42,5 +60,6 @@ class RecipeDetailViewModel(
         itemList.addAll(detail.instructions.map { DescriptionItem(description = it) })
 
         viewState.listItems.value = itemList
+        setSuccessState()
     }
 }
