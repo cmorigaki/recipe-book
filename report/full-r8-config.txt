@@ -1,4 +1,4 @@
-# The proguard configuration file for the following section is /Users/cesar.morigaki/Desktop/Cesar/Projetos/recipe-book/app/build/intermediates/proguard-files/proguard-android.txt-4.0.0-beta05
+# The proguard configuration file for the following section is /Users/cesar.morigaki/Desktop/Cesar/Projetos/recipe-book/app/build/intermediates/proguard-files/proguard-android.txt-4.0.0-rc01
 # This is a configuration file for ProGuard.
 # http://proguard.sourceforge.net/index.html#manual/usage.html
 #
@@ -114,7 +114,7 @@
 # These classes are duplicated between android.jar and core-lambda-stubs.jar.
 -dontnote java.lang.invoke.**
 
-# End of content from /Users/cesar.morigaki/Desktop/Cesar/Projetos/recipe-book/app/build/intermediates/proguard-files/proguard-android.txt-4.0.0-beta05
+# End of content from /Users/cesar.morigaki/Desktop/Cesar/Projetos/recipe-book/app/build/intermediates/proguard-files/proguard-android.txt-4.0.0-rc01
 # The proguard configuration file for the following section is /Users/cesar.morigaki/Desktop/Cesar/Projetos/recipe-book/app/proguard-rules.pro
 # generate R8 full report for the  project
 -printconfiguration ../report/full-r8-config.txt
@@ -212,15 +212,15 @@
 
 
 # End of content from /Users/cesar.morigaki/Desktop/Cesar/Projetos/recipe-book/app/build/intermediates/aapt_proguard_file/release/aapt_rules.txt
-# The proguard configuration file for the following section is /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/2dd17d443fbe31e60d4d51865ff36308/rules/lib/META-INF/com.android.tools/r8-from-1.6.0/coroutines.pro
+# The proguard configuration file for the following section is /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/944b8cddd402e85a3cc73d33aadbdc2e/rules/lib/META-INF/com.android.tools/r8-from-1.6.0/coroutines.pro
 # Allow R8 to optimize away the FastServiceLoader.
 # Together with ServiceLoader optimization in R8
 # this results in direct instantiation when loading Dispatchers.Main
 -assumenosideeffects class kotlinx.coroutines.internal.MainDispatcherLoader {
     boolean FAST_SERVICE_LOADER_ENABLED return false;
 }
-# End of content from /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/2dd17d443fbe31e60d4d51865ff36308/rules/lib/META-INF/com.android.tools/r8-from-1.6.0/coroutines.pro
-# The proguard configuration file for the following section is /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/61ec8867f4f5eb861cf1ecd13a9a9fbb/rules/lib/META-INF/proguard/coroutines.pro
+# End of content from /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/944b8cddd402e85a3cc73d33aadbdc2e/rules/lib/META-INF/com.android.tools/r8-from-1.6.0/coroutines.pro
+# The proguard configuration file for the following section is /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/956a9f021653ddb107bde26a2d130a9c/rules/lib/META-INF/proguard/coroutines.pro
 # ServiceLoader support
 -keepnames class kotlinx.coroutines.internal.MainDispatcherFactory {}
 -keepnames class kotlinx.coroutines.CoroutineExceptionHandler {}
@@ -232,8 +232,8 @@
     volatile <fields>;
 }
 
-# End of content from /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/61ec8867f4f5eb861cf1ecd13a9a9fbb/rules/lib/META-INF/proguard/coroutines.pro
-# The proguard configuration file for the following section is /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/48fbc0892c130fa34200e5e3b99657be/material-1.1.0/proguard.txt
+# End of content from /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/956a9f021653ddb107bde26a2d130a9c/rules/lib/META-INF/proguard/coroutines.pro
+# The proguard configuration file for the following section is /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/dbb38cfc3e44e55c98c0684d680ba57a/material-1.1.0/proguard.txt
 # Copyright (C) 2015 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -292,8 +292,8 @@
 -keep class androidx.recyclerview.widget.RecyclerView { *; }
 
 
-# End of content from /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/48fbc0892c130fa34200e5e3b99657be/material-1.1.0/proguard.txt
-# The proguard configuration file for the following section is /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/fb70a26dd1655c74e8df7a6c92b7d7d6/appcompat-1.1.0/proguard.txt
+# End of content from /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/dbb38cfc3e44e55c98c0684d680ba57a/material-1.1.0/proguard.txt
+# The proguard configuration file for the following section is /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/a380169ed906a7358a2fcbf848372382/appcompat-1.1.0/proguard.txt
 # Copyright (C) 2018 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -315,8 +315,8 @@
 # aapt is not able to read app::actionViewClass and app:actionProviderClass to produce proguard
 # keep rules. Add a commonly used SearchView to the keep list until b/109831488 is resolved.
 -keep class androidx.appcompat.widget.SearchView { <init>(...); }
-# End of content from /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/fb70a26dd1655c74e8df7a6c92b7d7d6/appcompat-1.1.0/proguard.txt
-# The proguard configuration file for the following section is /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/130bafae3b6de54daa29ccb002ca4fa3/recyclerview-1.1.0/proguard.txt
+# End of content from /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/a380169ed906a7358a2fcbf848372382/appcompat-1.1.0/proguard.txt
+# The proguard configuration file for the following section is /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/b1126f9327ce2a0d9d5527569d00099b/recyclerview-1.1.0/proguard.txt
 # Copyright (C) 2015 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -342,8 +342,8 @@
     public void suppressLayout(boolean);
     public boolean isLayoutSuppressed();
 }
-# End of content from /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/130bafae3b6de54daa29ccb002ca4fa3/recyclerview-1.1.0/proguard.txt
-# The proguard configuration file for the following section is /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/1ffeffed3ec99877f1381ce0a2412165/coordinatorlayout-1.1.0/proguard.txt
+# End of content from /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/b1126f9327ce2a0d9d5527569d00099b/recyclerview-1.1.0/proguard.txt
+# The proguard configuration file for the following section is /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/3a5fdfeee79cce9f61f006d363d77cfd/coordinatorlayout-1.1.0/proguard.txt
 # Copyright (C) 2016 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -367,8 +367,8 @@
 # Make sure we keep annotations for CoordinatorLayout's DefaultBehavior and ViewPager's DecorView
 -keepattributes *Annotation*
 
-# End of content from /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/1ffeffed3ec99877f1381ce0a2412165/coordinatorlayout-1.1.0/proguard.txt
-# The proguard configuration file for the following section is /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/9171446855aeba1cf4f79ec4d528c243/fragment-1.2.2/proguard.txt
+# End of content from /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/3a5fdfeee79cce9f61f006d363d77cfd/coordinatorlayout-1.1.0/proguard.txt
+# The proguard configuration file for the following section is /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/09ab060a6a865ba5358b52bf097739ae/fragment-1.2.2/proguard.txt
 # Copyright (C) 2020 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -389,8 +389,8 @@
     public <init>();
 }
 
-# End of content from /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/9171446855aeba1cf4f79ec4d528c243/fragment-1.2.2/proguard.txt
-# The proguard configuration file for the following section is /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/0fdda7ac628d01b6e6fbfd62de71a891/transition-1.2.0/proguard.txt
+# End of content from /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/09ab060a6a865ba5358b52bf097739ae/fragment-1.2.2/proguard.txt
+# The proguard configuration file for the following section is /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/add5804924630b31547c32fde8999044/transition-1.2.0/proguard.txt
 # Copyright (C) 2017 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -410,8 +410,8 @@
   androidx.transition.ChangeBounds$ViewBounds mViewBounds;
 }
 
-# End of content from /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/0fdda7ac628d01b6e6fbfd62de71a891/transition-1.2.0/proguard.txt
-# The proguard configuration file for the following section is /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/3824c0d2d78a242b28f236a39f3894d2/vectordrawable-animated-1.1.0/proguard.txt
+# End of content from /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/add5804924630b31547c32fde8999044/transition-1.2.0/proguard.txt
+# The proguard configuration file for the following section is /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/09a50e282fa7d0c0b30903ed70bf42a5/vectordrawable-animated-1.1.0/proguard.txt
 # Copyright (C) 2016 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -432,20 +432,20 @@
    *** get*();
 }
 
-# End of content from /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/3824c0d2d78a242b28f236a39f3894d2/vectordrawable-animated-1.1.0/proguard.txt
-# The proguard configuration file for the following section is /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/9b22a9d96dd46ef7df987454653725ec/core-1.2.0/proguard.txt
+# End of content from /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/09a50e282fa7d0c0b30903ed70bf42a5/vectordrawable-animated-1.1.0/proguard.txt
+# The proguard configuration file for the following section is /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/3ae462d752c6d8d60ec363b856cc3e61/core-1.2.0/proguard.txt
 # aapt2 is not (yet) keeping FQCNs defined in the appComponentFactory <application> attribute
 -keep class androidx.core.app.CoreComponentFactory
 
-# End of content from /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/9b22a9d96dd46ef7df987454653725ec/core-1.2.0/proguard.txt
-# The proguard configuration file for the following section is /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/1a3969b69e0e32ea6f5bbdd652fe7349/versionedparcelable-1.1.0/proguard.txt
+# End of content from /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/3ae462d752c6d8d60ec363b856cc3e61/core-1.2.0/proguard.txt
+# The proguard configuration file for the following section is /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/39ff458bb405b68400c585f6572698a8/versionedparcelable-1.1.0/proguard.txt
 -keep public class * implements androidx.versionedparcelable.VersionedParcelable
 -keep public class android.support.**Parcelizer { *; }
 -keep public class androidx.**Parcelizer { *; }
 -keep public class androidx.versionedparcelable.ParcelImpl
 
-# End of content from /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/1a3969b69e0e32ea6f5bbdd652fe7349/versionedparcelable-1.1.0/proguard.txt
-# The proguard configuration file for the following section is /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/c2ae8d1cca59a882ecb4d18f61afbe8a/jetified-sentry-android-ndk-2.1.0/proguard.txt
+# End of content from /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/39ff458bb405b68400c585f6572698a8/versionedparcelable-1.1.0/proguard.txt
+# The proguard configuration file for the following section is /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/26903605a78faf3f2cbfffd3ec4a8e32/jetified-sentry-android-ndk-2.1.0/proguard.txt
 ##---------------Begin: proguard configuration for NDK  ----------
 
 -keep class io.sentry.android.ndk.** { *; }
@@ -457,8 +457,8 @@
 
 ##---------------End: proguard configuration for NDK  ----------
 
-# End of content from /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/c2ae8d1cca59a882ecb4d18f61afbe8a/jetified-sentry-android-ndk-2.1.0/proguard.txt
-# The proguard configuration file for the following section is /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/51f70ebc0fdd795e84cf43cb1706bb0b/jetified-sentry-android-core-2.1.0/proguard.txt
+# End of content from /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/26903605a78faf3f2cbfffd3ec4a8e32/jetified-sentry-android-ndk-2.1.0/proguard.txt
+# The proguard configuration file for the following section is /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/d18b9359063d49c040b6501605df8722/jetified-sentry-android-core-2.1.0/proguard.txt
 ##---------------Begin: proguard configuration for Gson  ----------
 # Gson uses generic type information stored in a class file when working with fields. Proguard
 # removes such information by default, so configure it to keep all of it.
@@ -497,12 +497,12 @@
 
 ##---------------End: proguard configuration for Gson  ----------
 
-# End of content from /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/51f70ebc0fdd795e84cf43cb1706bb0b/jetified-sentry-android-core-2.1.0/proguard.txt
-# The proguard configuration file for the following section is /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/e0f99774c00e6d849b985e8501f51606/jetified-lifecycle-process-2.2.0/proguard.txt
+# End of content from /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/d18b9359063d49c040b6501605df8722/jetified-sentry-android-core-2.1.0/proguard.txt
+# The proguard configuration file for the following section is /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/7f9831bb7242a5e92ed2120629a64cf9/jetified-lifecycle-process-2.2.0/proguard.txt
 # this rule is need to work properly when app is compiled with api 28, see b/142778206
 -keepclassmembers class * extends androidx.lifecycle.EmptyActivityLifecycleCallbacks { *; }
-# End of content from /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/e0f99774c00e6d849b985e8501f51606/jetified-lifecycle-process-2.2.0/proguard.txt
-# The proguard configuration file for the following section is /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/e319c0843682cd69be78aec372d856cc/lifecycle-runtime-2.2.0/proguard.txt
+# End of content from /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/7f9831bb7242a5e92ed2120629a64cf9/jetified-lifecycle-process-2.2.0/proguard.txt
+# The proguard configuration file for the following section is /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/1f1d35cccb38a2d2b156712aebc5f350/lifecycle-runtime-2.2.0/proguard.txt
 -keepattributes *Annotation*
 
 -keepclassmembers enum androidx.lifecycle.Lifecycle$Event {
@@ -522,8 +522,8 @@
 
 # this rule is need to work properly when app is compiled with api 28, see b/142778206
 -keepclassmembers class androidx.lifecycle.ReportFragment$LifecycleCallbacks { *; }
-# End of content from /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/e319c0843682cd69be78aec372d856cc/lifecycle-runtime-2.2.0/proguard.txt
-# The proguard configuration file for the following section is /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/892cde995aafdc8c369f2935ba3bda5f/jetified-lifecycle-viewmodel-savedstate-2.2.0/proguard.txt
+# End of content from /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/1f1d35cccb38a2d2b156712aebc5f350/lifecycle-runtime-2.2.0/proguard.txt
+# The proguard configuration file for the following section is /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/b8baf346188e2e2e29e239080fe034af/jetified-lifecycle-viewmodel-savedstate-2.2.0/proguard.txt
 -keepclassmembers,allowobfuscation class * extends androidx.lifecycle.ViewModel {
     <init>(androidx.lifecycle.SavedStateHandle);
 }
@@ -532,8 +532,8 @@
     <init>(android.app.Application,androidx.lifecycle.SavedStateHandle);
 }
 
-# End of content from /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/892cde995aafdc8c369f2935ba3bda5f/jetified-lifecycle-viewmodel-savedstate-2.2.0/proguard.txt
-# The proguard configuration file for the following section is /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/8e87e3463564c1b43c21a1cbe4b6997b/jetified-savedstate-1.0.0/proguard.txt
+# End of content from /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/b8baf346188e2e2e29e239080fe034af/jetified-lifecycle-viewmodel-savedstate-2.2.0/proguard.txt
+# The proguard configuration file for the following section is /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/8daeac77104ebc0c3d727dd46338d60a/jetified-savedstate-1.0.0/proguard.txt
 # Copyright (C) 2019 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -552,8 +552,8 @@
     <init>();
 }
 
-# End of content from /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/8e87e3463564c1b43c21a1cbe4b6997b/jetified-savedstate-1.0.0/proguard.txt
-# The proguard configuration file for the following section is /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/4ef67bd640305a43c86aafdf76c0d658/lifecycle-viewmodel-2.2.0/proguard.txt
+# End of content from /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/8daeac77104ebc0c3d727dd46338d60a/jetified-savedstate-1.0.0/proguard.txt
+# The proguard configuration file for the following section is /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/469389d4b60cb6d2bcbee279a652bd65/lifecycle-viewmodel-2.2.0/proguard.txt
 -keepclassmembers,allowobfuscation class * extends androidx.lifecycle.ViewModel {
     <init>();
 }
@@ -562,8 +562,8 @@
     <init>(android.app.Application);
 }
 
-# End of content from /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/4ef67bd640305a43c86aafdf76c0d658/lifecycle-viewmodel-2.2.0/proguard.txt
-# The proguard configuration file for the following section is /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/48a57e4edb21baa53199c5ff75e8ece9/rules/lib/META-INF/proguard/androidx-annotations.pro
+# End of content from /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/469389d4b60cb6d2bcbee279a652bd65/lifecycle-viewmodel-2.2.0/proguard.txt
+# The proguard configuration file for the following section is /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/24602187653cf7d11aade95e0b0cf6bc/rules/lib/META-INF/proguard/androidx-annotations.pro
 -keep,allowobfuscation @interface androidx.annotation.Keep
 -keep @androidx.annotation.Keep class * {*;}
 
@@ -579,8 +579,8 @@
     @androidx.annotation.Keep <init>(...);
 }
 
-# End of content from /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/48a57e4edb21baa53199c5ff75e8ece9/rules/lib/META-INF/proguard/androidx-annotations.pro
-# The proguard configuration file for the following section is /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/66e6b9207ad1bfd334ca0fca9a6aa0c3/rules/lib/META-INF/proguard/retrofit2.pro
+# End of content from /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/24602187653cf7d11aade95e0b0cf6bc/rules/lib/META-INF/proguard/androidx-annotations.pro
+# The proguard configuration file for the following section is /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/ec0c2beda783896024cf15205251f635/rules/lib/META-INF/proguard/retrofit2.pro
 # Retrofit does reflection on generic parameters. InnerClasses is required to use Signature and
 # EnclosingMethod is required to use InnerClasses.
 -keepattributes Signature, InnerClasses, EnclosingMethod
@@ -611,8 +611,8 @@
 -if interface * { @retrofit2.http.* <methods>; }
 -keep,allowobfuscation interface <1>
 
-# End of content from /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/66e6b9207ad1bfd334ca0fca9a6aa0c3/rules/lib/META-INF/proguard/retrofit2.pro
-# The proguard configuration file for the following section is /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/e82d6537b4a3a0bb1a126ce0e2c4baf4/rules/lib/META-INF/proguard/moshi.pro
+# End of content from /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/ec0c2beda783896024cf15205251f635/rules/lib/META-INF/proguard/retrofit2.pro
+# The proguard configuration file for the following section is /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/c14aacb912e7900d4988b66355302b94/rules/lib/META-INF/proguard/moshi.pro
 # JSR 305 annotations are for embedding nullability information.
 -dontwarn javax.annotation.**
 
@@ -675,8 +675,8 @@
     <fields>;
 }
 
-# End of content from /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/e82d6537b4a3a0bb1a126ce0e2c4baf4/rules/lib/META-INF/proguard/moshi.pro
-# The proguard configuration file for the following section is /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/507740cdfc1233b8464c511f77038d9e/jetified-fbcore-2.2.0/proguard.txt
+# End of content from /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/c14aacb912e7900d4988b66355302b94/rules/lib/META-INF/proguard/moshi.pro
+# The proguard configuration file for the following section is /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/88df88fcba49d8c37a8dbc4052ff37bb/jetified-fbcore-2.2.0/proguard.txt
 # Keep our interfaces so they can be used by other ProGuard rules.
 # See http://sourceforge.net/p/proguard/bugs/466/
 -keep,allowobfuscation @interface com.facebook.common.internal.DoNotStrip
@@ -711,8 +711,8 @@
 -dontwarn com.android.volley.toolbox.**
 -dontwarn com.facebook.infer.**
 
-# End of content from /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/507740cdfc1233b8464c511f77038d9e/jetified-fbcore-2.2.0/proguard.txt
-# The proguard configuration file for the following section is /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/f89ef313a858738c1c0f55d0487151c1/rules/lib/META-INF/proguard/okhttp3.pro
+# End of content from /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/88df88fcba49d8c37a8dbc4052ff37bb/jetified-fbcore-2.2.0/proguard.txt
+# The proguard configuration file for the following section is /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/47d4eb31dc81fe6443e7bd17c98fd508/rules/lib/META-INF/proguard/okhttp3.pro
 # JSR 305 annotations are for embedding nullability information.
 -dontwarn javax.annotation.**
 
@@ -725,7 +725,7 @@
 # OkHttp platform used only on JVM and when Conscrypt dependency is available.
 -dontwarn okhttp3.internal.platform.ConscryptPlatform
 
-# End of content from /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/f89ef313a858738c1c0f55d0487151c1/rules/lib/META-INF/proguard/okhttp3.pro
+# End of content from /Users/cesar.morigaki/.gradle/caches/transforms-2/files-2.1/47d4eb31dc81fe6443e7bd17c98fd508/rules/lib/META-INF/proguard/okhttp3.pro
 # The proguard configuration file for the following section is <unknown>
 -ignorewarnings
 # End of content from <unknown>

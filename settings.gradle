@@ -1,8 +1,8 @@
 include ':app',
-    ':utility-android',
-    ':utility-kotlin',
+    ':utility:utility-android',
+    ':utility:utility-kotlin',
+    ':infrastructure:navigation',
     ':core-android',
-    ':navigation',
     ':features:recipe-collection',
     ':features:recipe-detail'
 

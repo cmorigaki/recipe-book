@@ -53,10 +53,10 @@ ext {
     ]
 
     ProjectConfig = [
-        utilityKotlin: ":utility-kotlin",
-        utilityAndroid: ":utility-android",
-        coreAndroid: ":core-android",
-        navigation: ":navigation"
+        utilityKotlin: ":utility:utility-kotlin",
+        utilityAndroid: ":utility:utility-android",
+        navigation: ":infrastructure:navigation",
+        coreAndroid: ":core-android"
     ]
 
     Features = [
