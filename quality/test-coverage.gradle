@@ -15,14 +15,23 @@ task codeCoverageReport(type: JacocoReport, dependsOn: ['testDebugUnitTest']) {
             '**/R.class',
             '**/R$*.class',
             '**/BuildConfig.*',
-            '**/*$ViewInjector*.*',
-            '**/*$ViewBinder*.*',
-            '**/*$MembersInjector*.*',
             '**/Manifest*.*',
-            '**/*Test*.*',
+            '**/*Should*.*',
             'android/**/*.*',
-            '**/*Module*.*',
-            '**/databinding/*'
+            'androidx/**/*.*',
+            '**/generated/**',
+            '**/di/*.*',
+            '**/model/*.*',
+
+            //DataBinding
+            '**/BR.class',
+            '**/DataBindingInfo.class',
+            '**/DataBinderMapperImpl$InnerBrLookup.class',
+            '**/*Binding.class',
+            '**/*BindingImpl.class',
+            '**/DataBinderMapperImpl$InnerLayoutIdLookup.class',
+            '**/DataBinderMapperImpl.class',
+            '**/databinding/*.*'
     ]
 
     def javaClasses = fileTree(
