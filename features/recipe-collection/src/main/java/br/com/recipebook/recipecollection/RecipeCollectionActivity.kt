@@ -10,6 +10,7 @@ import br.com.recipebook.navigation.MainNavigator
 import br.com.recipebook.navigation.intent.RecipeDetailIntent
 import br.com.recipebook.recipecollection.databinding.RecipeCollectionActivityBinding
 import br.com.recipebook.recipecollection.presentation.RecipeCollectionActionFromView
+import br.com.recipebook.recipecollection.presentation.RecipeCollectionActionToView
 import br.com.recipebook.recipecollection.presentation.RecipeCollectionViewModel
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -32,6 +33,7 @@ class RecipeCollectionActivity : AppCompatActivity() {
             initComponents(this)
             setContentView(root)
             observeState(this)
+            observeActionCommand()
         }
     }
 
@@ -65,7 +67,25 @@ class RecipeCollectionActivity : AppCompatActivity() {
         }
     }
 
+    private fun observeActionCommand() {
+        viewModel.actionToView.observe(this) {
+            when (it) {
+                is RecipeCollectionActionToView.OpenRecipeDetail -> {
+                    mainNavigator.navigate(
+                        this,
+                        RecipeDetailIntent(recipeId = it.recipeId, title = it.title)
+                    )
+                }
+            }
+        }
+    }
+
     private fun onRecipeClick(recipeId: String, title: String?) {
-        mainNavigator.navigate(this, RecipeDetailIntent(recipeId = recipeId, title = title))
+        viewModel.dispatchAction(
+            RecipeCollectionActionFromView.RecipeClick(
+                recipeId = recipeId,
+                title = title
+            )
+        )
     }
 }

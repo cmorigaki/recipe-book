@@ -22,6 +22,10 @@ class RecipeCollectionViewModel(
     override fun dispatchAction(action: RecipeCollectionActionFromView) {
         when (action) {
             is RecipeCollectionActionFromView.Refresh -> loadRecipeList()
+            is RecipeCollectionActionFromView.RecipeClick -> openRecipeDetail(
+                recipeId = action.recipeId,
+                title = action.title
+            )
         }
     }
 
@@ -57,5 +61,11 @@ class RecipeCollectionViewModel(
     private fun onLoadRecipeListError(error: CommonError) {
         viewState.hasError.value = true
         viewState.recipes.value = emptyList()
+    }
+
+    private fun openRecipeDetail(recipeId: String, title: String?) {
+        _actionToView.value = RecipeCollectionActionToView.OpenRecipeDetail(
+            recipeId = recipeId, title = title
+        )
     }
 }
