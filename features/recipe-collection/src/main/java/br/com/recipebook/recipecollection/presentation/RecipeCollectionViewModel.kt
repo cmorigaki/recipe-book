@@ -12,16 +12,16 @@ import kotlinx.coroutines.launch
 class RecipeCollectionViewModel(
     override val viewState: RecipeCollectionViewState,
     private val getRecipeCollection: GetRecipeCollectionUseCase
-) : BaseViewModel<RecipeCollectionViewState, RecipeCollectionViewAction>() {
+) : BaseViewModel<RecipeCollectionViewState, RecipeCollectionActionFromView, RecipeCollectionActionToView>() {
 
     init {
         setInitialState()
         loadRecipeList()
     }
 
-    override fun dispatchViewAction(action: RecipeCollectionViewAction) {
+    override fun dispatchAction(action: RecipeCollectionActionFromView) {
         when (action) {
-            is RecipeCollectionViewAction.Refresh -> loadRecipeList()
+            is RecipeCollectionActionFromView.Refresh -> loadRecipeList()
         }
     }
 

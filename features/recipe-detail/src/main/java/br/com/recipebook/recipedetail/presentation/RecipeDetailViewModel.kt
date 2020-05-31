@@ -16,7 +16,7 @@ class RecipeDetailViewModel(
     private val safeArgs: RecipeDetailSafeArgs,
     override val viewState: RecipeDetailViewState,
     private val getRecipeDetail: GetRecipeDetailUseCase
-) : BaseViewModel<RecipeDetailViewState, RecipeDetailViewAction>() {
+) : BaseViewModel<RecipeDetailViewState, RecipeDetailActionFromView, RecipeDetailActionToView>() {
 
     init {
         viewModelScope.launch {
@@ -26,7 +26,7 @@ class RecipeDetailViewModel(
         }
     }
 
-    override fun dispatchViewAction(action: RecipeDetailViewAction) {
+    override fun dispatchAction(action: RecipeDetailActionFromView) {
 
     }
 
