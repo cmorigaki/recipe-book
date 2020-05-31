@@ -1,18 +1,16 @@
 package br.com.recipebook.recipecollection
 
 import android.os.Bundle
-import android.widget.Toast
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.observe
 import br.com.recipebook.coreandroid.image.ImageResolver
 import br.com.recipebook.designsystem.ListMarginItemDecoration
 import br.com.recipebook.navigation.MainNavigator
-import br.com.recipebook.navigation.R
 import br.com.recipebook.navigation.intent.RecipeDetailIntent
 import br.com.recipebook.recipecollection.databinding.RecipeCollectionActivityBinding
 import br.com.recipebook.recipecollection.presentation.RecipeCollectionViewAction
 import br.com.recipebook.recipecollection.presentation.RecipeCollectionViewModel
-import br.com.recipebook.utilityandroid.MarginItemDecoration
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -55,22 +53,15 @@ class RecipeCollectionActivity : AppCompatActivity() {
     }
 
     private fun observeState(binding: RecipeCollectionActivityBinding) {
-        with(viewModel.viewState) {
-            recipes.observe(this@RecipeCollectionActivity) {
-                recipeCollectionAdapter.setData(it)
-            }
-            hasError.observe(this@RecipeCollectionActivity) {
-                if (it) {
-                    Toast.makeText(
-                        this@RecipeCollectionActivity,
-                        "Error... improve this",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            }
-            isLoading.observe(this@RecipeCollectionActivity) {
-                binding.swipeRefresh.isRefreshing = it
-            }
+        viewModel.viewState.recipes.observe(this) {
+            recipeCollectionAdapter.setData(it)
+        }
+        viewModel.viewState.hasError.observe(this) {
+            binding.recipeCollectionErrorState.root.visibility = if (it) View.VISIBLE else View.GONE
+        }
+        viewModel.viewState.isLoading.observe(this) {
+            binding.swipeRefresh.isRefreshing = it
+            binding.recipeCollectionLoading.visibility = if (it) View.VISIBLE else View.GONE
         }
     }
 

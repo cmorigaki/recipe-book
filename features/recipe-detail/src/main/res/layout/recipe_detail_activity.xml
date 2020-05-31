@@ -39,36 +39,22 @@
 
     </androidx.recyclerview.widget.RecyclerView>
 
-    <LinearLayout
+    <include
         android:id="@+id/recipe_detail_error_state"
+        layout="@layout/error_state_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:orientation="vertical"
         android:visibility="gone"
-        android:layout_margin="@dimen/margin_large_100"
-        tools:visibility="visible">
+        tools:visibility="visible"/>
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/recipe_error_state" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:text="@string/error_state_generic_title"
-            android:textAppearance="@style/TextAppearance.DS.List.SectionTitle"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:text="@string/error_state_generic_subtitle"
-            android:textAppearance="@style/TextAppearance.DS.List.Item.Description"/>
-    </LinearLayout>
+    <ImageView
+        android:id="@+id/recipe_detail_loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@drawable/loading_icon"
+        android:visibility="gone"
+        tools:visibility="visible" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

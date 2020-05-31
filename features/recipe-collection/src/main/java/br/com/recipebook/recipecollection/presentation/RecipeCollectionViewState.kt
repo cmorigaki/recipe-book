@@ -6,5 +6,6 @@ import br.com.recipebook.recipecollection.view.RecipeItem
 class RecipeCollectionViewState {
     val recipes = MutableLiveData<List<RecipeItem>>()
     val isLoading = MutableLiveData<Boolean>()
+    val isFirstLoading = MutableLiveData<Boolean>()
     val hasError = MutableLiveData<Boolean>()
 }

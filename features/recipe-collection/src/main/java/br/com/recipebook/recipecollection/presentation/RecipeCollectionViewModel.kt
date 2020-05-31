@@ -33,6 +33,7 @@ class RecipeCollectionViewModel(
 
     private fun loadRecipeList() = viewModelScope.launch {
         viewState.isLoading.value = true
+        viewState.hasError.value = false
 
         when (val result = getRecipeCollection()) {
             is ResultWrapper.Success -> onLoadRecipeListSuccess(result.data)
@@ -55,5 +56,6 @@ class RecipeCollectionViewModel(
 
     private fun onLoadRecipeListError(error: CommonError) {
         viewState.hasError.value = true
+        viewState.recipes.value = emptyList()
     }
 }

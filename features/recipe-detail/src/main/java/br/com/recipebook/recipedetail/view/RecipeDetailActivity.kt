@@ -77,14 +77,14 @@ class RecipeDetailActivity : AppCompatActivity() {
 
     private fun observeState(binding: RecipeDetailActivityBinding) {
         viewModel.viewState.isLoading.observe(this) {
-
+            binding.recipeDetailLoading.visibility = if (it) View.VISIBLE else View.GONE
         }
         viewModel.viewState.hasError.observe(this) {
             if (it) {
-                binding.recipeDetailErrorState.visibility = View.VISIBLE
+                binding.recipeDetailErrorState.root.visibility = View.VISIBLE
                 binding.appBarLayout.setExpanded(false)
             } else {
-                binding.recipeDetailErrorState.visibility = View.GONE
+                binding.recipeDetailErrorState.root.visibility = View.GONE
             }
         }
         viewModel.viewState.title.observe(this) {
