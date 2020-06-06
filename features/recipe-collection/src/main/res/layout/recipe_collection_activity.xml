@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:text="@string/recipe_collection_title"
-        android:textAppearance="@style/TextAppearance.DS.Headline"
+        android:textAppearance="@style/TextAppearance.DS.Headline.Color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"

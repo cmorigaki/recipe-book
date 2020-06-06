@@ -5,13 +5,16 @@
     <dimen name="title_item_normal_125">20sp</dimen>
     <dimen name="title_toolbar_normal_100">18sp</dimen>
 
-    <style name="TextAppearance.DS" parent="TextAppearance.AppCompat">
-        <item name="fontFamily">@font/montserrat</item>
-    </style>
+    <style name="TextAppearance.DS" parent="TextAppearance.AppCompat"/>
 
     <style name="TextAppearance.DS.Headline" parent="TextAppearance.DS">
         <item name="android:textSize">@dimen/title_headline_normal_100</item>
         <item name="android:textColor">?android:textColorPrimary</item>
+    </style>
+
+    <style name="TextAppearance.DS.Headline.Color" parent="TextAppearance.DS">
+        <item name="android:textSize">@dimen/title_headline_normal_100</item>
+        <item name="android:textColor">?android:colorPrimary</item>
     </style>
 
 </resources>

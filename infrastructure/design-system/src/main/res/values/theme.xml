@@ -1,33 +1,35 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
-        <!--   color for the app bar and other primary UI elements -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <!--   a darker variant of the primary color, used for
-            the status bar (on Android 5.0+) and contextual app bars -->
-        <item name="colorPrimaryDark">@color/translucent</item>
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- The primary brand color of your app, used most predominantly in theming -->
+        <item name="colorPrimary">#FF802E</item>
+        <!-- A lighter/darker variant of your primary brand color, used sparingly in theming -->
+        <item name="colorPrimaryVariant">#FFB15E</item>
+        <!-- The color used for elements displayed on top of your primary colors
+        (eg. Text and icons, often white or semi-transparent black depending on accessibility) -->
+        <item name="colorOnPrimary">@color/ghostWhite</item>
         <!--   a secondary color for controls like checkboxes and text fields -->
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">#FF802E</item>
+
+        <!--   a darker variant of the primary color, used for
+    the status bar (on Android 5.0+) and contextual app bars -->
+        <item name="colorPrimaryDark">@color/translucent</item>
 
         <!--<item name="android:windowBackground">@color/ghostWhite</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>-->
 
-        <item name="android:textColorPrimary">@color/colorPrimaryText</item>
-        <item name="android:textColorSecondary">@color/colorSecondaryText</item>
-        <item name="android:textColorHint">@color/colorTertiaryText</item>
+        <item name="android:textColorPrimary">#212121</item>
+        <item name="android:textColorSecondary">#757575</item>
+        <item name="android:textColorTertiary">#757575</item>
+        <item name="android:textColorHint">#959595</item>
+
+        <item name="fontFamily">@font/montserrat</item>
+        <item name="android:fontFamily">@font/montserrat</item>
     </style>
 
     <color name="translucent">#33000000</color>
-    <color name="colorPrimary">#FFC107</color>
-    <color name="colorPrimaryDark">#FFA000</color>
-    <color name="colorPrimaryLight">#FFECB3</color>
-    <color name="colorAccent">#FF5252</color>
-    <color name="colorPrimaryText">#212121</color>
-    <color name="colorSecondaryText">#757575</color>
-    <color name="colorTertiaryText">#959595</color>
     <color name="colorDivider">#BDBDBD</color>
     <color name="colorIcon">#212121</color>
-
     <color name="ghostWhite">#fcfcff</color>
 </resources>
