@@ -12,5 +12,4 @@ class RecipeDetailViewState {
     val recipeImage = MutableLiveData<String>()
     val title = MutableLiveData<String>()
     val listItems = MutableLiveData<List<RecipeDetailItem>>()
-
 }

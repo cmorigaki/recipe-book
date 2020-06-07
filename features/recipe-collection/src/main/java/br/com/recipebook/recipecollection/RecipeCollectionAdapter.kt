@@ -42,8 +42,7 @@ class RecipeCollectionAdapter(
         private val binding: RecipeCardBinding,
         private val imageResolver: ImageResolver,
         private val onRecipeClick: (recipeId: String, title: String?) -> Unit
-    ) :
-        RecyclerView.ViewHolder(binding.root) {
+    ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: RecipeItem) {
             with(binding) {

@@ -5,6 +5,7 @@ include ':app',
     ':infrastructure:design-system',
     ':core-android',
     ':features:recipe-collection',
-    ':features:recipe-detail'
+    ':features:recipe-detail',
+    ':features:settings'
 
 rootProject.name = 'Recipe Book'

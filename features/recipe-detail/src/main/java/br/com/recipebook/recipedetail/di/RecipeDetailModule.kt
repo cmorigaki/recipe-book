@@ -18,7 +18,7 @@ import org.koin.dsl.module
 import retrofit2.Retrofit
 
 val recipeDetailViewModule = module {
-    single<Navigator> {
+    single {
         RecipeDetailNavigator()
     } bind Navigator::class
 }

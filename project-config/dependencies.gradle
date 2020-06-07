@@ -62,7 +62,8 @@ ext {
 
     Features = [
         recipeCollection: ":features:recipe-collection",
-        recipeDetail: ":features:recipe-detail"
+        recipeDetail: ":features:recipe-detail",
+        settings: ":features:settings"
     ]
 
     TestConfig = [

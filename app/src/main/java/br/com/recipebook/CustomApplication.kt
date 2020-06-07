@@ -5,9 +5,9 @@ import br.com.recipebook.coreandroid.di.coreAndroidModule
 import br.com.recipebook.navigation.di.navigationModule
 import br.com.recipebook.recipecollection.di.recipeCollectionModules
 import br.com.recipebook.recipedetail.di.recipeDetailModules
+import br.com.recipebook.settings.di.settingsModules
 import com.facebook.drawee.backends.pipeline.Fresco
 import io.sentry.android.core.SentryAndroid
-import io.sentry.core.Sentry
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -25,11 +25,14 @@ class CustomApplication : Application() {
                 coreAndroidModule +
                         navigationModule +
                         recipeCollectionModules +
-                        recipeDetailModules
+                        recipeDetailModules +
+                        settingsModules
             )
         }
         Fresco.initialize(this)
 
-        SentryAndroid.init(this)
+        if (!BuildConfig.DEBUG) {
+            SentryAndroid.init(this)
+        }
     }
 }

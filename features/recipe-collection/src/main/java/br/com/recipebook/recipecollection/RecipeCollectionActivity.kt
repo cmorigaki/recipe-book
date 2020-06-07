@@ -8,6 +8,7 @@ import br.com.recipebook.coreandroid.image.ImageResolver
 import br.com.recipebook.designsystem.ListMarginItemDecoration
 import br.com.recipebook.navigation.MainNavigator
 import br.com.recipebook.navigation.intent.RecipeDetailIntent
+import br.com.recipebook.navigation.intent.SettingsIntent
 import br.com.recipebook.recipecollection.databinding.RecipeCollectionActivityBinding
 import br.com.recipebook.recipecollection.presentation.RecipeCollectionActionFromView
 import br.com.recipebook.recipecollection.presentation.RecipeCollectionActionToView
@@ -50,6 +51,10 @@ class RecipeCollectionActivity : AppCompatActivity() {
                 viewModel.dispatchAction(
                     RecipeCollectionActionFromView.Refresh
                 )
+            }
+            // FIXME Temporary access point. Said that, I'll not dispatch to VM
+            recipeCollectionSettings.setOnClickListener {
+                mainNavigator.navigate(this@RecipeCollectionActivity, SettingsIntent)
             }
         }
     }

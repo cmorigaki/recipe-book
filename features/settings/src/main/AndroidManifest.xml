@@ -1,0 +1,8 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="br.com.recipebook.settings">
+
+    <application>
+        <activity android:name=".view.SettingsActivity">
+        </activity>
+    </application>
+</manifest>

@@ -10,12 +10,23 @@
         android:id="@+id/recipe_collection_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/margin_normal_100"
         android:text="@string/recipe_collection_title"
         android:textAppearance="@style/TextAppearance.DS.Headline.Color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/recipe_collection_settings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_normal_100"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@android:drawable/ic_menu_preferences"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -41,12 +52,12 @@
         layout="@layout/error_state_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:visibility="gone"
-        tools:visibility="visible"/>
+        tools:visibility="visible" />
 
     <ImageView
         android:id="@+id/recipe_collection_loading"
