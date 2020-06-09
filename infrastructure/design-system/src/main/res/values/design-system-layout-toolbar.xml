@@ -23,7 +23,7 @@
     </style>
 
     <style name="Style.DS.AppBarLayout" parent="Theme.AppCompat">
-        <item name="android:background">@color/ghostWhite</item>
+        <item name="android:background">?android:colorPrimaryDark</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:theme">@style/ThemeOverlay.AppCompat.DayNight.ActionBar</item>
@@ -40,7 +40,7 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:fitsSystemWindows">true</item>
-        <item name="contentScrim">@color/ghostWhite</item>
+        <item name="contentScrim">?android:colorPrimaryDark</item>
         <item name="expandedTitleGravity">top</item>
         <item name="layout_scrollFlags">scroll|exitUntilCollapsed|snap</item>
     </style>

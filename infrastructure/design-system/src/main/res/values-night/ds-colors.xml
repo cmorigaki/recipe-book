@@ -19,16 +19,14 @@
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>-->
 
-        <item name="android:textColorPrimary">#212121</item>
-        <item name="android:textColorSecondary">#757575</item>
-        <item name="android:textColorTertiary">#757575</item>
-        <item name="android:textColorHint">#959595</item>
+        <item name="android:textColorPrimary">@color/ghostWhite</item>
+        <item name="android:textColorSecondary">#DCDCDC</item>
+        <item name="android:textColorTertiary">#DCDCDC</item>
+        <item name="android:textColorHint">#BCBCBC</item>
 
         <item name="fontFamily">@font/montserrat</item>
         <item name="android:fontFamily">@font/montserrat</item>
     </style>
 
-    <color name="translucent">#33000000</color>
-    <color name="colorIcon">#212121</color>
-    <color name="ghostWhite">#fcfcff</color>
+    <color name="colorIcon">@color/ghostWhite</color>
 </resources>
