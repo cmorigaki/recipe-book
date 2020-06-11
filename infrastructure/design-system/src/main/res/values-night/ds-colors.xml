@@ -29,4 +29,5 @@
     </style>
 
     <color name="colorIcon">@color/ghostWhite</color>
+    <color name="colorIconInverse">#212121</color>
 </resources>

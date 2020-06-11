@@ -30,5 +30,6 @@
 
     <color name="translucent">#33000000</color>
     <color name="colorIcon">#212121</color>
+    <color name="colorIconInverse">@color/ghostWhite</color>
     <color name="ghostWhite">#fcfcff</color>
 </resources>
