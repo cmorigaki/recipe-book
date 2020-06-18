@@ -15,7 +15,6 @@ import br.com.recipebook.settings.theme.domain.usecase.SetUserThemePreferenceUse
 import br.com.recipebook.settings.theme.presentation.SettingsThemeViewModel
 import br.com.recipebook.settings.theme.presentation.SettingsThemeViewState
 import br.com.recipebook.settings.theme.view.SettingsThemeNavigator
-import org.koin.android.ext.koin.androidApplication
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
@@ -23,7 +22,7 @@ import org.koin.dsl.bind
 import org.koin.dsl.module
 
 val settingsThemeViewModule = module {
-    single {
+    factory {
         SettingsThemeNavigator()
     } bind Navigator::class
 }
@@ -39,24 +38,24 @@ val settingsThemePresentationModule = module {
 }
 
 val settingsThemeDomainModule = module {
-    single<GetUserThemePreferenceUseCase> {
+    factory<GetUserThemePreferenceUseCase> {
         GetUserThemePreference(get())
     }
-    single<SetUserThemePreferenceUseCase> {
+    factory<SetUserThemePreferenceUseCase> {
         SetUserThemePreference(get())
     }
 }
 
 val settingsDataModule = module {
-    single<SettingsThemeRepository> {
+    factory<SettingsThemeRepository> {
         SettingsThemeRepositoryImpl(get())
     }
 
-    single<SettingsThemeDataSource> {
+    factory<SettingsThemeDataSource> {
         SettingsThemeLocalDataSource(get(named(NAMED_SHARED_PREFERENCES_SETTINGS_THEME)))
     }
 
-    single<SharedPreferences>(named(NAMED_SHARED_PREFERENCES_SETTINGS_THEME)) {
+    factory<SharedPreferences>(named(NAMED_SHARED_PREFERENCES_SETTINGS_THEME)) {
         androidContext().getSharedPreferences(
             NAMED_SHARED_PREFERENCES_SETTINGS_THEME,
             Context.MODE_PRIVATE

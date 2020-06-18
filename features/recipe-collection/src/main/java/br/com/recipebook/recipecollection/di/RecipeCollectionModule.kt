@@ -25,7 +25,7 @@ val recipeCollectionPresentationModule = module {
 }
 
 val recipeCollectionDomainModule = module {
-    single<GetRecipeCollectionUseCase> {
+    factory<GetRecipeCollectionUseCase> {
         GetRecipeCollection(
             recipeCollectionRepository = get()
         )
@@ -33,18 +33,18 @@ val recipeCollectionDomainModule = module {
 }
 
 val recipeCollectionDataModule = module {
-    single<RecipeCollectionRepository> {
+    factory<RecipeCollectionRepository> {
         RecipeCollectionRepositoryImpl(
             dataSourceLocal = get(),
             dataSourceRemote = get()
         )
     }
 
-    single<RecipeCollectionDataSourceLocal> {
+    factory<RecipeCollectionDataSourceLocal> {
         RecipeCollectionDataSourceLocalImpl()
     }
 
-    single<RecipeCollectionDataSourceRemote> {
+    factory<RecipeCollectionDataSourceRemote> {
         RecipeCollectionDataSourceRemoteImpl(
             api = (getKoin().get() as Retrofit).create(RecipeCollectionApi::class.java)
         )

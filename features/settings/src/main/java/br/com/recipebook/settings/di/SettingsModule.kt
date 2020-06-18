@@ -11,7 +11,7 @@ import org.koin.dsl.bind
 import org.koin.dsl.module
 
 val settingsViewModule = module {
-    single {
+    factory {
         SettingsNavigator()
     } bind Navigator::class
 }
@@ -26,7 +26,7 @@ val settingsPresentationModule = module {
 }
 
 val settingsDomainModule = module {
-    single<GetSettingsUseCase> {
+    factory<GetSettingsUseCase> {
         GetSettings()
     }
 }

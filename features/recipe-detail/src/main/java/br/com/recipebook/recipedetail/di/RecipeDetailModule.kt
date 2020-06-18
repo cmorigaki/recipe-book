@@ -18,7 +18,7 @@ import org.koin.dsl.module
 import retrofit2.Retrofit
 
 val recipeDetailViewModule = module {
-    single {
+    factory {
         RecipeDetailNavigator()
     } bind Navigator::class
 }
@@ -34,7 +34,7 @@ val recipeDetailPresentationModule = module {
 }
 
 val recipeDetailDomainModule = module {
-    single<GetRecipeDetailUseCase> {
+    factory<GetRecipeDetailUseCase> {
         GetRecipeDetail(
             recipeDetailRepository = get()
         )
@@ -42,13 +42,13 @@ val recipeDetailDomainModule = module {
 }
 
 val recipeDetailDataModule = module {
-    single<RecipeDetailRepository> {
+    factory<RecipeDetailRepository> {
         RecipeDetailRepositoryImpl(
             dataSourceRemote = get()
         )
     }
 
-    single<RecipeDetailDataSourceRemote> {
+    factory<RecipeDetailDataSourceRemote> {
         RecipeDetailDataSourceRemoteImpl(
             api = (getKoin().get() as Retrofit).create(RecipeDetailApi::class.java)
         )
