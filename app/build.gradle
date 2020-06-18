@@ -60,4 +60,5 @@ dependencies {
     implementation project(Features.recipeCollection)
     implementation project(Features.recipeDetail)
     implementation project(Features.settings)
+    implementation project(Features.settingsTheme)
 }

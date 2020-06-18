@@ -44,7 +44,7 @@ class SettingsListAdapter(
 
             fun bind(item: SettingsItem) {
                 with(binding) {
-                    settingsItem.text = item.title
+                    settingsItem.text = root.context.getString(item.title)
                     root.setOnClickListener { onItemClick(item) }
                 }
             }

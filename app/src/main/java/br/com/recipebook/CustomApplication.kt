@@ -6,6 +6,7 @@ import br.com.recipebook.navigation.di.navigationModule
 import br.com.recipebook.recipecollection.di.recipeCollectionModules
 import br.com.recipebook.recipedetail.di.recipeDetailModules
 import br.com.recipebook.settings.di.settingsModules
+import br.com.recipebook.settings.theme.di.settingsThemeModules
 import com.facebook.drawee.backends.pipeline.Fresco
 import io.sentry.android.core.SentryAndroid
 import org.koin.android.ext.koin.androidContext
@@ -26,7 +27,8 @@ class CustomApplication : Application() {
                         navigationModule +
                         recipeCollectionModules +
                         recipeDetailModules +
-                        settingsModules
+                        settingsModules +
+                        settingsThemeModules
             )
         }
         Fresco.initialize(this)

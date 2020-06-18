@@ -1,0 +1,8 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="br.com.recipebook.settings.theme">
+
+    <application>
+        <activity android:name=".view.SettingsThemeActivity">
+        </activity>
+    </application>
+</manifest>
