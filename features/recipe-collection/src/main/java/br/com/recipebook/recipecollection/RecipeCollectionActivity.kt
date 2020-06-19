@@ -36,6 +36,7 @@ class RecipeCollectionActivity : AppCompatActivity() {
             observeState(this)
             observeActionCommand()
         }
+        viewModel.dispatchAction(RecipeCollectionActionFromView.onDisplayScreen)
     }
 
     private fun initComponents(binding: RecipeCollectionActivityBinding) {

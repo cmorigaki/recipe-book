@@ -1,7 +1,9 @@
 package br.com.recipebook
 
 import android.app.Application
+import br.com.recipebook.analytics.amplitude.di.amplitudeAnalyticsModule
 import br.com.recipebook.coreandroid.di.coreAndroidModule
+import br.com.recipebook.di.buildModule
 import br.com.recipebook.navigation.di.navigationModule
 import br.com.recipebook.recipecollection.di.recipeCollectionModules
 import br.com.recipebook.recipedetail.di.recipeDetailModules
@@ -11,7 +13,6 @@ import com.facebook.drawee.backends.pipeline.Fresco
 import io.sentry.android.core.SentryAndroid
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
-
 
 class CustomApplication : Application() {
 
@@ -23,12 +24,14 @@ class CustomApplication : Application() {
             androidContext(this@CustomApplication)
             // declare modules
             modules(
+                buildModule +
                 coreAndroidModule +
                         navigationModule +
                         recipeCollectionModules +
                         recipeDetailModules +
                         settingsModules +
-                        settingsThemeModules
+                        settingsThemeModules +
+                        amplitudeAnalyticsModule
             )
         }
         Fresco.initialize(this)

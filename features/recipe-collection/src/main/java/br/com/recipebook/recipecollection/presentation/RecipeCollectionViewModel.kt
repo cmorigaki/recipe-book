@@ -1,6 +1,8 @@
 package br.com.recipebook.recipecollection.presentation
 
 import androidx.lifecycle.viewModelScope
+import br.com.recipebook.analytics.Analytics
+import br.com.recipebook.analytics.events.ViewScreenEvent
 import br.com.recipebook.recipecollection.domain.model.RecipeModel
 import br.com.recipebook.recipecollection.domain.usecase.GetRecipeCollectionUseCase
 import br.com.recipebook.recipecollection.view.RecipeItem
@@ -11,7 +13,8 @@ import kotlinx.coroutines.launch
 
 class RecipeCollectionViewModel(
     override val viewState: RecipeCollectionViewState,
-    private val getRecipeCollection: GetRecipeCollectionUseCase
+    private val getRecipeCollection: GetRecipeCollectionUseCase,
+    private val analytics: Analytics
 ) : BaseViewModel<RecipeCollectionViewState, RecipeCollectionActionFromView, RecipeCollectionActionToView>() {
 
     init {
@@ -21,6 +24,8 @@ class RecipeCollectionViewModel(
 
     override fun dispatchAction(action: RecipeCollectionActionFromView) {
         when (action) {
+            is RecipeCollectionActionFromView.onDisplayScreen ->
+                analytics.sendEvent(ViewScreenEvent("Recipe Collection"))
             is RecipeCollectionActionFromView.Refresh -> loadRecipeList()
             is RecipeCollectionActionFromView.RecipeClick -> openRecipeDetail(
                 recipeId = action.recipeId,
