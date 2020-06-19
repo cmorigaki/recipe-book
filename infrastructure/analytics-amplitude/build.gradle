@@ -27,8 +27,10 @@ dependencies {
     implementation AndroidLibConfig.coreKtx
 
     implementation AndroidLibConfig.koinAndroid
+    implementation AndroidLibConfig.amplitude
 
-    implementation project(ProjectConfig.coreAndroid)
     implementation project(ProjectConfig.utilityAndroid)
     implementation project(ProjectConfig.utilityKotlin)
+    implementation project(ProjectConfig.analytics)
+    implementation project(ProjectConfig.configuration)
 }

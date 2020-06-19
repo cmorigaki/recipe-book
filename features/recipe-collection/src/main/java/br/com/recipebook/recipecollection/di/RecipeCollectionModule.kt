@@ -19,7 +19,8 @@ val recipeCollectionPresentationModule = module {
     viewModel {
         RecipeCollectionViewModel(
             viewState = RecipeCollectionViewState(),
-            getRecipeCollection = get()
+            getRecipeCollection = get(),
+            analytics = get()
         )
     }
 }

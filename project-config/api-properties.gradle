@@ -1,10 +1,39 @@
 android {
-    defaultConfig {
-        def localProperties = new Properties()
-        localProperties.load(new FileInputStream("$project.rootDir/project-config/api.properties"))
-        localProperties.each {
-            prop -> project.ext.set(prop.key, prop.value)
+    buildTypes {
+        debug {
+            loadApiProperties("DEV").each { prop ->
+                // Add keys to manifest variables
+                project.ext.set(prop.key, prop.value)
                 manifestPlaceholders[prop.key] = prop.value
+                // Add keys to BuildConfig
+                buildConfigField "String", prop.key, "\"${prop.value}\""
+            }
+        }
+        release {
+            loadApiProperties("PROD").each { prop ->
+                // Add keys to manifest variables
+                project.ext.set(prop.key, prop.value)
+                manifestPlaceholders[prop.key] = prop.value
+                // Add keys to BuildConfig
+                buildConfigField "String", prop.key, "\"${prop.value}\""
+            }
         }
     }
+}
+
+/**
+ * Loads the API from the api.properties file.
+ *
+ * @param environment DEV or PROD
+ */
+Properties loadApiProperties(String environment) {
+    def envProperties = new Properties()
+    def localProperties = new Properties()
+    localProperties.load(new FileInputStream("$project.rootDir/project-config/api.properties"))
+    localProperties.each { prop ->
+        if (prop.key.endsWith(environment)) {
+            envProperties.put(prop.key.replace("_$environment", ""), prop.value)
+        }
+    }
+    return envProperties
 }

@@ -52,7 +52,10 @@ dependencies {
     implementation project(ProjectConfig.coreAndroid)
     implementation project(ProjectConfig.utilityAndroid)
     implementation project(ProjectConfig.utilityKotlin)
+    implementation project(ProjectConfig.configuration)
     implementation project(ProjectConfig.navigation)
+    implementation project(ProjectConfig.analytics)
+    implementation project(ProjectConfig.analyticsAmplitude)
 
     implementation AndroidLibConfig.fresco
     implementation AndroidLibConfig.sentry

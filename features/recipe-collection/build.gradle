@@ -2,4 +2,6 @@ apply from: "$rootDir/project-config/feature-complete-build.gradle"
 
 dependencies {
     implementation AndroidLibConfig.swipeRefresh
+
+    implementation project(ProjectConfig.analytics)
 }
