@@ -1,12 +1,12 @@
-name: Pull Request & Master CI
+name: Pull Request & Main CI
 
 on:
   pull_request:
     branches:
-      - 'master'
+      - 'main'
   push:
     branches:
-      - 'master'
+      - 'main'
 
 jobs:
   test:
