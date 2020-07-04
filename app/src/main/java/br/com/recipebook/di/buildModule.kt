@@ -9,7 +9,8 @@ val buildModule = module {
             appInfo = AppInfo(
                 name = BuildConfig.APPLICATION_ID,
                 version = BuildConfig.VERSION_NAME,
-                variant = BuildConfig.BUILD_TYPE
+                variant = BuildConfig.BUILD_TYPE,
+                buildVariant = if (BuildConfig.DEBUG) BuildVariant.DEBUG else BuildVariant.RELEASE
             ),
             apiKeys = ApiKeys(
                 sentryKey = BuildConfig.SENTRY_DSN,
