@@ -64,4 +64,7 @@ dependencies {
     implementation project(Features.recipeDetail)
     implementation project(Features.settings)
     implementation project(Features.settingsTheme)
+
+    // debugImplementation because LeakCanary should only run in debug builds.
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.4'
 }
