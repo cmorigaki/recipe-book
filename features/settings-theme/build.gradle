@@ -3,4 +3,6 @@ apply from: "$rootDir/project-config/feature-complete-build.gradle"
 dependencies {
     implementation AndroidLibConfig.coordinatorLayout
     implementation AndroidLibConfig.material
+
+    implementation project(ProjectConfig.analytics)
 }

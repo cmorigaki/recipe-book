@@ -13,6 +13,7 @@ import br.com.recipebook.coreandroid.image.ImageSize
 import br.com.recipebook.designsystem.ListMarginItemDecoration
 import br.com.recipebook.recipedetail.R
 import br.com.recipebook.recipedetail.databinding.RecipeDetailActivityBinding
+import br.com.recipebook.recipedetail.presentation.RecipeDetailActionFromView
 import br.com.recipebook.recipedetail.presentation.RecipeDetailViewModel
 import br.com.recipebook.utilityandroid.view.activitySafeArgs
 import br.com.recipebook.utilityandroid.view.putSafeArgs

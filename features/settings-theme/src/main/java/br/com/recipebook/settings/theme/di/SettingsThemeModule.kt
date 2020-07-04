@@ -32,7 +32,8 @@ val settingsThemePresentationModule = module {
         SettingsThemeViewModel(
             viewState = SettingsThemeViewState(),
             getUserThemePreference = get(),
-            setUserThemePreferenceUseCase = get()
+            setUserThemePreferenceUseCase = get(),
+            analytics = get()
         )
     }
 }

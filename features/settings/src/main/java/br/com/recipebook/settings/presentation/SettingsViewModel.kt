@@ -1,6 +1,8 @@
 package br.com.recipebook.settings.presentation
 
 import androidx.lifecycle.viewModelScope
+import br.com.recipebook.analytics.Analytics
+import br.com.recipebook.settings.analytics.ViewSettingsEvent
 import br.com.recipebook.settings.domain.model.SettingsItemModel
 import br.com.recipebook.settings.domain.usecase.GetSettingsUseCase
 import br.com.recipebook.settings.presentation.model.SettingsItem
@@ -10,13 +12,14 @@ import kotlinx.coroutines.launch
 
 class SettingsViewModel(
     override val viewState: SettingsViewState,
-    private val getSettingsList: GetSettingsUseCase
+    private val getSettingsList: GetSettingsUseCase,
+    private val analytics: Analytics
 ) : BaseViewModel<SettingsViewState, SettingsActionFromView, SettingsActionToView>() {
 
     init {
         viewModelScope.launch {
             setLoadingState()
-            getSettingsList().mapSuccess(::onLoadSuccess).mapError(::setErrorState)
+            getSettingsList().mapSuccess(::onLoadSuccess).mapError(::onLoadError)
         }
     }
 
@@ -32,7 +35,7 @@ class SettingsViewModel(
         viewState.hasError.value = false
     }
 
-    private fun setErrorState(error: CommonError) {
+    private fun setErrorState() {
         viewState.isLoading.value = false
         viewState.hasError.value = true
     }
@@ -43,9 +46,19 @@ class SettingsViewModel(
     }
 
     private fun onLoadSuccess(settings: List<SettingsItemModel>) {
+        sendViewEvent(true)
         viewState.listItems.value = settings.map {
             SettingsItem(id = it.id, title = it.title, navIntent = it.navIntent)
         }
         setSuccessState()
+    }
+
+    private fun onLoadError(error: CommonError) {
+        sendViewEvent(false)
+        setErrorState()
+    }
+
+    private fun sendViewEvent(success: Boolean) {
+        analytics.sendEvent(ViewSettingsEvent(success))
     }
 }

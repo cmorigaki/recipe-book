@@ -2,7 +2,7 @@ package br.com.recipebook.recipecollection.presentation
 
 import androidx.lifecycle.viewModelScope
 import br.com.recipebook.analytics.Analytics
-import br.com.recipebook.analytics.events.ViewScreenEvent
+import br.com.recipebook.recipecollection.analytics.ViewRecipeCollectionEvent
 import br.com.recipebook.recipecollection.domain.model.RecipeModel
 import br.com.recipebook.recipecollection.domain.usecase.GetRecipeCollectionUseCase
 import br.com.recipebook.recipecollection.view.RecipeItem
@@ -24,8 +24,6 @@ class RecipeCollectionViewModel(
 
     override fun dispatchAction(action: RecipeCollectionActionFromView) {
         when (action) {
-            is RecipeCollectionActionFromView.onDisplayScreen ->
-                analytics.sendEvent(ViewScreenEvent("Recipe Collection"))
             is RecipeCollectionActionFromView.Refresh -> loadRecipeList()
             is RecipeCollectionActionFromView.RecipeClick -> openRecipeDetail(
                 recipeId = action.recipeId,
@@ -53,6 +51,7 @@ class RecipeCollectionViewModel(
     }
 
     private fun onLoadRecipeListSuccess(list: List<RecipeModel>) {
+        sendViewEvent(true)
         viewState.hasError.value = false
         viewState.recipes.value = list.map {
             RecipeItem(
@@ -64,6 +63,7 @@ class RecipeCollectionViewModel(
     }
 
     private fun onLoadRecipeListError(error: CommonError) {
+        sendViewEvent(false)
         viewState.hasError.value = true
         viewState.recipes.value = emptyList()
     }
@@ -72,5 +72,9 @@ class RecipeCollectionViewModel(
         _actionToView.value = RecipeCollectionActionToView.OpenRecipeDetail(
             recipeId = recipeId, title = title
         )
+    }
+
+    private fun sendViewEvent(success: Boolean) {
+        analytics.sendEvent(ViewRecipeCollectionEvent(success))
     }
 }
