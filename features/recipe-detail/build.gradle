@@ -4,4 +4,6 @@ dependencies {
     implementation AndroidLibConfig.swipeRefresh
     implementation AndroidLibConfig.coordinatorLayout
     implementation AndroidLibConfig.material
+
+    implementation project(ProjectConfig.analytics)
 }

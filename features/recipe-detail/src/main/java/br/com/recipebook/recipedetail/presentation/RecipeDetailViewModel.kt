@@ -1,6 +1,8 @@
 package br.com.recipebook.recipedetail.presentation
 
 import androidx.lifecycle.viewModelScope
+import br.com.recipebook.analytics.Analytics
+import br.com.recipebook.recipedetail.analytics.ViewRecipeDetailEvent
 import br.com.recipebook.recipedetail.domain.model.RecipeDetailModel
 import br.com.recipebook.recipedetail.domain.usecase.GetRecipeDetailUseCase
 import br.com.recipebook.recipedetail.presentation.model.DescriptionItem
@@ -15,14 +17,15 @@ import kotlinx.coroutines.launch
 class RecipeDetailViewModel(
     private val safeArgs: RecipeDetailSafeArgs,
     override val viewState: RecipeDetailViewState,
-    private val getRecipeDetail: GetRecipeDetailUseCase
+    private val getRecipeDetail: GetRecipeDetailUseCase,
+    private val analytics: Analytics
 ) : BaseViewModel<RecipeDetailViewState, RecipeDetailActionFromView, RecipeDetailActionToView>() {
 
     init {
         viewModelScope.launch {
             viewState.title.value = safeArgs.title
             setLoadingState()
-            getRecipeDetail(safeArgs.recipeId).mapSuccess(::onLoadSuccess).mapError(::setErrorState)
+            getRecipeDetail(safeArgs.recipeId).mapSuccess(::onLoadSuccess).mapError(::onLoadError)
         }
     }
 
@@ -35,7 +38,7 @@ class RecipeDetailViewModel(
         viewState.hasError.value = false
     }
 
-    private fun setErrorState(error: CommonError) {
+    private fun setErrorState() {
         viewState.isLoading.value = false
         viewState.hasError.value = true
     }
@@ -46,6 +49,7 @@ class RecipeDetailViewModel(
     }
 
     private fun onLoadSuccess(detail: RecipeDetailModel) {
+        sendViewEvent(true)
         viewState.title.value = detail.name
         viewState.recipeImage.value = detail.imgPath
 
@@ -61,5 +65,14 @@ class RecipeDetailViewModel(
 
         viewState.listItems.value = itemList
         setSuccessState()
+    }
+
+    private fun onLoadError(error: CommonError) {
+        sendViewEvent(false)
+        setErrorState()
+    }
+
+    private fun sendViewEvent(success: Boolean) {
+        analytics.sendEvent(ViewRecipeDetailEvent(success))
     }
 }

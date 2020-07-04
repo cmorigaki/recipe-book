@@ -1,6 +1,8 @@
 package br.com.recipebook.settings.theme.presentation
 
 import androidx.lifecycle.viewModelScope
+import br.com.recipebook.analytics.Analytics
+import br.com.recipebook.settings.theme.analytics.ViewSettingsThemeEvent
 import br.com.recipebook.settings.theme.domain.model.UserThemePreferenceModel
 import br.com.recipebook.settings.theme.domain.usecase.GetUserThemePreferenceUseCase
 import br.com.recipebook.settings.theme.domain.usecase.SetUserThemePreferenceUseCase
@@ -11,13 +13,14 @@ import kotlinx.coroutines.launch
 class SettingsThemeViewModel(
     override val viewState: SettingsThemeViewState,
     private val getUserThemePreference: GetUserThemePreferenceUseCase,
-    private val setUserThemePreferenceUseCase: SetUserThemePreferenceUseCase
+    private val setUserThemePreferenceUseCase: SetUserThemePreferenceUseCase,
+    private val analytics: Analytics
 ) : BaseViewModel<SettingsThemeViewState, SettingsThemeActionFromView, SettingsThemeActionToView>() {
 
     init {
         viewModelScope.launch {
             setLoadingState()
-            getUserThemePreference().mapSuccess(::onLoadSuccess).mapError(::setErrorState)
+            getUserThemePreference().mapSuccess(::onLoadSuccess).mapError(::onLoadError)
         }
     }
 
@@ -39,7 +42,7 @@ class SettingsThemeViewModel(
         viewState.hasError.value = false
     }
 
-    private fun setErrorState(error: CommonError) {
+    private fun setErrorState() {
         viewState.isLoading.value = false
         viewState.hasError.value = true
     }
@@ -50,6 +53,7 @@ class SettingsThemeViewModel(
     }
 
     private fun onLoadSuccess(settings: UserThemePreferenceModel) {
+        sendViewEvent(true)
         when (settings) {
             UserThemePreferenceModel.SYSTEM -> {
                 viewState.isSystemThemeSelected.value = true
@@ -68,5 +72,14 @@ class SettingsThemeViewModel(
             }
         }
         setSuccessState()
+    }
+
+    private fun onLoadError(error: CommonError) {
+        sendViewEvent(false)
+        setErrorState()
+    }
+
+    private fun sendViewEvent(success: Boolean) {
+        analytics.sendEvent(ViewSettingsThemeEvent(success))
     }
 }
