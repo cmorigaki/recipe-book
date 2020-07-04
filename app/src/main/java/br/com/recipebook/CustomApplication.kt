@@ -18,6 +18,18 @@ class CustomApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+
+        // Crash report must be the first thing to initialize!
+        if (!BuildConfig.DEBUG) {
+            SentryAndroid.init(this)
+        }
+
+        initDI()
+
+        Fresco.initialize(this) // FIXME create abstraction layer and do a lazy init
+    }
+
+    private fun initDI() {
         // start Koin!
         startKoin {
             // declare used Android context
@@ -25,7 +37,7 @@ class CustomApplication : Application() {
             // declare modules
             modules(
                 buildModule +
-                coreAndroidModule +
+                        coreAndroidModule +
                         navigationModule +
                         recipeCollectionModules +
                         recipeDetailModules +
@@ -33,11 +45,6 @@ class CustomApplication : Application() {
                         settingsThemeModules +
                         amplitudeAnalyticsModule
             )
-        }
-        Fresco.initialize(this)
-
-        if (!BuildConfig.DEBUG) {
-            SentryAndroid.init(this)
         }
     }
 }

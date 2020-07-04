@@ -6,6 +6,7 @@ import br.com.recipebook.analytics.Analytics
 import br.com.recipebook.analytics.Event
 import br.com.recipebook.analytics.events.LibraryInitializationEvent
 import br.com.recipebook.di.BuildConfiguration
+import br.com.recipebook.di.BuildVariant
 import com.amplitude.api.Amplitude
 import org.json.JSONObject
 import kotlin.system.measureTimeMillis
@@ -29,9 +30,11 @@ class AmplitudeAnalytics(
                 .enableCoppaControl() // Turning off sensitive data tracking
         }
 
-        if (BuildConfig.DEBUG) {    // TODO inject
-            Amplitude.getInstance().setLogLevel(Log.VERBOSE)
+        val logLevel = when (buildConfiguration.appInfo.buildVariant) {
+            BuildVariant.DEBUG -> Log.VERBOSE
+            BuildVariant.RELEASE -> Log.INFO
         }
+        Amplitude.getInstance().setLogLevel(logLevel)
 
         isInitialized = true
         sendEvent(
