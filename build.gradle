@@ -24,6 +24,10 @@ allprojects {
     }
 }
 
+subprojects {
+    apply from: "$rootDir/quality/ktlint.gradle"
+}
+
 task clean(type: Delete) {
     delete rootProject.buildDir
 }

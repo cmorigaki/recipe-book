@@ -11,8 +11,10 @@ open class MarginItemDecoration(
     private val orientation: Int = GridLayoutManager.VERTICAL
 ) : RecyclerView.ItemDecoration() {
     override fun getItemOffsets(
-        outRect: Rect, view: View,
-        parent: RecyclerView, state: RecyclerView.State
+        outRect: Rect,
+        view: View,
+        parent: RecyclerView,
+        state: RecyclerView.State
     ) {
         with(outRect) {
             if (orientation == GridLayoutManager.VERTICAL) {

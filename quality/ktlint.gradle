@@ -2,12 +2,41 @@ configurations {
     ktlint
 }
 dependencies {
-    ktlint 'com.pinterest:ktlint:0.36.0'
+    ktlint 'com.pinterest:ktlint:0.37.2'
 }
 
-task ktlintVerification(type: JavaExec, group: "verification") {
-    description = "Check Kotlin code style."
-    classpath = configurations.ktlint
+def outputDir = "${project.buildDir}/reports/ktlint/"
+
+task ktlint(type: JavaExec, group: "verification", description: "Runs ktlint.") {
     main = "com.pinterest.ktlint.Main"
-    args "-F", "src/**/*.kt", "--reporter=plain", "--reporter=checkstyle,output=${buildDir}/reports/ktlint/ktlint-checkstyle.xml"
+    classpath = configurations.ktlint
+    args = [
+        "--reporter=plain",
+        "--reporter=checkstyle,output=${outputDir}ktlint-checkstyle-report.xml",
+        "src/**/*.kt"
+    ]
+
+    // To make this Gradle task incremental - https://medium.com/@vanniktech/making-your-gradle-tasks-incremental-7f26e4ef09c3
+    inputs.files(
+        fileTree(dir: "src", include: "**/*.kt"),
+        fileTree(dir: ".", include: "**/.editorconfig")
+    )
+    outputs.dir(outputDir)
+}
+
+task ktlintFormat(type: JavaExec, group: "formatting") {
+    description = "Runs ktlint and autoformats your code."
+    main = "com.pinterest.ktlint.Main"
+    classpath = configurations.ktlint
+    args = [
+        "-F",
+        "src/**/*.kt"
+    ]
+
+    // To make this Gradle task incremental - https://medium.com/@vanniktech/making-your-gradle-tasks-incremental-7f26e4ef09c3
+    inputs.files(
+        fileTree(dir: "src", include: "**/*.kt"),
+        fileTree(dir: ".", include: "**/.editorconfig")
+    )
+    outputs.upToDateWhen { true }
 }

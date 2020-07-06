@@ -3,8 +3,6 @@ package br.com.recipebook.settings.theme.domain.usecase
 import androidx.appcompat.app.AppCompatDelegate
 import br.com.recipebook.settings.theme.domain.model.UserThemePreferenceModel
 import br.com.recipebook.settings.theme.domain.repository.SettingsThemeRepository
-import br.com.recipebook.utilitykotlin.CommonError
-import br.com.recipebook.utilitykotlin.ResultWrapper
 
 interface SetUserThemePreferenceUseCase {
     suspend operator fun invoke(theme: UserThemePreferenceModel)
