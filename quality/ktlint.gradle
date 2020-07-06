@@ -1,0 +1,13 @@
+configurations {
+    ktlint
+}
+dependencies {
+    ktlint 'com.pinterest:ktlint:0.36.0'
+}
+
+task ktlintVerification(type: JavaExec, group: "verification") {
+    description = "Check Kotlin code style."
+    classpath = configurations.ktlint
+    main = "com.pinterest.ktlint.Main"
+    args "-F", "src/**/*.kt", "--reporter=plain", "--reporter=checkstyle,output=${buildDir}/reports/ktlint/ktlint-checkstyle.xml"
+}

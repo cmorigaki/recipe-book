@@ -4,6 +4,7 @@ apply plugin: 'kotlin-android-extensions'
 
 apply from: "$rootDir/project-config/api-properties.gradle"
 apply from: "$rootDir/quality/test-coverage.gradle"
+apply from: "$rootDir/quality/ktlint.gradle"
 
 android {
     compileSdkVersion AndroidConfig.compileSdk
