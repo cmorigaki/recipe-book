@@ -69,7 +69,6 @@ class SettingsThemeActivity : AppCompatActivity() {
 
     private fun observeActionCommand() {
         viewModel.actionToView.observe(this) {
-
         }
     }
 

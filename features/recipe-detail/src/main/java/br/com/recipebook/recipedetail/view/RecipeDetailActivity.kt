@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,7 +12,6 @@ import br.com.recipebook.coreandroid.image.ImageSize
 import br.com.recipebook.designsystem.ListMarginItemDecoration
 import br.com.recipebook.recipedetail.R
 import br.com.recipebook.recipedetail.databinding.RecipeDetailActivityBinding
-import br.com.recipebook.recipedetail.presentation.RecipeDetailActionFromView
 import br.com.recipebook.recipedetail.presentation.RecipeDetailViewModel
 import br.com.recipebook.utilityandroid.view.activitySafeArgs
 import br.com.recipebook.utilityandroid.view.putSafeArgs
@@ -54,20 +52,22 @@ class RecipeDetailActivity : AppCompatActivity() {
     private fun setupHeader(binding: RecipeDetailActivityBinding) {
         var isShow = true
         var scrollRange = -1
-        binding.appBarLayout.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { barLayout, verticalOffset ->
-            if (scrollRange == -1) {
-                scrollRange = barLayout?.totalScrollRange!!
+        binding.appBarLayout.addOnOffsetChangedListener(
+            AppBarLayout.OnOffsetChangedListener { barLayout, verticalOffset ->
+                if (scrollRange == -1) {
+                    scrollRange = barLayout?.totalScrollRange!!
+                }
+                if (scrollRange + verticalOffset == 0) {
+                    binding.toolbarTitle.visibility = View.VISIBLE
+                    binding.toolbar.navigationIcon?.setTint(getColor(R.color.colorIconInverse))
+                    isShow = true
+                } else if (isShow) {
+                    binding.toolbarTitle.visibility = View.GONE
+                    binding.toolbar.navigationIcon?.setTint(getColor(R.color.colorIcon))
+                    isShow = false
+                }
             }
-            if (scrollRange + verticalOffset == 0) {
-                binding.toolbarTitle.visibility = View.VISIBLE
-                binding.toolbar.navigationIcon?.setTint(getColor(R.color.colorIconInverse))
-                isShow = true
-            } else if (isShow) {
-                binding.toolbarTitle.visibility = View.GONE
-                binding.toolbar.navigationIcon?.setTint(getColor(R.color.colorIcon))
-                isShow = false
-            }
-        })
+        )
     }
 
     private fun setupList(binding: RecipeDetailActivityBinding) {

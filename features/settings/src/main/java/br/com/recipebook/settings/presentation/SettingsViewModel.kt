@@ -25,8 +25,9 @@ class SettingsViewModel(
 
     override fun dispatchAction(action: SettingsActionFromView) {
         when (action) {
-            is SettingsActionFromView.ItemClick -> _actionToView.value =
-                SettingsActionToView.OpenItem(action.settingsItem.navIntent)
+            is SettingsActionFromView.ItemClick ->
+                _actionToView.value =
+                    SettingsActionToView.OpenItem(action.settingsItem.navIntent)
         }
     }
 

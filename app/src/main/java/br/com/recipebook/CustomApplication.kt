@@ -37,13 +37,13 @@ class CustomApplication : Application() {
             // declare modules
             modules(
                 buildModule +
-                        coreAndroidModule +
-                        navigationModule +
-                        recipeCollectionModules +
-                        recipeDetailModules +
-                        settingsModules +
-                        settingsThemeModules +
-                        amplitudeAnalyticsModule
+                    coreAndroidModule +
+                    navigationModule +
+                    recipeCollectionModules +
+                    recipeDetailModules +
+                    settingsModules +
+                    settingsThemeModules +
+                    amplitudeAnalyticsModule
             )
         }
     }

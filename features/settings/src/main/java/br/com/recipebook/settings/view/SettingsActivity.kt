@@ -18,7 +18,6 @@ import br.com.recipebook.settings.presentation.model.SettingsItem
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-
 class SettingsActivity : AppCompatActivity() {
     private val viewModel: SettingsViewModel by viewModel()
     private val adapter by lazy { SettingsListAdapter(onItemClick = ::onItemClick) }

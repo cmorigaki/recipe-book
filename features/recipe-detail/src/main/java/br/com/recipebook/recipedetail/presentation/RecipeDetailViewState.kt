@@ -1,7 +1,6 @@
 package br.com.recipebook.recipedetail.presentation
 
 import androidx.lifecycle.MutableLiveData
-import br.com.recipebook.recipedetail.domain.model.IngredientsModel
 import br.com.recipebook.recipedetail.presentation.model.RecipeDetailItem
 
 class RecipeDetailViewState {

@@ -30,7 +30,6 @@ class RecipeDetailViewModel(
     }
 
     override fun dispatchAction(action: RecipeDetailActionFromView) {
-
     }
 
     private fun setLoadingState() {
@@ -54,12 +53,14 @@ class RecipeDetailViewModel(
         viewState.recipeImage.value = detail.imgPath
 
         val itemList = mutableListOf<RecipeDetailItem>(IngredientHeaderItem)
-        itemList.addAll(detail.ingredients.map {
-            DescriptionItem(
-                description = it.description,
-                imgPath = it.imgPath
-            )
-        })
+        itemList.addAll(
+            detail.ingredients.map {
+                DescriptionItem(
+                    description = it.description,
+                    imgPath = it.imgPath
+                )
+            }
+        )
         itemList.add(InstructionHeaderItem)
         itemList.addAll(detail.instructions.map { DescriptionItem(description = it) })
 
