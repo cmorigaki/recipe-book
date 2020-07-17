@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.recipebook.designsystem.ListMarginItemDecoration
@@ -15,9 +16,13 @@ import br.com.recipebook.settings.presentation.SettingsActionFromView
 import br.com.recipebook.settings.presentation.SettingsActionToView
 import br.com.recipebook.settings.presentation.SettingsViewModel
 import br.com.recipebook.settings.presentation.model.SettingsItem
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+@ExperimentalCoroutinesApi
 class SettingsActivity : AppCompatActivity() {
     private val viewModel: SettingsViewModel by viewModel()
     private val adapter by lazy { SettingsListAdapter(onItemClick = ::onItemClick) }
@@ -54,14 +59,20 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     private fun observeState(binding: SettingsActivityBinding) {
-        viewModel.viewState.isLoading.observe(this) {
-            binding.settingsLoading.visibility = if (it) View.VISIBLE else View.GONE
+        lifecycleScope.launch {
+            viewModel.viewState.isLoading.collect {
+                binding.settingsLoading.visibility = if (it) View.VISIBLE else View.GONE
+            }
         }
-        viewModel.viewState.hasError.observe(this) {
-            binding.settingsErrorState.root.visibility = if (it) View.VISIBLE else View.GONE
+        lifecycleScope.launch {
+            viewModel.viewState.hasError.collect {
+                binding.settingsErrorState.root.visibility = if (it) View.VISIBLE else View.GONE
+            }
         }
-        viewModel.viewState.listItems.observe(this) {
-            adapter.setData(it)
+        lifecycleScope.launch {
+            viewModel.viewState.listItems.collect {
+                adapter.setData(it)
+            }
         }
     }
 

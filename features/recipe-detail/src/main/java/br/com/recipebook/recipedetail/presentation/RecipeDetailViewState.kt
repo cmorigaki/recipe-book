@@ -1,14 +1,16 @@
 package br.com.recipebook.recipedetail.presentation
 
-import androidx.lifecycle.MutableLiveData
 import br.com.recipebook.recipedetail.presentation.model.RecipeDetailItem
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.MutableStateFlow
 
+@ExperimentalCoroutinesApi
 class RecipeDetailViewState {
-    val isLoading = MutableLiveData<Boolean>()
+    val isLoading = MutableStateFlow(true)
 
-    val hasError = MutableLiveData<Boolean>()
+    val hasError = MutableStateFlow(false)
 
-    val recipeImage = MutableLiveData<String>()
-    val title = MutableLiveData<String>()
-    val listItems = MutableLiveData<List<RecipeDetailItem>>()
+    val recipeImage = MutableStateFlow<String?>(null)
+    val title = MutableStateFlow<String?>(null)
+    val listItems = MutableStateFlow<List<RecipeDetailItem>>(emptyList())
 }

@@ -5,13 +5,18 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.observe
 import br.com.recipebook.settings.theme.R
 import br.com.recipebook.settings.theme.databinding.SettingsThemeActivityBinding
 import br.com.recipebook.settings.theme.presentation.SettingsThemeActionFromView
 import br.com.recipebook.settings.theme.presentation.SettingsThemeViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+@ExperimentalCoroutinesApi
 class SettingsThemeActivity : AppCompatActivity() {
     private val viewModel: SettingsThemeViewModel by viewModel()
 
@@ -50,20 +55,30 @@ class SettingsThemeActivity : AppCompatActivity() {
     }
 
     private fun observeState(binding: SettingsThemeActivityBinding) {
-        viewModel.viewState.isLoading.observe(this) {
-            binding.settingsLoading.visibility = if (it) View.VISIBLE else View.GONE
+        lifecycleScope.launch {
+            viewModel.viewState.isLoading.collect {
+                binding.settingsLoading.visibility = if (it) View.VISIBLE else View.GONE
+            }
         }
-        viewModel.viewState.hasError.observe(this) {
-            binding.settingsErrorState.root.visibility = if (it) View.VISIBLE else View.GONE
+        lifecycleScope.launch {
+            viewModel.viewState.hasError.collect {
+                binding.settingsErrorState.root.visibility = if (it) View.VISIBLE else View.GONE
+            }
         }
-        viewModel.viewState.isSystemThemeSelected.observe(this) {
-            binding.settingsThemeSystemDefault.isChecked = it
+        lifecycleScope.launch {
+            viewModel.viewState.isSystemThemeSelected.collect {
+                binding.settingsThemeSystemDefault.isChecked = it
+            }
         }
-        viewModel.viewState.isLightThemeSelected.observe(this) {
-            binding.settingsThemeLight.isChecked = it
+        lifecycleScope.launch {
+            viewModel.viewState.isLightThemeSelected.collect {
+                binding.settingsThemeLight.isChecked = it
+            }
         }
-        viewModel.viewState.isDarkThemeSelected.observe(this) {
-            binding.settingsThemeDark.isChecked = it
+        lifecycleScope.launch {
+            viewModel.viewState.isDarkThemeSelected.collect {
+                binding.settingsThemeDark.isChecked = it
+            }
         }
     }
 

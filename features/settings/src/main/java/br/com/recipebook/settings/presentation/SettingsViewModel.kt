@@ -8,8 +8,10 @@ import br.com.recipebook.settings.domain.usecase.GetSettingsUseCase
 import br.com.recipebook.settings.presentation.model.SettingsItem
 import br.com.recipebook.utilityandroid.presentation.BaseViewModel
 import br.com.recipebook.utilitykotlin.CommonError
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 
+@ExperimentalCoroutinesApi
 class SettingsViewModel(
     override val viewState: SettingsViewState,
     private val getSettingsList: GetSettingsUseCase,

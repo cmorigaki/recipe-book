@@ -12,8 +12,10 @@ import br.com.recipebook.recipedetail.presentation.model.RecipeDetailItem
 import br.com.recipebook.recipedetail.view.RecipeDetailSafeArgs
 import br.com.recipebook.utilityandroid.presentation.BaseViewModel
 import br.com.recipebook.utilitykotlin.CommonError
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 
+@ExperimentalCoroutinesApi
 class RecipeDetailViewModel(
     private val safeArgs: RecipeDetailSafeArgs,
     override val viewState: RecipeDetailViewState,

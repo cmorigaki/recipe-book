@@ -8,8 +8,10 @@ import br.com.recipebook.settings.theme.domain.usecase.GetUserThemePreferenceUse
 import br.com.recipebook.settings.theme.domain.usecase.SetUserThemePreferenceUseCase
 import br.com.recipebook.utilityandroid.presentation.BaseViewModel
 import br.com.recipebook.utilitykotlin.CommonError
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 
+@ExperimentalCoroutinesApi
 class SettingsThemeViewModel(
     override val viewState: SettingsThemeViewState,
     private val getUserThemePreference: GetUserThemePreferenceUseCase,

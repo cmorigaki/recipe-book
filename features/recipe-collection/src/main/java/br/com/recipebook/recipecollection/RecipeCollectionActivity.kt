@@ -3,6 +3,7 @@ package br.com.recipebook.recipecollection
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.observe
 import br.com.recipebook.coreandroid.image.ImageResolver
 import br.com.recipebook.designsystem.ListMarginItemDecoration
@@ -13,9 +14,13 @@ import br.com.recipebook.recipecollection.databinding.RecipeCollectionActivityBi
 import br.com.recipebook.recipecollection.presentation.RecipeCollectionActionFromView
 import br.com.recipebook.recipecollection.presentation.RecipeCollectionActionToView
 import br.com.recipebook.recipecollection.presentation.RecipeCollectionViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+@ExperimentalCoroutinesApi
 class RecipeCollectionActivity : AppCompatActivity() {
 
     private val viewModel: RecipeCollectionViewModel by viewModel(clazz = RecipeCollectionViewModel::class)
@@ -60,15 +65,21 @@ class RecipeCollectionActivity : AppCompatActivity() {
     }
 
     private fun observeState(binding: RecipeCollectionActivityBinding) {
-        viewModel.viewState.recipes.observe(this) {
-            recipeCollectionAdapter.setData(it)
+        lifecycleScope.launch {
+            viewModel.viewState.recipes.collect {
+                recipeCollectionAdapter.setData(it)
+            }
         }
-        viewModel.viewState.hasError.observe(this) {
-            binding.recipeCollectionErrorState.root.visibility = if (it) View.VISIBLE else View.GONE
+        lifecycleScope.launch {
+            viewModel.viewState.hasError.collect {
+                binding.recipeCollectionErrorState.root.visibility = if (it) View.VISIBLE else View.GONE
+            }
         }
-        viewModel.viewState.isLoading.observe(this) {
-            binding.swipeRefresh.isRefreshing = it
-            binding.recipeCollectionLoading.visibility = if (it) View.VISIBLE else View.GONE
+        lifecycleScope.launch {
+            viewModel.viewState.isLoading.collect {
+                binding.swipeRefresh.isRefreshing = it
+                binding.recipeCollectionLoading.visibility = if (it) View.VISIBLE else View.GONE
+            }
         }
     }
 
@@ -85,7 +96,10 @@ class RecipeCollectionActivity : AppCompatActivity() {
         }
     }
 
-    private fun onRecipeClick(recipeId: String, title: String?) {
+    private fun onRecipeClick(
+        recipeId: String,
+        title: String?
+    ) {
         viewModel.dispatchAction(
             RecipeCollectionActionFromView.RecipeClick(
                 recipeId = recipeId,

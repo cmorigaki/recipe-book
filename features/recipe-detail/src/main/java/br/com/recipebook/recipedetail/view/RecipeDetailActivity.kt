@@ -5,7 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.observe
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.recipebook.coreandroid.image.ImageResolver
 import br.com.recipebook.coreandroid.image.ImageSize
@@ -16,10 +16,14 @@ import br.com.recipebook.recipedetail.presentation.RecipeDetailViewModel
 import br.com.recipebook.utilityandroid.view.activitySafeArgs
 import br.com.recipebook.utilityandroid.view.putSafeArgs
 import com.google.android.material.appbar.AppBarLayout
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
+@ExperimentalCoroutinesApi
 class RecipeDetailActivity : AppCompatActivity() {
     private val safeArgs by activitySafeArgs<RecipeDetailSafeArgs>()
 
@@ -79,31 +83,45 @@ class RecipeDetailActivity : AppCompatActivity() {
     }
 
     private fun observeState(binding: RecipeDetailActivityBinding) {
-        viewModel.viewState.isLoading.observe(this) {
-            binding.recipeDetailLoading.visibility = if (it) View.VISIBLE else View.GONE
-        }
-        viewModel.viewState.hasError.observe(this) {
-            if (it) {
-                binding.recipeDetailErrorState.root.visibility = View.VISIBLE
-                binding.appBarLayout.setExpanded(false)
-            } else {
-                binding.recipeDetailErrorState.root.visibility = View.GONE
+        lifecycleScope.launch {
+            viewModel.viewState.isLoading.collect {
+                binding.recipeDetailLoading.visibility = if (it) View.VISIBLE else View.GONE
             }
         }
-        viewModel.viewState.title.observe(this) {
-            binding.toolbarTitle.text = it
+        lifecycleScope.launch {
+            viewModel.viewState.hasError.collect {
+                if (it) {
+                    binding.recipeDetailErrorState.root.visibility = View.VISIBLE
+                    binding.appBarLayout.setExpanded(false)
+                } else {
+                    binding.recipeDetailErrorState.root.visibility = View.GONE
+                }
+            }
         }
-        viewModel.viewState.recipeImage.observe(this) {
-            binding.recipeImage.setImageURI(imageResolver.mountUrl(it, ImageSize.LARGE))
+        lifecycleScope.launch {
+            viewModel.viewState.title.collect {
+                binding.toolbarTitle.text = it
+            }
         }
-        viewModel.viewState.listItems.observe(this) {
-            binding.recipeDetailList.visibility = if (it.isNotEmpty()) View.VISIBLE else View.GONE
-            adapter.setData(it)
+        lifecycleScope.launch {
+            viewModel.viewState.recipeImage.collect {
+                binding.recipeImage.setImageURI(imageResolver.mountUrl(it, ImageSize.LARGE))
+            }
+        }
+        lifecycleScope.launch {
+            viewModel.viewState.listItems.collect {
+                binding.recipeDetailList.visibility = if (it.isNotEmpty()) View.VISIBLE else View.GONE
+                adapter.setData(it)
+            }
         }
     }
 
     companion object {
-        fun newIntent(context: Context, recipeId: String, title: String?): Intent {
+        fun newIntent(
+            context: Context,
+            recipeId: String,
+            title: String?
+        ): Intent {
             return Intent(context, RecipeDetailActivity::class.java).apply {
                 putSafeArgs(RecipeDetailSafeArgs(recipeId, title))
             }
