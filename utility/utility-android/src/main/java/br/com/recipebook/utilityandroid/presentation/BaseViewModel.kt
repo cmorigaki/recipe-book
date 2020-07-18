@@ -1,14 +1,11 @@
 package br.com.recipebook.utilityandroid.presentation
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import kotlinx.coroutines.channels.Channel
 
 abstract class BaseViewModel<ViewState, ActionFromView, ActionToView> : ViewModel() {
     abstract val viewState: ViewState
-
-    protected val _actionToView = MutableLiveData<ActionToView>()
-    val actionToView: LiveData<ActionToView> get() = _actionToView
+    val actionToView = Channel<ActionToView>()
 
     abstract fun dispatchAction(action: ActionFromView)
 }

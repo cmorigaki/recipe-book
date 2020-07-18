@@ -9,8 +9,10 @@ import br.com.recipebook.recipecollection.view.RecipeItem
 import br.com.recipebook.utilityandroid.presentation.BaseViewModel
 import br.com.recipebook.utilitykotlin.CommonError
 import br.com.recipebook.utilitykotlin.ResultWrapper
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 
+@ExperimentalCoroutinesApi
 class RecipeCollectionViewModel(
     override val viewState: RecipeCollectionViewState,
     private val getRecipeCollection: GetRecipeCollectionUseCase,
@@ -68,9 +70,14 @@ class RecipeCollectionViewModel(
         viewState.recipes.value = emptyList()
     }
 
-    private fun openRecipeDetail(recipeId: String, title: String?) {
-        _actionToView.value = RecipeCollectionActionToView.OpenRecipeDetail(
-            recipeId = recipeId, title = title
+    private fun openRecipeDetail(
+        recipeId: String,
+        title: String?
+    ) = viewModelScope.launch {
+        actionToView.send(
+            RecipeCollectionActionToView.OpenRecipeDetail(
+                recipeId = recipeId, title = title
+            )
         )
     }
 

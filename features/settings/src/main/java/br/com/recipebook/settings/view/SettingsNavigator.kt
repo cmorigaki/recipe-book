@@ -4,7 +4,9 @@ import android.content.Context
 import br.com.recipebook.navigation.Navigator
 import br.com.recipebook.navigation.intent.NavIntent
 import br.com.recipebook.navigation.intent.SettingsIntent
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
+@ExperimentalCoroutinesApi
 class SettingsNavigator : Navigator {
     override var intentList = listOf(SettingsIntent::class.java)
 

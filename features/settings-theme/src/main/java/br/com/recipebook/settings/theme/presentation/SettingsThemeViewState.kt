@@ -1,13 +1,15 @@
 package br.com.recipebook.settings.theme.presentation
 
-import androidx.lifecycle.MutableLiveData
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.MutableStateFlow
 
+@ExperimentalCoroutinesApi
 class SettingsThemeViewState {
-    val isLoading = MutableLiveData<Boolean>()
+    val isLoading = MutableStateFlow(true)
 
-    val hasError = MutableLiveData<Boolean>()
+    val hasError = MutableStateFlow(false)
 
-    val isSystemThemeSelected = MutableLiveData<Boolean>()
-    val isLightThemeSelected = MutableLiveData<Boolean>()
-    val isDarkThemeSelected = MutableLiveData<Boolean>()
+    val isSystemThemeSelected = MutableStateFlow(false)
+    val isLightThemeSelected = MutableStateFlow(false)
+    val isDarkThemeSelected = MutableStateFlow(false)
 }

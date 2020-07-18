@@ -8,8 +8,10 @@ import br.com.recipebook.settings.domain.usecase.GetSettingsUseCase
 import br.com.recipebook.settings.presentation.model.SettingsItem
 import br.com.recipebook.utilityandroid.presentation.BaseViewModel
 import br.com.recipebook.utilitykotlin.CommonError
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 
+@ExperimentalCoroutinesApi
 class SettingsViewModel(
     override val viewState: SettingsViewState,
     private val getSettingsList: GetSettingsUseCase,
@@ -24,10 +26,11 @@ class SettingsViewModel(
     }
 
     override fun dispatchAction(action: SettingsActionFromView) {
-        when (action) {
-            is SettingsActionFromView.ItemClick ->
-                _actionToView.value =
-                    SettingsActionToView.OpenItem(action.settingsItem.navIntent)
+        viewModelScope.launch {
+            when (action) {
+                is SettingsActionFromView.ItemClick ->
+                    actionToView.send(SettingsActionToView.OpenItem(action.settingsItem.navIntent))
+            }
         }
     }
 
