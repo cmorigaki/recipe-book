@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.observe
 import br.com.recipebook.coreandroid.image.ImageResolver
 import br.com.recipebook.designsystem.ListMarginItemDecoration
 import br.com.recipebook.navigation.MainNavigator
@@ -15,6 +14,7 @@ import br.com.recipebook.recipecollection.presentation.RecipeCollectionActionFro
 import br.com.recipebook.recipecollection.presentation.RecipeCollectionActionToView
 import br.com.recipebook.recipecollection.presentation.RecipeCollectionViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
@@ -84,13 +84,15 @@ class RecipeCollectionActivity : AppCompatActivity() {
     }
 
     private fun observeActionCommand() {
-        viewModel.actionToView.observe(this) {
-            when (it) {
-                is RecipeCollectionActionToView.OpenRecipeDetail -> {
-                    mainNavigator.navigate(
-                        this,
-                        RecipeDetailIntent(recipeId = it.recipeId, title = it.title)
-                    )
+        lifecycleScope.launch {
+            viewModel.actionToView.consumeEach {
+                when (it) {
+                    is RecipeCollectionActionToView.OpenRecipeDetail -> {
+                        mainNavigator.navigate(
+                            this@RecipeCollectionActivity,
+                            RecipeDetailIntent(recipeId = it.recipeId, title = it.title)
+                        )
+                    }
                 }
             }
         }

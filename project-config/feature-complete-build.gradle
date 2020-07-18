@@ -55,7 +55,6 @@ dependencies {
     implementation AndroidLibConfig.recyclerView
     implementation AndroidLibConfig.cardView
     implementation AndroidLibConfig.viewmodel
-    implementation AndroidLibConfig.livedata
     implementation AndroidLibConfig.fragment
 
     implementation AndroidLibConfig.fresco

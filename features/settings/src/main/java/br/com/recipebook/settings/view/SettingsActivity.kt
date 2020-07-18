@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.recipebook.designsystem.ListMarginItemDecoration
 import br.com.recipebook.navigation.MainNavigator
@@ -17,6 +16,7 @@ import br.com.recipebook.settings.presentation.SettingsActionToView
 import br.com.recipebook.settings.presentation.SettingsViewModel
 import br.com.recipebook.settings.presentation.model.SettingsItem
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
@@ -77,13 +77,15 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     private fun observeActionCommand() {
-        viewModel.actionToView.observe(this) {
-            when (it) {
-                is SettingsActionToView.OpenItem -> {
-                    mainNavigator.navigate(
-                        this,
-                        it.navIntent
-                    )
+        lifecycleScope.launch {
+            viewModel.actionToView.consumeEach {
+                when (it) {
+                    is SettingsActionToView.OpenItem -> {
+                        mainNavigator.navigate(
+                            this@SettingsActivity,
+                            it.navIntent
+                        )
+                    }
                 }
             }
         }

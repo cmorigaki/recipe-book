@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.observe
 import br.com.recipebook.settings.theme.R
 import br.com.recipebook.settings.theme.databinding.SettingsThemeActivityBinding
 import br.com.recipebook.settings.theme.presentation.SettingsThemeActionFromView
@@ -26,7 +25,6 @@ class SettingsThemeActivity : AppCompatActivity() {
             initComponents(this)
             setContentView(root)
             observeState(this)
-            observeActionCommand()
         }
     }
 
@@ -79,11 +77,6 @@ class SettingsThemeActivity : AppCompatActivity() {
             viewModel.viewState.isDarkThemeSelected.collect {
                 binding.settingsThemeDark.isChecked = it
             }
-        }
-    }
-
-    private fun observeActionCommand() {
-        viewModel.actionToView.observe(this) {
         }
     }
 

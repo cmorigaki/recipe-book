@@ -38,7 +38,6 @@ ext {
         recyclerView: "androidx.recyclerview:recyclerview:1.1.0",
         cardView: "androidx.cardview:cardview:1.0.0",
         viewmodel: "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0",
-        livedata: "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0",
         fragment: "androidx.fragment:fragment-ktx:1.2.2",
         swipeRefresh: "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0",
         coordinatorLayout: "androidx.coordinatorlayout:coordinatorlayout:1.1.0",
