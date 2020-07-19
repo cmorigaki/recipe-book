@@ -10,7 +10,7 @@ on:
 
 jobs:
   test:
-    name: Run Static Analysis + Unit Tests
+    name: Unit Tests
     runs-on: ubuntu-18.04
 
     steps:
