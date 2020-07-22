@@ -1,12 +1,24 @@
-# Recipe Book [Under construction]
+# Recipe Book - My pet project 👷‍
 
-This is a "simple" personal project that provides a small collection of recipes and their details. 
+This app provides a small collection of recipes and their details. Also there is with a few possible settings configuration.
 
-The whole project is a case that prioritize a scalable architecture, following good design principles, intented to be a  codebase that could be maintained by a large number of collaborators/teams. Also, some new approachs may be used as study purpose.
+This project is intended to be a case that prioritize a scalable architecture, following good design principles, a codebase that could be maintained by a large number of collaborators/teams. Also, some new approachs may be used as study purpose.
 
+## Table of contents
+-   [Features](https://github.com/cmorigaki/recipe-book/#Features)
+-   [Architecture](https://github.com/cmorigaki/recipe-book/#Architecture)
+-   [Application layers](https://github.com/cmorigaki/recipe-book/#Application layers)
+-   [Feature layers](https://github.com/cmorigaki/recipe-book/#Feature layers)
+
+## Tech stack
+- // TODO not sure if it's necessary
 
 ## Architecture
+As we're using 100% kotlin, the project rely all the data flow using kotlin coroutines and flow for reactive.
 
+### Modularization
+
+### Feature layers
 Some buzzwords that summarizes the architecture pillars that the app follows:
 
 * MVVM
