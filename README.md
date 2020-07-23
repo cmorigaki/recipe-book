@@ -1,8 +1,8 @@
 # Recipe Book - My pet project 👷‍
 
-This app provides a small collection of recipes and their details. Also there is with a few possible settings configuration.
+This app provides a small collection of recipes and their details. Also there is a few possible settings configuration.
 
-This project is intended to be a case that prioritize a scalable architecture, following good design principles, a codebase that could be maintained by a large number of collaborators/teams. Also, some new approachs may be used as study purpose.
+This project is intended to be a case that prioritize a scalable architecture, following good design principles, a codebase that could be maintained by a large number of collaborators/teams. Also, some new approaches may be used as a study purpose.
 
 ## Table of contents
 -   [Features](https://github.com/cmorigaki/recipe-book/#Features)
@@ -11,41 +11,47 @@ This project is intended to be a case that prioritize a scalable architecture, f
 -   [Feature layers](https://github.com/cmorigaki/recipe-book/#Feature layers)
 
 ## Tech stack
-- // TODO not sure if it's necessary
+- 100% kotlin
+- coroutines
+- StateFlow (instead of LiveData)
+- Jetpack ViewModel
+- View binding
+- Koin
+- Gradle Groovy
+- Github actions
 
 ## Architecture
-As we're using 100% kotlin, the project rely all the data flow using kotlin coroutines and flow for reactive.
+For general development, for every peace of code I try to follow SOLID and clean code principles.
 
-### Modularization
+### Features
+For feature scope classes, the architecture relies on 5 distinct layers: View, Presentation, Domain, Data, Data source. These layers follows a *Clean architecture* dependency that can be represented by the below picture:
+[pic_clean.png]
 
-### Feature layers
-Some buzzwords that summarizes the architecture pillars that the app follows:
+For "view architecture" I'm using MVVM (Jetpack ViewModel), view binding (not DataBinding), kotlin StateFlow instead of LiveData.
 
-* MVVM
-* Clean architecture
-* Dependency inversion
-* Dependency injection
+### Data flow
+Since I'm using 100% kotlin, any asynchronous operation or background work uses kotlin coroutines and Flow when a reactive approach is necessary.
+For any SDK integration, I would wrap them using suspendCoroutine/channelFlow to give them a suspend function abstraction over the API.
 
-### Application layers
+### Navigation
+There are some solutions for navigation that highly affected by modularization.
+Today, I have a MainNavigator class that receives an object that corresponds to a screen. The navigation code are provided by each feature and injected using koin.
 
-1. App
-2. Feature
-3. Core
-4. Utility
-
-### Feature layers
-
-For features, I'm following clean architecture with the corresponding layers:
-1. View
-2. Presentation
-3. Domain
-4. Data
-
-[clean_feature.png]
+### DI Framework
+Koin
 
 ## Modularization
-//TODO
-[modules_structure.png]
+The whole application is composed of several modules that are ruled by a hierarchy dependency structure. All modules are classified into a specific module layer and this layer must respect a dependency direction, this is, a given module can only depend on modules of the same layer or below.
+The picture show the current project modules and how they are structured.
+[pic_modules]
+
+### Modules layers
+
+1. *App* - Glue all modules and has project configurations like build variants, API keys
+2. *Feature* - Product feature are developed at this level of modules. For this project I have modules:screen 1:1 but it may vary a lot.
+3. *Core* - Here we have modules that are not tied to a specific feature scope but the entire app like Base Classes.
+4. *Infrastructure* - Modules that compose the foundation of the project. Here we have networking, monitoring, analytics, design-system, navigation.
+4. *Utility* - Helpers and extensions classes goes here. But only the ones that are not related to business of the project and it can be reused by other projects.
 
 ## Code
 
@@ -59,9 +65,6 @@ For features, I'm following clean architecture with the corresponding layers:
 //TODO
 
 ## Tooling
-
-### Koin (DI)
-//TODO
 
 ### Crash report
 //TODO
@@ -95,7 +98,7 @@ I'm using Github actions for CI. Currently, it's still pretty basic...
 
 ## Authors
 
-* **Cesar Morigaki**
+**Cesar Morigaki**
 
 ## License
 ```
