@@ -1,5 +1,5 @@
 # Recipe Book - My pet project 👷‍
-
+<img src="misc/screenshots/list_dark.png" width="336" align="right" hspace="20">
 This app provides a small collection of recipes and their details. Also, there is a few possible settings configuration.
 
 This project is intended to be a case that prioritize a scalable architecture, following good design principles, a codebase that could be maintained by a large number of collaborators/teams. Also, some new approaches may be used as a study purpose.
@@ -38,6 +38,12 @@ For any SDK integration, I would wrap them using suspendCoroutine/channelFlow to
 ### Navigation
 There are some solutions for navigation that have huge impact by modularization.
 Today, I have a MainNavigator interface that receives an object that relates to a screen. The injected list of Navigation resolvers are provided using Koin "multibinding".
+
+### Theme
+The application has dark and light mode that can be changed at runtime. All definitions/styles are inside design-system module.
+| Light | Dark |
+|---|---|
+| <img src="misc/screenshots/list_light.png" hspace="20"> | <img src="misc/screenshots/list_dark.png" hspace="20"> |
 
 ### DI Framework
 Koin
@@ -78,17 +84,17 @@ The picture show the current project modules and how they are structured.
 
 ### Gradle files
 
-#### Kotlin DSL
-For affinity, I'm using kotlin DSL on all gradle files [ref:link]
+#### ---Kotlin DSL---
+I tried to use gradle kotlin DSL but I've encountered errors when splitting build files for modules reuse.
 
 #### Sync dependency versions
-To synchronize dependency versions and avoid string duplications, I'm using a common file that declares dependency versions  as constant referencing them inside build.gradle files.  [ref:link]
+To synchronize dependency versions and avoid string duplications, I'm using a common file that declares dependency versions as constants referencing them inside build.gradle files. [ref:link]
 
 #### Reuse build.gradle
 In general, features modules have a lot of common dependency. Said that, I'm reusing a base build.gradle files whenever is possible.
 
 #### Proguard
-Applying obfuscation and shirink code is a must to build the release version.
+Applying obfuscation and shrink code is a must for the release build.
 
 ## CI/CD
 
