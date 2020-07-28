@@ -62,6 +62,7 @@ ext {
     ProjectConfig = [
         utilityKotlin: ":utility:utility-kotlin",
         utilityAndroid: ":utility:utility-android",
+        startup: ":infrastructure:startup",
         configuration: ":infrastructure:configuration",
         navigation: ":infrastructure:navigation",
         analytics: ":infrastructure:analytics",

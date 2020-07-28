@@ -1,6 +1,7 @@
 include ':app',
     ':utility:utility-android',
     ':utility:utility-kotlin',
+    ':infrastructure:startup',
     ':infrastructure:configuration',
     ':infrastructure:navigation',
     ':infrastructure:design-system',

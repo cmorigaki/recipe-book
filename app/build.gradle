@@ -48,12 +48,14 @@ check.dependsOn ktlint
 dependencies {
     implementation EnvironmentConfig.kotlinStdLib
     implementation AndroidLibConfig.coreKtx
+    implementation AndroidLibConfig.coroutinesCore
 
     implementation AndroidLibConfig.koinAndroid
 
     implementation project(ProjectConfig.coreAndroid)
     implementation project(ProjectConfig.utilityAndroid)
     implementation project(ProjectConfig.utilityKotlin)
+    implementation project(ProjectConfig.startup)
     implementation project(ProjectConfig.configuration)
     implementation project(ProjectConfig.navigation)
     implementation project(ProjectConfig.analytics)
