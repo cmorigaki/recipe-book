@@ -9,7 +9,7 @@ This project is intended to be a case that prioritize a scalable architecture, f
 -   [Architecture](https://github.com/cmorigaki/recipe-book/#architecture)
 -   [Modularization](https://github.com/cmorigaki/recipe-book/#modularization)
 -   [Code](https://github.com/cmorigaki/recipe-book/#code)
--   [Build Config](https://github.com/cmorigaki/recipe-book/#build-cconfig)
+-   [Build Config](https://github.com/cmorigaki/recipe-book/#build-config)
 -   [CI/CD](https://github.com/cmorigaki/recipe-book/#cicd)
 
 ## Tech stack
