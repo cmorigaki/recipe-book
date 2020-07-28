@@ -84,7 +84,7 @@ The picture show the current project modules and how they are structured.
 
 ### Gradle files
 
-#### ---Kotlin DSL---
+#### ~~Kotlin DSL~~
 I tried to use gradle kotlin DSL but I've encountered errors when splitting build files for modules reuse.
 
 #### Sync dependency versions
