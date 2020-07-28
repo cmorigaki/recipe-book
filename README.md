@@ -1,39 +1,65 @@
-# Recipe Book [Under construction]
+# Recipe Book - My pet project 👷‍
+<img src="misc/screenshots/list_dark.png" width="336" align="right" hspace="20">
+This app provides a small collection of recipes and their details. Also, there is a few possible settings configuration.
 
-This is a "simple" personal project that provides a small collection of recipes and their details. 
+This project is intended to be a case that prioritize a scalable architecture, following good design principles, a codebase that could be maintained by a large number of collaborators/teams. Also, some new approaches may be used as a study purpose.
 
-The whole project is a case that prioritize a scalable architecture, following good design principles, intented to be a  codebase that could be maintained by a large number of collaborators/teams. Also, some new approachs may be used as study purpose.
+## Table of contents
+-   [Tech stack](https://github.com/cmorigaki/recipe-book/#tech-stack)
+-   [Architecture](https://github.com/cmorigaki/recipe-book/#architecture)
+-   [Modularization](https://github.com/cmorigaki/recipe-book/#modularization)
+-   [Code](https://github.com/cmorigaki/recipe-book/#code)
+-   [Build Config](https://github.com/cmorigaki/recipe-book/#build-config)
+-   [CI/CD](https://github.com/cmorigaki/recipe-book/#cicd)
 
+## Tech stack
+- 100% kotlin
+- coroutines
+- StateFlow (instead of LiveData)
+- Jetpack ViewModel
+- View binding
+- Koin
+- Gradle Groovy
+- Github actions
 
 ## Architecture
+In general, I try to follow SOLID and clean code principles for every piece of code.
 
-Some buzzwords that summarizes the architecture pillars that the app follows:
+### Features
+In a feature scope (a screen for this project), the architecture relies on 5 distinct layers: View, Presentation, Domain, Data, Data source. These layers follows a **Clean architecture** dependency that can be represented by the below picture:
+[pic_clean.png]
 
-* MVVM
-* Clean architecture
-* Dependency inversion
-* Dependency injection
+For "view architecture" I'm using MVVM (Jetpack ViewModel), view binding (not DataBinding), kotlin StateFlow instead of LiveData.
 
-### Application layers
+### Data flow
+Since I'm using 100% kotlin, any asynchronous operation or background work uses kotlin coroutines and Flow when a reactive approach is necessary.
+For any SDK integration, I would wrap them using suspendCoroutine/channelFlow to give them a suspend function abstraction over the API calls.
 
-1. App
-2. Feature
-3. Core
-4. Utility
+### Navigation
+There are some solutions for navigation that have huge impact by modularization.
+Today, I have a MainNavigator interface that receives an object that relates to a screen. The injected list of Navigation resolvers are provided using Koin "multibinding".
 
-### Feature layers
+### Theme
+The application has dark and light mode that can be changed at runtime. All definitions/styles are inside design-system module.
+| Light | Dark |
+|---|---|
+| <img src="misc/screenshots/list_light.png" hspace="20"> | <img src="misc/screenshots/list_dark.png" hspace="20"> |
 
-For features, I'm following clean architecture with the corresponding layers:
-1. View
-2. Presentation
-3. Domain
-4. Data
-
-[clean_feature.png]
+### DI Framework
+Koin
 
 ## Modularization
-//TODO
-[modules_structure.png]
+The whole application is composed of several modules that are ruled by a hierarchy dependency structure. All modules are classified into a specific module layer and this layer must respect the dependency direction, this is, a given module can only depend on modules of the same layer or below.
+The picture show the current project modules and how they are structured.
+[pic_modules]
+
+### Modules layers
+
+1. **App** - Glue all modules and has project configurations like build variants, API keys
+2. **Feature** - Product feature are developed at this level of modules. For this project I have modules:screen 1:1 but it may vary a lot.
+3. **Core** - Here we have modules that are not tied to a specific feature scope but the entire app like Base Classes.
+4. **Infrastructure** - Modules that compose the foundation of the project. Here we have networking, monitoring, analytics, design-system, navigation.
+4. **Utility** - Helpers and extensions classes goes here. But only the ones that are not related to business of the project and it can be reused by other projects.
 
 ## Code
 
@@ -48,9 +74,6 @@ For features, I'm following clean architecture with the corresponding layers:
 
 ## Tooling
 
-### Koin (DI)
-//TODO
-
 ### Crash report
 //TODO
 
@@ -61,17 +84,17 @@ For features, I'm following clean architecture with the corresponding layers:
 
 ### Gradle files
 
-#### Kotlin DSL
-For affinity, I'm using kotlin DSL on all gradle files [ref:link]
+#### ~~Kotlin DSL~~
+I tried to use gradle kotlin DSL but I've encountered errors when splitting build files for modules reuse.
 
 #### Sync dependency versions
-To synchronize dependency versions and avoid string duplications, I'm using a common file that declares dependency versions  as constant referencing them inside build.gradle files.  [ref:link]
+To synchronize dependency versions and avoid string duplications, I'm using a common file that declares dependency versions as constants referencing them inside build.gradle files. [ref:link]
 
 #### Reuse build.gradle
 In general, features modules have a lot of common dependency. Said that, I'm reusing a base build.gradle files whenever is possible.
 
 #### Proguard
-Applying obfuscation and shirink code is a must to build the release version.
+Applying obfuscation and shrink code is a must for the release build.
 
 ## CI/CD
 
