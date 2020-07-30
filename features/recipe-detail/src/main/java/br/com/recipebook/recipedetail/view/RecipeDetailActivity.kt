@@ -51,6 +51,7 @@ class RecipeDetailActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
         binding.toolbar.setNavigationOnClickListener { onBackPressed() }
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        binding.toolbar.navigationIcon?.setTint(getColor(R.color.colorIconDark))
     }
 
     private fun setupHeader(binding: RecipeDetailActivityBinding) {
@@ -63,11 +64,9 @@ class RecipeDetailActivity : AppCompatActivity() {
                 }
                 if (scrollRange + verticalOffset == 0) {
                     binding.toolbarTitle.visibility = View.VISIBLE
-                    binding.toolbar.navigationIcon?.setTint(getColor(R.color.colorIconInverse))
                     isShow = true
                 } else if (isShow) {
                     binding.toolbarTitle.visibility = View.GONE
-                    binding.toolbar.navigationIcon?.setTint(getColor(R.color.colorIcon))
                     isShow = false
                 }
             }
