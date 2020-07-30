@@ -8,6 +8,8 @@ import br.com.recipebook.settings.theme.data.SettingsThemeRepositoryImpl
 import br.com.recipebook.settings.theme.data.local.NAMED_SHARED_PREFERENCES_SETTINGS_THEME
 import br.com.recipebook.settings.theme.data.local.SettingsThemeLocalDataSource
 import br.com.recipebook.settings.theme.domain.repository.SettingsThemeRepository
+import br.com.recipebook.settings.theme.domain.usecase.ApplyUserThemePreference
+import br.com.recipebook.settings.theme.domain.usecase.ApplyUserThemePreferenceUseCase
 import br.com.recipebook.settings.theme.domain.usecase.GetUserThemePreference
 import br.com.recipebook.settings.theme.domain.usecase.GetUserThemePreferenceUseCase
 import br.com.recipebook.settings.theme.domain.usecase.SetUserThemePreference
@@ -15,6 +17,7 @@ import br.com.recipebook.settings.theme.domain.usecase.SetUserThemePreferenceUse
 import br.com.recipebook.settings.theme.presentation.SettingsThemeViewModel
 import br.com.recipebook.settings.theme.presentation.SettingsThemeViewState
 import br.com.recipebook.settings.theme.view.SettingsThemeNavigator
+import br.com.recipebook.startup.StartupJob
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
@@ -45,6 +48,9 @@ val settingsThemeDomainModule = module {
     factory<SetUserThemePreferenceUseCase> {
         SetUserThemePreference(get())
     }
+    factory<ApplyUserThemePreferenceUseCase> {
+        ApplyUserThemePreference(get())
+    } bind StartupJob::class
 }
 
 val settingsDataModule = module {
