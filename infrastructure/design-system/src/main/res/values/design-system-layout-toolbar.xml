@@ -27,6 +27,7 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:theme">@style/ThemeOverlay.AppCompat.DayNight.ActionBar</item>
+        <item name="elevation">0dp</item>
     </style>
 
     <style name="Style.DS.AppBarLayout.Parallax" parent="Theme.AppCompat">

@@ -26,7 +26,8 @@
 
                 <TextView
                     android:id="@+id/toolbar_title"
-                    style="@style/Style.DS.Toolbar.Title" />
+                    style="@style/Style.DS.Toolbar.Title"
+                    android:textColor="@color/textColorPrimaryDark" />
             </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
@@ -47,7 +48,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:visibility="gone"
-        tools:visibility="visible"/>
+        tools:visibility="visible" />
 
     <ImageView
         android:id="@+id/recipe_detail_loading"
