@@ -11,8 +11,8 @@ import br.com.recipebook.settings.theme.databinding.SettingsThemeActivityBinding
 import br.com.recipebook.settings.theme.presentation.SettingsThemeActionFromView
 import br.com.recipebook.settings.theme.presentation.SettingsThemeViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 @ExperimentalCoroutinesApi
@@ -53,31 +53,26 @@ class SettingsThemeActivity : AppCompatActivity() {
     }
 
     private fun observeState(binding: SettingsThemeActivityBinding) {
-        lifecycleScope.launch {
-            viewModel.viewState.isLoading.collect {
-                binding.settingsLoading.visibility = if (it) View.VISIBLE else View.GONE
-            }
-        }
-        lifecycleScope.launch {
-            viewModel.viewState.hasError.collect {
-                binding.settingsErrorState.root.visibility = if (it) View.VISIBLE else View.GONE
-            }
-        }
-        lifecycleScope.launch {
-            viewModel.viewState.isSystemThemeSelected.collect {
-                binding.settingsThemeSystemDefault.isChecked = it
-            }
-        }
-        lifecycleScope.launch {
-            viewModel.viewState.isLightThemeSelected.collect {
-                binding.settingsThemeLight.isChecked = it
-            }
-        }
-        lifecycleScope.launch {
-            viewModel.viewState.isDarkThemeSelected.collect {
-                binding.settingsThemeDark.isChecked = it
-            }
-        }
+
+        viewModel.viewState.isLoading.onEach {
+            binding.settingsLoading.visibility = if (it) View.VISIBLE else View.GONE
+        }.launchIn(lifecycleScope)
+
+        viewModel.viewState.hasError.onEach {
+            binding.settingsErrorState.root.visibility = if (it) View.VISIBLE else View.GONE
+        }.launchIn(lifecycleScope)
+
+        viewModel.viewState.isSystemThemeSelected.onEach {
+            binding.settingsThemeSystemDefault.isChecked = it
+        }.launchIn(lifecycleScope)
+
+        viewModel.viewState.isLightThemeSelected.onEach {
+            binding.settingsThemeLight.isChecked = it
+        }.launchIn(lifecycleScope)
+
+        viewModel.viewState.isDarkThemeSelected.onEach {
+            binding.settingsThemeDark.isChecked = it
+        }.launchIn(lifecycleScope)
     }
 
     companion object {
