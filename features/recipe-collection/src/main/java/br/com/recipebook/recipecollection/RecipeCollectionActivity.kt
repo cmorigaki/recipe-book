@@ -10,7 +10,7 @@ import br.com.recipebook.navigation.MainNavigator
 import br.com.recipebook.navigation.intent.RecipeDetailIntent
 import br.com.recipebook.navigation.intent.SettingsIntent
 import br.com.recipebook.recipecollection.databinding.RecipeCollectionActivityBinding
-import br.com.recipebook.recipecollection.presentation.RecipeCollectionActionFromView
+import br.com.recipebook.recipecollection.presentation.RecipeCollectionAction
 import br.com.recipebook.recipecollection.presentation.RecipeCollectionCommand
 import br.com.recipebook.recipecollection.presentation.RecipeCollectionViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -53,7 +53,7 @@ class RecipeCollectionActivity : AppCompatActivity() {
             )
             swipeRefresh.setOnRefreshListener {
                 viewModel.dispatchAction(
-                    RecipeCollectionActionFromView.Refresh
+                    RecipeCollectionAction.Refresh
                 )
             }
             // FIXME Temporary access point. Said that, I'll not dispatch to VM
@@ -96,7 +96,7 @@ class RecipeCollectionActivity : AppCompatActivity() {
         title: String?
     ) {
         viewModel.dispatchAction(
-            RecipeCollectionActionFromView.RecipeClick(
+            RecipeCollectionAction.RecipeClick(
                 recipeId = recipeId,
                 title = title
             )

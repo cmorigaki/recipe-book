@@ -17,17 +17,17 @@ class RecipeCollectionViewModel(
     override val viewState: RecipeCollectionViewState,
     private val getRecipeCollection: GetRecipeCollectionUseCase,
     private val analytics: Analytics
-) : BaseViewModel<RecipeCollectionViewState, RecipeCollectionActionFromView, RecipeCollectionCommand>() {
+) : BaseViewModel<RecipeCollectionViewState, RecipeCollectionAction, RecipeCollectionCommand>() {
 
     init {
         setInitialState()
         loadRecipeList()
     }
 
-    override fun dispatchAction(action: RecipeCollectionActionFromView) {
+    override fun dispatchAction(action: RecipeCollectionAction) {
         when (action) {
-            is RecipeCollectionActionFromView.Refresh -> loadRecipeList()
-            is RecipeCollectionActionFromView.RecipeClick -> openRecipeDetail(
+            is RecipeCollectionAction.Refresh -> loadRecipeList()
+            is RecipeCollectionAction.RecipeClick -> openRecipeDetail(
                 recipeId = action.recipeId,
                 title = action.title
             )

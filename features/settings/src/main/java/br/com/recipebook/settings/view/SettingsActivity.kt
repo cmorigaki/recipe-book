@@ -11,7 +11,7 @@ import br.com.recipebook.designsystem.ListMarginItemDecoration
 import br.com.recipebook.navigation.MainNavigator
 import br.com.recipebook.settings.R
 import br.com.recipebook.settings.databinding.SettingsActivityBinding
-import br.com.recipebook.settings.presentation.SettingsActionFromView
+import br.com.recipebook.settings.presentation.SettingsAction
 import br.com.recipebook.settings.presentation.SettingsCommand
 import br.com.recipebook.settings.presentation.SettingsViewModel
 import br.com.recipebook.settings.presentation.model.SettingsItem
@@ -86,7 +86,7 @@ class SettingsActivity : AppCompatActivity() {
 
     private fun onItemClick(item: SettingsItem) {
         viewModel.dispatchAction(
-            SettingsActionFromView.ItemClick(settingsItem = item)
+            SettingsAction.ItemClick(settingsItem = item)
         )
     }
 

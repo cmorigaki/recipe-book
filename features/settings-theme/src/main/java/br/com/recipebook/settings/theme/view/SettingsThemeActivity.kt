@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import br.com.recipebook.settings.theme.R
 import br.com.recipebook.settings.theme.databinding.SettingsThemeActivityBinding
-import br.com.recipebook.settings.theme.presentation.SettingsThemeActionFromView
+import br.com.recipebook.settings.theme.presentation.SettingsThemeAction
 import br.com.recipebook.settings.theme.presentation.SettingsThemeViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.launchIn
@@ -42,13 +42,13 @@ class SettingsThemeActivity : AppCompatActivity() {
 
     private fun setupRadioButtons(binding: SettingsThemeActivityBinding) {
         binding.settingsThemeSystemDefault.setOnClickListener {
-            viewModel.dispatchAction(SettingsThemeActionFromView.SystemThemeSelected)
+            viewModel.dispatchAction(SettingsThemeAction.SystemThemeSelected)
         }
         binding.settingsThemeLight.setOnClickListener {
-            viewModel.dispatchAction(SettingsThemeActionFromView.LightThemeSelected)
+            viewModel.dispatchAction(SettingsThemeAction.LightThemeSelected)
         }
         binding.settingsThemeDark.setOnClickListener {
-            viewModel.dispatchAction(SettingsThemeActionFromView.DarkThemeSelected)
+            viewModel.dispatchAction(SettingsThemeAction.DarkThemeSelected)
         }
     }
 
