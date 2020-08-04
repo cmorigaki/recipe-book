@@ -11,7 +11,7 @@ import br.com.recipebook.navigation.intent.RecipeDetailIntent
 import br.com.recipebook.navigation.intent.SettingsIntent
 import br.com.recipebook.recipecollection.databinding.RecipeCollectionActivityBinding
 import br.com.recipebook.recipecollection.presentation.RecipeCollectionActionFromView
-import br.com.recipebook.recipecollection.presentation.RecipeCollectionActionToView
+import br.com.recipebook.recipecollection.presentation.RecipeCollectionCommand
 import br.com.recipebook.recipecollection.presentation.RecipeCollectionViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.launchIn
@@ -81,7 +81,7 @@ class RecipeCollectionActivity : AppCompatActivity() {
     private fun observeActionCommand() {
         viewModel.commandFlow.onEach {
             when (it) {
-                is RecipeCollectionActionToView.OpenRecipeDetail -> {
+                is RecipeCollectionCommand.OpenRecipeDetail -> {
                     mainNavigator.navigate(
                         this@RecipeCollectionActivity,
                         RecipeDetailIntent(recipeId = it.recipeId, title = it.title)

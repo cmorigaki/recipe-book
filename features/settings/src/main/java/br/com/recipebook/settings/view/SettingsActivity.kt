@@ -12,7 +12,7 @@ import br.com.recipebook.navigation.MainNavigator
 import br.com.recipebook.settings.R
 import br.com.recipebook.settings.databinding.SettingsActivityBinding
 import br.com.recipebook.settings.presentation.SettingsActionFromView
-import br.com.recipebook.settings.presentation.SettingsActionToView
+import br.com.recipebook.settings.presentation.SettingsCommand
 import br.com.recipebook.settings.presentation.SettingsViewModel
 import br.com.recipebook.settings.presentation.model.SettingsItem
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -74,7 +74,7 @@ class SettingsActivity : AppCompatActivity() {
     private fun observeActionCommand() {
         viewModel.commandFlow.onEach {
             when (it) {
-                is SettingsActionToView.OpenItem -> {
+                is SettingsCommand.OpenItem -> {
                     mainNavigator.navigate(
                         this@SettingsActivity,
                         it.navIntent

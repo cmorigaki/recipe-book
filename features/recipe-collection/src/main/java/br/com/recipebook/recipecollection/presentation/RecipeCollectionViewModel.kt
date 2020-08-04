@@ -17,7 +17,7 @@ class RecipeCollectionViewModel(
     override val viewState: RecipeCollectionViewState,
     private val getRecipeCollection: GetRecipeCollectionUseCase,
     private val analytics: Analytics
-) : BaseViewModel<RecipeCollectionViewState, RecipeCollectionActionFromView, RecipeCollectionActionToView>() {
+) : BaseViewModel<RecipeCollectionViewState, RecipeCollectionActionFromView, RecipeCollectionCommand>() {
 
     init {
         setInitialState()
@@ -75,7 +75,7 @@ class RecipeCollectionViewModel(
         title: String?
     ) = viewModelScope.launch {
         command.send(
-            RecipeCollectionActionToView.OpenRecipeDetail(
+            RecipeCollectionCommand.OpenRecipeDetail(
                 recipeId = recipeId, title = title
             )
         )

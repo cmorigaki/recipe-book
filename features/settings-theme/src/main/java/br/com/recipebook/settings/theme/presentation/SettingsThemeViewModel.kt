@@ -17,7 +17,7 @@ class SettingsThemeViewModel(
     private val getUserThemePreference: GetUserThemePreferenceUseCase,
     private val setUserThemePreferenceUseCase: SetUserThemePreferenceUseCase,
     private val analytics: Analytics
-) : BaseViewModel<SettingsThemeViewState, SettingsThemeActionFromView, SettingsThemeActionToView>() {
+) : BaseViewModel<SettingsThemeViewState, SettingsThemeActionFromView, SettingsThemeCommand>() {
 
     init {
         viewModelScope.launch {
