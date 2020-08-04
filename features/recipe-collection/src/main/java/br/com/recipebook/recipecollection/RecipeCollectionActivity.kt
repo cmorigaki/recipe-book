@@ -14,9 +14,8 @@ import br.com.recipebook.recipecollection.presentation.RecipeCollectionActionFro
 import br.com.recipebook.recipecollection.presentation.RecipeCollectionActionToView
 import br.com.recipebook.recipecollection.presentation.RecipeCollectionViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.channels.consumeEach
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -65,37 +64,31 @@ class RecipeCollectionActivity : AppCompatActivity() {
     }
 
     private fun observeState(binding: RecipeCollectionActivityBinding) {
-        lifecycleScope.launch {
-            viewModel.viewState.recipes.collect {
-                recipeCollectionAdapter.setData(it)
-            }
-        }
-        lifecycleScope.launch {
-            viewModel.viewState.hasError.collect {
-                binding.recipeCollectionErrorState.root.visibility = if (it) View.VISIBLE else View.GONE
-            }
-        }
-        lifecycleScope.launch {
-            viewModel.viewState.isLoading.collect {
-                binding.swipeRefresh.isRefreshing = it
-                binding.recipeCollectionLoading.visibility = if (it) View.VISIBLE else View.GONE
-            }
-        }
+        viewModel.viewState.recipes.onEach {
+            recipeCollectionAdapter.setData(it)
+        }.launchIn(lifecycleScope)
+
+        viewModel.viewState.hasError.onEach {
+            binding.recipeCollectionErrorState.root.visibility = if (it) View.VISIBLE else View.GONE
+        }.launchIn(lifecycleScope)
+
+        viewModel.viewState.isLoading.onEach {
+            binding.swipeRefresh.isRefreshing = it
+            binding.recipeCollectionLoading.visibility = if (it) View.VISIBLE else View.GONE
+        }.launchIn(lifecycleScope)
     }
 
     private fun observeActionCommand() {
-        lifecycleScope.launch {
-            viewModel.actionToView.consumeEach {
-                when (it) {
-                    is RecipeCollectionActionToView.OpenRecipeDetail -> {
-                        mainNavigator.navigate(
-                            this@RecipeCollectionActivity,
-                            RecipeDetailIntent(recipeId = it.recipeId, title = it.title)
-                        )
-                    }
+        viewModel.commands.onEach {
+            when (it) {
+                is RecipeCollectionActionToView.OpenRecipeDetail -> {
+                    mainNavigator.navigate(
+                        this@RecipeCollectionActivity,
+                        RecipeDetailIntent(recipeId = it.recipeId, title = it.title)
+                    )
                 }
             }
-        }
+        }.launchIn(lifecycleScope)
     }
 
     private fun onRecipeClick(
