@@ -11,14 +11,13 @@ import br.com.recipebook.designsystem.ListMarginItemDecoration
 import br.com.recipebook.navigation.MainNavigator
 import br.com.recipebook.settings.R
 import br.com.recipebook.settings.databinding.SettingsActivityBinding
-import br.com.recipebook.settings.presentation.SettingsActionFromView
-import br.com.recipebook.settings.presentation.SettingsActionToView
+import br.com.recipebook.settings.presentation.SettingsAction
+import br.com.recipebook.settings.presentation.SettingsCommand
 import br.com.recipebook.settings.presentation.SettingsViewModel
 import br.com.recipebook.settings.presentation.model.SettingsItem
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.channels.consumeEach
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -59,41 +58,35 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     private fun observeState(binding: SettingsActivityBinding) {
-        lifecycleScope.launch {
-            viewModel.viewState.isLoading.collect {
-                binding.settingsLoading.visibility = if (it) View.VISIBLE else View.GONE
-            }
-        }
-        lifecycleScope.launch {
-            viewModel.viewState.hasError.collect {
-                binding.settingsErrorState.root.visibility = if (it) View.VISIBLE else View.GONE
-            }
-        }
-        lifecycleScope.launch {
-            viewModel.viewState.listItems.collect {
-                adapter.setData(it)
-            }
-        }
+        viewModel.viewState.isLoading.onEach {
+            binding.settingsLoading.visibility = if (it) View.VISIBLE else View.GONE
+        }.launchIn(lifecycleScope)
+
+        viewModel.viewState.hasError.onEach {
+            binding.settingsErrorState.root.visibility = if (it) View.VISIBLE else View.GONE
+        }.launchIn(lifecycleScope)
+
+        viewModel.viewState.listItems.onEach {
+            adapter.setData(it)
+        }.launchIn(lifecycleScope)
     }
 
     private fun observeActionCommand() {
-        lifecycleScope.launch {
-            viewModel.actionToView.consumeEach {
-                when (it) {
-                    is SettingsActionToView.OpenItem -> {
-                        mainNavigator.navigate(
-                            this@SettingsActivity,
-                            it.navIntent
-                        )
-                    }
+        viewModel.commandFlow.onEach {
+            when (it) {
+                is SettingsCommand.OpenItem -> {
+                    mainNavigator.navigate(
+                        this@SettingsActivity,
+                        it.navIntent
+                    )
                 }
             }
-        }
+        }.launchIn(lifecycleScope)
     }
 
     private fun onItemClick(item: SettingsItem) {
         viewModel.dispatchAction(
-            SettingsActionFromView.ItemClick(settingsItem = item)
+            SettingsAction.ItemClick(settingsItem = item)
         )
     }
 

@@ -16,7 +16,7 @@ class SettingsViewModel(
     override val viewState: SettingsViewState,
     private val getSettingsList: GetSettingsUseCase,
     private val analytics: Analytics
-) : BaseViewModel<SettingsViewState, SettingsActionFromView, SettingsActionToView>() {
+) : BaseViewModel<SettingsViewState, SettingsAction, SettingsCommand>() {
 
     init {
         viewModelScope.launch {
@@ -25,11 +25,11 @@ class SettingsViewModel(
         }
     }
 
-    override fun dispatchAction(action: SettingsActionFromView) {
+    override fun dispatchAction(action: SettingsAction) {
         viewModelScope.launch {
             when (action) {
-                is SettingsActionFromView.ItemClick ->
-                    actionToView.send(SettingsActionToView.OpenItem(action.settingsItem.navIntent))
+                is SettingsAction.ItemClick ->
+                    command.send(SettingsCommand.OpenItem(action.settingsItem.navIntent))
             }
         }
     }

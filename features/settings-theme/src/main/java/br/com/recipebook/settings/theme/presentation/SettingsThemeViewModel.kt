@@ -17,7 +17,7 @@ class SettingsThemeViewModel(
     private val getUserThemePreference: GetUserThemePreferenceUseCase,
     private val setUserThemePreferenceUseCase: SetUserThemePreferenceUseCase,
     private val analytics: Analytics
-) : BaseViewModel<SettingsThemeViewState, SettingsThemeActionFromView, SettingsThemeActionToView>() {
+) : BaseViewModel<SettingsThemeViewState, SettingsThemeAction, SettingsThemeCommand>() {
 
     init {
         viewModelScope.launch {
@@ -26,14 +26,14 @@ class SettingsThemeViewModel(
         }
     }
 
-    override fun dispatchAction(action: SettingsThemeActionFromView) {
+    override fun dispatchAction(action: SettingsThemeAction) {
         viewModelScope.launch {
             when (action) {
-                is SettingsThemeActionFromView.SystemThemeSelected ->
+                is SettingsThemeAction.SystemThemeSelected ->
                     setUserThemePreferenceUseCase(UserThemePreferenceModel.SYSTEM)
-                is SettingsThemeActionFromView.LightThemeSelected ->
+                is SettingsThemeAction.LightThemeSelected ->
                     setUserThemePreferenceUseCase(UserThemePreferenceModel.LIGHT)
-                is SettingsThemeActionFromView.DarkThemeSelected ->
+                is SettingsThemeAction.DarkThemeSelected ->
                     setUserThemePreferenceUseCase(UserThemePreferenceModel.DARK)
             }
         }
