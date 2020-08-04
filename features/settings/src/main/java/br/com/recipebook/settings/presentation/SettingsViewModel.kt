@@ -29,7 +29,7 @@ class SettingsViewModel(
         viewModelScope.launch {
             when (action) {
                 is SettingsActionFromView.ItemClick ->
-                    actionToView.send(SettingsActionToView.OpenItem(action.settingsItem.navIntent))
+                    command.send(SettingsActionToView.OpenItem(action.settingsItem.navIntent))
             }
         }
     }

@@ -72,7 +72,7 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     private fun observeActionCommand() {
-        viewModel.commands.onEach {
+        viewModel.commandFlow.onEach {
             when (it) {
                 is SettingsActionToView.OpenItem -> {
                     mainNavigator.navigate(

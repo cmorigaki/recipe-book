@@ -79,7 +79,7 @@ class RecipeCollectionActivity : AppCompatActivity() {
     }
 
     private fun observeActionCommand() {
-        viewModel.commands.onEach {
+        viewModel.commandFlow.onEach {
             when (it) {
                 is RecipeCollectionActionToView.OpenRecipeDetail -> {
                     mainNavigator.navigate(

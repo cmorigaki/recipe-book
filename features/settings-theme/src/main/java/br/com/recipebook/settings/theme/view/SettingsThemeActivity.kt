@@ -53,7 +53,6 @@ class SettingsThemeActivity : AppCompatActivity() {
     }
 
     private fun observeState(binding: SettingsThemeActivityBinding) {
-
         viewModel.viewState.isLoading.onEach {
             binding.settingsLoading.visibility = if (it) View.VISIBLE else View.GONE
         }.launchIn(lifecycleScope)

@@ -74,7 +74,7 @@ class RecipeCollectionViewModel(
         recipeId: String,
         title: String?
     ) = viewModelScope.launch {
-        actionToView.send(
+        command.send(
             RecipeCollectionActionToView.OpenRecipeDetail(
                 recipeId = recipeId, title = title
             )
