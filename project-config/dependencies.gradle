@@ -67,6 +67,7 @@ ext {
         navigation: ":infrastructure:navigation",
         analytics: ":infrastructure:analytics",
         analyticsAmplitude: ":infrastructure:analytics-amplitude",
+        image: ":infrastructure:image",
         designSystem: ":infrastructure:design-system",
         coreAndroid: ":core-android"
     ]

@@ -3,6 +3,7 @@ package br.com.recipebook.di
 import android.app.Application
 import br.com.recipebook.analytics.amplitude.di.amplitudeAnalyticsModule
 import br.com.recipebook.coreandroid.di.coreAndroidModule
+import br.com.recipebook.image.di.imageModule
 import br.com.recipebook.navigation.di.navigationModule
 import br.com.recipebook.recipecollection.di.recipeCollectionModules
 import br.com.recipebook.recipedetail.di.recipeDetailModules
@@ -20,6 +21,7 @@ object KoinInitializer {
             // declare modules
             modules(
                 applicationModule +
+                    imageModule +
                     coreAndroidModule +
                     startupModule +
                     navigationModule +

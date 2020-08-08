@@ -60,8 +60,8 @@ dependencies {
     implementation project(ProjectConfig.navigation)
     implementation project(ProjectConfig.analytics)
     implementation project(ProjectConfig.analyticsAmplitude)
+    implementation project(ProjectConfig.image)
 
-    implementation AndroidLibConfig.fresco
     implementation AndroidLibConfig.sentry
 
     implementation project(Features.recipeCollection)

@@ -2,9 +2,6 @@ package br.com.recipebook.di
 
 import br.com.recipebook.ApplicationStartAnalytics
 import br.com.recipebook.BuildConfig
-import br.com.recipebook.ImageLibraryJob
-import br.com.recipebook.startup.StartupJob
-import org.koin.dsl.bind
 import org.koin.dsl.module
 
 val applicationModule = module {
@@ -28,7 +25,4 @@ val applicationModule = module {
             analytics = get()
         )
     }
-    factory {
-        ImageLibraryJob(application = get())
-    } bind StartupJob::class
 }
