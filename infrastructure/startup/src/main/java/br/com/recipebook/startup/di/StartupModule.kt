@@ -1,4 +1,4 @@
-package br.com.recipebook.di
+package br.com.recipebook.startup.di
 
 import br.com.recipebook.startup.StartupJobsExecutor
 import br.com.recipebook.startup.StartupJobsExecutorImpl

@@ -1,9 +1,10 @@
 package br.com.recipebook.di
 
+import br.com.recipebook.ApplicationStartAnalytics
 import br.com.recipebook.BuildConfig
 import org.koin.dsl.module
 
-val buildModule = module {
+val applicationModule = module {
     single {
         BuildConfiguration(
             appInfo = AppInfo(
@@ -16,6 +17,12 @@ val buildModule = module {
                 sentryKey = BuildConfig.SENTRY_DSN,
                 amplitudeKey = BuildConfig.AMPLITUDE_KEY
             )
+        )
+    }
+    single {
+        ApplicationStartAnalytics(
+            application = get(),
+            analytics = get()
         )
     }
 }

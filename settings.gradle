@@ -1,13 +1,17 @@
 include ':app',
     ':utility:utility-android',
     ':utility:utility-kotlin',
+
     ':infrastructure:startup',
     ':infrastructure:configuration',
     ':infrastructure:navigation',
     ':infrastructure:design-system',
     ':infrastructure:analytics',
     ':infrastructure:analytics-amplitude',
+    ':infrastructure:image',
+
     ':core-android',
+
     ':features:recipe-collection',
     ':features:recipe-detail',
     ':features:settings',
