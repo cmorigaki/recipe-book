@@ -6,6 +6,7 @@ import br.com.recipebook.startup.StartupJobsExecutor
 import io.sentry.android.core.SentryAndroid
 import kotlinx.coroutines.runBlocking
 import org.koin.android.ext.android.inject
+import org.koin.core.time.measureDuration
 
 class CustomApplication : Application() {
 
@@ -15,19 +16,21 @@ class CustomApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        // Crash report must be the first thing to initialize!
-        if (!BuildConfig.DEBUG) {
-            SentryAndroid.init(this)
-        }
+        val startupDuration = measureDuration {
+            // Crash report must be the first thing to initialize!
+            if (!BuildConfig.DEBUG) {
+                SentryAndroid.init(this)
+            }
 
-        // Initialize DI
-        KoinInitializer.init(this)
+            // Initialize DI
+            KoinInitializer.init(this)
 
-        // Run startup jobs
-        runBlocking {
-            startupJobsExecutor()
+            // Run startup jobs
+            runBlocking {
+                startupJobsExecutor()
+            }
         }
         // Need to run on main thread
-        applicationInitWatcher.watch()
+        applicationInitWatcher.watch(startupDuration)
     }
 }

@@ -15,14 +15,18 @@ class ApplicationStartAnalytics(
     private var firstActivityCreated = false
     private var hasSavedState = false
 
-    fun watch() {
+    fun watch(duration: Double) {
         application.registerActivityLifecycleCallbacks(this)
         Handler().post {
             if (firstActivityCreated) {
                 if (hasSavedState) {
-                    analytics.sendEvent(AppStartEvent(InitMode.LUKEWARM_START))
+                    analytics.sendEvent(
+                        AppStartEvent(InitMode.LUKEWARM_START, duration.toLong())
+                    )
                 } else {
-                    analytics.sendEvent(AppStartEvent(InitMode.COLD_START))
+                    analytics.sendEvent(
+                        AppStartEvent(InitMode.COLD_START, duration.toLong())
+                    )
                 }
             }
         }
