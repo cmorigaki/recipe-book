@@ -5,7 +5,7 @@ import android.app.Application
 import android.os.Bundle
 import android.os.Handler
 import br.com.recipebook.analytics.Analytics
-import br.com.recipebook.analytics.AppInitEvent
+import br.com.recipebook.analytics.AppStartEvent
 import br.com.recipebook.analytics.InitMode
 
 class ApplicationStartAnalytics(
@@ -20,9 +20,9 @@ class ApplicationStartAnalytics(
         Handler().post {
             if (firstActivityCreated) {
                 if (hasSavedState) {
-                    analytics.sendEvent(AppInitEvent(InitMode.LUKEWARM_START))
+                    analytics.sendEvent(AppStartEvent(InitMode.LUKEWARM_START))
                 } else {
-                    analytics.sendEvent(AppInitEvent(InitMode.COLD_START))
+                    analytics.sendEvent(AppStartEvent(InitMode.COLD_START))
                 }
             }
         }

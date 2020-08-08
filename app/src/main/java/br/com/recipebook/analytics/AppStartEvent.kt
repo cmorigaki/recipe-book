@@ -5,10 +5,10 @@ enum class InitMode(val value: String) {
     LUKEWARM_START("lukewarm_start")
 }
 
-class AppInitEvent(
+class AppStartEvent(
     private val startMode: InitMode
 ) : Event {
-    override val id = "app_init"
+    override val id = "app_start"
     override val properties: Map<String, Any?>
         get() = mapOf(
             "start_mode" to startMode.value
