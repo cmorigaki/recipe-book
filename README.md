@@ -29,7 +29,9 @@ In general, I try to follow SOLID and clean code principles for every piece of c
 
 ### Features
 In a feature scope (a screen for this project), the architecture relies on 5 distinct layers: View, Presentation, Domain, Data, Data source. These layers follows a **Clean architecture** dependency that can be represented by the below picture:
-<img src="misc/modeling/feature_clean_arch.png" hspace="20">
+<p align="center">
+    <img src="misc/modeling/feature_clean_arch.png" hspace="20">
+</p>
 
 For "view architecture" I'm using MVVM (Jetpack ViewModel), view binding (not DataBinding), kotlin StateFlow instead of LiveData.
 
@@ -40,7 +42,9 @@ For any SDK integration, I would wrap them using suspendCoroutine/channelFlow to
 ### Navigation
 There are some solutions for navigation that have huge impact by modularization.
 Today, I have a MainNavigator interface that receives an object that relates to a given screen. The injected list of Navigation resolvers are provided using Koin "multibinding".
-<img src="misc/modeling/navigation.png" hspace="20">
+<p align="center">
+    <img src="misc/modeling/navigation.png" hspace="20">
+</p>
 
 ### Theme
 The application has dark and light mode that can be changed at runtime. All definitions/styles are inside design-system module.
@@ -56,7 +60,9 @@ The whole application is composed of several modules that are ruled by a hierarc
 
 ### Modules layers
 The picture shows the current modules and how they are structured.
-<img src="misc/modeling/modularization.png" hspace="20">
+<p align="center">
+    <img src="misc/modeling/modularization.png" hspace="20">
+</p>
 
 1. **App** - Glue all modules and it has project configurations like build variants, API keys.
 2. **Feature** - Product features are developed at this level of modules. For this project I have modules:screen 1:1 but it may vary a lot.
