@@ -29,7 +29,7 @@ android {
 Properties loadApiProperties(String environment) {
     def envProperties = new Properties()
     def localProperties = new Properties()
-    localProperties.load(new FileInputStream("$project.rootDir/project-config/api.properties"))
+    localProperties.load(new FileInputStream("$project.rootDir/project-config/api-properties/api.properties"))
     localProperties.each { prop ->
         if (prop.key.endsWith(environment)) {
             envProperties.put(prop.key.replace("_$environment", ""), prop.value)
