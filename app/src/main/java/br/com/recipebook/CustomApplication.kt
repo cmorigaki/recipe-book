@@ -6,7 +6,7 @@ import br.com.recipebook.startup.StartupJobsExecutor
 import io.sentry.android.core.SentryAndroid
 import kotlinx.coroutines.runBlocking
 import org.koin.android.ext.android.inject
-import org.koin.core.time.measureDuration
+import kotlin.system.measureTimeMillis
 
 class CustomApplication : Application() {
 
@@ -16,7 +16,7 @@ class CustomApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        val startupDuration = measureDuration {
+        val startupDuration = measureTimeMillis {
             // Crash report must be the first thing to initialize!
             if (!BuildConfig.DEBUG) {
                 SentryAndroid.init(this)
