@@ -1,0 +1,34 @@
+apply plugin: "com.android.library"
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion AndroidConfig.compileSdk
+    buildToolsVersion AndroidConfig.buildTools
+
+    defaultConfig {
+        minSdkVersion AndroidConfig.minSdk
+        targetSdkVersion AndroidConfig.targetSdk
+        versionCode AndroidConfig.versionCode
+        versionName AndroidConfig.versionName
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = jvmTargetVersion
+    }
+}
+
+dependencies {
+    implementation EnvironmentConfig.kotlinStdLib
+    implementation AndroidLibConfig.coreKtx
+
+    implementation AndroidLibConfig.koinAndroid
+    implementation AndroidLibConfig.timber
+    implementation AndroidLibConfig.sentry
+
+    implementation project(ProjectConfig.configuration)
+}

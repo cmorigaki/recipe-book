@@ -61,8 +61,10 @@ dependencies {
     implementation project(ProjectConfig.analytics)
     implementation project(ProjectConfig.analyticsAmplitude)
     implementation project(ProjectConfig.image)
+    implementation project(ProjectConfig.monitoring)
 
     implementation AndroidLibConfig.sentry
+    implementation AndroidLibConfig.timber
 
     implementation project(Features.recipeCollection)
     implementation project(Features.recipeDetail)

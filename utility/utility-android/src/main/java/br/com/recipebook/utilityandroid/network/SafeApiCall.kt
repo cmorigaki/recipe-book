@@ -21,8 +21,6 @@ suspend fun <T> safeApiCall(
             when (throwable) {
                 is IOException -> ResultWrapper.Failure(NetworkError.UnknownError)
                 is HttpException -> {
-                    // val code = throwable.code()
-                    // val errorResponse = convertErrorBody(throwable)
                     ResultWrapper.Failure(NetworkError.HttpException)
                 }
                 else -> {
@@ -32,14 +30,3 @@ suspend fun <T> safeApiCall(
         }
     }
 }
-
-// private fun convertErrorBody(throwable: HttpException): ErrorResponse? {
-//    return try {
-//        throwable.response()?.errorBody()?.source()?.let {
-//            val moshiAdapter = Moshi.Builder().build().adapter(ErrorResponse::class.java)
-//            moshiAdapter.fromJson(it)
-//        }
-//    } catch (exception: Exception) {
-//        null
-//    }
-// }

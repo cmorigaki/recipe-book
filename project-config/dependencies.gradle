@@ -56,7 +56,10 @@ ext {
         sentry: "io.sentry:sentry-android:2.1.0",
 
         // Analytics
-        amplitude: "com.amplitude:android-sdk:2.26.1"
+        amplitude: "com.amplitude:android-sdk:2.26.1",
+
+        // Logging
+        timber: 'com.jakewharton.timber:timber:4.7.1'
     ]
 
     ProjectConfig = [
@@ -69,6 +72,7 @@ ext {
         analyticsAmplitude: ":infrastructure:analytics-amplitude",
         image: ":infrastructure:image",
         designSystem: ":infrastructure:design-system",
+        monitoring: ":infrastructure:monitoring",
         coreAndroid: ":core-android"
     ]
 
