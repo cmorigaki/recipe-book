@@ -8,7 +8,7 @@ import br.com.recipebook.analytics.Analytics
 import br.com.recipebook.analytics.AppStartEvent
 import br.com.recipebook.analytics.InitMode
 
-class ApplicationStartAnalytics(
+class ApplicationStartAnalyticsWatcher(
     private val application: Application,
     private val analytics: Analytics
 ) : Application.ActivityLifecycleCallbacks {
