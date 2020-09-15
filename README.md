@@ -21,6 +21,7 @@ This project is intended to be a case that prioritize a scalable architecture, f
 - Koin
 - Retrofit
 - Moshi
+- Timber
 - Gradle Groovy
 - Github actions
 
@@ -81,7 +82,7 @@ The picture shows the current modules and how they are structured.
 ### Classes naming convention
 //TODO
 
-## Libraries
+## Analytics + Monitoring
 
 ### Crash report and logs
 Currently I'm using [Sentry](https://sentry.io) for crash report and [Timber](https://github.com/JakeWharton/timber) as log abstraction layer.
