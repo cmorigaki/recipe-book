@@ -21,6 +21,7 @@ This project is intended to be a case that prioritize a scalable architecture, f
 - Koin
 - Retrofit
 - Moshi
+- Timber
 - Gradle Groovy
 - Github actions
 
@@ -67,7 +68,7 @@ The picture shows the current modules and how they are structured.
 1. **App** - Glue all modules and it has project configurations like build variants, API keys.
 2. **Feature** - Product features are developed at this level of modules. For this project I have modules:screen 1:1 but it may vary a lot.
 3. **Core** - Here I have modules that are not tied to a specific feature scope but the entire app like Base Classes when needed (I am pretty confident that I keep this layer really small).
-4. **Infrastructure** - Modules that compose the foundation of the project. Here we have networking, monitoring, analytics, design-system, navigation.
+4. **Infrastructure** - Modules that compose the foundation of the project. Configuration, navigation, analytics, design-system...
 4. **Utility** - Helpers and extensions classes goes here. But only the ones that are not related to business of the project and it can be reused by other projects.
 
 ## Code
@@ -81,13 +82,14 @@ The picture shows the current modules and how they are structured.
 ### Classes naming convention
 //TODO
 
-## Tooling
+## Analytics + Monitoring
 
-### Crash report
-//TODO
+### Crash report and logs
+Currently I'm using [Sentry](https://sentry.io) for crash report and [Timber](https://github.com/JakeWharton/timber) as log abstraction layer.
+Monitoring must be the first thing to initialize!
 
-### Event report
-//TODO
+### Event analytics
+The module `analytics` is an abstraction for event report. We currently rely on Amplitude platform to send and analyse user/application behaviour.
 
 ## Build Config
 
