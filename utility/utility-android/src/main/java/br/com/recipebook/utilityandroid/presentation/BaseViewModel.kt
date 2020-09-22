@@ -9,8 +9,8 @@ import kotlinx.coroutines.flow.asFlow
 @ExperimentalCoroutinesApi
 abstract class BaseViewModel<ViewState, Action, Command> : ViewModel() {
     abstract val viewState: ViewState
-    protected val command = BroadcastChannel<Command>(Channel.BUFFERED)
-    val commandFlow = command.asFlow()
+    protected val commandSender = BroadcastChannel<Command>(Channel.BUFFERED)
+    val commandReceiver = commandSender.asFlow()
 
     abstract fun dispatchAction(action: Action)
 }
