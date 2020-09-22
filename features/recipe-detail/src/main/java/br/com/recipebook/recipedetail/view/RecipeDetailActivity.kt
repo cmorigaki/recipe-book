@@ -17,8 +17,7 @@ import br.com.recipebook.utilityandroid.view.activitySafeArgs
 import br.com.recipebook.utilityandroid.view.putSafeArgs
 import com.google.android.material.appbar.AppBarLayout
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.collect
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
@@ -82,31 +81,41 @@ class RecipeDetailActivity : AppCompatActivity() {
     }
 
     private fun observeState(binding: RecipeDetailActivityBinding) {
-        viewModel.viewState.isLoading.onEach {
-            binding.recipeDetailLoading.visibility = if (it) View.VISIBLE else View.GONE
-        }.launchIn(lifecycleScope)
-
-        viewModel.viewState.hasError.onEach {
-            if (it) {
-                binding.recipeDetailErrorState.root.visibility = View.VISIBLE
-                binding.appBarLayout.setExpanded(false)
-            } else {
-                binding.recipeDetailErrorState.root.visibility = View.GONE
+        lifecycleScope.launchWhenStarted {
+            viewModel.viewState.isLoading.collect {
+                binding.recipeDetailLoading.visibility = if (it) View.VISIBLE else View.GONE
             }
-        }.launchIn(lifecycleScope)
+        }
 
-        viewModel.viewState.title.onEach {
-            binding.toolbarTitle.text = it
-        }.launchIn(lifecycleScope)
+        lifecycleScope.launchWhenStarted {
+            viewModel.viewState.hasError.collect {
+                if (it) {
+                    binding.recipeDetailErrorState.root.visibility = View.VISIBLE
+                    binding.appBarLayout.setExpanded(false)
+                } else {
+                    binding.recipeDetailErrorState.root.visibility = View.GONE
+                }
+            }
+        }
 
-        viewModel.viewState.recipeImage.onEach {
-            binding.recipeImage.setImageURI(imageResolver.mountUrl(it, ImageSize.LARGE))
-        }.launchIn(lifecycleScope)
+        lifecycleScope.launchWhenStarted {
+            viewModel.viewState.title.collect {
+                binding.toolbarTitle.text = it
+            }
+        }
 
-        viewModel.viewState.listItems.onEach {
-            binding.recipeDetailList.visibility = if (it.isNotEmpty()) View.VISIBLE else View.GONE
-            adapter.setData(it)
-        }.launchIn(lifecycleScope)
+        lifecycleScope.launchWhenStarted {
+            viewModel.viewState.recipeImage.collect {
+                binding.recipeImage.setImageURI(imageResolver.mountUrl(it, ImageSize.LARGE))
+            }
+        }
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.viewState.listItems.collect {
+                binding.recipeDetailList.visibility = if (it.isNotEmpty()) View.VISIBLE else View.GONE
+                adapter.setData(it)
+            }
+        }
     }
 
     companion object {

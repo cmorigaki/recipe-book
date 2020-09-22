@@ -16,8 +16,7 @@ import br.com.recipebook.settings.presentation.SettingsCommand
 import br.com.recipebook.settings.presentation.SettingsViewModel
 import br.com.recipebook.settings.presentation.model.SettingsItem
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.collect
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -58,30 +57,38 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     private fun observeState(binding: SettingsActivityBinding) {
-        viewModel.viewState.isLoading.onEach {
-            binding.settingsLoading.visibility = if (it) View.VISIBLE else View.GONE
-        }.launchIn(lifecycleScope)
+        lifecycleScope.launchWhenStarted {
+            viewModel.viewState.isLoading.collect {
+                binding.settingsLoading.visibility = if (it) View.VISIBLE else View.GONE
+            }
+        }
 
-        viewModel.viewState.hasError.onEach {
-            binding.settingsErrorState.root.visibility = if (it) View.VISIBLE else View.GONE
-        }.launchIn(lifecycleScope)
+        lifecycleScope.launchWhenStarted {
+            viewModel.viewState.hasError.collect {
+                binding.settingsErrorState.root.visibility = if (it) View.VISIBLE else View.GONE
+            }
+        }
 
-        viewModel.viewState.listItems.onEach {
-            adapter.setData(it)
-        }.launchIn(lifecycleScope)
+        lifecycleScope.launchWhenStarted {
+            viewModel.viewState.listItems.collect {
+                adapter.setData(it)
+            }
+        }
     }
 
     private fun observeActionCommand() {
-        viewModel.commandFlow.onEach {
-            when (it) {
-                is SettingsCommand.OpenItem -> {
-                    mainNavigator.navigate(
-                        this@SettingsActivity,
-                        it.navIntent
-                    )
+        lifecycleScope.launchWhenStarted {
+            viewModel.commandReceiver.collect {
+                when (it) {
+                    is SettingsCommand.OpenItem -> {
+                        mainNavigator.navigate(
+                            this@SettingsActivity,
+                            it.navIntent
+                        )
+                    }
                 }
             }
-        }.launchIn(lifecycleScope)
+        }
     }
 
     private fun onItemClick(item: SettingsItem) {
