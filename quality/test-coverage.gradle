@@ -1,17 +1,27 @@
 apply plugin: 'jacoco'
 
 // Must run after test task
-task codeCoverageReport(type: JacocoReport, dependsOn: ['testDebugUnitTest']) {
-
+task codeCoverageReport(type: JacocoReport) {
     group = "Reporting"
     description = "Generate Jacoco coverage reports after running tests."
 
-    def coverageSourceDirs = [
+    if (plugins.hasPlugin('kotlin')) {
+        setupKotlinReport()
+    } else {
+        setupAndroidReport()
+    }
+}
+
+def setupAndroidReport() {
+    codeCoverageReport {
+        dependsOn = ['testDebugUnitTest']
+
+        def coverageSourceDirs = [
             "src/main/java",
             "src/main/kotlin",
-    ]
+        ]
 
-    def fileFilter = [
+        def fileFilter = [
             '**/R.class',
             '**/R$*.class',
             '**/BuildConfig.*',
@@ -31,35 +41,68 @@ task codeCoverageReport(type: JacocoReport, dependsOn: ['testDebugUnitTest']) {
             '**/DataBinderMapperImpl$InnerLayoutIdLookup.class',
             '**/DataBinderMapperImpl.class',
             '**/databinding/*.*'
-    ]
+        ]
 
-    def javaClasses
-    if (plugins.hasPlugin('com.android.application')) {
-        javaClasses = fileTree(
-            dir: "$buildDir/tmp/kotlin-classes/debug",
-            excludes: fileFilter
-        )
-    } else {
-        javaClasses = fileTree(
-            dir: "$buildDir/intermediates/aar_main_jar/debug",
-            excludes: fileFilter
-        )
-    }
+        def javaClasses
+        if (plugins.hasPlugin('com.android.application')) {
+            // Application module
+            javaClasses = fileTree(
+                dir: "$buildDir/tmp/kotlin-classes/debug",
+                excludes: fileFilter
+            )
+        } else {
+            // Android lib module
+            javaClasses = fileTree(
+                dir: "$buildDir/intermediates/aar_main_jar/debug",
+                excludes: fileFilter
+            )
+        }
 
-    // Used by jacoco to collect class files for analysis
-    classDirectories.from = files([ javaClasses ])
-    // Used by jacoco to collect class files for analysis, here we’re giving it the path stored in our debugTree declaration
-    // additionalSourceDirs.from = files(coverageSourceDirs)
-    sourceDirectories.from = files(coverageSourceDirs)
-    // Save the results of the report generation, this must have the .exec extension but you can decide the path
-    executionData.from = fileTree(dir: "$buildDir", includes: [
+        // Used by jacoco to collect class files for analysis
+        classDirectories.from = files([ javaClasses ])
+        // Used by jacoco to collect class files for analysis, here we’re giving it the path stored in our debugTree declaration
+        sourceDirectories.from = files(coverageSourceDirs)
+        // Results of the report generation
+        executionData.from = fileTree(dir: "$buildDir", includes: [
             "jacoco/testDebugUnitTest.exec"
-    ])
+        ])
 
-    // These are the different report file formats that we have enabled jacoco to create reports for
-    reports {
-        xml.enabled = true
-        html.enabled = true
+        // These are the different report file formats that we have enabled jacoco to create reports for
+        reports {
+            csv.enabled false
+            xml.enabled = false
+            html.enabled true
+        }
+    }
+}
+
+def setupKotlinReport() {
+    codeCoverageReport {
+        dependsOn test
+
+        def coverageSourceDirs = [
+            "src/main/java",
+            "src/main/kotlin",
+        ]
+
+        def javaClasses = fileTree(
+            dir: "$buildDir/libs"
+        )
+
+        // Used by jacoco to collect class files for analysis
+        classDirectories.from = files([ javaClasses ])
+        // Used by jacoco to collect class files for analysis, here we’re giving it the path stored in our debugTree declaration
+        sourceDirectories.from = files(coverageSourceDirs)
+        // Results of the report generation
+        executionData.from = fileTree(dir: "$buildDir", includes: [
+            "jacoco/test.exec"
+        ])
+
+        reports {
+            csv.enabled false
+            xml.enabled false
+            html.enabled true
+        }
     }
 }
 
