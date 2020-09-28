@@ -16,7 +16,6 @@ task codeCoverageReport(type: JacocoReport, dependsOn: ['testDebugUnitTest']) {
             '**/R$*.class',
             '**/BuildConfig.*',
             '**/Manifest*.*',
-            '**/*Should*.*',
             'android/**/*.*',
             'androidx/**/*.*',
             '**/generated/**',
@@ -34,10 +33,18 @@ task codeCoverageReport(type: JacocoReport, dependsOn: ['testDebugUnitTest']) {
             '**/databinding/*.*'
     ]
 
-    def javaClasses = fileTree(
+    def javaClasses
+    if (plugins.hasPlugin('com.android.application')) {
+        javaClasses = fileTree(
+            dir: "$buildDir/tmp/kotlin-classes/debug",
+            excludes: fileFilter
+        )
+    } else {
+        javaClasses = fileTree(
             dir: "$buildDir/intermediates/aar_main_jar/debug",
             excludes: fileFilter
-    )
+        )
+    }
 
     // Used by jacoco to collect class files for analysis
     classDirectories.from = files([ javaClasses ])
