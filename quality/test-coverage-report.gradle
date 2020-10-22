@@ -1,0 +1,11 @@
+def testDirs = ['src/test', 'src/androidTest']
+def ignoredModules = []
+
+subprojects {
+  afterEvaluate { project ->
+    // Apply task to modules
+    if (testDirs.any { file("$projectDir/$it").exists() } && !ignoredModules.any { name.contains(it) }) {
+      project.apply from: "$rootDir/quality/jacoco-task.gradle"
+    }
+  }
+}

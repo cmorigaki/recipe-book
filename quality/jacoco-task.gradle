@@ -43,20 +43,10 @@ def setupAndroidReport() {
             '**/databinding/*.*'
         ]
 
-        def javaClasses
-        //if (plugins.hasPlugin('com.android.application')) {
-            // Application module
-            javaClasses = fileTree(
-                dir: "$buildDir/tmp/kotlin-classes/debug",
-                excludes: fileFilter
-            )
-//        } else {
-//            // Android lib module
-//            javaClasses = fileTree(
-//                dir: "$buildDir/intermediates/aar_main_jar/debug",
-//                excludes: fileFilter
-//            )
-//        }
+        def javaClasses = fileTree(
+            dir: "$buildDir/tmp/kotlin-classes/debug",
+            excludes: fileFilter
+        )
 
         // Used by jacoco to collect class files for analysis
         classDirectories.from = files([ javaClasses ])

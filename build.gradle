@@ -23,13 +23,10 @@ allprojects {
 }
 
 apply from: "project-config/dependencies.gradle"
+apply from: "$rootDir/quality/test-coverage-report.gradle"
 
-// Ktlint
 subprojects {
     apply from: "$rootDir/quality/ktlint.gradle"
-    afterEvaluate { project ->
-        project.apply from: "$rootDir/quality/test-coverage.gradle"
-    }
 }
 
 task installGitHook(type: Copy) {
