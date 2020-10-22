@@ -7,7 +7,7 @@ buildscript {
     dependencies {
         // classpath EnvironmentConfig.gradleTools
         // classpath EnvironmentConfig.gradlePlugin
-        classpath 'com.android.tools.build:gradle:4.0.1'
+        classpath 'com.android.tools.build:gradle:4.1.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.10"
 
         // NOTE: Do not place your application dependencies here; they belong
@@ -27,6 +27,9 @@ apply from: "project-config/dependencies.gradle"
 // Ktlint
 subprojects {
     apply from: "$rootDir/quality/ktlint.gradle"
+    afterEvaluate { project ->
+        project.apply from: "$rootDir/quality/test-coverage.gradle"
+    }
 }
 
 task installGitHook(type: Copy) {

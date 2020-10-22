@@ -1,5 +1,4 @@
 apply plugin: 'kotlin'
-apply from: "$rootDir/quality/test-coverage.gradle"
 
 repositories {
     jcenter()
