@@ -23,7 +23,7 @@ allprojects {
 }
 
 apply from: "project-config/dependencies.gradle"
-apply from: "$rootDir/quality/test-coverage-report.gradle"
+apply from: "$rootDir/quality/test-coverage-setup.gradle"
 
 subprojects {
     apply from: "$rootDir/quality/ktlint.gradle"

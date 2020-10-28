@@ -1,24 +1,37 @@
 apply plugin: 'jacoco'
 
-// Must run after test task
-task codeCoverageReport(type: JacocoReport) {
+def validateTestCoverage() {
     group = "Reporting"
-    description = "Generate Jacoco coverage reports after running tests."
+    description = "Validate Jacoco coverage reports after report."
+
+    def jacocoCoverageThresholdDefault = 0.60
+    def threshold = project.hasProperty('jacocoCoverageThreshold')
+        ? project.jacocoCoverageThreshold
+        : jacocoCoverageThresholdDefault
 
     if (plugins.hasPlugin('kotlin')) {
-        setupKotlinReport()
+        setupKotlinReportValidation(threshold)
     } else {
-        setupAndroidReport()
+        setupAndroidReportValidation(threshold)
     }
 }
 
-def setupAndroidReport() {
-    codeCoverageReport {
-        dependsOn = ['testDebugUnitTest']
+def setupAndroidReportValidation(threshold) {
+    task jacocoTestCoverageVerification(
+        type: JacocoCoverageVerification,
+        dependsOn: [ 'testDebugUnitTest' ]
+    ) {
+        violationRules {
+            rule {
+                limit {
+                    minimum = threshold
+                }
+            }
+        }
 
         def coverageSourceDirs = [
-            "src/main/java",
-            "src/main/kotlin",
+            "$projectDir/src/main/java",
+            "$projectDir/src/main/kotlin",
         ]
 
         def fileFilter = [
@@ -49,26 +62,28 @@ def setupAndroidReport() {
         )
 
         // Used by jacoco to collect class files for analysis
-        classDirectories.from = files([ javaClasses ])
+        classDirectories.from = files([javaClasses])
         // Used by jacoco to collect class files for analysis, here we’re giving it the path stored in our debugTree declaration
         sourceDirectories.from = files(coverageSourceDirs)
         // Results of the report generation
         executionData.from = fileTree(dir: "$buildDir", includes: [
             "jacoco/testDebugUnitTest.exec"
         ])
-
-        // These are the different report file formats that we have enabled jacoco to create reports for
-        reports {
-            csv.enabled false
-            xml.enabled = false
-            html.enabled true
-        }
     }
 }
 
-def setupKotlinReport() {
-    codeCoverageReport {
-        dependsOn test
+def setupKotlinReportValidation() {
+    task jacocoTestCoverageVerification(
+        type: JacocoCoverageVerification,
+        dependsOn: [ 'testDebugUnitTest' ]
+    ) {
+        violationRules {
+            rule {
+                limit {
+                    minimum = threshold
+                }
+            }
+        }
 
         def coverageSourceDirs = [
             "src/main/java",
@@ -80,23 +95,12 @@ def setupKotlinReport() {
         )
 
         // Used by jacoco to collect class files for analysis
-        classDirectories.from = files([ javaClasses ])
+        classDirectories.from = files([javaClasses])
         // Used by jacoco to collect class files for analysis, here we’re giving it the path stored in our debugTree declaration
         sourceDirectories.from = files(coverageSourceDirs)
         // Results of the report generation
         executionData.from = fileTree(dir: "$buildDir", includes: [
             "jacoco/test.exec"
         ])
-
-        reports {
-            csv.enabled false
-            xml.enabled false
-            html.enabled true
-        }
     }
-}
-
-task getCoverage(type: Exec, dependsOn: 'codeCoverageReport') {
-    group = "Reporting"
-    commandLine "open", "$buildDir/reports/jacoco/codeCoverageReport/html/index.html"
 }

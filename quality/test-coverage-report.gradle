@@ -1,11 +1,101 @@
-def testDirs = ['src/test', 'src/androidTest']
-def ignoredModules = []
+apply plugin: 'jacoco'
 
-subprojects {
-  afterEvaluate { project ->
-    // Apply task to modules
-    if (testDirs.any { file("$projectDir/$it").exists() } && !ignoredModules.any { name.contains(it) }) {
-      project.apply from: "$rootDir/quality/jacoco-task.gradle"
+task codeCoverageReport(type: JacocoReport) {
+    group = "Reporting"
+    description = "Generate Jacoco coverage reports after running tests."
+
+    if (plugins.hasPlugin('kotlin')) {
+        setupKotlinReport()
+    } else {
+        setupAndroidReport()
     }
-  }
+}
+
+def setupAndroidReport() {
+    codeCoverageReport {
+        dependsOn = ['testDebugUnitTest']
+
+        def coverageSourceDirs = [
+            "src/main/java",
+            "src/main/kotlin",
+        ]
+
+        def fileFilter = [
+            '**/R.class',
+            '**/R$*.class',
+            '**/BuildConfig.*',
+            '**/Manifest*.*',
+            'android/**/*.*',
+            'androidx/**/*.*',
+            '**/generated/**',
+            '**/di/*.*',
+            '**/model/*.*',
+
+            //DataBinding
+            '**/BR.class',
+            '**/DataBindingInfo.class',
+            '**/DataBinderMapperImpl$InnerBrLookup.class',
+            '**/*Binding.class',
+            '**/*BindingImpl.class',
+            '**/DataBinderMapperImpl$InnerLayoutIdLookup.class',
+            '**/DataBinderMapperImpl.class',
+            '**/databinding/*.*'
+        ]
+
+        def javaClasses = fileTree(
+            dir: "$buildDir/tmp/kotlin-classes/debug",
+            excludes: fileFilter
+        )
+
+        // Used by jacoco to collect class files for analysis
+        classDirectories.from = files([javaClasses])
+        // Used by jacoco to collect class files for analysis, here we’re giving it the path stored in our debugTree declaration
+        sourceDirectories.from = files(coverageSourceDirs)
+        // Results of the report generation
+        executionData.from = fileTree(dir: "$buildDir", includes: [
+            "jacoco/testDebugUnitTest.exec"
+        ])
+
+        // These are the different report file formats that we have enabled jacoco to create reports for
+        reports {
+            csv.enabled false
+            xml.enabled = false
+            html.enabled true
+        }
+    }
+}
+
+def setupKotlinReport() {
+    codeCoverageReport {
+        dependsOn test
+
+        def coverageSourceDirs = [
+            "src/main/java",
+            "src/main/kotlin",
+        ]
+
+        def javaClasses = fileTree(
+            dir: "$buildDir/classes/kotlin/main"
+        )
+
+        // Used by jacoco to collect class files for analysis
+        classDirectories.from = files([javaClasses])
+        // Used by jacoco to collect class files for analysis, here we’re giving it the path stored in our debugTree declaration
+        sourceDirectories.from = files(coverageSourceDirs)
+        // Results of the report generation
+        executionData.from = fileTree(dir: "$buildDir", includes: [
+            "jacoco/test.exec"
+        ])
+
+        reports {
+            csv.enabled false
+            xml.enabled false
+            html.enabled true
+        }
+    }
+}
+
+task getCoverage(type: Exec, dependsOn: 'codeCoverageReport') {
+    group = "Reporting"
+    commandLine "open", "$buildDir/reports/jacoco/codeCoverageReport/html/index.html"
 }
