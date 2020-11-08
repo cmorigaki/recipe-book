@@ -1,5 +1,3 @@
-apply from: "$rootDir/quality/test-coverage-validation.gradle"
-
 def testDirs = ['src/test', 'src/androidTest']
 def ignoredModules = []
 
@@ -8,7 +6,7 @@ subprojects {
         // Apply task to modules
         if (testDirs.any { file("$projectDir/$it").exists() } && !ignoredModules.any { name.contains(it) }) {
             project.apply from: "$rootDir/quality/test-coverage-report.gradle"
-            validateTestCoverage()
+            project.apply from: "$rootDir/quality/jacoco.gradle"
         }
     }
 }
