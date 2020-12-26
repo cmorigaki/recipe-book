@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="settings_theme_title">Tema</string>
+    <string name="theme_option_system">Utilizar padrão do sistema</string>
+    <string name="theme_option_light">Tema claro</string>
+    <string name="theme_option_dark">Tema escuro</string>
+</resources>
