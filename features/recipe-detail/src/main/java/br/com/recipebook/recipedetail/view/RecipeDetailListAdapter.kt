@@ -4,8 +4,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import br.com.recipebook.coreandroid.image.ImageResolver
-import br.com.recipebook.coreandroid.image.ImageSize
 import br.com.recipebook.recipedetail.R
 import br.com.recipebook.recipedetail.databinding.RecipeDetailListItemBinding
 import br.com.recipebook.recipedetail.databinding.RecipeDetailListItemHeaderBinding
@@ -20,9 +18,7 @@ private enum class ViewType {
     HEADER_INSTRUCTIONS
 }
 
-class RecipeDetailListAdapter(
-    private val imageResolver: ImageResolver
-) : RecyclerView.Adapter<RecipeDetailListAdapter.ViewHolder>() {
+class RecipeDetailListAdapter : RecyclerView.Adapter<RecipeDetailListAdapter.ViewHolder>() {
 
     private var list = emptyList<RecipeDetailItem>()
 
@@ -48,7 +44,6 @@ class RecipeDetailListAdapter(
                         parent,
                         false
                     ),
-                    imageResolver = imageResolver
                 )
             else -> throw ClassNotFoundException()
         }
@@ -95,23 +90,10 @@ class RecipeDetailListAdapter(
 
         class DescriptionViewHolder(
             private val binding: RecipeDetailListItemBinding,
-            private val imageResolver: ImageResolver
         ) : ViewHolder(binding.root) {
 
             fun bind(item: DescriptionItem) {
                 with(binding) {
-
-                    if (!item.imgPath.isNullOrBlank()) {
-                        recipeDetailItemImage.setImageURI(
-                            imageResolver.mountUrl(
-                                item.imgPath,
-                                ImageSize.SMALL
-                            )
-                        )
-                        recipeDetailItemImage.visibility = View.VISIBLE
-                    } else {
-                        recipeDetailItemImage.visibility = View.INVISIBLE
-                    }
                     recipeDetailItemDescription.text = item.description
                 }
             }

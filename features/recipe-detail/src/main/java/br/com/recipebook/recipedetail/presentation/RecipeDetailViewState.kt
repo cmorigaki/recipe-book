@@ -10,7 +10,7 @@ class RecipeDetailViewState {
 
     val hasError = MutableStateFlow(false)
 
-    val recipeImage = MutableStateFlow<String?>(null)
+    val recipeImage = MutableStateFlow<String?>("")
     val title = MutableStateFlow<String?>(null)
     val listItems = MutableStateFlow<List<RecipeDetailItem>>(emptyList())
 }
