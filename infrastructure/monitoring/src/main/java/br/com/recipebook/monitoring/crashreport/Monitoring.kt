@@ -1,6 +1,6 @@
 package br.com.recipebook.monitoring.crashreport
 
-import io.sentry.core.Sentry
+import io.sentry.Sentry
 
 sealed class Breadcrumb(val value: String) {
     object StartupJobFinished : Breadcrumb("STARTUP_JOBS_FINISHED")
