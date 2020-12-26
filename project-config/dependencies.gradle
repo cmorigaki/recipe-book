@@ -83,7 +83,7 @@ ext {
 
     TestConfig = [
         jUnit: "junit:junit:4.13.1",
-        mockk: "io.mockk:mockk:1.10.3"
+        mockk: "io.mockk:mockk:1.10.2"
     ]
 
 }
