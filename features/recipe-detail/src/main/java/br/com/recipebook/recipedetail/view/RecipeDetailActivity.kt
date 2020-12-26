@@ -14,6 +14,7 @@ import br.com.recipebook.recipedetail.R
 import br.com.recipebook.recipedetail.databinding.RecipeDetailActivityBinding
 import br.com.recipebook.recipedetail.presentation.RecipeDetailViewModel
 import br.com.recipebook.utilityandroid.view.activitySafeArgs
+import br.com.recipebook.utilityandroid.view.appbarlayout.setCollapsedAndDisableScroll
 import br.com.recipebook.utilityandroid.view.putSafeArgs
 import com.google.android.material.appbar.AppBarLayout
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -28,7 +29,7 @@ class RecipeDetailActivity : AppCompatActivity() {
 
     private val viewModel: RecipeDetailViewModel by viewModel(parameters = { parametersOf(safeArgs) })
     private val imageResolver: ImageResolver by inject()
-    private val adapter by lazy { RecipeDetailListAdapter(imageResolver) }
+    private val adapter by lazy { RecipeDetailListAdapter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -91,7 +92,7 @@ class RecipeDetailActivity : AppCompatActivity() {
             viewModel.viewState.hasError.collect {
                 if (it) {
                     binding.recipeDetailErrorState.root.visibility = View.VISIBLE
-                    binding.appBarLayout.setExpanded(false)
+                    binding.appBarLayout.setCollapsedAndDisableScroll(binding.recipeDetailList)
                 } else {
                     binding.recipeDetailErrorState.root.visibility = View.GONE
                 }
@@ -106,7 +107,11 @@ class RecipeDetailActivity : AppCompatActivity() {
 
         lifecycleScope.launchWhenStarted {
             viewModel.viewState.recipeImage.collect {
-                binding.recipeImage.setImageURI(imageResolver.mountUrl(it, ImageSize.LARGE))
+                if (it != null) {
+                    binding.recipeImage.setImageURI(imageResolver.mountUrl(it, ImageSize.LARGE))
+                } else {
+                    binding.appBarLayout.setCollapsedAndDisableScroll(binding.recipeDetailList)
+                }
             }
         }
 

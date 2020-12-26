@@ -1,6 +1,6 @@
 ext {
-    kotlinVersion = "1.4.0"
-    gradleVersion = "4.0.1"
+    kotlinVersion = "1.4.20"
+    gradleVersion = "4.1.1"
     jvmTargetVersion = "1.8"
     
     EnvironmentConfig = [
