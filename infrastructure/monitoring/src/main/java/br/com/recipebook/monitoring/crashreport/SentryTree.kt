@@ -1,8 +1,8 @@
 package br.com.recipebook.monitoring.crashreport
 
 import android.util.Log
-import io.sentry.core.Sentry
-import io.sentry.core.SentryLevel
+import io.sentry.Sentry
+import io.sentry.SentryLevel
 import timber.log.Timber
 
 class SentryTree : Timber.Tree() {
