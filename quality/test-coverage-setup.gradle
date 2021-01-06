@@ -4,7 +4,7 @@ def ignoredModules = []
 subprojects {
     afterEvaluate { project ->
         // Apply task to modules
-        if (testDirs.any { file("$projectDir/$it").exists() } && !ignoredModules.any { name.contains(it) }) {
+         if (testDirs.any { file("$projectDir/$it").exists() } && !ignoredModules.any { name.contains(it) }) {
             project.apply from: "$rootDir/quality/test-coverage-report.gradle"
             project.apply from: "$rootDir/quality/jacoco.gradle"
         }

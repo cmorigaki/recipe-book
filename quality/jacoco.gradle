@@ -1,5 +1,4 @@
 apply from: "$rootDir/quality/jacoco-config.gradle"
-apply from: "$rootDir/quality/test-coverage/test-existence-validation-task.gradle"
 apply plugin: 'jacoco'
 
 afterEvaluate { project ->
@@ -10,21 +9,11 @@ afterEvaluate { project ->
         return false
     }
 
-    def threshold = project.hasProperty('jacocoCoverageThreshold')
-        ? project.jacocoCoverageThreshold
-        : project.jacocoCoverageThresholdDefault
-    setupTestExistenceValidationTask()
     if (isAndroidModule(project)) {
         setupAndroidReporting()
-        setupAndroidCoverageVerification(threshold)
     } else {
         setupKotlinReporting()
-        setupKotlinCoverageVerification(threshold)
     }
-}
-
-def setupTestExistenceValidationTask() {
-    task testExistenceValidation(type: TestExistenceValidation)
 }
 
 def setupAndroidReporting() {
@@ -34,7 +23,6 @@ def setupAndroidReporting() {
     task jacocoTestReport(
         type: JacocoReport,
         dependsOn: [
-            'testExistenceValidation',
             'testDebugUnitTest'
         ]
     ) {
@@ -44,65 +32,6 @@ def setupAndroidReporting() {
             html {
                 enabled true
                 destination file("${buildDir}/coverage-report")
-            }
-        }
-
-        def coverageSourceDirs = [
-            "src/main/java",
-            "src/main/kotlin",
-        ]
-
-        def fileFilter = [
-            '**/R.class',
-            '**/R$*.class',
-            '**/BuildConfig.*',
-            '**/Manifest*.*',
-            'android/**/*.*',
-            'androidx/**/*.*',
-            '**/generated/**',
-            '**/di/*.*',
-            '**/model/*.*',
-
-            //DataBinding
-            '**/BR.class',
-            '**/DataBindingInfo.class',
-            '**/DataBinderMapperImpl$InnerBrLookup.class',
-            '**/*Binding.class',
-            '**/*BindingImpl.class',
-            '**/DataBinderMapperImpl$InnerLayoutIdLookup.class',
-            '**/DataBinderMapperImpl.class',
-            '**/databinding/*.*'
-        ]
-
-        def javaClasses = fileTree(
-            dir: "$buildDir/tmp/kotlin-classes/debug",
-            excludes: fileFilter
-        )
-
-        // Used by jacoco to collect class files for analysis
-        classDirectories.from = files([javaClasses])
-        // Used by jacoco to collect class files for analysis, here we’re giving it the path stored in our debugTree declaration
-        sourceDirectories.from = files(coverageSourceDirs)
-        // Results of the report generation
-        executionData.from = fileTree(dir: "$buildDir", includes: [
-            "jacoco/testDebugUnitTest.exec"
-        ])
-    }
-}
-
-def setupAndroidCoverageVerification(threshold) {
-    task jacocoTestCoverageVerification(
-        type: JacocoCoverageVerification,
-        dependsOn: [
-            'testExistenceValidation',
-            'testDebugUnitTest'
-        ]
-    ) {
-        violationRules {
-            rule {
-                limit {
-                    minimum = threshold
-                }
             }
         }
 
@@ -151,7 +80,6 @@ def setupAndroidCoverageVerification(threshold) {
 
 def setupKotlinReporting() {
     jacocoTestReport {
-        dependsOn testExistenceValidation
         dependsOn test
         reports {
             csv.enabled false
@@ -159,20 +87,6 @@ def setupKotlinReporting() {
             html {
                 enabled true
                 destination file("${buildDir}/coverage-report")
-            }
-        }
-    }
-}
-
-def setupKotlinCoverageVerification(threshold) {
-    jacocoTestCoverageVerification {
-        dependsOn testExistenceValidation
-        dependsOn test
-        violationRules {
-            rule {
-                limit {
-                    minimum = threshold
-                }
             }
         }
     }
