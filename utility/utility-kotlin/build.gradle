@@ -6,6 +6,7 @@ repositories {
 
 dependencies {
     implementation EnvironmentConfig.kotlinJdk
+    implementation AndroidLibConfig.coroutinesCore
 }
 
 java {

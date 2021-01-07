@@ -11,6 +11,12 @@ dependencies {
     implementation AndroidLibConfig.coroutinesCore
 
     implementation AndroidLibConfig.koinAndroid
+
+    implementation project(ProjectConfig.utilityKotlin)
+
+    testImplementation TestConfig.jUnit
+    testImplementation TestConfig.mockk
+    testImplementation TestConfig.coroutinesTest
 }
 
 java {

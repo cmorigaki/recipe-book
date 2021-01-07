@@ -7,7 +7,8 @@ import org.koin.dsl.module
 val startupModule = module {
     single<StartupJobsExecutor> {
         StartupJobsExecutorImpl(
-            listStartupJobsExecutors = getAll()
+            listStartupJobsExecutors = getAll(),
+            dispatcherProvider = get()
         )
     }
 }

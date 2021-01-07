@@ -2,7 +2,6 @@ apply plugin: "com.android.application"
 apply plugin: 'kotlin-android'
 
 apply from: "$rootDir/project-config/api-properties/api-properties.gradle"
-apply from: "$rootDir/quality/test-coverage.gradle"
 
 android {
     compileSdkVersion AndroidConfig.compileSdk
@@ -69,6 +68,9 @@ dependencies {
     implementation project(Features.recipeDetail)
     implementation project(Features.settings)
     implementation project(Features.settingsTheme)
+
+    testImplementation TestConfig.jUnit
+    testImplementation TestConfig.mockk
 
     // debugImplementation because LeakCanary should only run in debug builds.
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.5'

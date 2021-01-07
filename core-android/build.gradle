@@ -1,8 +1,6 @@
 apply plugin: "com.android.library"
 apply plugin: 'kotlin-android'
 
-apply from: "$rootDir/quality/test-coverage.gradle"
-
 android {
     compileSdkVersion AndroidConfig.compileSdk
     buildToolsVersion AndroidConfig.buildTools

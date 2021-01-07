@@ -1,0 +1,23 @@
+project.ext {
+
+    jacocoCoverageThresholdDefault = 0.60
+
+    jacocoIgnoreList = [
+        "module-name-1",
+        "module-name-2"
+    ]
+
+    // Exclude file by names, packages or types. Such files will be ignored during test coverage
+    // calculation
+    jacocoFileFilter = [
+        '**/*App.*',
+        '**/*Application.*',
+        '**/*Activity.*',
+        '**/*Fragment.*',
+        '**/*View.*',
+        '**/*ViewGroup.*',
+        '**/*JsonAdapter.*',
+        '**/di/**',
+        '**/*Dagger.*'
+    ]
+}

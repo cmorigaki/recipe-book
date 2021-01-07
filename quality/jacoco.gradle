@@ -1,0 +1,99 @@
+apply from: "$rootDir/quality/jacoco-config.gradle"
+apply plugin: 'jacoco'
+
+afterEvaluate { project ->
+    def ignoreList = jacocoIgnoreList
+    def projectName = project.name
+    if (ignoreList.contains(projectName)) {
+        println "Jacoco: ignoring project ${projectName}"
+        return false
+    }
+
+    if (isAndroidModule(project)) {
+        setupAndroidReporting()
+    } else {
+        setupKotlinReporting()
+    }
+}
+
+def setupAndroidReporting() {
+    tasks.withType(Test) {
+        jacoco.includeNoLocationClasses true
+    }
+    task jacocoTestReport(
+        type: JacocoReport,
+        dependsOn: [
+            'testDebugUnitTest'
+        ]
+    ) {
+        reports {
+            csv.enabled false
+            xml.enabled false
+            html {
+                enabled true
+                destination file("${buildDir}/coverage-report")
+            }
+        }
+
+        def coverageSourceDirs = [
+            "src/main/java",
+            "src/main/kotlin",
+        ]
+
+        def fileFilter = [
+            '**/R.class',
+            '**/R$*.class',
+            '**/BuildConfig.*',
+            '**/Manifest*.*',
+            'android/**/*.*',
+            'androidx/**/*.*',
+            '**/generated/**',
+            '**/di/*.*',
+            '**/model/*.*',
+
+            //DataBinding
+            '**/BR.class',
+            '**/DataBindingInfo.class',
+            '**/DataBinderMapperImpl$InnerBrLookup.class',
+            '**/*Binding.class',
+            '**/*BindingImpl.class',
+            '**/DataBinderMapperImpl$InnerLayoutIdLookup.class',
+            '**/DataBinderMapperImpl.class',
+            '**/databinding/*.*'
+        ]
+
+        def javaClasses = fileTree(
+            dir: "$buildDir/tmp/kotlin-classes/debug",
+            excludes: fileFilter
+        )
+
+        // Used by jacoco to collect class files for analysis
+        classDirectories.from = files([javaClasses])
+        // Used by jacoco to collect class files for analysis, here we’re giving it the path stored in our debugTree declaration
+        sourceDirectories.from = files(coverageSourceDirs)
+        // Results of the report generation
+        executionData.from = fileTree(dir: "$buildDir", includes: [
+            "jacoco/testDebugUnitTest.exec"
+        ])
+    }
+}
+
+def setupKotlinReporting() {
+    jacocoTestReport {
+        dependsOn test
+        reports {
+            csv.enabled false
+            xml.enabled false
+            html {
+                enabled true
+                destination file("${buildDir}/coverage-report")
+            }
+        }
+    }
+}
+
+private static boolean isAndroidModule(Project project) {
+    def isAndroidLibrary = project.plugins.hasPlugin('com.android.library')
+    def isAndroidApp = project.plugins.hasPlugin('com.android.application')
+    return isAndroidLibrary || isAndroidApp
+}
