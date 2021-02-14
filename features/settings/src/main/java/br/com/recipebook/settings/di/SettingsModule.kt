@@ -21,7 +21,8 @@ val settingsPresentationModule = module {
         SettingsViewModel(
             viewState = SettingsViewState(),
             getSettingsList = get(),
-            analytics = get()
+            analytics = get(),
+            buildConfiguration = get(),
         )
     }
 }
