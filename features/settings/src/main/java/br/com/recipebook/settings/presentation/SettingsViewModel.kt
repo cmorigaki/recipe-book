@@ -2,6 +2,7 @@ package br.com.recipebook.settings.presentation
 
 import androidx.lifecycle.viewModelScope
 import br.com.recipebook.analytics.Analytics
+import br.com.recipebook.di.BuildConfiguration
 import br.com.recipebook.settings.analytics.ViewSettingsEvent
 import br.com.recipebook.settings.domain.model.SettingsItemModel
 import br.com.recipebook.settings.domain.usecase.GetSettingsUseCase
@@ -15,10 +16,12 @@ import kotlinx.coroutines.launch
 class SettingsViewModel(
     override val viewState: SettingsViewState,
     private val getSettingsList: GetSettingsUseCase,
-    private val analytics: Analytics
+    private val analytics: Analytics,
+    private buildConfiguration: BuildConfiguration,
 ) : BaseViewModel<SettingsViewState, SettingsAction, SettingsCommand>() {
 
     init {
+        viewState.appVersion.value = buildConfiguration.appInfo.version
         viewModelScope.launch {
             setLoadingState()
             getSettingsList().mapSuccess(::onLoadSuccess).mapError(::onLoadError)

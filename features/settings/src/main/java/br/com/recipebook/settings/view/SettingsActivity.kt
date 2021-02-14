@@ -74,6 +74,12 @@ class SettingsActivity : AppCompatActivity() {
                 adapter.setData(it)
             }
         }
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.viewState.appVersion.collect {
+                if (it.isNotBlank()) binding.appVersion.text = getString(R.string.settings_app_version, it)
+            }
+        }
     }
 
     private fun observeActionCommand() {
