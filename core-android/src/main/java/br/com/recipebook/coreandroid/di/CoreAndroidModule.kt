@@ -20,7 +20,7 @@ val coreAndroidModule = module {
     }
     single {
         Retrofit.Builder()
-            .baseUrl("https://cm-recipe-book.s3-sa-east-1.amazonaws.com")
+            .baseUrl("https://d20y9ud0nwoqf1.cloudfront.net/")
             .client(get())
             .addConverterFactory(get())
             .build()
