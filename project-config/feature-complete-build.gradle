@@ -15,6 +15,7 @@ android {
 
     buildFeatures {
         viewBinding true
+//        compose true
     }
 
     buildTypes {
@@ -23,12 +24,18 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility javaVersion
+        targetCompatibility javaVersion
     }
     kotlinOptions {
         jvmTarget = jvmTargetVersion
+//        useIR = true
     }
+
+//    composeOptions {
+//        kotlinCompilerVersion "1.4.21"
+//        kotlinCompilerExtensionVersion "1.0.0-alpha10"
+//    }
 }
 
 dependencies {
@@ -62,4 +69,21 @@ dependencies {
     implementation project(ProjectConfig.coreAndroid)
     implementation project(ProjectConfig.navigation)
     implementation project(ProjectConfig.designSystem)
+
+//    implementation 'androidx.compose.ui:ui:1.0.0-alpha10'
+//    // Tooling support (Previews, etc.)
+//    implementation 'androidx.compose.ui:ui-tooling:1.0.0-alpha10'
+//    // Foundation (Border, Background, Box, Image, Scroll, shapes, animations, etc.)
+//    implementation 'androidx.compose.foundation:foundation:1.0.0-alpha10'
+//    // Material Design
+//    implementation 'androidx.compose.material:material:1.0.0-alpha10'
+//    // Material design icons
+//    implementation 'androidx.compose.material:material-icons-core:1.0.0-alpha10'
+//    implementation 'androidx.compose.material:material-icons-extended:1.0.0-alpha10'
+//    // Integration with observables
+//    implementation 'androidx.compose.runtime:runtime-livedata:1.0.0-alpha10'
+//    implementation 'androidx.compose.runtime:runtime-rxjava2:1.0.0-alpha10'
+//
+//    // UI Tests
+//    androidTestImplementation 'androidx.compose.ui:ui-test-junit4:1.0.0-alpha10'
 }

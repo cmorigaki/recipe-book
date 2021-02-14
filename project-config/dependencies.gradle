@@ -1,5 +1,6 @@
 ext {
-    jvmTargetVersion = "1.8"
+    jvmTargetVersion = "11"
+    javaVersion = JavaVersion.VERSION_11
     
     EnvironmentConfig = [
         gradlePlugin: "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion",
@@ -14,10 +15,10 @@ ext {
         versionCode: 2,
         versionName: "0.1.0",
 
-        compileSdk: 29,
-        buildTools: "29.0.3",
+        compileSdk: 30,
+        buildTools: "30.0.3",
         minSdk: 23,
-        targetSdk: 29
+        targetSdk: 30
     ]
     
     AndroidLibConfig = [
