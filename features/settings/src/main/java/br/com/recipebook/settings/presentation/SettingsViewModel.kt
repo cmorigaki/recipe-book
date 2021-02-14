@@ -17,7 +17,7 @@ class SettingsViewModel(
     override val viewState: SettingsViewState,
     private val getSettingsList: GetSettingsUseCase,
     private val analytics: Analytics,
-    private buildConfiguration: BuildConfiguration,
+    buildConfiguration: BuildConfiguration,
 ) : BaseViewModel<SettingsViewState, SettingsAction, SettingsCommand>() {
 
     init {
