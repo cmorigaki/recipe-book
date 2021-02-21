@@ -31,7 +31,8 @@ object KoinInitializer {
                     settingsModules +
                     settingsThemeModules +
                     amplitudeAnalyticsModule +
-                    monitoringModule
+                    monitoringModule +
+                    configurationModules
             )
         }
     }

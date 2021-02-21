@@ -1,0 +1,7 @@
+apply from: "$rootDir/project-config/feature-complete-build.gradle"
+apply plugin: 'kotlin-parcelize'
+
+dependencies {
+    implementation AndroidLibConfig.playCore
+    implementation AndroidLibConfig.playCoreExtensions
+}

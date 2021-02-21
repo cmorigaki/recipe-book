@@ -16,6 +16,7 @@ include ':app',
     ':features:recipe-collection',
     ':features:recipe-detail',
     ':features:settings',
-    ':features:settings-theme'
+    ':features:settings-theme',
+    ':features:in-app-update'
 
 rootProject.name = 'Recipe Book'
