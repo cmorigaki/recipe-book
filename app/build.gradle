@@ -68,6 +68,7 @@ dependencies {
     implementation project(Features.recipeDetail)
     implementation project(Features.settings)
     implementation project(Features.settingsTheme)
+    implementation project(Features.inAppUpdate)
 
     testImplementation TestConfig.jUnit
     testImplementation TestConfig.mockk

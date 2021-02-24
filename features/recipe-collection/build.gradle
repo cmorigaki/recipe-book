@@ -4,4 +4,5 @@ dependencies {
     implementation AndroidLibConfig.swipeRefresh
 
     implementation project(ProjectConfig.analytics)
+    implementation project(Features.inAppUpdate)
 }
