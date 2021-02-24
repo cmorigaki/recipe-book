@@ -6,5 +6,4 @@ import com.squareup.moshi.JsonClass
 data class ConfigurationResponse(
     val minimumVersionCode: Int?,
     val excludedVersionCodes: List<Int>?,
-    val appStoreVersion: Int?,
 )

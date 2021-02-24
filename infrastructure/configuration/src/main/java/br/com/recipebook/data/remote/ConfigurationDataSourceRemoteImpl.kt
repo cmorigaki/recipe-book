@@ -17,11 +17,7 @@ internal class ConfigurationDataSourceRemoteImpl(
         }
         return when (result) {
             is ResultWrapper.Success -> {
-                result.data.takeIf {
-                    it.minimumVersionCode != null &&
-                        !it.excludedVersionCodes.isNullOrEmpty() &&
-                        it.appStoreVersion != null
-                }?.let {
+                result.data.takeIf { it.minimumVersionCode != null }?.let {
                     ResultWrapper.Success(mapConfigurationResponseToModel(it))
                 } ?: ResultWrapper.Failure(AppUpdateInfoModelError.NoInformation)
             }
@@ -33,7 +29,6 @@ internal class ConfigurationDataSourceRemoteImpl(
         AppUpdateInfoModel(
             minimumVersionCode = recipe.minimumVersionCode,
             excludedVersionCodes = recipe.excludedVersionCodes ?: emptyList(),
-            appStoreVersion = recipe.appStoreVersion,
         )
 }
 

@@ -12,6 +12,7 @@ val inAppUpdateDomainModule = module {
             buildConfiguration = get(),
             configurationRepository = get(),
             inAppUpdater = get(),
+            analytics = get(),
         )
     }
 }
