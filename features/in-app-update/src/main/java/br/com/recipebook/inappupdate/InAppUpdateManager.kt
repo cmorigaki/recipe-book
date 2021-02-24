@@ -1,11 +1,11 @@
 package br.com.recipebook.inappupdate
 
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentActivity
 import kotlinx.coroutines.CompletableDeferred
 
 private const val TAG = "InAppUpdateManager"
 
-suspend fun AppCompatActivity.requestInAppUpdate(
+suspend fun FragmentActivity.requestInAppUpdate(
     appUpdateType: Int,
     requestCode: Int
 ): InAppUpdateResult {

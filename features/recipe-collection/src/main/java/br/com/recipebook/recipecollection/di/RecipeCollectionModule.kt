@@ -20,7 +20,8 @@ val recipeCollectionPresentationModule = module {
         RecipeCollectionViewModel(
             viewState = RecipeCollectionViewState(),
             getRecipeCollection = get(),
-            analytics = get()
+            analytics = get(),
+            checkInAppUpdate = get(),
         )
     }
 }

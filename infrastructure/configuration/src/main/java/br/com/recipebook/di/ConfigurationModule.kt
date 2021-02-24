@@ -7,6 +7,7 @@ import br.com.recipebook.data.remote.ConfigurationApi
 import br.com.recipebook.data.remote.ConfigurationDataSourceRemote
 import br.com.recipebook.data.remote.ConfigurationDataSourceRemoteImpl
 import br.com.recipebook.domain.ConfigurationRepository
+import br.com.recipebook.view.ActivityProvider
 import org.koin.dsl.module
 import retrofit2.Retrofit
 
@@ -29,6 +30,11 @@ val configurationDataModule = module {
     }
 }
 
+val configurationViewModule = module {
+    single { ActivityProvider(get()) }
+}
+
 val configurationModules = listOf(
-    configurationDataModule
+    configurationDataModule,
+    configurationViewModule
 )

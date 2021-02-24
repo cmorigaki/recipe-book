@@ -4,6 +4,7 @@ import android.app.Application
 import br.com.recipebook.analytics.amplitude.di.amplitudeAnalyticsModule
 import br.com.recipebook.coreandroid.di.coreAndroidModule
 import br.com.recipebook.image.di.imageModule
+import br.com.recipebook.inappupdate.di.inAppUpdateModules
 import br.com.recipebook.monitoring.di.monitoringModule
 import br.com.recipebook.navigation.di.navigationModule
 import br.com.recipebook.recipecollection.di.recipeCollectionModules
@@ -31,8 +32,9 @@ object KoinInitializer {
                     settingsModules +
                     settingsThemeModules +
                     amplitudeAnalyticsModule +
-                    monitoringModule +
-                    configurationModules
+                    configurationModules +
+                    inAppUpdateModules +
+                    monitoringModule
             )
         }
     }

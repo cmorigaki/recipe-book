@@ -1,11 +1,40 @@
 package br.com.recipebook.inappupdate.domain
 
+import br.com.recipebook.di.BuildConfiguration
+import br.com.recipebook.domain.ConfigurationRepository
+import br.com.recipebook.domain.model.AppUpdateInfoModel
+import br.com.recipebook.inappupdate.InAppUpdateResult
+import br.com.recipebook.monitoring.crashreport.Breadcrumb
+import br.com.recipebook.monitoring.crashreport.Monitoring
+import br.com.recipebook.utilitykotlin.ResultWrapper
+
 interface CheckInAppUpdateUseCase {
-    operator fun invoke()
+    suspend operator fun invoke(): Boolean
 }
 
-internal class CheckInAppUpdate() : CheckInAppUpdateUseCase {
-    override fun invoke() {
-        TODO("Not yet implemented")
+internal class CheckInAppUpdate(
+    private val buildConfiguration: BuildConfiguration,
+    private val configurationRepository: ConfigurationRepository,
+    private val inAppUpdater: InAppUpdater,
+) : CheckInAppUpdateUseCase {
+    override suspend fun invoke(): Boolean {
+        val shouldUpdate = when (val result = configurationRepository.getAppUpdateInfo()) {
+            is ResultWrapper.Success -> shouldAskUpdate(result.data)
+            is ResultWrapper.Failure -> true
+        }
+
+        return if (shouldUpdate) {
+            Monitoring.addBreadcrumb(Breadcrumb.StartingInAppUpdate)
+            inAppUpdater() !is InAppUpdateResult.UpdateFailed
+        } else {
+            true
+        }
+    }
+
+    private fun shouldAskUpdate(info: AppUpdateInfoModel): Boolean {
+        return buildConfiguration.appInfo.versionCode.let { currentVersionCode ->
+            (currentVersionCode < info.minimumVersionCode ?: 0) ||
+                info.excludedVersionCodes.contains(currentVersionCode)
+        }
     }
 }
