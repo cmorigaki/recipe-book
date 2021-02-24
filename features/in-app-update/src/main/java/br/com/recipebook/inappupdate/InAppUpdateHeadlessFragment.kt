@@ -21,7 +21,6 @@ internal class InAppUpdateHeadlessFragment : Fragment() {
     }
 
     private fun checkInAppUpdate() {
-        android.util.Log.d("Cesar", "checkInAppUpdate")
         // Creates instance of the manager.
         val appUpdateManager = AppUpdateManagerFactory.create(requireContext())
 
@@ -35,13 +34,9 @@ internal class InAppUpdateHeadlessFragment : Fragment() {
             ) {
                 // Request the update.
                 appUpdateManager.startUpdateFlowForResult(
-                    // Pass the intent that is returned by 'getAppUpdateInfo()'.
                     appUpdateInfo,
-                    // Or 'AppUpdateType.FLEXIBLE' for flexible updates.
                     safeArgs.appUpdateType,
-                    // The current activity making the update request.
                     this,
-                    // Include a request code to later monitor this update request.
                     safeArgs.requestCode
                 )
             } else {
@@ -80,7 +75,6 @@ internal class InAppUpdateHeadlessFragment : Fragment() {
     }
 
     private fun removeThisFragment() {
-        android.util.Log.d("Cesar", "Fragment removed")
         parentFragmentManager.beginTransaction()
             .remove(this)
             .commitAllowingStateLoss()
@@ -88,9 +82,7 @@ internal class InAppUpdateHeadlessFragment : Fragment() {
 
     override fun onDestroy() {
         super.onDestroy()
-        android.util.Log.d("Cesar", "Fragment destroyed")
         if (::completableDeferred.isInitialized && completableDeferred.isActive) {
-            android.util.Log.d("Cesar", "Cancelling completable")
             completableDeferred.cancel()
         }
     }
