@@ -1,10 +1,9 @@
-package br.com.recipebook.view
+package br.com.recipebook.device
 
 import android.app.Activity
 import android.app.Application
 import android.os.Bundle
 
-// FIXME this class shouldn't be inside this module
 class ActivityProvider(application: Application) {
     var activeActivity: Activity? = null
 
