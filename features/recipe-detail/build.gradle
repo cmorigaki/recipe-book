@@ -7,4 +7,5 @@ dependencies {
     implementation AndroidLibConfig.material
 
     implementation project(ProjectConfig.analytics)
+    implementation project(ProjectConfig.device)
 }

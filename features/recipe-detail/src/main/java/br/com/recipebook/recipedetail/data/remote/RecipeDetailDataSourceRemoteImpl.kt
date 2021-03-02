@@ -1,5 +1,6 @@
 package br.com.recipebook.recipedetail.data.remote
 
+import br.com.recipebook.device.LocaleProvider
 import br.com.recipebook.recipedetail.data.RecipeDetailDataSourceRemote
 import br.com.recipebook.recipedetail.domain.model.IngredientsModel
 import br.com.recipebook.recipedetail.domain.model.RecipeDetailModel
@@ -11,11 +12,12 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 internal class RecipeDetailDataSourceRemoteImpl(
-    private val api: RecipeDetailApi
+    private val api: RecipeDetailApi,
+    private val localeProvider: LocaleProvider,
 ) : RecipeDetailDataSourceRemote {
     override suspend fun getDetail(id: String): ResultWrapper<RecipeDetailModel, CommonError> {
         val result = safeApiCall(Dispatchers.IO) {
-            api.getData(id)
+            api.getData(locale = localeProvider.getLocale(), id = id)
         }
         return when (result) {
             is ResultWrapper.Success -> ResultWrapper.Success(mapRecipeToModel(result.data))
@@ -41,6 +43,9 @@ internal class RecipeDetailDataSourceRemoteImpl(
 }
 
 internal interface RecipeDetailApi {
-    @GET("/recipe-detail/{id}.json")
-    suspend fun getData(@Path("id") id: String): RecipeDetailResponse
+    @GET("{locale}/recipe-detail/{id}.json")
+    suspend fun getData(
+        @Path("locale") locale: String,
+        @Path("id") id: String
+    ): RecipeDetailResponse
 }

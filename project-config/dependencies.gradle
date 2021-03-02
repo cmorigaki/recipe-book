@@ -75,6 +75,7 @@ ext {
         image: ":infrastructure:image",
         designSystem: ":infrastructure:design-system",
         monitoring: ":infrastructure:monitoring",
+        device: ":infrastructure:device",
         coreAndroid: ":core-android"
     ]
 

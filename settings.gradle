@@ -10,6 +10,7 @@ include ':app',
     ':infrastructure:analytics-amplitude',
     ':infrastructure:image',
     ':infrastructure:monitoring',
+    ':infrastructure:device',
 
     ':core-android',
 
