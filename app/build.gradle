@@ -60,6 +60,7 @@ dependencies {
     implementation project(ProjectConfig.analyticsAmplitude)
     implementation project(ProjectConfig.image)
     implementation project(ProjectConfig.monitoring)
+    implementation project(ProjectConfig.device)
 
     implementation AndroidLibConfig.sentry
     implementation AndroidLibConfig.timber

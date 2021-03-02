@@ -48,7 +48,8 @@ val recipeCollectionDataModule = module {
 
     factory<RecipeCollectionDataSourceRemote> {
         RecipeCollectionDataSourceRemoteImpl(
-            api = (getKoin().get() as Retrofit).create(RecipeCollectionApi::class.java)
+            api = (getKoin().get() as Retrofit).create(RecipeCollectionApi::class.java),
+            localeProvider = get(),
         )
     }
 }

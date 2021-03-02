@@ -7,5 +7,6 @@ dependencies {
 
     implementation project(ProjectConfig.configuration)
     implementation project(ProjectConfig.monitoring)
+    implementation project(ProjectConfig.device)
     implementation project(ProjectConfig.analytics)
 }
