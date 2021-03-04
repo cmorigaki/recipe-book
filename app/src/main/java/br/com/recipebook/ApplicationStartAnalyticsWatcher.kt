@@ -17,7 +17,7 @@ class ApplicationStartAnalyticsWatcher(
 
     fun watch(duration: Long) {
         application.registerActivityLifecycleCallbacks(this)
-        Handler().post {
+        Handler(application.mainLooper).post {
             if (firstActivityCreated) {
                 if (hasSavedState) {
                     analytics.sendEvent(

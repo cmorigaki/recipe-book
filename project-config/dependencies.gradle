@@ -26,6 +26,7 @@ ext {
 
         // Network related libraries
         retrofit: "com.squareup.retrofit2:retrofit:2.9.0",
+        okhttp: "com.squareup.okhttp3:okhttp:3.14.9",
         moshiConverter: "com.squareup.retrofit2:converter-moshi:2.9.0",
         moshiCodeGen: "com.squareup.moshi:moshi-kotlin-codegen:1.11.0",
         moshi: "com.squareup.moshi:moshi:1.11.0",
