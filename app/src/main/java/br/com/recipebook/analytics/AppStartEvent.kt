@@ -5,7 +5,7 @@ enum class InitMode(val value: String) {
     LUKEWARM_START("lukewarm_start")
 }
 
-class AppStartEvent(
+data class AppStartEvent(
     private val startMode: InitMode,
     private val duration: Long
 ) : Event {

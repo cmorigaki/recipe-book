@@ -9,13 +9,14 @@ import br.com.recipebook.di.BuildConfiguration
 import br.com.recipebook.di.BuildVariant
 import com.amplitude.api.Amplitude
 import org.json.JSONObject
+import timber.log.Timber
 import kotlin.system.measureTimeMillis
 
 private const val ANALYTICS_LIBRARY_NAME = "Amplitude"
 
 class AmplitudeAnalytics(
     private val application: Application,
-    private val buildConfiguration: BuildConfiguration
+    private val buildConfiguration: BuildConfiguration,
 ) : Analytics {
 
     private var isInitialized = false
@@ -31,7 +32,7 @@ class AmplitudeAnalytics(
         }
 
         val logLevel = when (buildConfiguration.appInfo.buildVariant) {
-            BuildVariant.DEBUG -> Log.VERBOSE
+            BuildVariant.DEBUG -> Log.DEBUG
             BuildVariant.RELEASE -> Log.INFO
         }
         Amplitude.getInstance().setLogLevel(logLevel)
@@ -64,6 +65,8 @@ class AmplitudeAnalytics(
                     }
                 }
             }
+
+        Timber.d("[Amplitude] Sending event $event")
         Amplitude.getInstance().logEvent(event.id, attributes)
     }
 }
