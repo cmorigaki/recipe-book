@@ -17,7 +17,7 @@ buildscript {
         jcenter()
     }
     ext {
-        kotlinVersion = "1.4.30"
+        kotlinVersion = "1.4.31"
         gradleVersion = '4.1.2'
     }
 
