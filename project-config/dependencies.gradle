@@ -11,7 +11,7 @@ ext {
     
     AndroidConfig = [
         applicationId: "br.com.recipebook",
-        versionCode: 100000, // x.xxx.xx
+        versionCode: 10000001, // x.xxx.xx-xx
         versionName: "1.0.0",
 
         compileSdk: 30,
