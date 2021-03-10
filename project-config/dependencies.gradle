@@ -51,10 +51,10 @@ ext {
         playCoreExtensions: "com.google.android.play:core-ktx:1.8.1",
 
         // DI
-        koinAndroid: "org.koin:koin-android:2.2.2", // Koin for Android
-        koinLifecycle: "org.koin:koin-androidx-scope:2.2.2", // or Koin for Lifecycle scoping
-        koinViewModel: "org.koin:koin-androidx-viewmodel:2.2.2", // or Koin for Android Architecture ViewModel
-        koinFragment: "org.koin:koin-androidx-fragment:2.2.2", // or Koin for Android Fragment Factory (unstable version)
+        koinAndroid: "io.insert-koin:koin-android:3.0.1-beta-1", // Koin for Android
+        koinLifecycle: "io.insert-koin:koin-androidx-scope:3.0.1-beta-1", // or Koin for Lifecycle scoping
+        koinViewModel: "io.insert-koin:koin-androidx-viewmodel:3.0.1-beta-1", // or Koin for Android Architecture ViewModel
+        koinFragment: "io.insert-koin:koin-androidx-fragment:3.0.1-beta-1", // or Koin for Android Fragment Factory (unstable version)
     
         // Image download library
         fresco: "com.facebook.fresco:fresco:2.4.0",
