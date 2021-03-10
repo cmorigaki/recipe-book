@@ -11,8 +11,8 @@ fun AppBarLayout.setCollapsedAndDisableScroll(recyclerView: RecyclerView) {
     // Disable AppBar scroll from the recycler view
     ViewCompat.setNestedScrollingEnabled(recyclerView, false)
     // Disable AppBar scroll from the AppBar
-    ((layoutParams as CoordinatorLayout.LayoutParams).behavior as AppBarLayout.Behavior)
-        .setDragCallback(object : AppBarLayout.Behavior.DragCallback() {
+    ((layoutParams as? CoordinatorLayout.LayoutParams)?.behavior as? AppBarLayout.Behavior)
+        ?.setDragCallback(object : AppBarLayout.Behavior.DragCallback() {
             override fun canDrag(appBarLayout: AppBarLayout): Boolean {
                 return false
             }

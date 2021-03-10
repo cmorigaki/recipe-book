@@ -8,6 +8,7 @@ data class BuildConfiguration(
 data class AppInfo(
     val name: String,
     val version: String,
+    val versionCode: Int,
     val variant: String,
     val buildVariant: BuildVariant
 )

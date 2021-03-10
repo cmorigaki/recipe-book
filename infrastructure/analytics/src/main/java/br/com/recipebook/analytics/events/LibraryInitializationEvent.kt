@@ -2,7 +2,7 @@ package br.com.recipebook.analytics.events
 
 import br.com.recipebook.analytics.Event
 
-class LibraryInitializationEvent(
+data class LibraryInitializationEvent(
     val libraryName: String,
     val timeToInitialize: Long?
 ) : Event {

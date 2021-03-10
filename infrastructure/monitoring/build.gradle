@@ -28,6 +28,8 @@ dependencies {
     implementation AndroidLibConfig.koinAndroid
     implementation AndroidLibConfig.timber
     implementation AndroidLibConfig.sentry
+    implementation AndroidLibConfig.okhttp
 
+    implementation project(ProjectConfig.analytics)
     implementation project(ProjectConfig.configuration)
 }

@@ -17,6 +17,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import kotlin.system.exitProcess
 
 @ExperimentalCoroutinesApi
 class RecipeCollectionActivity : AppCompatActivity() {
@@ -92,6 +93,9 @@ class RecipeCollectionActivity : AppCompatActivity() {
                             this@RecipeCollectionActivity,
                             RecipeDetailIntent(recipeId = it.recipeId, title = it.title)
                         )
+                    }
+                    is RecipeCollectionCommand.FinishApp -> {
+                        exitProcess(1)
                     }
                 }
             }

@@ -2,4 +2,5 @@
 <resources>
     <string name="settings_title">Configurações</string>
     <string name="settings_theme">Alterar tema</string>
+    <string name="settings_app_version">Versão %s</string>
 </resources>

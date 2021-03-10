@@ -46,10 +46,10 @@ val settingsThemeDomainModule = module {
         GetUserThemePreference(get())
     }
     factory<SetUserThemePreferenceUseCase> {
-        SetUserThemePreference(get())
+        SetUserThemePreference(get(), get())
     }
     factory<ApplyUserThemePreferenceUseCase> {
-        ApplyUserThemePreference(get())
+        ApplyUserThemePreference(get(), get(), get())
     } bind StartupJob::class
 }
 

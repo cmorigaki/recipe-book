@@ -20,7 +20,8 @@ val recipeCollectionPresentationModule = module {
         RecipeCollectionViewModel(
             viewState = RecipeCollectionViewState(),
             getRecipeCollection = get(),
-            analytics = get()
+            analytics = get(),
+            checkInAppUpdate = get(),
         )
     }
 }
@@ -47,7 +48,8 @@ val recipeCollectionDataModule = module {
 
     factory<RecipeCollectionDataSourceRemote> {
         RecipeCollectionDataSourceRemoteImpl(
-            api = (getKoin().get() as Retrofit).create(RecipeCollectionApi::class.java)
+            api = (getKoin().get() as Retrofit).create(RecipeCollectionApi::class.java),
+            localeProvider = get(),
         )
     }
 }

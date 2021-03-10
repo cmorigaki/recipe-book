@@ -27,6 +27,7 @@ dependencies {
 
     implementation AndroidLibConfig.koinAndroid
     implementation AndroidLibConfig.amplitude
+    implementation AndroidLibConfig.timber
 
     implementation project(ProjectConfig.utilityAndroid)
     implementation project(ProjectConfig.utilityKotlin)

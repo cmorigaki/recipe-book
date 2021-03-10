@@ -11,4 +11,5 @@ class SettingsViewState {
     val hasError = MutableStateFlow(false)
 
     val listItems = MutableStateFlow<List<SettingsItem>>(emptyList())
+    val appVersion = MutableStateFlow("")
 }

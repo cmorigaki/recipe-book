@@ -51,7 +51,8 @@ val recipeDetailDataModule = module {
 
     factory<RecipeDetailDataSourceRemote> {
         RecipeDetailDataSourceRemoteImpl(
-            api = (getKoin().get() as Retrofit).create(RecipeDetailApi::class.java)
+            api = (getKoin().get() as Retrofit).create(RecipeDetailApi::class.java),
+            localeProvider = get(),
         )
     }
 }

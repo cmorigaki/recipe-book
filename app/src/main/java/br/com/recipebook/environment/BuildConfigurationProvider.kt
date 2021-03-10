@@ -14,6 +14,7 @@ object BuildConfigurationProvider {
         appInfo = AppInfo(
             name = BuildConfig.APPLICATION_ID,
             version = BuildConfig.VERSION_NAME,
+            versionCode = BuildConfig.VERSION_CODE,
             variant = BuildConfig.BUILD_TYPE,
             buildVariant = if (BuildConfig.DEBUG) BuildVariant.DEBUG else BuildVariant.RELEASE
         ),

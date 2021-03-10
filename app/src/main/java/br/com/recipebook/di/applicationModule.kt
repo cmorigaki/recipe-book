@@ -13,7 +13,7 @@ val applicationModule = module {
     single {
         ApplicationStartAnalyticsWatcher(
             application = get(),
-            analytics = get()
+            analytics = get(),
         )
     }
     single<DispatcherProvider> {
