@@ -25,7 +25,7 @@ dependencies {
     implementation EnvironmentConfig.kotlinJdk
     implementation AndroidLibConfig.coroutinesCore
 
-    implementation AndroidLibConfig.koinAndroid
+    implementation AndroidLibConfig.koinCore
 }
 
 java {

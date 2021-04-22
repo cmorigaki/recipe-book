@@ -1,9 +1,5 @@
 apply plugin: 'kotlin'
 
-repositories {
-    jcenter()
-}
-
 dependencies {
     implementation EnvironmentConfig.kotlinJdk
 }

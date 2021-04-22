@@ -26,7 +26,7 @@ dependencies {
     implementation EnvironmentConfig.kotlinJdk
     implementation AndroidLibConfig.coroutinesCore
 
-    implementation AndroidLibConfig.koinAndroid
+    implementation AndroidLibConfig.koinCore
 
     implementation project(ProjectConfig.utilityKotlin)
     implementation project(ProjectConfig.utilityAndroid)

@@ -29,6 +29,8 @@ android {
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
         debug {
+            applicationIdSuffix ".debug"
+
             testCoverageEnabled = true
         }
     }
@@ -48,7 +50,8 @@ dependencies {
     implementation AndroidLibConfig.coreKtx
     implementation AndroidLibConfig.coroutinesCore
 
-    implementation AndroidLibConfig.koinAndroid
+    implementation AndroidLibConfig.koinCore
+    implementation AndroidLibConfig.koinAndroidExt
 
     implementation project(ProjectConfig.coreAndroid)
     implementation project(ProjectConfig.utilityAndroid)

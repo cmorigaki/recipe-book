@@ -1,16 +1,12 @@
 apply plugin: 'kotlin'
 
-repositories {
-    jcenter()
-}
-
 dependencies {
     implementation EnvironmentConfig.kotlinJdk
     implementation EnvironmentConfig.kotlinStdLib
     implementation AndroidLibConfig.coreKtx
     implementation AndroidLibConfig.coroutinesCore
 
-    implementation AndroidLibConfig.koinAndroid
+    implementation AndroidLibConfig.koinCore
 
     implementation project(ProjectConfig.utilityKotlin)
 
