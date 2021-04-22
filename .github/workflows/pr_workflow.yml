@@ -29,3 +29,6 @@ jobs:
 
       - name: Unit tests
         run: ./gradlew test --stacktrace
+
+      - name: Code coverage
+        run: ./gradlew jacocoTestReport
