@@ -13,15 +13,8 @@ apply from: "$rootDir/quality/test-coverage-setup.gradle"
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     repositories {
-        //mavenCentral()
+        mavenCentral()
         google()
-//        jcenter {
-//            content {
-//                // https://youtrack.jetbrains.com/issue/IDEA-261387
-//                includeModule("org.jetbrains.trove4j", "trove4j")
-//            }
-//        }
-        jcenter()
     }
     ext {
         kotlinVersion = "1.4.32"
@@ -41,7 +34,6 @@ buildscript {
 allprojects {
     repositories {
         google()
-        jcenter()
         mavenCentral()
     }
 }
