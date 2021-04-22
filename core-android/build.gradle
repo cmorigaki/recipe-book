@@ -29,7 +29,7 @@ dependencies {
     implementation EnvironmentConfig.kotlinStdLib
     implementation AndroidLibConfig.coreKtx
 
-    implementation AndroidLibConfig.koinAndroid
+    implementation AndroidLibConfig.koinCore
 
     implementation AndroidLibConfig.retrofit
     implementation AndroidLibConfig.moshiConverter
