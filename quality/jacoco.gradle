@@ -1,6 +1,12 @@
 apply from: "$rootDir/quality/jacoco-config.gradle"
 apply plugin: 'jacoco'
 
+// https://github.com/gradle/gradle/issues/5184
+tasks.withType(Test) {
+    jacoco.includeNoLocationClasses = true
+    jacoco.excludes = ['jdk.internal.*']
+}
+
 afterEvaluate { project ->
     def ignoreList = jacocoIgnoreList
     def projectName = project.name
