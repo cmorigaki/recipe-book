@@ -6,8 +6,8 @@ buildscript {
         gradlePluginPortal() // ben-manes
     }
     ext {
-        kotlinVersion = "1.4.32"
-        gradleVersion = '7.0.0-alpha14'
+        kotlinVersion = "1.5.10"
+        gradleVersion = '7.0.0-beta05'
     }
 
     dependencies {
