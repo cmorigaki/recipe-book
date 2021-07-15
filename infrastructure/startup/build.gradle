@@ -14,8 +14,3 @@ dependencies {
     testImplementation TestConfig.mockk
     testImplementation TestConfig.coroutinesTest
 }
-
-java {
-    sourceCompatibility JavaVersion.VERSION_1_8
-    targetCompatibility JavaVersion.VERSION_1_8
-}
