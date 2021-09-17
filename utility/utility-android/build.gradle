@@ -27,6 +27,7 @@ dependencies {
     implementation EnvironmentConfig.kotlinStdLib
     implementation AndroidLibConfig.coreKtx
     implementation AndroidLibConfig.coroutinesCore
+    implementation AndroidLibConfig.kotlinResult
 
     implementation AndroidLibConfig.retrofit
     implementation AndroidLibConfig.moshiConverter

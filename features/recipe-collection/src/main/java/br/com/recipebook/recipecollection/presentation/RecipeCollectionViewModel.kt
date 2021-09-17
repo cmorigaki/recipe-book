@@ -9,7 +9,8 @@ import br.com.recipebook.recipecollection.domain.usecase.GetRecipeCollectionUseC
 import br.com.recipebook.recipecollection.view.RecipeItem
 import br.com.recipebook.utilityandroid.presentation.BaseViewModel
 import br.com.recipebook.utilitykotlin.CommonError
-import br.com.recipebook.utilitykotlin.ResultWrapper
+import com.github.michaelbull.result.onFailure
+import com.github.michaelbull.result.onSuccess
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 
@@ -52,10 +53,9 @@ class RecipeCollectionViewModel(
         viewState.isLoading.value = true
         viewState.hasError.value = false
 
-        when (val result = getRecipeCollection()) {
-            is ResultWrapper.Success -> onLoadRecipeListSuccess(result.data)
-            is ResultWrapper.Failure -> onLoadRecipeListError(result.error)
-        }
+        getRecipeCollection()
+            .onSuccess { onLoadRecipeListSuccess(it) }
+            .onFailure { onLoadRecipeListError(it) }
 
         viewState.isLoading.value = false
     }

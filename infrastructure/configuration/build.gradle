@@ -23,6 +23,7 @@ android {
 dependencies {
     implementation EnvironmentConfig.kotlinJdk
     implementation AndroidLibConfig.coroutinesCore
+    implementation AndroidLibConfig.kotlinResult
 
     implementation AndroidLibConfig.koinCore
 
