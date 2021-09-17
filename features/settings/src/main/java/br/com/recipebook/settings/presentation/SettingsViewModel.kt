@@ -9,6 +9,8 @@ import br.com.recipebook.settings.domain.usecase.GetSettingsUseCase
 import br.com.recipebook.settings.presentation.model.SettingsItem
 import br.com.recipebook.utilityandroid.presentation.BaseViewModel
 import br.com.recipebook.utilitykotlin.CommonError
+import com.github.michaelbull.result.onFailure
+import com.github.michaelbull.result.onSuccess
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 
@@ -24,7 +26,7 @@ class SettingsViewModel(
         viewState.appVersion.value = buildConfiguration.appInfo.version
         viewModelScope.launch {
             setLoadingState()
-            getSettingsList().mapSuccess(::onLoadSuccess).mapError(::onLoadError)
+            getSettingsList().onSuccess(::onLoadSuccess).onFailure(::onLoadError)
         }
     }
 

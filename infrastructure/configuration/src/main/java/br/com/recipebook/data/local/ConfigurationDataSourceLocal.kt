@@ -2,9 +2,9 @@ package br.com.recipebook.data.local
 
 import br.com.recipebook.domain.model.AppUpdateInfoModel
 import br.com.recipebook.domain.model.AppUpdateInfoModelError
-import br.com.recipebook.utilitykotlin.ResultWrapper
+import com.github.michaelbull.result.Result
 
 interface ConfigurationDataSourceLocal {
-    fun getAppUpdateInfo(): ResultWrapper<AppUpdateInfoModel, AppUpdateInfoModelError>
+    fun getAppUpdateInfo(): Result<AppUpdateInfoModel, AppUpdateInfoModelError>
     fun saveAppUpdateInfo(info: AppUpdateInfoModel)
 }

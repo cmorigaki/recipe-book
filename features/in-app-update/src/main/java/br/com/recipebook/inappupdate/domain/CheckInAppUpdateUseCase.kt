@@ -8,7 +8,7 @@ import br.com.recipebook.inappupdate.InAppUpdateResult
 import br.com.recipebook.inappupdate.analytics.InAppUpdateEvent
 import br.com.recipebook.monitoring.crashreport.Breadcrumb
 import br.com.recipebook.monitoring.crashreport.Monitoring
-import br.com.recipebook.utilitykotlin.ResultWrapper
+import com.github.michaelbull.result.mapBoth
 
 interface CheckInAppUpdateUseCase {
     suspend operator fun invoke(): Boolean
@@ -21,10 +21,10 @@ internal class CheckInAppUpdate(
     private val analytics: Analytics,
 ) : CheckInAppUpdateUseCase {
     override suspend fun invoke(): Boolean {
-        val shouldUpdate = when (val result = configurationRepository.getAppUpdateInfo()) {
-            is ResultWrapper.Success -> shouldAskUpdate(result.data)
-            is ResultWrapper.Failure -> true
-        }
+        val shouldUpdate = configurationRepository.getAppUpdateInfo().mapBoth(
+            success = { shouldAskUpdate(it) },
+            failure = { true }
+        )
 
         return if (shouldUpdate) {
             Monitoring.addBreadcrumb(Breadcrumb.StartingInAppUpdate)

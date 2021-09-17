@@ -4,15 +4,16 @@ import br.com.recipebook.navigation.intent.SettingsThemeIntent
 import br.com.recipebook.settings.R
 import br.com.recipebook.settings.domain.model.SettingsItemModel
 import br.com.recipebook.utilitykotlin.CommonError
-import br.com.recipebook.utilitykotlin.ResultWrapper
+import com.github.michaelbull.result.Ok
+import com.github.michaelbull.result.Result
 
 interface GetSettingsUseCase {
-    suspend operator fun invoke(): ResultWrapper<List<SettingsItemModel>, CommonError>
+    suspend operator fun invoke(): Result<List<SettingsItemModel>, CommonError>
 }
 
 class GetSettings : GetSettingsUseCase {
-    override suspend fun invoke(): ResultWrapper<List<SettingsItemModel>, CommonError> {
-        return ResultWrapper.Success(
+    override suspend fun invoke(): Result<List<SettingsItemModel>, CommonError> {
+        return Ok(
             listOf(
                 SettingsItemModel(
                     id = "1",
