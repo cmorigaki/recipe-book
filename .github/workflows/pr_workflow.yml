@@ -24,8 +24,9 @@ jobs:
       - name: Decrypting api-properties
         run: gpg --quiet --batch --yes --decrypt --passphrase "${{ secrets.API_PROPERTIES_PASSPHRASE }}" project-config/api-properties/api.properties.asc > project-config/api-properties/api.properties
 
-      - name: ktlint
-        run: ./gradlew ktlint
+      - name: Detekt
+        uses: FranzDiebold/github-env-vars-action@v2
+        run: ./quality/detekt/detekt-ci.sh -target $GITHUB_BASE_REF -source $CI_ACTION_REF_NAME
 
       - name: Unit tests
         run: ./gradlew test --stacktrace
