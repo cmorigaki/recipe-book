@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Update detekt-run.sh on version update
+
 mkdir -p .tools
 
 echo "Downloading detekt cli"

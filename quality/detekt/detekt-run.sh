@@ -8,6 +8,12 @@ do
     esac
 done
 
+# Install detekt cli if necessary
+DETEKT_VERSION=$(.tools/detekt-cli/bin/detekt-cli --version)
+if [[ $DETEKT_VERSION != "1.19.0-RC1" ]]; then
+  ./quality/detekt/detekt-install.sh
+fi
+
 CMD=".tools/detekt-cli/bin/detekt-cli --all-rules \
 --excludes \"**/build/**,$EXCLUDE_PATHS\" "
 
