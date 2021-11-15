@@ -87,3 +87,6 @@ lint/tmp/
 #secrets
 *.keystore
 api.properties
+
+#tools
+.tools/

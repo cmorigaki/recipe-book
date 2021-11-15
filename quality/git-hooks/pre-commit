@@ -1,0 +1,22 @@
+#!/bin/bash
+
+hook_dir="quality/git-hooks/pre-commit.d"
+
+echo $hook_dir
+
+if [[ -d $hook_dir ]]; then
+  stdin=$(cat /dev/stdin)
+
+  for hook in $hook_dir/*; do
+    echo "$stdin" | $hook "$@"
+
+    exit_code=$?
+
+    if [ $exit_code != 0 ]; then
+      exit $exit_code
+    fi
+  done
+fi
+
+exit 0
+
