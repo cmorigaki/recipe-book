@@ -29,7 +29,7 @@ jobs:
         uses: FranzDiebold/github-env-vars-action@v2
 
       - name: Run detekt
-        run: ./quality/detekt/detekt-ci.sh -target $GITHUB_BASE_REF -source $CI_ACTION_REF_NAME
+        run: ./quality/detekt/detekt-ci.sh -t $GITHUB_BASE_REF -s $CI_ACTION_REF_NAME
 
       - name: Unit tests
         run: ./gradlew test --stacktrace

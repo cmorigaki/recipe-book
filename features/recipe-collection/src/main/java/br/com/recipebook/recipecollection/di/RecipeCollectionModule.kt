@@ -37,7 +37,6 @@ val recipeCollectionDomainModule = module {
 val recipeCollectionDataModule = module {
     factory<RecipeCollectionRepository> {
         RecipeCollectionRepositoryImpl(
-            dataSourceLocal = get(),
             dataSourceRemote = get()
         )
     }

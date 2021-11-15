@@ -1,13 +1,15 @@
 #!/bin/bash
 
-while getopts target:source: flag
+while getopts t:s: flag
 do
     case "${flag}" in
-        target) TARGET_BRANCH=${OPTARG};;
-        source) SOURCE_BRANCH=${OPTARG};;
+        t) TARGET_BRANCH=${OPTARG};;
+        s) SOURCE_BRANCH=${OPTARG};;
     esac
 done
 
+echo $TARGET_BRANCH
+echo $SOURCE_BRANCH
 MODIFIED_DETEKT_FILES=$(git diff --diff-filter=ACMRd --name-only $TARGET_BRANCH...$SOURCE_BRANCH | grep 'detekt')
 
 if [[ $MODIFIED_DETEKT_FILES ]]; then
