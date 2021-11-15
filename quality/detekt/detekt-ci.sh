@@ -8,8 +8,8 @@ do
     esac
 done
 
-echo $TARGET_BRANCH
-echo $SOURCE_BRANCH
+git fetch origin $TARGET_BRANCH:$TARGET_BRANCH $SOURCE_BRANCH:$SOURCE_BRANCH --no-tags
+
 MODIFIED_DETEKT_FILES=$(git diff --diff-filter=ACMRd --name-only $TARGET_BRANCH...$SOURCE_BRANCH | grep 'detekt')
 
 if [[ $MODIFIED_DETEKT_FILES ]]; then
