@@ -19,7 +19,7 @@ buildscript {
     }
     ext {
         kotlinVersion = "1.5.20"
-        gradleVersion = '7.0.2'
+        gradleVersion = '7.0.3'
     }
 
     dependencies {
