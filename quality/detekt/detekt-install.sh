@@ -12,3 +12,5 @@ unzip -q .tools/detekt-cli.zip -d .tools/
 
 mv .tools/detekt-cli-1.19.0-RC1 .tools/detekt-cli
 rm .tools/detekt-cli.zip
+
+echo "Installation finished"
