@@ -14,7 +14,8 @@ jobs:
     runs-on: ubuntu-18.04
 
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
       - name: set up JDK 11
         uses: actions/setup-java@v1
@@ -24,8 +25,10 @@ jobs:
       - name: Decrypting api-properties
         run: gpg --quiet --batch --yes --decrypt --passphrase "${{ secrets.API_PROPERTIES_PASSPHRASE }}" project-config/api-properties/api.properties.asc > project-config/api-properties/api.properties
 
-      - name: Detekt
+      - name: Generate env vars
         uses: FranzDiebold/github-env-vars-action@v2
+
+      - name: Run detekt
         run: ./quality/detekt/detekt-ci.sh -target $GITHUB_BASE_REF -source $CI_ACTION_REF_NAME
 
       - name: Unit tests
