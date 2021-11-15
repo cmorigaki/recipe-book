@@ -12,11 +12,9 @@ class ActivityProvider(application: Application) {
             override fun onActivityCreated(
                 activity: Activity,
                 savedInstanceState: Bundle?
-            ) {
-            }
+            ) = Unit
 
-            override fun onActivityStarted(activity: Activity) {
-            }
+            override fun onActivityStarted(activity: Activity) = Unit
 
             override fun onActivityResumed(activity: Activity) {
                 activeActivity = activity
@@ -26,17 +24,14 @@ class ActivityProvider(application: Application) {
                 activeActivity = null
             }
 
-            override fun onActivityStopped(activity: Activity) {
-            }
+            override fun onActivityStopped(activity: Activity) = Unit
 
             override fun onActivitySaveInstanceState(
                 activity: Activity,
                 outState: Bundle
-            ) {
-            }
+            ) = Unit
 
-            override fun onActivityDestroyed(activity: Activity) {
-            }
+            override fun onActivityDestroyed(activity: Activity) = Unit
         })
     }
 }

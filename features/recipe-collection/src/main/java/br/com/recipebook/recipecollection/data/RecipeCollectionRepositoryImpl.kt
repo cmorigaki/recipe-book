@@ -6,7 +6,6 @@ import br.com.recipebook.utilitykotlin.CommonError
 import com.github.michaelbull.result.Result
 
 internal class RecipeCollectionRepositoryImpl constructor(
-    private val dataSourceLocal: RecipeCollectionDataSourceLocal,
     private val dataSourceRemote: RecipeCollectionDataSourceRemote
 ) : RecipeCollectionRepository {
     override suspend fun getRecipeCollection(): Result<List<RecipeModel>, CommonError> {

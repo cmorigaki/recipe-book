@@ -26,7 +26,7 @@ class SettingsViewModel(
         viewState.appVersion.value = buildConfiguration.appInfo.version
         viewModelScope.launch {
             setLoadingState()
-            getSettingsList().onSuccess(::onLoadSuccess).onFailure(::onLoadError)
+            getSettingsList().onSuccess(::onLoadSuccess).onFailure { onLoadError() }
         }
     }
 
@@ -62,7 +62,7 @@ class SettingsViewModel(
         setSuccessState()
     }
 
-    private fun onLoadError(error: CommonError) {
+    private fun onLoadError() {
         sendViewEvent(false)
         setErrorState()
     }

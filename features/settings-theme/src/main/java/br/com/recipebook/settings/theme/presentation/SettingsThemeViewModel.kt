@@ -7,7 +7,6 @@ import br.com.recipebook.settings.theme.domain.model.UserThemePreferenceModel
 import br.com.recipebook.settings.theme.domain.usecase.GetUserThemePreferenceUseCase
 import br.com.recipebook.settings.theme.domain.usecase.SetUserThemePreferenceUseCase
 import br.com.recipebook.utilityandroid.presentation.BaseViewModel
-import br.com.recipebook.utilitykotlin.CommonError
 import com.github.michaelbull.result.onFailure
 import com.github.michaelbull.result.onSuccess
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -24,7 +23,7 @@ class SettingsThemeViewModel(
     init {
         viewModelScope.launch {
             setLoadingState()
-            getUserThemePreference().onSuccess(::onLoadSuccess).onFailure(::onLoadError)
+            getUserThemePreference().onSuccess(::onLoadSuccess).onFailure{ onLoadError() }
         }
     }
 
@@ -78,7 +77,7 @@ class SettingsThemeViewModel(
         setSuccessState()
     }
 
-    private fun onLoadError(error: CommonError) {
+    private fun onLoadError() {
         sendViewEvent(false)
         setErrorState()
     }

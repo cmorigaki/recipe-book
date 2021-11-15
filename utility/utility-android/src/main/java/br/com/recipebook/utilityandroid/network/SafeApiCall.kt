@@ -9,9 +9,8 @@ import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 import java.io.IOException
 
-/**
- * FIXME: This class need some improvements
- */
+@Suppress("TooGenericExceptionCaught", "ForbiddenComment")
+// FIXME: This class need some improvements
 suspend fun <T> safeApiCall(
     dispatcher: CoroutineDispatcher,
     apiCall: suspend () -> T
