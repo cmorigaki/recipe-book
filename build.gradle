@@ -45,12 +45,15 @@ subprojects {
     apply from: "$rootDir/quality/ktlint.gradle"
 }
 
-task installGitHook(type: Copy) {
-    from new File(rootProject.rootDir, 'git-hooks/pre-commit')
-    into { new File(rootProject.rootDir, '.git/hooks') }
-    fileMode 0777
+task installGitHooks(type: Exec) {
+    group 'Quality'
+    description 'Installs the git hooks'
+    println("Installing git hooks")
+
+    workingDir rootDir
+    commandLine "quality/git-hooks/install-hooks.sh"
 }
-tasks.getByPath(':app:preBuild').dependsOn installGitHook
+tasks.getByPath(':app:preBuild').dependsOn installGitHooks
 
 task clean(type: Delete) {
     delete rootProject.buildDir
