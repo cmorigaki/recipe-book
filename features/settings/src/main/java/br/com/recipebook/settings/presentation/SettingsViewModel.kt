@@ -8,7 +8,6 @@ import br.com.recipebook.settings.domain.model.SettingsItemModel
 import br.com.recipebook.settings.domain.usecase.GetSettingsUseCase
 import br.com.recipebook.settings.presentation.model.SettingsItem
 import br.com.recipebook.utilityandroid.presentation.BaseViewModel
-import br.com.recipebook.utilitykotlin.CommonError
 import com.github.michaelbull.result.onFailure
 import com.github.michaelbull.result.onSuccess
 import kotlinx.coroutines.ExperimentalCoroutinesApi

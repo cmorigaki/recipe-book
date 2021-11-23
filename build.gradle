@@ -39,12 +39,6 @@ allprojects {
     }
 }
 
-
-// Ktlint
-subprojects {
-    apply from: "$rootDir/quality/ktlint.gradle"
-}
-
 task installGitHooks(type: Exec) {
     group 'Quality'
     description 'Installs the git hooks'
