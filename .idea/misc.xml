@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="features/settings-theme/src/main/res/layout/settings_theme_activity.xml" value="0.1828125" />
+        <entry key="features/settings/src/main/res/layout/settings_activity.xml" value="0.18125" />
+        <entry key="infrastructure/design-system/src/main/res/layout/error_state_view.xml" value="0.1828125" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK" />
 </project>

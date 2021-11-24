@@ -4,10 +4,12 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.recipebook.designsystem.ListMarginItemDecoration
+import br.com.recipebook.designsystem.compose.RecipeBookTheme
 import br.com.recipebook.navigation.MainNavigator
 import br.com.recipebook.settings.R
 import br.com.recipebook.settings.databinding.SettingsActivityBinding
@@ -28,6 +30,11 @@ class SettingsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContent {
+            RecipeBookTheme {
+                SettingsView()
+            }
+        }
         SettingsActivityBinding.inflate(layoutInflater).apply {
             initComponents(this)
             setContentView(root)

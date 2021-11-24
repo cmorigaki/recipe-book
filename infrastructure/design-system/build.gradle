@@ -12,14 +12,21 @@ android {
 
     buildFeatures {
         viewBinding true
+        compose true
     }
 
     compileOptions {
         sourceCompatibility javaVersion
         targetCompatibility javaVersion
     }
+
     kotlinOptions {
         jvmTarget = jvmTargetVersion
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion composeVersion
+        kotlinCompilerVersion kotlinVersion
     }
 }
 
@@ -31,6 +38,7 @@ dependencies {
     implementation AndroidLibConfig.recyclerView
     implementation AndroidLibConfig.constraintLayout
     implementation AndroidLibConfig.material
+    implementation AndroidLibConfig.composeMaterial
 
     implementation project(ProjectConfig.utilityAndroid)
 }
