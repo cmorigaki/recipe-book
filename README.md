@@ -116,6 +116,10 @@ I'm using Github actions for CI. Currently, it's still pretty basic...
 ### Secrets
 //TODO
 
+### Others
+[Variant ribbon](https://github.com/usefulness/easylauncher-gradle-plugin)
+<img src="misc/variant_ribbon.png" hspace="20">
+
 ## Authors
 
 * **Cesar Morigaki**
