@@ -43,8 +43,6 @@ android {
     }
 }
 
-check.dependsOn ktlint
-
 dependencies {
     implementation EnvironmentConfig.kotlinStdLib
     implementation AndroidLibConfig.coreKtx

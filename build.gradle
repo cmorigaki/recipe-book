@@ -18,7 +18,7 @@ buildscript {
         gradlePluginPortal() // ben-manes
     }
     ext {
-        kotlinVersion = "1.5.20"
+        kotlinVersion = "1.5.31"
         gradleVersion = '7.0.3'
     }
 
@@ -37,12 +37,6 @@ allprojects {
         google()
         mavenCentral()
     }
-}
-
-
-// Ktlint
-subprojects {
-    apply from: "$rootDir/quality/ktlint.gradle"
 }
 
 task installGitHooks(type: Exec) {

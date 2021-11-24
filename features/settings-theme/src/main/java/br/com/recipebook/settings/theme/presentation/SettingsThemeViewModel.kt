@@ -23,7 +23,7 @@ class SettingsThemeViewModel(
     init {
         viewModelScope.launch {
             setLoadingState()
-            getUserThemePreference().onSuccess(::onLoadSuccess).onFailure{ onLoadError() }
+            getUserThemePreference().onSuccess(::onLoadSuccess).onFailure { onLoadError() }
         }
     }
 

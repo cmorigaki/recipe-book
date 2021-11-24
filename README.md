@@ -72,10 +72,10 @@ The picture shows the current modules and how they are structured.
 4. **Infrastructure** - Modules that compose the foundation of the project. Configuration, navigation, analytics, design-system...
 4. **Utility** - Helpers and extensions classes goes here. But only the ones that are not related to business of the project and it can be reused by other projects.
 
-## Code
+## Quality
 
-### Code style
-//TODO
+### Code style and code smell
+[Detekt](https://detekt.github.io/detekt/) + [ktlint formatting](https://ktlint.github.io/)
 
 ### Resources naming convention
 //TODO
