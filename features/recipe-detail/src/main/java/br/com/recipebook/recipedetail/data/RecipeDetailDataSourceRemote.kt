@@ -2,8 +2,8 @@ package br.com.recipebook.recipedetail.data
 
 import br.com.recipebook.recipedetail.domain.model.RecipeDetailModel
 import br.com.recipebook.utilitykotlin.CommonError
-import br.com.recipebook.utilitykotlin.ResultWrapper
+import com.github.michaelbull.result.Result
 
 interface RecipeDetailDataSourceRemote {
-    suspend fun getDetail(id: String): ResultWrapper<RecipeDetailModel, CommonError>
+    suspend fun getDetail(id: String): Result<RecipeDetailModel, CommonError>
 }

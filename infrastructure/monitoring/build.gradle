@@ -8,8 +8,6 @@ android {
     defaultConfig {
         minSdkVersion AndroidConfig.minSdk
         targetSdkVersion AndroidConfig.targetSdk
-        versionCode AndroidConfig.versionCode
-        versionName AndroidConfig.versionName
     }
 
     compileOptions {
@@ -25,7 +23,8 @@ dependencies {
     implementation EnvironmentConfig.kotlinStdLib
     implementation AndroidLibConfig.coreKtx
 
-    implementation AndroidLibConfig.koinAndroid
+    implementation AndroidLibConfig.koinCore
+
     implementation AndroidLibConfig.timber
     implementation AndroidLibConfig.sentry
     implementation AndroidLibConfig.okhttp

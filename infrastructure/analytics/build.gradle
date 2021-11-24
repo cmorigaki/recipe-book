@@ -3,8 +3,3 @@ apply plugin: 'kotlin'
 dependencies {
     implementation EnvironmentConfig.kotlinJdk
 }
-
-java {
-    sourceCompatibility javaVersion
-    targetCompatibility javaVersion
-}

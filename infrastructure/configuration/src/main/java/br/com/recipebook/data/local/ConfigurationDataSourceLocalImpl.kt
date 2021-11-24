@@ -2,15 +2,17 @@ package br.com.recipebook.data.local
 
 import br.com.recipebook.domain.model.AppUpdateInfoModel
 import br.com.recipebook.domain.model.AppUpdateInfoModelError
-import br.com.recipebook.utilitykotlin.ResultWrapper
+import com.github.michaelbull.result.Err
+import com.github.michaelbull.result.Ok
+import com.github.michaelbull.result.Result
 
 internal class ConfigurationDataSourceLocalImpl : ConfigurationDataSourceLocal {
     private var appUpdateInfoModel: AppUpdateInfoModel? = null
 
-    override fun getAppUpdateInfo(): ResultWrapper<AppUpdateInfoModel, AppUpdateInfoModelError> {
+    override fun getAppUpdateInfo(): Result<AppUpdateInfoModel, AppUpdateInfoModelError> {
         return appUpdateInfoModel?.let {
-            ResultWrapper.Success(it)
-        } ?: ResultWrapper.Failure(AppUpdateInfoModelError.NoInformation)
+            Ok(it)
+        } ?: Err(AppUpdateInfoModelError.NoInformation)
     }
 
     override fun saveAppUpdateInfo(info: AppUpdateInfoModel) {

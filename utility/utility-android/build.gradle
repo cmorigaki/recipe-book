@@ -8,8 +8,6 @@ android {
     defaultConfig {
         minSdkVersion AndroidConfig.minSdk
         targetSdkVersion AndroidConfig.targetSdk
-        versionCode AndroidConfig.versionCode
-        versionName AndroidConfig.versionName
     }
 
     buildFeatures {
@@ -29,6 +27,7 @@ dependencies {
     implementation EnvironmentConfig.kotlinStdLib
     implementation AndroidLibConfig.coreKtx
     implementation AndroidLibConfig.coroutinesCore
+    implementation AndroidLibConfig.kotlinResult
 
     implementation AndroidLibConfig.retrofit
     implementation AndroidLibConfig.moshiConverter

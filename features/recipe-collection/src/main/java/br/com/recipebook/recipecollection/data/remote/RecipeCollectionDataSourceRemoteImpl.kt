@@ -5,7 +5,8 @@ import br.com.recipebook.recipecollection.data.RecipeCollectionDataSourceRemote
 import br.com.recipebook.recipecollection.domain.model.RecipeModel
 import br.com.recipebook.utilityandroid.network.safeApiCall
 import br.com.recipebook.utilitykotlin.CommonError
-import br.com.recipebook.utilitykotlin.ResultWrapper
+import com.github.michaelbull.result.Result
+import com.github.michaelbull.result.map
 import kotlinx.coroutines.Dispatchers
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -14,14 +15,10 @@ internal class RecipeCollectionDataSourceRemoteImpl(
     private val api: RecipeCollectionApi,
     private val localeProvider: LocaleProvider,
 ) : RecipeCollectionDataSourceRemote {
-    override suspend fun getRecipeCollection(): ResultWrapper<List<RecipeModel>, CommonError> {
-        val result = safeApiCall(Dispatchers.IO) {
+    override suspend fun getRecipeCollection(): Result<List<RecipeModel>, CommonError> {
+        return safeApiCall(Dispatchers.IO) {
             api.getData(localeProvider.getLocale())
-        }
-        return when (result) {
-            is ResultWrapper.Success -> ResultWrapper.Success(result.data.recipeList.map(::mapRecipeToModel))
-            is ResultWrapper.Failure -> ResultWrapper.Failure(result.error)
-        }
+        }.map { it.recipeList.map(::mapRecipeToModel) }
     }
 
     private fun mapRecipeToModel(recipe: RecipeResponse) =

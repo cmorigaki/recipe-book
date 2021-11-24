@@ -5,24 +5,23 @@ import br.com.recipebook.data.remote.ConfigurationDataSourceRemote
 import br.com.recipebook.domain.ConfigurationRepository
 import br.com.recipebook.domain.model.AppUpdateInfoModel
 import br.com.recipebook.domain.model.AppUpdateInfoModelError
-import br.com.recipebook.utilitykotlin.ResultWrapper
+import com.github.michaelbull.result.Ok
+import com.github.michaelbull.result.Result
+import com.github.michaelbull.result.mapBoth
+import com.github.michaelbull.result.onSuccess
 
 internal class ConfigurationRepositoryImpl(
     private val dataSourceRemote: ConfigurationDataSourceRemote,
     private val dataSourceLocal: ConfigurationDataSourceLocal,
 ) : ConfigurationRepository {
-    override suspend fun getAppUpdateInfo(): ResultWrapper<AppUpdateInfoModel, AppUpdateInfoModelError> {
-        return when (val localResult = dataSourceLocal.getAppUpdateInfo()) {
-            is ResultWrapper.Success -> localResult
-            is ResultWrapper.Failure -> {
-                when (val remoteResult = dataSourceRemote.getAppUpdateInfo()) {
-                    is ResultWrapper.Success -> {
-                        dataSourceLocal.saveAppUpdateInfo(remoteResult.data)
-                        ResultWrapper.Success(remoteResult.data)
-                    }
-                    is ResultWrapper.Failure -> remoteResult
+    override suspend fun getAppUpdateInfo(): Result<AppUpdateInfoModel, AppUpdateInfoModelError> {
+        return dataSourceLocal.getAppUpdateInfo()
+            .mapBoth(
+                success = { Ok(it) },
+                failure = {
+                    dataSourceRemote.getAppUpdateInfo()
+                        .onSuccess { dataSourceLocal.saveAppUpdateInfo(it) }
                 }
-            }
-        }
+            )
     }
 }

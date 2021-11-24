@@ -13,19 +13,19 @@ apply from: "$rootDir/quality/test-coverage-setup.gradle"
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     repositories {
-        gradlePluginPortal()
-        google()
         mavenCentral()
+        google()
+        gradlePluginPortal() // ben-manes
     }
     ext {
-        kotlinVersion = "1.4.31"
-        gradleVersion = '7.0.0-alpha09'
+        kotlinVersion = "1.5.31"
+        gradleVersion = '7.0.3'
     }
 
     dependencies {
         classpath "com.android.tools.build:gradle:$gradleVersion"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
-        classpath "com.github.ben-manes:gradle-versions-plugin:0.38.0"
+        classpath "com.github.ben-manes:gradle-versions-plugin:0.39.0"
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -39,18 +39,15 @@ allprojects {
     }
 }
 
+task installGitHooks(type: Exec) {
+    group 'Quality'
+    description 'Installs the git hooks'
+    println("Installing git hooks")
 
-// Ktlint
-subprojects {
-    apply from: "$rootDir/quality/ktlint.gradle"
+    workingDir rootDir
+    commandLine "quality/git-hooks/install-hooks.sh"
 }
-
-task installGitHook(type: Copy) {
-    from new File(rootProject.rootDir, 'git-hooks/pre-commit')
-    into { new File(rootProject.rootDir, '.git/hooks') }
-    fileMode 0777
-}
-tasks.getByPath(':app:preBuild').dependsOn installGitHook
+tasks.getByPath(':app:preBuild').dependsOn installGitHooks
 
 task clean(type: Delete) {
     delete rootProject.buildDir

@@ -8,13 +8,11 @@ android {
     defaultConfig {
         minSdkVersion AndroidConfig.minSdk
         targetSdkVersion AndroidConfig.targetSdk
-        versionCode AndroidConfig.versionCode
-        versionName AndroidConfig.versionName
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
     kotlinOptions {
         jvmTarget = jvmTargetVersion
@@ -25,10 +23,5 @@ dependencies {
     implementation EnvironmentConfig.kotlinJdk
     implementation AndroidLibConfig.coroutinesCore
 
-    implementation AndroidLibConfig.koinAndroid
-}
-
-java {
-    sourceCompatibility JavaVersion.VERSION_1_8
-    targetCompatibility JavaVersion.VERSION_1_8
+    implementation AndroidLibConfig.koinCore
 }

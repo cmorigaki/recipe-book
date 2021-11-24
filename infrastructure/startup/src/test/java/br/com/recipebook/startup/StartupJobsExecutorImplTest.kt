@@ -57,7 +57,7 @@ class CoroutineTestRule : TestRule {
 }
 
 @ExperimentalCoroutinesApi
-class TestDispatcherProvider() : DispatcherProvider {
+class TestDispatcherProvider : DispatcherProvider {
     private val testCoroutineDispatcher = TestCoroutineDispatcher()
     override fun main() = testCoroutineDispatcher
     override fun default() = testCoroutineDispatcher

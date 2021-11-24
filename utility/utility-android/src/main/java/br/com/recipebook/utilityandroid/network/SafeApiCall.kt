@@ -1,30 +1,31 @@
 package br.com.recipebook.utilityandroid.network
 
 import br.com.recipebook.utilitykotlin.NetworkError
-import br.com.recipebook.utilitykotlin.ResultWrapper
+import com.github.michaelbull.result.Err
+import com.github.michaelbull.result.Ok
+import com.github.michaelbull.result.Result
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 import java.io.IOException
 
-/**
- * FIXME: This class need some improvements
- */
+@Suppress("TooGenericExceptionCaught", "ForbiddenComment")
+// FIXME: This class need some improvements
 suspend fun <T> safeApiCall(
     dispatcher: CoroutineDispatcher,
     apiCall: suspend () -> T
-): ResultWrapper<T, NetworkError> {
+): Result<T, NetworkError> {
     return withContext(dispatcher) {
         try {
-            ResultWrapper.Success(apiCall())
+            Ok(apiCall())
         } catch (throwable: Throwable) {
             when (throwable) {
-                is IOException -> ResultWrapper.Failure(NetworkError.UnknownError)
+                is IOException -> Err(NetworkError.UnknownError)
                 is HttpException -> {
-                    ResultWrapper.Failure(NetworkError.HttpException)
+                    Err(NetworkError.HttpException)
                 }
                 else -> {
-                    ResultWrapper.Failure(NetworkError.UnknownError)
+                    Err(NetworkError.UnknownError)
                 }
             }
         }

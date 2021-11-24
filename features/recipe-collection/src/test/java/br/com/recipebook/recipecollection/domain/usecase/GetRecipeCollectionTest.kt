@@ -2,7 +2,7 @@ package br.com.recipebook.recipecollection.domain.usecase
 
 import br.com.recipebook.recipecollection.RecipeModelDummyFactory
 import br.com.recipebook.recipecollection.domain.RecipeCollectionRepository
-import br.com.recipebook.utilitykotlin.ResultWrapper
+import com.github.michaelbull.result.Ok
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
@@ -16,7 +16,7 @@ class GetRecipeCollectionTest {
 
     @Test
     fun `invoke proxy call to repository`() = runBlocking {
-        coEvery { recipeCollectionRepository.getRecipeCollection() } returns ResultWrapper.Success(
+        coEvery { recipeCollectionRepository.getRecipeCollection() } returns Ok(
             RecipeModelDummyFactory.makeList()
         )
 

@@ -6,7 +6,7 @@ dependencies {
     implementation AndroidLibConfig.coreKtx
     implementation AndroidLibConfig.coroutinesCore
 
-    implementation AndroidLibConfig.koinAndroid
+    implementation AndroidLibConfig.koinCore
 
     implementation project(ProjectConfig.utilityKotlin)
 

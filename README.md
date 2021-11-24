@@ -1,8 +1,9 @@
-# Recipe Book - My pet project 👷‍
+# Recipe Book - Forever Work In Progress 👷‍
+<a href="https://play.google.com/store/apps/details?id=br.com.recipebook"><img alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" height=60px /></a>
 <img src="misc/screenshots/list_dark.png" width="336" align="right" hspace="20">
-This app provides a small collection of recipes and their details. Also, there is a few possible settings configuration.
+My app is a cookbook containing recipes that we frequently make in my house.
 
-This project is intended to be a case that prioritize a scalable architecture, following good design principles, a codebase that could be maintained by a large number of collaborators/teams. Also, some new approaches may be used as a study purpose.
+This project is developed in order to create a scalable architecture, with good design principles that could be maintained by a large number of collaborators/teams. Additionally, newer libraries or approaches can be used for experimentation.
 
 ## Table of contents
 -   [Tech stack](https://github.com/cmorigaki/recipe-book/#tech-stack)
@@ -71,10 +72,10 @@ The picture shows the current modules and how they are structured.
 4. **Infrastructure** - Modules that compose the foundation of the project. Configuration, navigation, analytics, design-system...
 4. **Utility** - Helpers and extensions classes goes here. But only the ones that are not related to business of the project and it can be reused by other projects.
 
-## Code
+## Quality
 
-### Code style
-//TODO
+### Code style and code smell
+[Detekt](https://detekt.github.io/detekt/) + [ktlint formatting](https://ktlint.github.io/)
 
 ### Resources naming convention
 //TODO

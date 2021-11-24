@@ -1,25 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <bytecodeTargetLevel target="1.8">
-      <module name="Recipe_Book.app" target="11" />
-      <module name="Recipe_Book.buildSrc" target="11" />
-      <module name="Recipe_Book.core-android" target="11" />
-      <module name="Recipe_Book.features.in-app-update" target="11" />
-      <module name="Recipe_Book.features.recipe-collection" target="11" />
-      <module name="Recipe_Book.features.recipe-detail" target="11" />
-      <module name="Recipe_Book.features.settings" target="11" />
-      <module name="Recipe_Book.features.settings-theme" target="11" />
-      <module name="Recipe_Book.infrastructure.analytics" target="11" />
-      <module name="Recipe_Book.infrastructure.analytics-amplitude" target="11" />
-      <module name="Recipe_Book.infrastructure.configuration" target="11" />
-      <module name="Recipe_Book.infrastructure.design-system" target="11" />
-      <module name="Recipe_Book.infrastructure.image" target="11" />
-      <module name="Recipe_Book.infrastructure.monitoring" target="11" />
-      <module name="Recipe_Book.infrastructure.navigation" target="11" />
-      <module name="Recipe_Book.infrastructure.startup" target="11" />
-      <module name="Recipe_Book.utility.utility-android" target="11" />
-      <module name="Recipe_Book.utility.utility-kotlin" target="11" />
-    </bytecodeTargetLevel>
+    <bytecodeTargetLevel target="11" />
   </component>
 </project>

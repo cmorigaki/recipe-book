@@ -34,11 +34,11 @@ internal class NetworkCallInterceptor(
         analytics.sendEvent(
             NetworkCall(
                 time = duration,
-                method = request.method(),
-                host = request.url().host(),
-                path = request.url().encodedPath(),
-                query = request.url().query(),
-                status = response?.code(),
+                method = request.method,
+                host = request.url.host,
+                path = request.url.encodedPath,
+                query = request.url.query,
+                status = response?.code,
                 exception = exception?.message,
             )
         )
