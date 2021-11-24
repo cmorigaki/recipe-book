@@ -77,6 +77,9 @@ The picture shows the current modules and how they are structured.
 ### Code style and code smell
 [Detekt](https://detekt.github.io/detekt/) + [ktlint formatting](https://ktlint.github.io/)
 
+### Strict Mode
+[Strict Mode](https://developer.android.com/reference/android/os/StrictMode) is a developer tool which detects things you might be doing by accident and brings them to your attention so you can fix them.
+
 ### Resources naming convention
 //TODO
 
@@ -116,9 +119,11 @@ I'm using Github actions for CI. Currently, it's still pretty basic...
 ### Secrets
 //TODO
 
-### Others
+## Others
 [Variant ribbon](https://github.com/usefulness/easylauncher-gradle-plugin)
-<img src="misc/variant_ribbon.png" hspace="20">
+<p>
+    <img src="misc/variant_ribbon.png" hspace="20"/>
+</p>
 
 ## Authors
 
