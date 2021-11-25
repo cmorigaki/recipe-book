@@ -1,6 +1,7 @@
 package br.com.recipebook
 
 import android.app.Application
+import android.os.StrictMode
 import br.com.recipebook.di.KoinInitializer
 import br.com.recipebook.environment.BuildConfigurationProvider
 import br.com.recipebook.monitoring.ActivityMonitoringWatcher
@@ -19,6 +20,7 @@ class CustomApplication : Application() {
     private val activityMonitoringWatcher by inject<ActivityMonitoringWatcher>()
 
     override fun onCreate() {
+        setupStrictMode()
         super.onCreate()
 
         val startupDuration = measureTimeMillis {
@@ -37,5 +39,24 @@ class CustomApplication : Application() {
         // Need to run on main thread
         applicationInitWatcher.watch(startupDuration)
         activityMonitoringWatcher.watch()
+    }
+
+    private fun setupStrictMode() {
+        if (BuildConfig.DEBUG) {
+            StrictMode.setThreadPolicy(
+                StrictMode.ThreadPolicy.Builder()
+                    .detectAll()
+                    .penaltyLog()
+                    .build()
+            )
+            StrictMode.setVmPolicy(
+                StrictMode.VmPolicy.Builder()
+                    .detectLeakedSqlLiteObjects()
+                    .detectLeakedClosableObjects()
+                    .penaltyLog()
+                    .penaltyDeath()
+                    .build()
+            )
+        }
     }
 }
