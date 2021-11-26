@@ -1,5 +1,7 @@
 package br.com.recipebook.designsystem.compose
 
+import androidx.compose.foundation.layout.height
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 object Spacing {
@@ -11,3 +13,5 @@ object Spacing {
 object Size {
     val IconSize = 36.dp
 }
+
+fun Modifier.minTouchHeight() = height(48.dp)

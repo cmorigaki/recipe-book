@@ -38,6 +38,8 @@ dependencies {
     implementation AndroidLibConfig.recyclerView
     implementation AndroidLibConfig.constraintLayout
     implementation AndroidLibConfig.material
+
+    implementation AndroidLibConfig.composeTooling
     implementation AndroidLibConfig.composeMaterial
 
     implementation project(ProjectConfig.utilityAndroid)
