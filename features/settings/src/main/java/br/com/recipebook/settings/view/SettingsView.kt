@@ -5,20 +5,20 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.text.ClickableText
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import br.com.recipebook.designsystem.compose.RecipeBookTheme
 import br.com.recipebook.designsystem.compose.Spacing
 import br.com.recipebook.designsystem.compose.component.DSLoading
+import br.com.recipebook.designsystem.compose.component.DSTextButton
 import br.com.recipebook.designsystem.compose.component.DSTopAppBar
-import br.com.recipebook.designsystem.compose.minTouchHeight
 import br.com.recipebook.navigation.intent.NavIntent
 import br.com.recipebook.settings.R
 import br.com.recipebook.settings.presentation.SettingsViewState
@@ -49,27 +49,30 @@ fun SettingsView(
     onBackClick: () -> Unit,
     onItemClick: (item: SettingsItem) -> Unit,
 ) {
-    Column(modifier = Modifier.fillMaxSize()) {
-        DSTopAppBar(
-            titleResId = R.string.settings_title,
-            onBackClick = onBackClick,
-        )
-        when (state) {
-            is SettingsViewState.Loaded -> SettingsViewLoaded(
-                state,
-                Modifier.weight(weight = 1f),
-                onItemClick,
+    Surface {
+        Column(modifier = Modifier.fillMaxSize()) {
+            DSTopAppBar(
+                titleResId = R.string.settings_title,
+                onBackClick = onBackClick,
             )
-            is SettingsViewState.Error -> SettingsViewError(Modifier.weight(weight = 1f))
-            is SettingsViewState.Loading -> SettingsViewLoading(Modifier.weight(weight = 1f))
+            when (state) {
+                is SettingsViewState.Loaded -> SettingsViewLoaded(
+                    state,
+                    Modifier.weight(weight = 1f),
+                    onItemClick,
+                )
+                is SettingsViewState.Error -> SettingsViewError(Modifier.weight(weight = 1f))
+                is SettingsViewState.Loading -> SettingsViewLoading(Modifier.weight(weight = 1f))
+            }
+            Text(
+                text = stringResource(id = R.string.settings_app_version, state.appVersion),
+                textAlign = TextAlign.End,
+                style = MaterialTheme.typography.subtitle2,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(Spacing.MarginSmall100),
+            )
         }
-        Text(
-            text = stringResource(id = R.string.settings_app_version, state.appVersion),
-            textAlign = TextAlign.End,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(Spacing.MarginSmall100),
-        )
     }
 }
 
@@ -91,13 +94,10 @@ private fun SettingsItem(
     item: SettingsItem,
     onItemClick: (item: SettingsItem) -> Unit,
 ) {
-    ClickableText(
-        text = AnnotatedString(stringResource(id = item.title)),
-        modifier = Modifier
-            .padding(horizontal = Spacing.MarginNormal100)
-            .fillMaxWidth()
-            .minTouchHeight(),
+    DSTextButton(
+        modifier = Modifier.fillMaxWidth(),
         onClick = { onItemClick(item) },
+        textResId = item.title,
     )
 }
 

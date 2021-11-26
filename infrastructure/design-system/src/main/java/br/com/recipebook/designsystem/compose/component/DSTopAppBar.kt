@@ -47,7 +47,7 @@ fun DSTopAppBar(
 ) {
     TopAppBar(
         modifier = Modifier.fillMaxWidth(),
-        backgroundColor = MaterialTheme.colors.toolbarBackground,
+        backgroundColor = MaterialTheme.colors.surface,
         elevation = 0.dp,
         content = {
             Box {
@@ -60,7 +60,6 @@ fun DSTopAppBar(
                 ) {
                     Text(
                         text = title,
-                        color = MaterialTheme.colors.textColorPrimary,
                         style = MaterialTheme.typography.h6,
                         textAlign = TextAlign.Center,
                     )
