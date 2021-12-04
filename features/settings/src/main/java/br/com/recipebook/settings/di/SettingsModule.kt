@@ -20,7 +20,6 @@ val settingsViewModule = module {
 val settingsPresentationModule = module {
     viewModel {
         SettingsViewModel(
-            viewState = MutableStateFlow(SettingsViewState.Loading("")),
             getSettingsList = get(),
             analytics = get(),
             buildConfiguration = get(),

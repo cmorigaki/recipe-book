@@ -29,11 +29,9 @@ android {
     }
     kotlinOptions {
         jvmTarget = jvmTargetVersion
-//        useIR = true
     }
 
     composeOptions {
-//        kotlinCompilerVersion "1.4.21"
         kotlinCompilerExtensionVersion composeVersion
     }
 }

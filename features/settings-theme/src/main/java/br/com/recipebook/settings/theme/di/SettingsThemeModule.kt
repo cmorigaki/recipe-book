@@ -15,7 +15,6 @@ import br.com.recipebook.settings.theme.domain.usecase.GetUserThemePreferenceUse
 import br.com.recipebook.settings.theme.domain.usecase.SetUserThemePreference
 import br.com.recipebook.settings.theme.domain.usecase.SetUserThemePreferenceUseCase
 import br.com.recipebook.settings.theme.presentation.SettingsThemeViewModel
-import br.com.recipebook.settings.theme.presentation.SettingsThemeViewState
 import br.com.recipebook.settings.theme.view.SettingsThemeNavigator
 import br.com.recipebook.startup.StartupJob
 import org.koin.android.ext.koin.androidContext
@@ -33,7 +32,6 @@ val settingsThemeViewModule = module {
 val settingsThemePresentationModule = module {
     viewModel {
         SettingsThemeViewModel(
-            viewState = SettingsThemeViewState(),
             getUserThemePreference = get(),
             setUserThemePreferenceUseCase = get(),
             analytics = get()

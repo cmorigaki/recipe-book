@@ -10,6 +10,7 @@ import br.com.recipebook.settings.theme.R
 import br.com.recipebook.settings.theme.databinding.SettingsThemeActivityBinding
 import br.com.recipebook.settings.theme.presentation.SettingsThemeAction
 import br.com.recipebook.settings.theme.presentation.SettingsThemeViewModel
+import br.com.recipebook.settings.theme.presentation.SettingsThemeViewState
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -53,32 +54,27 @@ class SettingsThemeActivity : AppCompatActivity() {
 
     private fun observeState(binding: SettingsThemeActivityBinding) {
         lifecycleScope.launchWhenStarted {
-            viewModel.viewState.isLoading.collect {
-                binding.settingsLoading.visibility = if (it) View.VISIBLE else View.GONE
-            }
-        }
+            viewModel.viewState.collect {
+                when (it) {
+                    SettingsThemeViewState.Loading -> {
+                        binding.settingsLoading.visibility = View.VISIBLE
+                        binding.settingsErrorState.root.visibility = View.GONE
+                    }
+                    SettingsThemeViewState.Error -> {
+                        binding.settingsLoading.visibility = View.GONE
+                        binding.settingsErrorState.root.visibility = View.VISIBLE
+                    }
+                    is SettingsThemeViewState.Loaded -> {
+                        binding.settingsLoading.visibility = View.GONE
+                        binding.settingsErrorState.root.visibility = View.GONE
 
-        lifecycleScope.launchWhenStarted {
-            viewModel.viewState.hasError.collect {
-                binding.settingsErrorState.root.visibility = if (it) View.VISIBLE else View.GONE
-            }
-        }
-
-        lifecycleScope.launchWhenStarted {
-            viewModel.viewState.isSystemThemeSelected.collect {
-                binding.settingsThemeSystemDefault.isChecked = it
-            }
-        }
-
-        lifecycleScope.launchWhenStarted {
-            viewModel.viewState.isLightThemeSelected.collect {
-                binding.settingsThemeLight.isChecked = it
-            }
-        }
-
-        lifecycleScope.launchWhenStarted {
-            viewModel.viewState.isDarkThemeSelected.collect {
-                binding.settingsThemeDark.isChecked = it
+                        when {
+                            it.isSystemThemeSelected -> binding.settingsThemeSystemDefault.isChecked
+                            it.isLightThemeSelected -> binding.settingsThemeLight.isChecked
+                            it.isDarkThemeSelected -> binding.settingsThemeDark.isChecked
+                        }
+                    }
+                }
             }
         }
     }

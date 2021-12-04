@@ -16,10 +16,10 @@ import kotlinx.coroutines.launch
 
 @ExperimentalCoroutinesApi
 class SettingsViewModel(
-    override val viewState: MutableStateFlow<SettingsViewState>,
     private val getSettingsList: GetSettingsUseCase,
     private val analytics: Analytics,
     private val buildConfiguration: BuildConfiguration,
+    override val viewState: MutableStateFlow<SettingsViewState> = MutableStateFlow(SettingsViewState.Loading("")),
 ) : BaseViewModel<MutableStateFlow<SettingsViewState>, SettingsAction, SettingsCommand>() {
 
     init {

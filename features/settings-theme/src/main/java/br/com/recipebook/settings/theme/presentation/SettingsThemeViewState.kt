@@ -1,15 +1,15 @@
 package br.com.recipebook.settings.theme.presentation
 
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.MutableStateFlow
 
 @ExperimentalCoroutinesApi
-class SettingsThemeViewState {
-    val isLoading = MutableStateFlow(true)
+sealed class SettingsThemeViewState {
+    object Loading : SettingsThemeViewState()
 
-    val hasError = MutableStateFlow(false)
-
-    val isSystemThemeSelected = MutableStateFlow(false)
-    val isLightThemeSelected = MutableStateFlow(false)
-    val isDarkThemeSelected = MutableStateFlow(false)
+    object Error : SettingsThemeViewState()
+    data class Loaded(
+        val isSystemThemeSelected: Boolean,
+        val isLightThemeSelected: Boolean,
+        val isDarkThemeSelected: Boolean,
+    ) : SettingsThemeViewState()
 }

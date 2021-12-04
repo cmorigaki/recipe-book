@@ -10,19 +10,19 @@ import br.com.recipebook.utilityandroid.presentation.BaseViewModel
 import com.github.michaelbull.result.onFailure
 import com.github.michaelbull.result.onSuccess
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
 @ExperimentalCoroutinesApi
 class SettingsThemeViewModel(
-    override val viewState: SettingsThemeViewState,
     private val getUserThemePreference: GetUserThemePreferenceUseCase,
     private val setUserThemePreferenceUseCase: SetUserThemePreferenceUseCase,
-    private val analytics: Analytics
-) : BaseViewModel<SettingsThemeViewState, SettingsThemeAction, SettingsThemeCommand>() {
+    private val analytics: Analytics,
+    override val viewState: MutableStateFlow<SettingsThemeViewState> = MutableStateFlow(SettingsThemeViewState.Loading),
+) : BaseViewModel<MutableStateFlow<SettingsThemeViewState>, SettingsThemeAction, SettingsThemeCommand>() {
 
     init {
         viewModelScope.launch {
-            setLoadingState()
             getUserThemePreference().onSuccess(::onLoadSuccess).onFailure { onLoadError() }
         }
     }
@@ -40,46 +40,36 @@ class SettingsThemeViewModel(
         }
     }
 
-    private fun setLoadingState() {
-        viewState.isLoading.value = true
-        viewState.hasError.value = false
-    }
-
-    private fun setErrorState() {
-        viewState.isLoading.value = false
-        viewState.hasError.value = true
-    }
-
-    private fun setSuccessState() {
-        viewState.isLoading.value = false
-        viewState.hasError.value = false
-    }
-
     private fun onLoadSuccess(settings: UserThemePreferenceModel) {
         sendViewEvent(true)
-        when (settings) {
+        viewState.value = when (settings) {
             UserThemePreferenceModel.SYSTEM -> {
-                viewState.isSystemThemeSelected.value = true
-                viewState.isLightThemeSelected.value = false
-                viewState.isDarkThemeSelected.value = false
+                SettingsThemeViewState.Loaded(
+                    isSystemThemeSelected = true,
+                    isLightThemeSelected = false,
+                    isDarkThemeSelected = false,
+                )
             }
             UserThemePreferenceModel.LIGHT -> {
-                viewState.isSystemThemeSelected.value = false
-                viewState.isLightThemeSelected.value = true
-                viewState.isDarkThemeSelected.value = false
+                SettingsThemeViewState.Loaded(
+                    isSystemThemeSelected = false,
+                    isLightThemeSelected = true,
+                    isDarkThemeSelected = false,
+                )
             }
             UserThemePreferenceModel.DARK -> {
-                viewState.isSystemThemeSelected.value = false
-                viewState.isLightThemeSelected.value = false
-                viewState.isDarkThemeSelected.value = true
+                SettingsThemeViewState.Loaded(
+                    isSystemThemeSelected = false,
+                    isLightThemeSelected = false,
+                    isDarkThemeSelected = true,
+                )
             }
         }
-        setSuccessState()
     }
 
     private fun onLoadError() {
         sendViewEvent(false)
-        setErrorState()
+        viewState.value = SettingsThemeViewState.Error
     }
 
     private fun sendViewEvent(success: Boolean) {
