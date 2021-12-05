@@ -3,16 +3,12 @@ package br.com.recipebook.settings.theme.view
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import br.com.recipebook.designsystem.compose.RecipeBookTheme
-import br.com.recipebook.settings.theme.R
-import br.com.recipebook.settings.theme.databinding.SettingsThemeActivityBinding
 import br.com.recipebook.settings.theme.presentation.SettingsThemeAction
 import br.com.recipebook.settings.theme.presentation.SettingsThemeViewModel
-import br.com.recipebook.settings.theme.presentation.SettingsThemeViewState
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -24,35 +20,6 @@ class SettingsThemeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         observeState()
-//        SettingsThemeActivityBinding.inflate(layoutInflater).apply {
-//            initComponents(this)
-//            setContentView(root)
-//            observeState()
-//        }
-    }
-
-    private fun initComponents(binding: SettingsThemeActivityBinding) {
-        setupToolbar(binding)
-        setupRadioButtons(binding)
-    }
-
-    private fun setupToolbar(binding: SettingsThemeActivityBinding) {
-        binding.toolbarTitle.text = getString(R.string.settings_theme_title)
-        setSupportActionBar(binding.toolbar)
-        binding.toolbar.setNavigationOnClickListener { onBackPressed() }
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-    }
-
-    private fun setupRadioButtons(binding: SettingsThemeActivityBinding) {
-        binding.settingsThemeSystemDefault.setOnClickListener {
-            viewModel.dispatchAction(SettingsThemeAction.SystemThemeSelected)
-        }
-        binding.settingsThemeLight.setOnClickListener {
-            viewModel.dispatchAction(SettingsThemeAction.LightThemeSelected)
-        }
-        binding.settingsThemeDark.setOnClickListener {
-            viewModel.dispatchAction(SettingsThemeAction.DarkThemeSelected)
-        }
     }
 
     private fun observeState() {
@@ -60,7 +27,8 @@ class SettingsThemeActivity : AppCompatActivity() {
             viewModel.viewState.collect {
                 setContent {
                     RecipeBookTheme {
-                        SettingsThemeView(state = it,
+                        SettingsThemeView(
+                            state = it,
                             onBackClick = ::onBackPressed,
                             onItemClick = ::onItemClick,
                         )
