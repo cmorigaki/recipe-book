@@ -7,9 +7,5 @@ sealed class SettingsThemeViewState {
     object Loading : SettingsThemeViewState()
 
     object Error : SettingsThemeViewState()
-    data class Loaded(
-        val isSystemThemeSelected: Boolean,
-        val isLightThemeSelected: Boolean,
-        val isDarkThemeSelected: Boolean,
-    ) : SettingsThemeViewState()
+    data class Loaded(val selectedTheme: SettingsThemeAction) : SettingsThemeViewState()
 }

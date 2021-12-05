@@ -30,12 +30,24 @@ class SettingsThemeViewModel(
     override fun dispatchAction(action: SettingsThemeAction) {
         viewModelScope.launch {
             when (action) {
-                is SettingsThemeAction.SystemThemeSelected ->
+                is SettingsThemeAction.SystemThemeSelected -> {
+                    viewState.value = SettingsThemeViewState.Loaded(
+                        selectedTheme = SettingsThemeAction.SystemThemeSelected
+                    )
                     setUserThemePreferenceUseCase(UserThemePreferenceModel.SYSTEM)
-                is SettingsThemeAction.LightThemeSelected ->
+                }
+                is SettingsThemeAction.LightThemeSelected -> {
+                    viewState.value = SettingsThemeViewState.Loaded(
+                        selectedTheme = SettingsThemeAction.LightThemeSelected
+                    )
                     setUserThemePreferenceUseCase(UserThemePreferenceModel.LIGHT)
-                is SettingsThemeAction.DarkThemeSelected ->
+                }
+                is SettingsThemeAction.DarkThemeSelected -> {
+                    viewState.value = SettingsThemeViewState.Loaded(
+                        selectedTheme = SettingsThemeAction.DarkThemeSelected
+                    )
                     setUserThemePreferenceUseCase(UserThemePreferenceModel.DARK)
+                }
             }
         }
     }
@@ -44,25 +56,13 @@ class SettingsThemeViewModel(
         sendViewEvent(true)
         viewState.value = when (settings) {
             UserThemePreferenceModel.SYSTEM -> {
-                SettingsThemeViewState.Loaded(
-                    isSystemThemeSelected = true,
-                    isLightThemeSelected = false,
-                    isDarkThemeSelected = false,
-                )
+                SettingsThemeViewState.Loaded(selectedTheme = SettingsThemeAction.SystemThemeSelected)
             }
             UserThemePreferenceModel.LIGHT -> {
-                SettingsThemeViewState.Loaded(
-                    isSystemThemeSelected = false,
-                    isLightThemeSelected = true,
-                    isDarkThemeSelected = false,
-                )
+                SettingsThemeViewState.Loaded(selectedTheme = SettingsThemeAction.LightThemeSelected)
             }
             UserThemePreferenceModel.DARK -> {
-                SettingsThemeViewState.Loaded(
-                    isSystemThemeSelected = false,
-                    isLightThemeSelected = false,
-                    isDarkThemeSelected = true,
-                )
+                SettingsThemeViewState.Loaded(selectedTheme = SettingsThemeAction.DarkThemeSelected)
             }
         }
     }

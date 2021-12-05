@@ -4,8 +4,10 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import br.com.recipebook.designsystem.compose.RecipeBookTheme
 import br.com.recipebook.settings.theme.R
 import br.com.recipebook.settings.theme.databinding.SettingsThemeActivityBinding
 import br.com.recipebook.settings.theme.presentation.SettingsThemeAction
@@ -21,11 +23,12 @@ class SettingsThemeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        SettingsThemeActivityBinding.inflate(layoutInflater).apply {
-            initComponents(this)
-            setContentView(root)
-            observeState(this)
-        }
+        observeState()
+//        SettingsThemeActivityBinding.inflate(layoutInflater).apply {
+//            initComponents(this)
+//            setContentView(root)
+//            observeState()
+//        }
     }
 
     private fun initComponents(binding: SettingsThemeActivityBinding) {
@@ -52,31 +55,23 @@ class SettingsThemeActivity : AppCompatActivity() {
         }
     }
 
-    private fun observeState(binding: SettingsThemeActivityBinding) {
+    private fun observeState() {
         lifecycleScope.launchWhenStarted {
             viewModel.viewState.collect {
-                when (it) {
-                    SettingsThemeViewState.Loading -> {
-                        binding.settingsLoading.visibility = View.VISIBLE
-                        binding.settingsErrorState.root.visibility = View.GONE
-                    }
-                    SettingsThemeViewState.Error -> {
-                        binding.settingsLoading.visibility = View.GONE
-                        binding.settingsErrorState.root.visibility = View.VISIBLE
-                    }
-                    is SettingsThemeViewState.Loaded -> {
-                        binding.settingsLoading.visibility = View.GONE
-                        binding.settingsErrorState.root.visibility = View.GONE
-
-                        when {
-                            it.isSystemThemeSelected -> binding.settingsThemeSystemDefault.isChecked
-                            it.isLightThemeSelected -> binding.settingsThemeLight.isChecked
-                            it.isDarkThemeSelected -> binding.settingsThemeDark.isChecked
-                        }
+                setContent {
+                    RecipeBookTheme {
+                        SettingsThemeView(state = it,
+                            onBackClick = ::onBackPressed,
+                            onItemClick = ::onItemClick,
+                        )
                     }
                 }
             }
         }
+    }
+
+    private fun onItemClick(item: SettingsThemeAction) {
+        viewModel.dispatchAction(item)
     }
 
     companion object {
