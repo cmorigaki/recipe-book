@@ -18,7 +18,6 @@ import retrofit2.Retrofit
 val recipeCollectionPresentationModule = module {
     viewModel {
         RecipeCollectionViewModel(
-            viewState = RecipeCollectionViewState(),
             getRecipeCollection = get(),
             analytics = get(),
             checkInAppUpdate = get(),

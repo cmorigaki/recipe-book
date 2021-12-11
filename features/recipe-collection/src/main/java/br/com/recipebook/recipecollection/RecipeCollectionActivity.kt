@@ -13,6 +13,7 @@ import br.com.recipebook.recipecollection.databinding.RecipeCollectionActivityBi
 import br.com.recipebook.recipecollection.presentation.RecipeCollectionAction
 import br.com.recipebook.recipecollection.presentation.RecipeCollectionCommand
 import br.com.recipebook.recipecollection.presentation.RecipeCollectionViewModel
+import br.com.recipebook.recipecollection.presentation.RecipeCollectionViewState
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 import org.koin.android.ext.android.inject
@@ -65,21 +66,25 @@ class RecipeCollectionActivity : AppCompatActivity() {
 
     private fun observeState(binding: RecipeCollectionActivityBinding) {
         lifecycleScope.launchWhenStarted {
-            viewModel.viewState.recipes.collect {
-                recipeCollectionAdapter.setData(it)
-            }
-        }
-
-        lifecycleScope.launchWhenStarted {
-            viewModel.viewState.hasError.collect {
-                binding.recipeCollectionErrorState.root.visibility = if (it) View.VISIBLE else View.GONE
-            }
-        }
-
-        lifecycleScope.launchWhenStarted {
-            viewModel.viewState.isLoading.collect {
-                binding.swipeRefresh.isRefreshing = it
-                binding.recipeCollectionLoading.visibility = if (it) View.VISIBLE else View.GONE
+            viewModel.viewState.collect {
+                when (it) {
+                    is RecipeCollectionViewState.Loaded -> {
+                        binding.recipeCollectionErrorState.root.visibility = View.GONE
+                        binding.swipeRefresh.isRefreshing = false
+                        binding.recipeCollectionLoading.visibility = View.GONE
+                        recipeCollectionAdapter.setData(it.recipes)
+                    }
+                    RecipeCollectionViewState.Loading -> {
+                        binding.swipeRefresh.isRefreshing = true
+                        binding.recipeCollectionLoading.visibility = View.VISIBLE
+                        binding.recipeCollectionErrorState.root.visibility = View.GONE
+                    }
+                    RecipeCollectionViewState.Error -> {
+                        binding.swipeRefresh.isRefreshing = false
+                        binding.recipeCollectionLoading.visibility = View.GONE
+                        binding.recipeCollectionErrorState.root.visibility = View.VISIBLE
+                    }
+                }
             }
         }
     }
