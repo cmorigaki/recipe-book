@@ -2,10 +2,12 @@ package br.com.recipebook.recipecollection
 
 import android.os.Bundle
 import android.view.View
+import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import br.com.recipebook.coreandroid.image.ImageResolver
 import br.com.recipebook.designsystem.ListMarginItemDecoration
+import br.com.recipebook.designsystem.compose.RecipeBookTheme
 import br.com.recipebook.navigation.MainNavigator
 import br.com.recipebook.navigation.intent.RecipeDetailIntent
 import br.com.recipebook.navigation.intent.SettingsIntent
@@ -14,6 +16,7 @@ import br.com.recipebook.recipecollection.presentation.RecipeCollectionAction
 import br.com.recipebook.recipecollection.presentation.RecipeCollectionCommand
 import br.com.recipebook.recipecollection.presentation.RecipeCollectionViewModel
 import br.com.recipebook.recipecollection.presentation.RecipeCollectionViewState
+import br.com.recipebook.recipecollection.view.RecipeCollectionView
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 import org.koin.android.ext.android.inject
@@ -35,12 +38,14 @@ class RecipeCollectionActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        RecipeCollectionActivityBinding.inflate(layoutInflater).apply {
-            initComponents(this)
-            setContentView(root)
-            observeState(this)
-            observeActionCommand()
-        }
+//        RecipeCollectionActivityBinding.inflate(layoutInflater).apply {
+//            initComponents(this)
+//            setContentView(root)
+//            observeState()
+//            observeActionCommand()
+//        }
+        observeState()
+        observeActionCommand()
     }
 
     private fun initComponents(binding: RecipeCollectionActivityBinding) {
@@ -64,25 +69,12 @@ class RecipeCollectionActivity : AppCompatActivity() {
         }
     }
 
-    private fun observeState(binding: RecipeCollectionActivityBinding) {
+    private fun observeState() {
         lifecycleScope.launchWhenStarted {
             viewModel.viewState.collect {
-                when (it) {
-                    is RecipeCollectionViewState.Loaded -> {
-                        binding.recipeCollectionErrorState.root.visibility = View.GONE
-                        binding.swipeRefresh.isRefreshing = false
-                        binding.recipeCollectionLoading.visibility = View.GONE
-                        recipeCollectionAdapter.setData(it.recipes)
-                    }
-                    RecipeCollectionViewState.Loading -> {
-                        binding.swipeRefresh.isRefreshing = true
-                        binding.recipeCollectionLoading.visibility = View.VISIBLE
-                        binding.recipeCollectionErrorState.root.visibility = View.GONE
-                    }
-                    RecipeCollectionViewState.Error -> {
-                        binding.swipeRefresh.isRefreshing = false
-                        binding.recipeCollectionLoading.visibility = View.GONE
-                        binding.recipeCollectionErrorState.root.visibility = View.VISIBLE
+                setContent {
+                    RecipeBookTheme {
+                        RecipeCollectionView(state = it)
                     }
                 }
             }
