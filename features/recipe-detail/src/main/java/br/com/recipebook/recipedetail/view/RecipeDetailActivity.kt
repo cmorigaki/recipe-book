@@ -28,7 +28,6 @@ class RecipeDetailActivity : AppCompatActivity() {
     private val safeArgs by activitySafeArgs<RecipeDetailSafeArgs>()
 
     private val viewModel: RecipeDetailViewModel by viewModel(parameters = { parametersOf(safeArgs) })
-    private val imageResolver: ImageResolver by inject()
     private val adapter by lazy { RecipeDetailListAdapter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -108,7 +107,7 @@ class RecipeDetailActivity : AppCompatActivity() {
         lifecycleScope.launchWhenStarted {
             viewModel.viewState.recipeImage.collect {
                 if (it != null) {
-                    binding.recipeImage.setImageURI(imageResolver.mountUrl(it, ImageSize.LARGE))
+                    binding.recipeImage.setImageURI(ImageResolver.mountUrl(it, ImageSize.LARGE))
                 } else {
                     binding.appBarLayout.setCollapsedAndDisableScroll(binding.recipeDetailList)
                 }

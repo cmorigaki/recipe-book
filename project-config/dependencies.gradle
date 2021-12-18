@@ -67,6 +67,8 @@ ext {
     
         // Image download library
         fresco: "com.facebook.fresco:fresco:2.5.0",
+        coil: "io.coil-kt:coil:1.4.0",
+        coilCompose: "io.coil-kt:coil-compose:1.4.0",
     
         // Crash reporting library
         sentry: "io.sentry:sentry-android:5.1.2",

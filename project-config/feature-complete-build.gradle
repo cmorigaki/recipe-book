@@ -58,6 +58,8 @@ dependencies {
     implementation AndroidLibConfig.fragment
 
     implementation AndroidLibConfig.fresco
+    implementation AndroidLibConfig.coil
+    implementation AndroidLibConfig.coilCompose
 
     testImplementation TestConfig.jUnit
     testImplementation TestConfig.mockk

@@ -1,6 +1,5 @@
 package br.com.recipebook.coreandroid.di
 
-import br.com.recipebook.coreandroid.image.ImageResolver
 import br.com.recipebook.utilityandroid.network.BigDecimalAdapter
 import com.squareup.moshi.Moshi
 import okhttp3.Interceptor
@@ -32,8 +31,5 @@ val coreAndroidModule = module {
             .client(get())
             .addConverterFactory(get())
             .build()
-    }
-    single {
-        ImageResolver()
     }
 }

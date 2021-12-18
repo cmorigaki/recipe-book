@@ -1,11 +1,9 @@
 package br.com.recipebook.recipecollection
 
 import android.os.Bundle
-import android.view.View
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import br.com.recipebook.coreandroid.image.ImageResolver
 import br.com.recipebook.designsystem.ListMarginItemDecoration
 import br.com.recipebook.designsystem.compose.RecipeBookTheme
 import br.com.recipebook.navigation.MainNavigator
@@ -15,7 +13,6 @@ import br.com.recipebook.recipecollection.databinding.RecipeCollectionActivityBi
 import br.com.recipebook.recipecollection.presentation.RecipeCollectionAction
 import br.com.recipebook.recipecollection.presentation.RecipeCollectionCommand
 import br.com.recipebook.recipecollection.presentation.RecipeCollectionViewModel
-import br.com.recipebook.recipecollection.presentation.RecipeCollectionViewState
 import br.com.recipebook.recipecollection.view.RecipeCollectionView
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
@@ -27,10 +24,8 @@ import kotlin.system.exitProcess
 class RecipeCollectionActivity : AppCompatActivity() {
 
     private val viewModel: RecipeCollectionViewModel by viewModel(clazz = RecipeCollectionViewModel::class)
-    private val imageResolver: ImageResolver by inject()
     private val recipeCollectionAdapter by lazy {
         RecipeCollectionAdapter(
-            imageResolver,
             ::onRecipeClick
         )
     }
