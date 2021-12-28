@@ -69,7 +69,20 @@ class RecipeCollectionActivity : AppCompatActivity() {
             viewModel.viewState.collect {
                 setContent {
                     RecipeBookTheme {
-                        RecipeCollectionView(state = it)
+                        RecipeCollectionView(
+                            state = it,
+                            onItemClick = {
+                                viewModel.dispatchAction(
+                                    RecipeCollectionAction.RecipeClick(
+                                        recipeId = it.id,
+                                        title = it.title,
+                                    )
+                                )
+                            },
+                            onSettingsClick = {
+                                mainNavigator.navigate(this@RecipeCollectionActivity, SettingsIntent)
+                            }
+                        )
                     }
                 }
             }
