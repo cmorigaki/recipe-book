@@ -19,6 +19,7 @@ import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Settings
@@ -26,7 +27,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextOverflow
@@ -36,25 +36,32 @@ import br.com.recipebook.coreandroid.image.ImageSize
 import br.com.recipebook.designsystem.compose.FontSize
 import br.com.recipebook.designsystem.compose.Spacing
 import br.com.recipebook.designsystem.compose.component.DSLoading
+import br.com.recipebook.designsystem.compose.util.lineHeight
 import br.com.recipebook.recipecollection.R
 import br.com.recipebook.recipecollection.presentation.RecipeCollectionViewState
 import coil.compose.rememberImagePainter
 import coil.size.OriginalSize
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
+private const val RECIPE_IMG_RATIO = 1.3333334f
+
+@OptIn(ExperimentalCoroutinesApi::class)
 @Composable
 fun RecipeCollectionView(
     state: RecipeCollectionViewState,
     onItemClick: (item: RecipeItem) -> Unit,
     onSettingsClick: () -> Unit,
 ) {
-    when (state) {
-        is RecipeCollectionViewState.Loaded -> RecipeCollectionViewLoaded(
-            state = state,
-            onItemClick = onItemClick,
-            onSettingsClick = onSettingsClick,
-        )
-        RecipeCollectionViewState.Loading -> RecipeCollectionViewLoading(Modifier.fillMaxHeight())
-        RecipeCollectionViewState.Error -> RecipeCollectionViewError(Modifier.fillMaxHeight())
+    Surface {
+        when (state) {
+            is RecipeCollectionViewState.Loaded -> RecipeCollectionViewLoaded(
+                state = state,
+                onItemClick = onItemClick,
+                onSettingsClick = onSettingsClick,
+            )
+            RecipeCollectionViewState.Loading -> RecipeCollectionViewLoading(Modifier.fillMaxHeight())
+            RecipeCollectionViewState.Error -> RecipeCollectionViewError(Modifier.fillMaxHeight())
+        }
     }
 }
 
@@ -115,15 +122,22 @@ fun RecipeCollectionItem(
     val modifier = if (index % 2 == 0) {
         Modifier.padding(
             start = Spacing.MarginNormal100,
-            end = Spacing.MarginNormal100,
+            end = Spacing.MarginNormal100 / 2,
             bottom = Spacing.MarginNormal100,
         )
     } else {
-        Modifier.padding(end = Spacing.MarginNormal100, bottom = Spacing.MarginNormal100)
+        Modifier.padding(
+            start = Spacing.MarginNormal100 / 2,
+            end = Spacing.MarginNormal100,
+            bottom = Spacing.MarginNormal100,
+        )
     }
-    val lineHeight = MaterialTheme.typography.body1.fontSize.value*4/3
 
-    Card(modifier = modifier, onClick = { onItemClick(recipe) }) {
+    Card(
+        modifier = modifier,
+        onClick = { onItemClick(recipe) },
+        elevation = 2.dp
+    ) {
         Column {
             Image(
                 painter = rememberImagePainter(
@@ -136,16 +150,18 @@ fun RecipeCollectionItem(
                 contentDescription = null,
                 modifier = Modifier
                     .fillMaxSize()
-                    .aspectRatio(4f / 3f),
+                    .aspectRatio(RECIPE_IMG_RATIO),
                 contentScale = ContentScale.Crop,
             )
-//            Text(
-//                modifier = Modifier.padding(Spacing.MarginSmall100).sizeIn(minHeight = (lineHeight*2).dp),
-//                text = recipe.title,
-//                maxLines = 2,
-//                overflow = TextOverflow.Ellipsis,
-//                fontStyle = MaterialTheme.typography.body1
-//            )
+            Text(
+                text = recipe.title,
+                modifier = Modifier
+                    .padding(Spacing.MarginSmall100)
+                    .sizeIn(minHeight = (2.lineHeight()).dp),
+                maxLines = 2,
+                overflow = TextOverflow.Ellipsis,
+                style = MaterialTheme.typography.body1,
+            )
         }
     }
 }
