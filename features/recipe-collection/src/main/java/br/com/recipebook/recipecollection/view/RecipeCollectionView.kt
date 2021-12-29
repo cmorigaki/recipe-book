@@ -27,6 +27,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextOverflow
@@ -36,6 +37,7 @@ import br.com.recipebook.coreandroid.image.ImageSize
 import br.com.recipebook.designsystem.compose.FontSize
 import br.com.recipebook.designsystem.compose.Spacing
 import br.com.recipebook.designsystem.compose.component.DSLoading
+import br.com.recipebook.designsystem.compose.util.fillHalfSize
 import br.com.recipebook.designsystem.compose.util.lineHeight
 import br.com.recipebook.recipecollection.R
 import br.com.recipebook.recipecollection.presentation.RecipeCollectionViewState
@@ -67,7 +69,7 @@ fun RecipeCollectionView(
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun RecipeCollectionViewLoaded(
+private fun RecipeCollectionViewLoaded(
     state: RecipeCollectionViewState.Loaded,
     onItemClick: (item: RecipeItem) -> Unit,
     onSettingsClick: () -> Unit,
@@ -114,7 +116,7 @@ fun RecipeCollectionViewLoaded(
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun RecipeCollectionItem(
+private fun RecipeCollectionItem(
     recipe: RecipeItem,
     index: Int,
     onItemClick: (item: RecipeItem) -> Unit,
@@ -139,20 +141,7 @@ fun RecipeCollectionItem(
         elevation = 2.dp
     ) {
         Column {
-            Image(
-                painter = rememberImagePainter(
-                    ImageResolver.mountUrl(recipe.imgPath, ImageSize.MEDIUM),
-                    builder = {
-                        size(OriginalSize)
-                        placeholder(R.drawable.recipe_item_placeholder)
-                    }
-                ),
-                contentDescription = null,
-                modifier = Modifier
-                    .fillMaxSize()
-                    .aspectRatio(RECIPE_IMG_RATIO),
-                contentScale = ContentScale.Crop,
-            )
+            ImageOrPlaceholder(recipe.imgPath)
             Text(
                 text = recipe.title,
                 modifier = Modifier
@@ -167,14 +156,42 @@ fun RecipeCollectionItem(
 }
 
 @Composable
-fun RecipeCollectionViewLoading(modifier: Modifier) {
+private fun ImageOrPlaceholder(imgPath: String?) {
+    if (imgPath != null) {
+        Image(
+            painter = rememberImagePainter(
+                ImageResolver.mountUrl(imgPath, ImageSize.MEDIUM),
+                builder = {
+                    size(OriginalSize)
+                    placeholder(R.drawable.recipe_item_placeholder)
+                    error(R.drawable.recipe_item_placeholder)
+                }
+            ),
+            contentDescription = null,
+            modifier = Modifier.fillMaxSize().aspectRatio(RECIPE_IMG_RATIO),
+            contentScale = ContentScale.Crop,
+        )
+    } else {
+        Box(modifier = Modifier.fillMaxSize().aspectRatio(RECIPE_IMG_RATIO), contentAlignment = Alignment.Center) {
+            Image(
+                painter = painterResource(id = R.drawable.recipe_item_placeholder),
+                contentDescription = null,
+                modifier = Modifier.fillHalfSize(),
+                contentScale = ContentScale.Fit,
+            )
+        }
+    }
+}
+
+@Composable
+private fun RecipeCollectionViewLoading(modifier: Modifier) {
     Box(modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
         DSLoading()
     }
 }
 
 @Composable
-fun RecipeCollectionViewError(modifier: Modifier) {
+private fun RecipeCollectionViewError(modifier: Modifier) {
     Box(modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
         DSLoading()
     }
