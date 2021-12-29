@@ -47,7 +47,7 @@ import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
-private const val RECIPE_IMG_RATIO = 1.3333334f
+private const val RecipeImgRatio = 1.3333334f
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @Composable
@@ -188,13 +188,16 @@ private fun ImageOrPlaceholder(imgPath: String?) {
             contentDescription = null,
             modifier = Modifier
                 .fillMaxSize()
-                .aspectRatio(RECIPE_IMG_RATIO),
+                .aspectRatio(RecipeImgRatio),
             contentScale = ContentScale.Crop,
         )
     } else {
-        Box(modifier = Modifier
-            .fillMaxSize()
-            .aspectRatio(RECIPE_IMG_RATIO), contentAlignment = Alignment.Center) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .aspectRatio(RecipeImgRatio),
+            contentAlignment = Alignment.Center,
+        ) {
             Image(
                 painter = painterResource(id = R.drawable.recipe_item_placeholder),
                 contentDescription = null,

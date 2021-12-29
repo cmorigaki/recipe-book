@@ -11,7 +11,6 @@ import br.com.recipebook.navigation.MainNavigator
 import br.com.recipebook.settings.presentation.SettingsAction
 import br.com.recipebook.settings.presentation.SettingsCommand
 import br.com.recipebook.settings.presentation.SettingsViewModel
-import br.com.recipebook.settings.presentation.SettingsViewState
 import br.com.recipebook.settings.presentation.model.SettingsItem
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect

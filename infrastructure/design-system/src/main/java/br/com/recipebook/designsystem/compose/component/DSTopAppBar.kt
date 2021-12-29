@@ -20,8 +20,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import br.com.recipebook.designsystem.compose.textColorPrimary
-import br.com.recipebook.designsystem.compose.toolbarBackground
 
 @Preview
 @Composable
@@ -67,8 +65,7 @@ fun DSTopAppBar(
                 Row(
                     modifier = Modifier.fillMaxHeight(),
                     verticalAlignment = Alignment.CenterVertically
-                )
-                {
+                ) {
                     IconButton(onClick = onBackClick) {
                         Icon(Icons.Filled.ArrowBack, "")
                     }
