@@ -13,6 +13,7 @@ import br.com.recipebook.designsystem.ListMarginItemDecoration
 import br.com.recipebook.recipedetail.R
 import br.com.recipebook.recipedetail.databinding.RecipeDetailActivityBinding
 import br.com.recipebook.recipedetail.presentation.RecipeDetailViewModel
+import br.com.recipebook.recipedetail.presentation.RecipeDetailViewState
 import br.com.recipebook.utilityandroid.view.activitySafeArgs
 import br.com.recipebook.utilityandroid.view.appbarlayout.setCollapsedAndDisableScroll
 import br.com.recipebook.utilityandroid.view.putSafeArgs
@@ -81,42 +82,31 @@ class RecipeDetailActivity : AppCompatActivity() {
 
     private fun observeState(binding: RecipeDetailActivityBinding) {
         lifecycleScope.launchWhenStarted {
-            viewModel.viewState.isLoading.collect {
-                binding.recipeDetailLoading.visibility = if (it) View.VISIBLE else View.GONE
-            }
-        }
+            viewModel.viewState.collect {
+                when (it) {
+                    is RecipeDetailViewState.Loading -> {
+                        binding.recipeDetailLoading.visibility = View.VISIBLE
+                        binding.recipeDetailErrorState.root.visibility = View.GONE
+                    }
+                    is RecipeDetailViewState.Error -> {
+                        binding.recipeDetailLoading.visibility = View.GONE
+                        binding.recipeDetailErrorState.root.visibility = View.VISIBLE
+                        binding.appBarLayout.setCollapsedAndDisableScroll(binding.recipeDetailList)
+                    }
+                    is RecipeDetailViewState.Loaded -> {
+                        binding.recipeDetailErrorState.root.visibility = View.GONE
+                        binding.recipeDetailLoading.visibility = View.GONE
 
-        lifecycleScope.launchWhenStarted {
-            viewModel.viewState.hasError.collect {
-                if (it) {
-                    binding.recipeDetailErrorState.root.visibility = View.VISIBLE
-                    binding.appBarLayout.setCollapsedAndDisableScroll(binding.recipeDetailList)
-                } else {
-                    binding.recipeDetailErrorState.root.visibility = View.GONE
+                        binding.toolbarTitle.text = it.title
+                        if (it.recipeImage != null) {
+                            binding.recipeImage.setImageURI(ImageResolver.mountUrl(it.recipeImage, ImageSize.LARGE))
+                        } else {
+                            binding.appBarLayout.setCollapsedAndDisableScroll(binding.recipeDetailList)
+                        }
+                        binding.recipeDetailList.visibility = if (it.listItems.isNotEmpty()) View.VISIBLE else View.GONE
+                        adapter.setData(it.listItems)
+                    }
                 }
-            }
-        }
-
-        lifecycleScope.launchWhenStarted {
-            viewModel.viewState.title.collect {
-                binding.toolbarTitle.text = it
-            }
-        }
-
-        lifecycleScope.launchWhenStarted {
-            viewModel.viewState.recipeImage.collect {
-                if (it != null) {
-                    binding.recipeImage.setImageURI(ImageResolver.mountUrl(it, ImageSize.LARGE))
-                } else {
-                    binding.appBarLayout.setCollapsedAndDisableScroll(binding.recipeDetailList)
-                }
-            }
-        }
-
-        lifecycleScope.launchWhenStarted {
-            viewModel.viewState.listItems.collect {
-                binding.recipeDetailList.visibility = if (it.isNotEmpty()) View.VISIBLE else View.GONE
-                adapter.setData(it)
             }
         }
     }

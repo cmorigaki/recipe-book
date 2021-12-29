@@ -26,7 +26,6 @@ class RecipeCollectionViewModel(
     init {
         viewModelScope.launch {
             if (checkInAppUpdate()) {
-                viewState.value = RecipeCollectionViewState.Loading
                 loadRecipeList()
             } else {
                 commandSender.send(RecipeCollectionCommand.FinishApp)

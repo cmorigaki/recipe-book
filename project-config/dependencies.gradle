@@ -57,6 +57,7 @@ ext {
         composeTooling: "androidx.compose.ui:ui-tooling:$composeVersion",
         composeActivity: 'androidx.activity:activity-compose:1.3.1',
         composeSwipeRefresh: "com.google.accompanist:accompanist-swiperefresh:0.19.0",
+        composeCollapsingToolbar: "me.onebone:toolbar-compose:2.3.0",
 
         // Android utilities
         playCore: "com.google.android.play:core:1.10.1", // For in-App update

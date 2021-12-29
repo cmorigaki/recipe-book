@@ -2,9 +2,9 @@ apply from: "$rootDir/project-config/feature-complete-build.gradle"
 apply plugin: 'kotlin-parcelize'
 
 dependencies {
-    implementation AndroidLibConfig.swipeRefresh
     implementation AndroidLibConfig.coordinatorLayout
     implementation AndroidLibConfig.material
+    implementation AndroidLibConfig.composeCollapsingToolbar
 
     implementation project(ProjectConfig.analytics)
     implementation project(ProjectConfig.device)

@@ -27,7 +27,6 @@ val recipeDetailPresentationModule = module {
     viewModel { (safeArgs: RecipeDetailSafeArgs) ->
         RecipeDetailViewModel(
             safeArgs = safeArgs,
-            viewState = RecipeDetailViewState(),
             getRecipeDetail = get(),
             analytics = get()
         )

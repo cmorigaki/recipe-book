@@ -14,45 +14,28 @@ import br.com.recipebook.utilityandroid.presentation.BaseViewModel
 import com.github.michaelbull.result.onFailure
 import com.github.michaelbull.result.onSuccess
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
 @ExperimentalCoroutinesApi
 class RecipeDetailViewModel(
     private val safeArgs: RecipeDetailSafeArgs,
-    override val viewState: RecipeDetailViewState,
     private val getRecipeDetail: GetRecipeDetailUseCase,
-    private val analytics: Analytics
-) : BaseViewModel<RecipeDetailViewState, RecipeDetailAction, RecipeDetailCommand>() {
+    private val analytics: Analytics,
+    override val viewState: MutableStateFlow<RecipeDetailViewState> =
+        MutableStateFlow(RecipeDetailViewState.Loading(safeArgs.title)),
+) : BaseViewModel<MutableStateFlow<RecipeDetailViewState>, RecipeDetailAction, RecipeDetailCommand>() {
 
     init {
         viewModelScope.launch {
-            viewState.title.value = safeArgs.title
-            setLoadingState()
             getRecipeDetail(safeArgs.recipeId).onSuccess(::onLoadSuccess).onFailure { onLoadError() }
         }
     }
 
     override fun dispatchAction(action: RecipeDetailAction) = Unit
 
-    private fun setLoadingState() {
-        viewState.isLoading.value = true
-        viewState.hasError.value = false
-    }
-
-    private fun setErrorState() {
-        viewState.isLoading.value = false
-        viewState.hasError.value = true
-    }
-
-    private fun setSuccessState() {
-        viewState.isLoading.value = false
-        viewState.hasError.value = false
-    }
-
     private fun onLoadSuccess(detail: RecipeDetailModel) {
         sendViewEvent(true)
-        viewState.title.value = detail.name
-        viewState.recipeImage.value = detail.imgPath
 
         val itemList = mutableListOf<RecipeDetailItem>(IngredientHeaderItem)
         itemList.addAll(
@@ -66,13 +49,16 @@ class RecipeDetailViewModel(
         itemList.add(InstructionHeaderItem)
         itemList.addAll(detail.instructions.map { DescriptionItem(description = it) })
 
-        viewState.listItems.value = itemList
-        setSuccessState()
+        viewState.value = RecipeDetailViewState.Loaded(
+            title = safeArgs.title,
+            recipeImage = detail.imgPath,
+            listItems = itemList,
+        )
     }
 
     private fun onLoadError() {
         sendViewEvent(false)
-        setErrorState()
+        viewState.value = RecipeDetailViewState.Error(safeArgs.title)
     }
 
     private fun sendViewEvent(success: Boolean) {

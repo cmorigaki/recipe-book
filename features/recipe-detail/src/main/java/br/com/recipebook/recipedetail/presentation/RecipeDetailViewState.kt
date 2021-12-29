@@ -2,15 +2,22 @@ package br.com.recipebook.recipedetail.presentation
 
 import br.com.recipebook.recipedetail.presentation.model.RecipeDetailItem
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.MutableStateFlow
 
 @ExperimentalCoroutinesApi
-class RecipeDetailViewState {
-    val isLoading = MutableStateFlow(true)
+sealed class RecipeDetailViewState {
+    abstract val title: String?
 
-    val hasError = MutableStateFlow(false)
+    data class Loading(
+        override val title: String?,
+    ) : RecipeDetailViewState()
 
-    val recipeImage = MutableStateFlow<String?>("")
-    val title = MutableStateFlow<String?>(null)
-    val listItems = MutableStateFlow<List<RecipeDetailItem>>(emptyList())
+    data class Error(
+        override val title: String?,
+    ) : RecipeDetailViewState()
+
+    data class Loaded(
+        override val title: String?,
+        val recipeImage: String?,
+        val listItems: List<RecipeDetailItem>
+    ) : RecipeDetailViewState()
 }
