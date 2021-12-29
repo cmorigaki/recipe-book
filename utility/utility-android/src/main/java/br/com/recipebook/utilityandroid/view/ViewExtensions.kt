@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
 
-private const val SCREEN_ARGS = "SCREEN_ARGS"
+private const val ScreenArgs = "SCREEN_ARGS"
 
 fun <V : Any> safeArgs() = object : ReadOnlyProperty<Fragment, V> {
     var value: V? = null
@@ -20,7 +20,7 @@ fun <V : Any> safeArgs() = object : ReadOnlyProperty<Fragment, V> {
         if (value == null) {
             val args = thisRef.arguments
                 ?: throw IllegalArgumentException("There are no fragment arguments!")
-            val argUntyped = args.get(SCREEN_ARGS)
+            val argUntyped = args.get(ScreenArgs)
             argUntyped
                 ?: throw IllegalArgumentException("Screen arguments not found at key SCREEN_ARGS!")
             @Suppress("UNCHECKED_CAST")
@@ -32,7 +32,7 @@ fun <V : Any> safeArgs() = object : ReadOnlyProperty<Fragment, V> {
 
 fun <T : Fragment> T.putSafeArgs(parcelable: Parcelable): T =
     apply {
-        arguments = Bundle().apply { putParcelable(SCREEN_ARGS, parcelable) }
+        arguments = Bundle().apply { putParcelable(ScreenArgs, parcelable) }
     }
 
 fun <V : Any> activitySafeArgs() = object : ReadOnlyProperty<Activity, V> {
@@ -45,7 +45,7 @@ fun <V : Any> activitySafeArgs() = object : ReadOnlyProperty<Activity, V> {
         if (value == null) {
             val args = thisRef.intent.extras
                 ?: throw IllegalArgumentException("There are no activity arguments!")
-            val argUntyped = args.get(SCREEN_ARGS)
+            val argUntyped = args.get(ScreenArgs)
             argUntyped
                 ?: throw IllegalArgumentException("Screen arguments not found at key SCREEN_ARGS!")
             @Suppress("UNCHECKED_CAST")
@@ -56,5 +56,5 @@ fun <V : Any> activitySafeArgs() = object : ReadOnlyProperty<Activity, V> {
 }
 
 fun Intent.putSafeArgs(value: Parcelable) {
-    putExtra(SCREEN_ARGS, value)
+    putExtra(ScreenArgs, value)
 }

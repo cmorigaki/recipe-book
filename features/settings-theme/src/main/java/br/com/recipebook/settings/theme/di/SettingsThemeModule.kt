@@ -5,7 +5,7 @@ import android.content.SharedPreferences
 import br.com.recipebook.navigation.Navigator
 import br.com.recipebook.settings.theme.data.SettingsThemeDataSource
 import br.com.recipebook.settings.theme.data.SettingsThemeRepositoryImpl
-import br.com.recipebook.settings.theme.data.local.NAMED_SHARED_PREFERENCES_SETTINGS_THEME
+import br.com.recipebook.settings.theme.data.local.NamesSharedPreferencesSettingsTheme
 import br.com.recipebook.settings.theme.data.local.SettingsThemeLocalDataSource
 import br.com.recipebook.settings.theme.domain.repository.SettingsThemeRepository
 import br.com.recipebook.settings.theme.domain.usecase.ApplyUserThemePreference
@@ -59,12 +59,12 @@ val settingsDataModule = module {
     }
 
     factory<SettingsThemeDataSource> {
-        SettingsThemeLocalDataSource(get(named(NAMED_SHARED_PREFERENCES_SETTINGS_THEME)))
+        SettingsThemeLocalDataSource(get(named(NamesSharedPreferencesSettingsTheme)))
     }
 
-    factory<SharedPreferences>(named(NAMED_SHARED_PREFERENCES_SETTINGS_THEME)) {
+    factory<SharedPreferences>(named(NamesSharedPreferencesSettingsTheme)) {
         androidContext().getSharedPreferences(
-            NAMED_SHARED_PREFERENCES_SETTINGS_THEME,
+            NamesSharedPreferencesSettingsTheme,
             Context.MODE_PRIVATE
         )
     }
