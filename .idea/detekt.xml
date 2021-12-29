@@ -4,5 +4,6 @@
     <enableDetekt>true</enableDetekt>
     <enableFormatting>true</enableFormatting>
     <enableAllRules>true</enableAllRules>
+    <configPaths>$PROJECT_DIR$/quality/detekt/detekt-config.yml</configPaths>
   </component>
 </project>

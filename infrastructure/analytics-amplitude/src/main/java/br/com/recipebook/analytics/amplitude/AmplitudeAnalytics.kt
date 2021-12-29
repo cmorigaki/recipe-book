@@ -12,7 +12,7 @@ import org.json.JSONObject
 import timber.log.Timber
 import kotlin.system.measureTimeMillis
 
-private const val ANALYTICS_LIBRARY_NAME = "Amplitude"
+private const val AnalyticsLibraryName = "Amplitude"
 
 class AmplitudeAnalytics(
     private val application: Application,
@@ -40,7 +40,7 @@ class AmplitudeAnalytics(
         isInitialized = true
         sendEvent(
             LibraryInitializationEvent(
-                libraryName = ANALYTICS_LIBRARY_NAME,
+                libraryName = AnalyticsLibraryName,
                 timeToInitialize = initTimeInMillis
             )
         )
