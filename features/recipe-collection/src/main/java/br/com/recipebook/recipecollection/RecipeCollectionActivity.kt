@@ -4,12 +4,10 @@ import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import br.com.recipebook.designsystem.ListMarginItemDecoration
 import br.com.recipebook.designsystem.compose.RecipeBookTheme
 import br.com.recipebook.navigation.MainNavigator
 import br.com.recipebook.navigation.intent.RecipeDetailIntent
 import br.com.recipebook.navigation.intent.SettingsIntent
-import br.com.recipebook.recipecollection.databinding.RecipeCollectionActivityBinding
 import br.com.recipebook.recipecollection.presentation.RecipeCollectionAction
 import br.com.recipebook.recipecollection.presentation.RecipeCollectionCommand
 import br.com.recipebook.recipecollection.presentation.RecipeCollectionViewModel
@@ -24,44 +22,12 @@ import kotlin.system.exitProcess
 class RecipeCollectionActivity : AppCompatActivity() {
 
     private val viewModel: RecipeCollectionViewModel by viewModel(clazz = RecipeCollectionViewModel::class)
-    private val recipeCollectionAdapter by lazy {
-        RecipeCollectionAdapter(
-            ::onRecipeClick
-        )
-    }
     private val mainNavigator: MainNavigator by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        RecipeCollectionActivityBinding.inflate(layoutInflater).apply {
-//            initComponents(this)
-//            setContentView(root)
-//            observeState()
-//            observeActionCommand()
-//        }
         observeState()
         observeActionCommand()
-    }
-
-    private fun initComponents(binding: RecipeCollectionActivityBinding) {
-        with(binding) {
-            recipeList.adapter = recipeCollectionAdapter
-            recipeList.addItemDecoration(
-                ListMarginItemDecoration(
-                    resources = resources,
-                    spanCount = 2
-                )
-            )
-            swipeRefresh.setOnRefreshListener {
-                viewModel.dispatchAction(
-                    RecipeCollectionAction.Refresh
-                )
-            }
-            // FIXME Temporary access point. Said that, I'll not dispatch to VM
-            recipeCollectionSettings.setOnClickListener {
-                mainNavigator.navigate(this@RecipeCollectionActivity, SettingsIntent)
-            }
-        }
     }
 
     private fun observeState() {
@@ -81,6 +47,9 @@ class RecipeCollectionActivity : AppCompatActivity() {
                             },
                             onSettingsClick = {
                                 mainNavigator.navigate(this@RecipeCollectionActivity, SettingsIntent)
+                            },
+                            onRefresh = {
+                                viewModel.dispatchAction(RecipeCollectionAction.Refresh)
                             }
                         )
                     }
@@ -105,17 +74,5 @@ class RecipeCollectionActivity : AppCompatActivity() {
                 }
             }
         }
-    }
-
-    private fun onRecipeClick(
-        recipeId: String,
-        title: String?
-    ) {
-        viewModel.dispatchAction(
-            RecipeCollectionAction.RecipeClick(
-                recipeId = recipeId,
-                title = title
-            )
-        )
     }
 }

@@ -9,5 +9,6 @@ sealed class RecipeCollectionViewState {
     object Error : RecipeCollectionViewState()
     data class Loaded(
         val recipes: List<RecipeItem>,
+        val isRefreshing: Boolean,
     ) : RecipeCollectionViewState()
 }

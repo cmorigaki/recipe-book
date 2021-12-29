@@ -43,6 +43,8 @@ import br.com.recipebook.recipecollection.R
 import br.com.recipebook.recipecollection.presentation.RecipeCollectionViewState
 import coil.compose.rememberImagePainter
 import coil.size.OriginalSize
+import com.google.accompanist.swiperefresh.SwipeRefresh
+import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 private const val RECIPE_IMG_RATIO = 1.3333334f
@@ -53,6 +55,7 @@ fun RecipeCollectionView(
     state: RecipeCollectionViewState,
     onItemClick: (item: RecipeItem) -> Unit,
     onSettingsClick: () -> Unit,
+    onRefresh: () -> Unit,
 ) {
     Surface {
         when (state) {
@@ -60,6 +63,7 @@ fun RecipeCollectionView(
                 state = state,
                 onItemClick = onItemClick,
                 onSettingsClick = onSettingsClick,
+                onRefresh = onRefresh,
             )
             RecipeCollectionViewState.Loading -> RecipeCollectionViewLoading(Modifier.fillMaxHeight())
             RecipeCollectionViewState.Error -> RecipeCollectionViewError(Modifier.fillMaxHeight())
@@ -73,43 +77,57 @@ private fun RecipeCollectionViewLoaded(
     state: RecipeCollectionViewState.Loaded,
     onItemClick: (item: RecipeItem) -> Unit,
     onSettingsClick: () -> Unit,
+    onRefresh: () -> Unit,
 ) {
     Column(modifier = Modifier.fillMaxWidth()) {
-        Row(modifier = Modifier.fillMaxWidth()) {
-            Text(
+        TopBar(onSettingsClick)
+        SwipeRefresh(
+            state = rememberSwipeRefreshState(state.isRefreshing),
+            onRefresh = { onRefresh() },
+        ) {
+            LazyVerticalGrid(
+                cells = GridCells.Fixed(2),
                 modifier = Modifier
-                    .weight(1f)
-                    .padding(Spacing.MarginNormal100),
-                text = stringResource(id = R.string.recipe_collection_title),
-                style = TextStyle(
-                    color = MaterialTheme.colors.primary,
-                    fontSize = FontSize.TitleHeadLineNormal100,
-                )
-            )
-            IconButton(
-                modifier = Modifier.align(Alignment.CenterVertically),
-                onClick = { onSettingsClick() }
+                    .fillMaxWidth()
+                    .padding(top = Spacing.MarginSmall100),
             ) {
-                Icon(
-                    modifier = Modifier.padding(Spacing.MarginNormal100),
-                    imageVector = Icons.Default.Settings,
-                    contentDescription = "",
-                )
+                itemsIndexed(state.recipes) { index, item ->
+                    RecipeCollectionItem(
+                        recipe = item,
+                        index = index,
+                        onItemClick = onItemClick,
+                    )
+                }
             }
         }
-        LazyVerticalGrid(
-            cells = GridCells.Fixed(2),
+    }
+}
+
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+private fun TopBar(
+    onSettingsClick: () -> Unit,
+) {
+    Row(modifier = Modifier.fillMaxWidth()) {
+        Text(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = Spacing.MarginSmall100),
+                .weight(1f)
+                .padding(Spacing.MarginNormal100),
+            text = stringResource(id = R.string.recipe_collection_title),
+            style = TextStyle(
+                color = MaterialTheme.colors.primary,
+                fontSize = FontSize.TitleHeadLineNormal100,
+            )
+        )
+        IconButton(
+            modifier = Modifier.align(Alignment.CenterVertically),
+            onClick = { onSettingsClick() }
         ) {
-            itemsIndexed(state.recipes) { index, item ->
-                RecipeCollectionItem(
-                    recipe = item,
-                    index = index,
-                    onItemClick = onItemClick,
-                )
-            }
+            Icon(
+                modifier = Modifier.padding(Spacing.MarginNormal100),
+                imageVector = Icons.Default.Settings,
+                contentDescription = "",
+            )
         }
     }
 }
@@ -168,11 +186,15 @@ private fun ImageOrPlaceholder(imgPath: String?) {
                 }
             ),
             contentDescription = null,
-            modifier = Modifier.fillMaxSize().aspectRatio(RECIPE_IMG_RATIO),
+            modifier = Modifier
+                .fillMaxSize()
+                .aspectRatio(RECIPE_IMG_RATIO),
             contentScale = ContentScale.Crop,
         )
     } else {
-        Box(modifier = Modifier.fillMaxSize().aspectRatio(RECIPE_IMG_RATIO), contentAlignment = Alignment.Center) {
+        Box(modifier = Modifier
+            .fillMaxSize()
+            .aspectRatio(RECIPE_IMG_RATIO), contentAlignment = Alignment.Center) {
             Image(
                 painter = painterResource(id = R.drawable.recipe_item_placeholder),
                 contentDescription = null,

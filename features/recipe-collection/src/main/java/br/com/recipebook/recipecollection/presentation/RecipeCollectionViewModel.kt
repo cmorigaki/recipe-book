@@ -26,6 +26,7 @@ class RecipeCollectionViewModel(
     init {
         viewModelScope.launch {
             if (checkInAppUpdate()) {
+                viewState.value = RecipeCollectionViewState.Loading
                 loadRecipeList()
             } else {
                 commandSender.send(RecipeCollectionCommand.FinishApp)
@@ -35,7 +36,7 @@ class RecipeCollectionViewModel(
 
     override fun dispatchAction(action: RecipeCollectionAction) {
         when (action) {
-            is RecipeCollectionAction.Refresh -> loadRecipeList()
+            is RecipeCollectionAction.Refresh -> onRefresh()
             is RecipeCollectionAction.RecipeClick -> openRecipeDetail(
                 recipeId = action.recipeId,
                 title = action.title
@@ -43,9 +44,14 @@ class RecipeCollectionViewModel(
         }
     }
 
-    private fun loadRecipeList() = viewModelScope.launch {
-        viewState.value = RecipeCollectionViewState.Loading
+    private fun onRefresh() {
+        (viewState.value as? RecipeCollectionViewState.Loaded)?.let {
+            viewState.value = it.copy(isRefreshing = true)
+            loadRecipeList()
+        }
+    }
 
+    private fun loadRecipeList() = viewModelScope.launch {
         getRecipeCollection()
             .onSuccess { onLoadRecipeListSuccess(it) }
             .onFailure { onLoadRecipeListError() }
@@ -54,13 +60,14 @@ class RecipeCollectionViewModel(
     private fun onLoadRecipeListSuccess(list: List<RecipeModel>) {
         sendViewEvent(true)
         viewState.value = RecipeCollectionViewState.Loaded(
-            list.map {
+            recipes = list.map {
                 RecipeItem(
                     id = it.id,
                     imgPath = it.imgPath,
                     title = it.title
                 )
-            }
+            },
+            isRefreshing = false,
         )
     }
 
