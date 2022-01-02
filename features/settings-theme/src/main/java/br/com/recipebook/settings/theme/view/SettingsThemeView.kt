@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import br.com.recipebook.designsystem.compose.Spacing
+import br.com.recipebook.designsystem.compose.component.DSError
 import br.com.recipebook.designsystem.compose.component.DSLoading
 import br.com.recipebook.designsystem.compose.component.DSTextButton
 import br.com.recipebook.designsystem.compose.component.DSTopAppBar
@@ -100,6 +101,6 @@ fun SettingsThemeViewLoading(modifier: Modifier) {
 @Composable
 fun SettingsThemeViewError(modifier: Modifier) {
     Box(modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
-        DSLoading()
+        DSError()
     }
 }

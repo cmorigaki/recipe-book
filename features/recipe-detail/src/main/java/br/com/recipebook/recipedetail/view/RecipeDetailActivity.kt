@@ -4,12 +4,14 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.recipebook.coreandroid.image.ImageResolver
 import br.com.recipebook.coreandroid.image.ImageSize
 import br.com.recipebook.designsystem.ListMarginItemDecoration
+import br.com.recipebook.designsystem.compose.RecipeBookTheme
 import br.com.recipebook.recipedetail.R
 import br.com.recipebook.recipedetail.databinding.RecipeDetailActivityBinding
 import br.com.recipebook.recipedetail.presentation.RecipeDetailViewModel
@@ -32,11 +34,7 @@ class RecipeDetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        RecipeDetailActivityBinding.inflate(layoutInflater).apply {
-            initComponents(this)
-            setContentView(root)
-            observeState(this)
-        }
+        observeState()
     }
 
     private fun initComponents(binding: RecipeDetailActivityBinding) {
@@ -80,31 +78,15 @@ class RecipeDetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun observeState(binding: RecipeDetailActivityBinding) {
+    private fun observeState() {
         lifecycleScope.launchWhenStarted {
             viewModel.viewState.collect {
-                when (it) {
-                    is RecipeDetailViewState.Loading -> {
-                        binding.recipeDetailLoading.visibility = View.VISIBLE
-                        binding.recipeDetailErrorState.root.visibility = View.GONE
-                    }
-                    is RecipeDetailViewState.Error -> {
-                        binding.recipeDetailLoading.visibility = View.GONE
-                        binding.recipeDetailErrorState.root.visibility = View.VISIBLE
-                        binding.appBarLayout.setCollapsedAndDisableScroll(binding.recipeDetailList)
-                    }
-                    is RecipeDetailViewState.Loaded -> {
-                        binding.recipeDetailErrorState.root.visibility = View.GONE
-                        binding.recipeDetailLoading.visibility = View.GONE
-
-                        binding.toolbarTitle.text = it.title
-                        if (it.recipeImage != null) {
-                            binding.recipeImage.setImageURI(ImageResolver.mountUrl(it.recipeImage, ImageSize.LARGE))
-                        } else {
-                            binding.appBarLayout.setCollapsedAndDisableScroll(binding.recipeDetailList)
-                        }
-                        binding.recipeDetailList.visibility = if (it.listItems.isNotEmpty()) View.VISIBLE else View.GONE
-                        adapter.setData(it.listItems)
+                setContent {
+                    RecipeBookTheme {
+                        RecipeDetailView(
+                            state = it,
+                            onBackClick = ::onBackPressed,
+                        )
                     }
                 }
             }

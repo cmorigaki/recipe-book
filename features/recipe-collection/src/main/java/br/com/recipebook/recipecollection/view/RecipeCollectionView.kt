@@ -36,6 +36,7 @@ import br.com.recipebook.coreandroid.image.ImageResolver
 import br.com.recipebook.coreandroid.image.ImageSize
 import br.com.recipebook.designsystem.compose.FontSize
 import br.com.recipebook.designsystem.compose.Spacing
+import br.com.recipebook.designsystem.compose.component.DSError
 import br.com.recipebook.designsystem.compose.component.DSLoading
 import br.com.recipebook.designsystem.compose.util.fillHalfSize
 import br.com.recipebook.designsystem.compose.util.lineHeight
@@ -218,6 +219,6 @@ private fun RecipeCollectionViewLoading(modifier: Modifier) {
 @Composable
 private fun RecipeCollectionViewError(modifier: Modifier) {
     Box(modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
-        DSLoading()
+        DSError()
     }
 }
