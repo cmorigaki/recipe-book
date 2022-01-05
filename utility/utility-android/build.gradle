@@ -33,10 +33,6 @@ dependencies {
     implementation AndroidLibConfig.moshiConverter
 
     implementation AndroidLibConfig.appCompat
-    implementation AndroidLibConfig.constraintLayout
-    implementation AndroidLibConfig.recyclerView
-    implementation AndroidLibConfig.cardView
-    implementation AndroidLibConfig.material
 
     testImplementation TestConfig.jUnit
 

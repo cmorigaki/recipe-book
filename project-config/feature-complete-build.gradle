@@ -51,13 +51,8 @@ dependencies {
     kapt AndroidLibConfig.moshiCodeGen
 
     implementation AndroidLibConfig.appCompat
-    implementation AndroidLibConfig.constraintLayout
-    implementation AndroidLibConfig.recyclerView
-    implementation AndroidLibConfig.cardView
     implementation AndroidLibConfig.viewmodel
-    implementation AndroidLibConfig.fragment
 
-    implementation AndroidLibConfig.fresco
     implementation AndroidLibConfig.coil
     implementation AndroidLibConfig.coilCompose
 

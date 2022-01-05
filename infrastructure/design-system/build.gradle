@@ -35,10 +35,8 @@ dependencies {
     implementation AndroidLibConfig.coreKtx
 
     implementation AndroidLibConfig.appCompat
-    implementation AndroidLibConfig.recyclerView
-    implementation AndroidLibConfig.constraintLayout
-    implementation AndroidLibConfig.material
 
+    implementation AndroidLibConfig.material
     implementation AndroidLibConfig.composeTooling
     implementation AndroidLibConfig.composeMaterial
 

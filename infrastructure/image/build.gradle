@@ -31,7 +31,6 @@ dependencies {
     implementation AndroidLibConfig.coroutinesCore
 
     implementation AndroidLibConfig.koinCore
-    implementation AndroidLibConfig.fresco
 
     implementation project(ProjectConfig.startup)
 }
