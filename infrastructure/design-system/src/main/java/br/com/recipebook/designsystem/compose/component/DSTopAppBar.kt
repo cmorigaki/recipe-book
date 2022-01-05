@@ -46,7 +46,7 @@ fun DSTopAppBar(
     title: String,
     modifier: Modifier = Modifier,
     textModifier: Modifier = Modifier,
-    tint: Color = Color.Black,
+    tint: Color = Color.Unspecified,
     onBackClick: () -> Unit,
 ) {
     TopAppBar(
@@ -78,7 +78,11 @@ fun DSTopAppBar(
                         Icon(
                             imageVector = Icons.Filled.ArrowBack,
                             contentDescription = "",
-                            tint = tint,
+                            tint = if (tint != Color.Unspecified) {
+                                tint
+                            } else {
+                                LocalContentColor.current.copy(alpha = LocalContentAlpha.current)
+                            },
                         )
                     }
                 }
