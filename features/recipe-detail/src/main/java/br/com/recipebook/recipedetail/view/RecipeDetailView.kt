@@ -1,6 +1,7 @@
 package br.com.recipebook.recipedetail.view
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -16,8 +17,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import br.com.recipebook.coreandroid.image.ImageResolver
 import br.com.recipebook.coreandroid.image.ImageSize
@@ -40,31 +43,34 @@ import me.onebone.toolbar.rememberCollapsingToolbarScaffoldState
 @Composable
 fun RecipeDetailView(
     state: RecipeDetailViewState,
+    statusBarHeight: Dp,
     onBackClick: () -> Unit,
 ) {
     Surface {
         when (state) {
             is RecipeDetailViewState.Loading -> {
-                RecipeDetailLoading(state.title ?: "", onBackClick)
+                RecipeDetailLoading(state.title ?: "", statusBarHeight, onBackClick)
             }
             is RecipeDetailViewState.Error -> {
-                RecipeDetailError(state.title ?: "", onBackClick)
+                RecipeDetailError(state.title ?: "", statusBarHeight, onBackClick)
             }
             is RecipeDetailViewState.Loaded -> {
-                RecipeDetailLoaded(state, onBackClick)
+                RecipeDetailLoaded(state, statusBarHeight, onBackClick)
             }
         }
     }
 }
 
 @Composable
-fun RecipeDetailLoading(
+private fun RecipeDetailLoading(
     title: String,
+    statusBarHeight: Dp,
     onBackClick: () -> Unit,
 ) {
     Column(Modifier.fillMaxSize()) {
-        DSTopAppBar(
+        RecipeDetailTopBar(
             title = title,
+            statusBarHeight = statusBarHeight,
             onBackClick = onBackClick,
         )
         Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
@@ -74,13 +80,15 @@ fun RecipeDetailLoading(
 }
 
 @Composable
-fun RecipeDetailError(
+private fun RecipeDetailError(
     title: String,
+    statusBarHeight: Dp,
     onBackClick: () -> Unit,
 ) {
     Column(Modifier.fillMaxSize()) {
-        DSTopAppBar(
+        RecipeDetailTopBar(
             title = title,
+            statusBarHeight = statusBarHeight,
             onBackClick = onBackClick,
         )
         Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
@@ -90,8 +98,9 @@ fun RecipeDetailError(
 }
 
 @Composable
-fun RecipeDetailLoaded(
+private fun RecipeDetailLoaded(
     state: RecipeDetailViewState.Loaded,
+    statusBarHeight: Dp,
     onBackClick: () -> Unit,
 ) {
     val scaffoldState = rememberCollapsingToolbarScaffoldState()
@@ -99,6 +108,7 @@ fun RecipeDetailLoaded(
     CollapsingToolbarScaffold(
         modifier = Modifier.fillMaxSize(),
         state = scaffoldState, // provide the state of the scaffold
+        toolbarModifier = Modifier.background(MaterialTheme.colors.primary),
         toolbar = {
             if (state.recipeImage != null) {
                 Image(
@@ -113,9 +123,10 @@ fun RecipeDetailLoaded(
                     contentScale = ContentScale.FillWidth,
                 )
             }
-            DSTopAppBar(
+            RecipeDetailTopBar(
                 title = state.title ?: "",
-                textModifier = Modifier.alpha(1 - scaffoldState.toolbarState.progress),
+                statusBarHeight = statusBarHeight,
+                titleAlpha = 1 - scaffoldState.toolbarState.progress,
                 onBackClick = onBackClick,
             )
         },
@@ -134,7 +145,7 @@ fun RecipeDetailLoaded(
 }
 
 @Composable
-fun ItemHeader(text: String) {
+private fun ItemHeader(text: String) {
     Text(
         text = text,
         modifier = Modifier.padding(Spacing.MarginNormal100),
@@ -143,7 +154,7 @@ fun ItemHeader(text: String) {
 }
 
 @Composable
-fun Item(text: String) {
+private fun Item(text: String) {
     Text(
         text = text,
         modifier = Modifier.padding(
@@ -153,5 +164,21 @@ fun Item(text: String) {
             bottom = Spacing.MarginSmall100,
         ),
         style = MaterialTheme.typography.body1,
+    )
+}
+
+@Composable
+private fun RecipeDetailTopBar(
+    title: String,
+    titleAlpha: Float = 1f,
+    statusBarHeight: Dp,
+    onBackClick: () -> Unit,
+) {
+    DSTopAppBar(
+        title = title,
+        textModifier = Modifier.alpha(titleAlpha),
+        onBackClick = onBackClick,
+        tint = Color.White,
+        modifier = Modifier.padding(top = statusBarHeight)
     )
 }

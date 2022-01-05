@@ -8,6 +8,8 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
+import androidx.compose.material.LocalContentAlpha
+import androidx.compose.material.LocalContentColor
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
@@ -44,7 +46,7 @@ fun DSTopAppBar(
     title: String,
     modifier: Modifier = Modifier,
     textModifier: Modifier = Modifier,
-    textColor: Color = Color.Unspecified,
+    tint: Color = Color.Black,
     onBackClick: () -> Unit,
 ) {
     TopAppBar(
@@ -62,7 +64,7 @@ fun DSTopAppBar(
                 ) {
                     Text(
                         text = title,
-                        color = textColor,
+                        color = tint,
                         modifier = textModifier,
                         style = MaterialTheme.typography.h6,
                         textAlign = TextAlign.Center,
@@ -73,7 +75,11 @@ fun DSTopAppBar(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     IconButton(onClick = onBackClick) {
-                        Icon(Icons.Filled.ArrowBack, "")
+                        Icon(
+                            imageVector = Icons.Filled.ArrowBack,
+                            contentDescription = "",
+                            tint = tint,
+                        )
                     }
                 }
             }

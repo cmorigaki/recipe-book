@@ -5,10 +5,13 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.ui.unit.dp
+import androidx.core.view.WindowCompat
 import androidx.lifecycle.lifecycleScope
 import br.com.recipebook.designsystem.compose.RecipeBookTheme
 import br.com.recipebook.recipedetail.presentation.RecipeDetailViewModel
 import br.com.recipebook.utilityandroid.view.activitySafeArgs
+import br.com.recipebook.utilityandroid.view.getStatusBarHeight
 import br.com.recipebook.utilityandroid.view.putSafeArgs
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
@@ -23,6 +26,7 @@ class RecipeDetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        WindowCompat.setDecorFitsSystemWindows(window, false)
         observeState()
     }
 
@@ -33,6 +37,7 @@ class RecipeDetailActivity : AppCompatActivity() {
                     RecipeBookTheme {
                         RecipeDetailView(
                             state = it,
+                            statusBarHeight = getStatusBarHeight().dp,
                             onBackClick = ::onBackPressed,
                         )
                     }
