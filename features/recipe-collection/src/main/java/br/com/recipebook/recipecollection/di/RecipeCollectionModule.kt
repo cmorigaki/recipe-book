@@ -10,7 +10,6 @@ import br.com.recipebook.recipecollection.domain.RecipeCollectionRepository
 import br.com.recipebook.recipecollection.domain.usecase.GetRecipeCollection
 import br.com.recipebook.recipecollection.domain.usecase.GetRecipeCollectionUseCase
 import br.com.recipebook.recipecollection.presentation.RecipeCollectionViewModel
-import br.com.recipebook.recipecollection.presentation.RecipeCollectionViewState
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -18,7 +17,6 @@ import retrofit2.Retrofit
 val recipeCollectionPresentationModule = module {
     viewModel {
         RecipeCollectionViewModel(
-            viewState = RecipeCollectionViewState(),
             getRecipeCollection = get(),
             analytics = get(),
             checkInAppUpdate = get(),

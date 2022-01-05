@@ -10,19 +10,19 @@ import br.com.recipebook.utilityandroid.presentation.BaseViewModel
 import com.github.michaelbull.result.onFailure
 import com.github.michaelbull.result.onSuccess
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
 @ExperimentalCoroutinesApi
 class SettingsThemeViewModel(
-    override val viewState: SettingsThemeViewState,
     private val getUserThemePreference: GetUserThemePreferenceUseCase,
     private val setUserThemePreferenceUseCase: SetUserThemePreferenceUseCase,
-    private val analytics: Analytics
-) : BaseViewModel<SettingsThemeViewState, SettingsThemeAction, SettingsThemeCommand>() {
+    private val analytics: Analytics,
+    override val viewState: MutableStateFlow<SettingsThemeViewState> = MutableStateFlow(SettingsThemeViewState.Loading),
+) : BaseViewModel<MutableStateFlow<SettingsThemeViewState>, SettingsThemeAction, SettingsThemeCommand>() {
 
     init {
         viewModelScope.launch {
-            setLoadingState()
             getUserThemePreference().onSuccess(::onLoadSuccess).onFailure { onLoadError() }
         }
     }
@@ -30,56 +30,46 @@ class SettingsThemeViewModel(
     override fun dispatchAction(action: SettingsThemeAction) {
         viewModelScope.launch {
             when (action) {
-                is SettingsThemeAction.SystemThemeSelected ->
+                is SettingsThemeAction.SystemThemeSelected -> {
+                    viewState.value = SettingsThemeViewState.Loaded(
+                        selectedTheme = SettingsThemeAction.SystemThemeSelected
+                    )
                     setUserThemePreferenceUseCase(UserThemePreferenceModel.SYSTEM)
-                is SettingsThemeAction.LightThemeSelected ->
+                }
+                is SettingsThemeAction.LightThemeSelected -> {
+                    viewState.value = SettingsThemeViewState.Loaded(
+                        selectedTheme = SettingsThemeAction.LightThemeSelected
+                    )
                     setUserThemePreferenceUseCase(UserThemePreferenceModel.LIGHT)
-                is SettingsThemeAction.DarkThemeSelected ->
+                }
+                is SettingsThemeAction.DarkThemeSelected -> {
+                    viewState.value = SettingsThemeViewState.Loaded(
+                        selectedTheme = SettingsThemeAction.DarkThemeSelected
+                    )
                     setUserThemePreferenceUseCase(UserThemePreferenceModel.DARK)
+                }
             }
         }
-    }
-
-    private fun setLoadingState() {
-        viewState.isLoading.value = true
-        viewState.hasError.value = false
-    }
-
-    private fun setErrorState() {
-        viewState.isLoading.value = false
-        viewState.hasError.value = true
-    }
-
-    private fun setSuccessState() {
-        viewState.isLoading.value = false
-        viewState.hasError.value = false
     }
 
     private fun onLoadSuccess(settings: UserThemePreferenceModel) {
         sendViewEvent(true)
-        when (settings) {
+        viewState.value = when (settings) {
             UserThemePreferenceModel.SYSTEM -> {
-                viewState.isSystemThemeSelected.value = true
-                viewState.isLightThemeSelected.value = false
-                viewState.isDarkThemeSelected.value = false
+                SettingsThemeViewState.Loaded(selectedTheme = SettingsThemeAction.SystemThemeSelected)
             }
             UserThemePreferenceModel.LIGHT -> {
-                viewState.isSystemThemeSelected.value = false
-                viewState.isLightThemeSelected.value = true
-                viewState.isDarkThemeSelected.value = false
+                SettingsThemeViewState.Loaded(selectedTheme = SettingsThemeAction.LightThemeSelected)
             }
             UserThemePreferenceModel.DARK -> {
-                viewState.isSystemThemeSelected.value = false
-                viewState.isLightThemeSelected.value = false
-                viewState.isDarkThemeSelected.value = true
+                SettingsThemeViewState.Loaded(selectedTheme = SettingsThemeAction.DarkThemeSelected)
             }
         }
-        setSuccessState()
     }
 
     private fun onLoadError() {
         sendViewEvent(false)
-        setErrorState()
+        viewState.value = SettingsThemeViewState.Error
     }
 
     private fun sendViewEvent(success: Boolean) {

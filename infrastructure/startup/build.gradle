@@ -14,3 +14,8 @@ dependencies {
     testImplementation TestConfig.mockk
     testImplementation TestConfig.coroutinesTest
 }
+
+java {
+    sourceCompatibility javaVersion
+    targetCompatibility javaVersion
+}

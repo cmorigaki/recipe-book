@@ -11,18 +11,19 @@ import br.com.recipebook.utilityandroid.presentation.BaseViewModel
 import com.github.michaelbull.result.onFailure
 import com.github.michaelbull.result.onSuccess
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
 @ExperimentalCoroutinesApi
 class RecipeCollectionViewModel(
-    override val viewState: RecipeCollectionViewState,
     private val getRecipeCollection: GetRecipeCollectionUseCase,
     private val analytics: Analytics,
     private val checkInAppUpdate: CheckInAppUpdateUseCase,
-) : BaseViewModel<RecipeCollectionViewState, RecipeCollectionAction, RecipeCollectionCommand>() {
+    override val viewState: MutableStateFlow<RecipeCollectionViewState> =
+        MutableStateFlow(RecipeCollectionViewState.Loading),
+) : BaseViewModel<MutableStateFlow<RecipeCollectionViewState>, RecipeCollectionAction, RecipeCollectionCommand>() {
 
     init {
-        setInitialState()
         viewModelScope.launch {
             if (checkInAppUpdate()) {
                 loadRecipeList()
@@ -34,7 +35,7 @@ class RecipeCollectionViewModel(
 
     override fun dispatchAction(action: RecipeCollectionAction) {
         when (action) {
-            is RecipeCollectionAction.Refresh -> loadRecipeList()
+            is RecipeCollectionAction.Refresh -> onRefresh()
             is RecipeCollectionAction.RecipeClick -> openRecipeDetail(
                 recipeId = action.recipeId,
                 title = action.title
@@ -42,39 +43,36 @@ class RecipeCollectionViewModel(
         }
     }
 
-    private fun setInitialState() {
-        viewState.isLoading.value = true
-        viewState.recipes.value = emptyList()
-        viewState.hasError.value = false
+    private fun onRefresh() {
+        (viewState.value as? RecipeCollectionViewState.Loaded)?.let {
+            viewState.value = it.copy(isRefreshing = true)
+            loadRecipeList()
+        }
     }
 
     private fun loadRecipeList() = viewModelScope.launch {
-        viewState.isLoading.value = true
-        viewState.hasError.value = false
-
         getRecipeCollection()
             .onSuccess { onLoadRecipeListSuccess(it) }
             .onFailure { onLoadRecipeListError() }
-
-        viewState.isLoading.value = false
     }
 
     private fun onLoadRecipeListSuccess(list: List<RecipeModel>) {
         sendViewEvent(true)
-        viewState.hasError.value = false
-        viewState.recipes.value = list.map {
-            RecipeItem(
-                id = it.id,
-                imgPath = it.imgPath,
-                title = it.title
-            )
-        }
+        viewState.value = RecipeCollectionViewState.Loaded(
+            recipes = list.map {
+                RecipeItem(
+                    id = it.id,
+                    imgPath = it.imgPath,
+                    title = it.title
+                )
+            },
+            isRefreshing = false,
+        )
     }
 
     private fun onLoadRecipeListError() {
         sendViewEvent(false)
-        viewState.hasError.value = true
-        viewState.recipes.value = emptyList()
+        viewState.value = RecipeCollectionViewState.Error
     }
 
     private fun openRecipeDetail(

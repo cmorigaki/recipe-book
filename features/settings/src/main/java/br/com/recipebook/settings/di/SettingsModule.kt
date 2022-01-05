@@ -4,7 +4,6 @@ import br.com.recipebook.navigation.Navigator
 import br.com.recipebook.settings.domain.usecase.GetSettings
 import br.com.recipebook.settings.domain.usecase.GetSettingsUseCase
 import br.com.recipebook.settings.presentation.SettingsViewModel
-import br.com.recipebook.settings.presentation.SettingsViewState
 import br.com.recipebook.settings.view.SettingsNavigator
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.bind
@@ -19,7 +18,6 @@ val settingsViewModule = module {
 val settingsPresentationModule = module {
     viewModel {
         SettingsViewModel(
-            viewState = SettingsViewState(),
             getSettingsList = get(),
             analytics = get(),
             buildConfiguration = get(),

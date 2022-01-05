@@ -15,6 +15,7 @@ android {
 
     buildFeatures {
         viewBinding true
+        compose true
     }
 
     buildTypes {
@@ -23,11 +24,15 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility javaVersion
+        targetCompatibility javaVersion
     }
     kotlinOptions {
         jvmTarget = jvmTargetVersion
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion composeVersion
     }
 }
 
@@ -46,13 +51,10 @@ dependencies {
     kapt AndroidLibConfig.moshiCodeGen
 
     implementation AndroidLibConfig.appCompat
-    implementation AndroidLibConfig.constraintLayout
-    implementation AndroidLibConfig.recyclerView
-    implementation AndroidLibConfig.cardView
     implementation AndroidLibConfig.viewmodel
-    implementation AndroidLibConfig.fragment
 
-    implementation AndroidLibConfig.fresco
+    implementation AndroidLibConfig.coil
+    implementation AndroidLibConfig.coilCompose
 
     testImplementation TestConfig.jUnit
     testImplementation TestConfig.mockk
@@ -62,4 +64,13 @@ dependencies {
     implementation project(ProjectConfig.coreAndroid)
     implementation project(ProjectConfig.navigation)
     implementation project(ProjectConfig.designSystem)
+
+    implementation AndroidLibConfig.compose
+    implementation AndroidLibConfig.composeFoundation
+    implementation AndroidLibConfig.composeMaterial
+    implementation AndroidLibConfig.composeTooling
+    implementation AndroidLibConfig.composeActivity
+
+    // UI Tests
+    androidTestImplementation 'androidx.compose.ui:ui-test-junit4:1.0.5'
 }

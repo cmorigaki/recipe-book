@@ -11,20 +11,20 @@ import br.com.recipebook.utilityandroid.presentation.BaseViewModel
 import com.github.michaelbull.result.onFailure
 import com.github.michaelbull.result.onSuccess
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
 @ExperimentalCoroutinesApi
 class SettingsViewModel(
-    override val viewState: SettingsViewState,
     private val getSettingsList: GetSettingsUseCase,
     private val analytics: Analytics,
-    buildConfiguration: BuildConfiguration,
-) : BaseViewModel<SettingsViewState, SettingsAction, SettingsCommand>() {
+    private val buildConfiguration: BuildConfiguration,
+    override val viewState: MutableStateFlow<SettingsViewState> = MutableStateFlow(SettingsViewState.Loading("")),
+) : BaseViewModel<MutableStateFlow<SettingsViewState>, SettingsAction, SettingsCommand>() {
 
     init {
-        viewState.appVersion.value = buildConfiguration.appInfo.version
         viewModelScope.launch {
-            setLoadingState()
+            viewState.value = SettingsViewState.Loading(buildConfiguration.appInfo.version)
             getSettingsList().onSuccess(::onLoadSuccess).onFailure { onLoadError() }
         }
     }
@@ -38,32 +38,20 @@ class SettingsViewModel(
         }
     }
 
-    private fun setLoadingState() {
-        viewState.isLoading.value = true
-        viewState.hasError.value = false
-    }
-
-    private fun setErrorState() {
-        viewState.isLoading.value = false
-        viewState.hasError.value = true
-    }
-
-    private fun setSuccessState() {
-        viewState.isLoading.value = false
-        viewState.hasError.value = false
-    }
-
     private fun onLoadSuccess(settings: List<SettingsItemModel>) {
         sendViewEvent(true)
-        viewState.listItems.value = settings.map {
+        val listItems = settings.map {
             SettingsItem(id = it.id, title = it.title, navIntent = it.navIntent)
         }
-        setSuccessState()
+        viewState.value = SettingsViewState.Loaded(
+            listItems = listItems,
+            appVersion = buildConfiguration.appInfo.version,
+        )
     }
 
     private fun onLoadError() {
         sendViewEvent(false)
-        setErrorState()
+        viewState.value = SettingsViewState.Error(buildConfiguration.appInfo.version)
     }
 
     private fun sendViewEvent(success: Boolean) {

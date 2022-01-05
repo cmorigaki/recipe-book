@@ -3,11 +3,10 @@ package br.com.recipebook.settings.theme.view
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
+import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import br.com.recipebook.settings.theme.R
-import br.com.recipebook.settings.theme.databinding.SettingsThemeActivityBinding
+import br.com.recipebook.designsystem.compose.RecipeBookTheme
 import br.com.recipebook.settings.theme.presentation.SettingsThemeAction
 import br.com.recipebook.settings.theme.presentation.SettingsThemeViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -20,67 +19,27 @@ class SettingsThemeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        SettingsThemeActivityBinding.inflate(layoutInflater).apply {
-            initComponents(this)
-            setContentView(root)
-            observeState(this)
+        observeState()
+    }
+
+    private fun observeState() {
+        lifecycleScope.launchWhenStarted {
+            viewModel.viewState.collect {
+                setContent {
+                    RecipeBookTheme {
+                        SettingsThemeView(
+                            state = it,
+                            onBackClick = ::onBackPressed,
+                            onItemClick = ::onItemClick,
+                        )
+                    }
+                }
+            }
         }
     }
 
-    private fun initComponents(binding: SettingsThemeActivityBinding) {
-        setupToolbar(binding)
-        setupRadioButtons(binding)
-    }
-
-    private fun setupToolbar(binding: SettingsThemeActivityBinding) {
-        binding.toolbarTitle.text = getString(R.string.settings_theme_title)
-        setSupportActionBar(binding.toolbar)
-        binding.toolbar.setNavigationOnClickListener { onBackPressed() }
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-    }
-
-    private fun setupRadioButtons(binding: SettingsThemeActivityBinding) {
-        binding.settingsThemeSystemDefault.setOnClickListener {
-            viewModel.dispatchAction(SettingsThemeAction.SystemThemeSelected)
-        }
-        binding.settingsThemeLight.setOnClickListener {
-            viewModel.dispatchAction(SettingsThemeAction.LightThemeSelected)
-        }
-        binding.settingsThemeDark.setOnClickListener {
-            viewModel.dispatchAction(SettingsThemeAction.DarkThemeSelected)
-        }
-    }
-
-    private fun observeState(binding: SettingsThemeActivityBinding) {
-        lifecycleScope.launchWhenStarted {
-            viewModel.viewState.isLoading.collect {
-                binding.settingsLoading.visibility = if (it) View.VISIBLE else View.GONE
-            }
-        }
-
-        lifecycleScope.launchWhenStarted {
-            viewModel.viewState.hasError.collect {
-                binding.settingsErrorState.root.visibility = if (it) View.VISIBLE else View.GONE
-            }
-        }
-
-        lifecycleScope.launchWhenStarted {
-            viewModel.viewState.isSystemThemeSelected.collect {
-                binding.settingsThemeSystemDefault.isChecked = it
-            }
-        }
-
-        lifecycleScope.launchWhenStarted {
-            viewModel.viewState.isLightThemeSelected.collect {
-                binding.settingsThemeLight.isChecked = it
-            }
-        }
-
-        lifecycleScope.launchWhenStarted {
-            viewModel.viewState.isDarkThemeSelected.collect {
-                binding.settingsThemeDark.isChecked = it
-            }
-        }
+    private fun onItemClick(item: SettingsThemeAction) {
+        viewModel.dispatchAction(item)
     }
 
     companion object {

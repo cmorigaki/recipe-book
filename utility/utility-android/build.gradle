@@ -15,8 +15,8 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility javaVersion
+        targetCompatibility javaVersion
     }
     kotlinOptions {
         jvmTarget = jvmTargetVersion
@@ -33,10 +33,6 @@ dependencies {
     implementation AndroidLibConfig.moshiConverter
 
     implementation AndroidLibConfig.appCompat
-    implementation AndroidLibConfig.constraintLayout
-    implementation AndroidLibConfig.recyclerView
-    implementation AndroidLibConfig.cardView
-    implementation AndroidLibConfig.material
 
     testImplementation TestConfig.jUnit
 

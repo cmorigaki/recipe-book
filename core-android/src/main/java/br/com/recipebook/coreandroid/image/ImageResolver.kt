@@ -11,7 +11,7 @@ enum class ImageSize(val folder: String) {
 
 private const val SizePlaceholder = "{size}"
 
-class ImageResolver {
+object ImageResolver {
     fun mountUrl(relativePath: String?, size: ImageSize): String? {
         return if (!relativePath.isNullOrBlank()) {
             Configuration.IMG_URL + relativePath.replace(SizePlaceholder, size.folder)

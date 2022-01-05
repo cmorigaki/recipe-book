@@ -5,3 +5,7 @@ dependencies {
     implementation AndroidLibConfig.coroutinesCore
 }
 
+java {
+    sourceCompatibility javaVersion
+    targetCompatibility javaVersion
+}
