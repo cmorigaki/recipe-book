@@ -18,7 +18,7 @@ This project is developed in order to create a scalable architecture, with good 
 - coroutines
 - StateFlow (instead of LiveData)
 - Jetpack ViewModel
-- View binding
+- Jetpack Compose
 - Koin
 - Retrofit
 - Moshi
@@ -27,7 +27,7 @@ This project is developed in order to create a scalable architecture, with good 
 - Github actions
 
 ## Architecture
-In general, I try to follow SOLID and clean code principles for every piece of code.
+SOLID and clean architecture are the pillars.
 
 ### Features
 In a feature scope (a screen for this project), the architecture relies on 5 distinct layers: View, Presentation, Domain, Data, Data source. These layers follows a **Clean architecture** dependency that can be represented by the below picture:
@@ -35,7 +35,7 @@ In a feature scope (a screen for this project), the architecture relies on 5 dis
     <img src="misc/modeling/feature_clean_arch.png" hspace="20">
 </p>
 
-For "view architecture" I'm using MVVM (Jetpack ViewModel), view binding (not DataBinding), kotlin StateFlow instead of LiveData.
+For "view architecture" I'm using MVVM (Jetpack ViewModel), kotlin StateFlow to provide state, and Compose.
 
 ### Data flow
 Since I'm using 100% kotlin, any asynchronous operation or background work uses kotlin coroutines and Flow when a reactive approach is necessary.
@@ -52,7 +52,7 @@ Today, I have a MainNavigator interface that receives an object that relates to 
 The application has dark and light mode that can be changed at runtime. All definitions/styles are inside design-system module.
 | Light | Dark |
 |---|---|
-| <img src="misc/screenshots/list_light.png" hspace="20"> | <img src="misc/screenshots/list_dark.png" hspace="20"> |
+| <img src="misc/screenshots/list_light.png"> | <img src="misc/screenshots/list_dark.png"> |
 
 ### DI Framework
 Koin
