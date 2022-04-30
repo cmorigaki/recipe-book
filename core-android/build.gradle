@@ -25,7 +25,6 @@ android {
 
 dependencies {
     implementation EnvironmentConfig.kotlinStdLib
-    implementation AndroidLibConfig.coreKtx
 
     implementation AndroidLibConfig.koinCore
 

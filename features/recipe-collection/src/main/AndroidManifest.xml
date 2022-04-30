@@ -2,7 +2,9 @@
     package="br.com.recipebook.recipecollection">
 
     <application>
-        <activity android:name=".RecipeCollectionActivity">
+        <activity
+            android:name=".RecipeCollectionActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
