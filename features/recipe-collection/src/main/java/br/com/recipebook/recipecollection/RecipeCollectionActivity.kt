@@ -21,7 +21,7 @@ import kotlin.system.exitProcess
 @ExperimentalCoroutinesApi
 class RecipeCollectionActivity : AppCompatActivity() {
 
-    private val viewModel: RecipeCollectionViewModel by viewModel(clazz = RecipeCollectionViewModel::class)
+    private val viewModel: RecipeCollectionViewModel by viewModel()
     private val mainNavigator: MainNavigator by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {

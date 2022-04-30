@@ -26,13 +26,11 @@ android {
 
     composeOptions {
         kotlinCompilerExtensionVersion composeVersion
-        kotlinCompilerVersion kotlinVersion
     }
 }
 
 dependencies {
     implementation EnvironmentConfig.kotlinStdLib
-    implementation AndroidLibConfig.coreKtx
 
     implementation AndroidLibConfig.appCompat
 

@@ -15,33 +15,32 @@ ext {
         versionCode: 10000001, // x.xxx.xx-xx
         versionName: "1.0.0",
 
-        compileSdk: 30,
-        buildTools: "30.0.3",
+        compileSdk: 32,
+        buildTools: "32.0.0",
         minSdk: 23,
-        targetSdk: 30
+        targetSdk: 32
     ]
     
     AndroidLibConfig = [
-        coreKtx: "androidx.core:core-ktx:1.3.2",
         coroutinesCore: "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2",
-        kotlinResult: "com.michael-bull.kotlin-result:kotlin-result:1.1.12",
+        kotlinResult: "com.michael-bull.kotlin-result:kotlin-result:1.1.16",
         kotlinResultCoroutines: "com.michael-bull.kotlin-result:kotlin-result-coroutines:1.1.12",
 
         // Debug
-        leakCanary: "com.squareup.leakcanary:leakcanary-android:2.7",
+        leakCanary: "com.squareup.leakcanary:leakcanary-android:2.9.1",
 
         // Network related libraries
         retrofit: "com.squareup.retrofit2:retrofit:2.9.0",
         okhttp: "com.squareup.okhttp3:okhttp:4.9.1",
         moshiConverter: "com.squareup.retrofit2:converter-moshi:2.9.0",
-        moshiCodeGen: "com.squareup.moshi:moshi-kotlin-codegen:1.12.0",
-        moshi: "com.squareup.moshi:moshi:1.12.0",
+        moshiCodeGen: "com.squareup.moshi:moshi-kotlin-codegen:1.13.0",
+        moshi: "com.squareup.moshi:moshi:1.13.0",
 
         // Android components
-        appCompat: "androidx.appcompat:appcompat:1.3.1",
-        viewmodel: "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1",
-        fragment: "androidx.fragment:fragment-ktx:1.3.6",
-        material: "com.google.android.material:material:1.4.0",
+        appCompat: "androidx.appcompat:appcompat:1.4.1",
+        viewmodel: "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1",
+        fragment: "androidx.fragment:fragment-ktx:1.4.1",
+        material: "com.google.android.material:material:1.5.0",
 
         // Compose
         compose: "androidx.compose.ui:ui:$composeVersion",
@@ -50,27 +49,27 @@ ext {
         composeMaterialIcons: "androidx.compose.material:material-icons-core:$composeVersion",
         composeMaterialIconsExt: "androidx.compose.material:material-icons-extended:$composeVersion",
         composeTooling: "androidx.compose.ui:ui-tooling:$composeVersion",
-        composeActivity: 'androidx.activity:activity-compose:1.3.1',
-        composeSwipeRefresh: "com.google.accompanist:accompanist-swiperefresh:0.19.0",
-        composeCollapsingToolbar: "me.onebone:toolbar-compose:2.3.0",
+        composeActivity: 'androidx.activity:activity-compose:1.4.0',
+        composeSwipeRefresh: "com.google.accompanist:accompanist-swiperefresh:0.23.1",
+        composeCollapsingToolbar: "me.onebone:toolbar-compose:2.3.3",
 
         // Android utilities
-        playCore: "com.google.android.play:core:1.10.1", // For in-App update
+        playCore: "com.google.android.play:core:1.10.3", // For in-App update
         playCoreExtensions: "com.google.android.play:core-ktx:1.8.1",
 
         // DI
-        koinCore: "io.insert-koin:koin-core:3.1.2", // Koin Core
-        koinAndroidExt: "io.insert-koin:koin-android:3.1.2", // Koin for Android
+        koinCore: "io.insert-koin:koin-core:3.1.6", // Koin Core
+        koinAndroidExt: "io.insert-koin:koin-android:3.1.6", // Koin for Android
     
         // Image download library
         coil: "io.coil-kt:coil:1.4.0",
         coilCompose: "io.coil-kt:coil-compose:1.4.0",
     
         // Crash reporting library
-        sentry: "io.sentry:sentry-android:5.1.2",
+        sentry: "io.sentry:sentry-android:5.7.3",
 
         // Analytics
-        amplitude: "com.amplitude:android-sdk:2.32.2",
+        amplitude: "com.amplitude:android-sdk:3.35.1",
 
         // Logging
         timber: 'com.jakewharton.timber:timber:5.0.1'
@@ -101,7 +100,7 @@ ext {
 
     TestConfig = [
         jUnit: "junit:junit:4.13.2",
-        mockk: "io.mockk:mockk:1.12.0",
+        mockk: "io.mockk:mockk:1.12.3",
         coroutinesTest: "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.2"
     ]
 
