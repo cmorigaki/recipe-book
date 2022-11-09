@@ -17,6 +17,7 @@ android {
     kotlinOptions {
         jvmTarget = jvmTargetVersion
     }
+    namespace 'br.com.recipebook.analytics.amplitude'
 }
 
 dependencies {

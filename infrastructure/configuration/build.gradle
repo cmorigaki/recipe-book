@@ -18,6 +18,7 @@ android {
     kotlinOptions {
         jvmTarget = jvmTargetVersion
     }
+    namespace 'br.com.recipebook.configuration'
 }
 
 dependencies {

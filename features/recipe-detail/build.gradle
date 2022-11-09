@@ -1,6 +1,10 @@
 apply from: "$rootDir/project-config/feature-complete-build.gradle"
 apply plugin: 'kotlin-parcelize'
 
+android {
+    namespace 'br.com.recipebook.recipedetail'
+}
+
 dependencies {
     implementation AndroidLibConfig.composeCollapsingToolbar
 
