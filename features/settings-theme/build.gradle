@@ -1,4 +1,7 @@
 apply from: "$rootDir/project-config/feature-complete-build.gradle"
+android {
+    namespace 'br.com.recipebook.settings.theme'
+}
 
 dependencies {
     implementation project(ProjectConfig.analytics)
