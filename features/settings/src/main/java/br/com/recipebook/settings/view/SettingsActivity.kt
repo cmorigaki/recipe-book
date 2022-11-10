@@ -32,7 +32,7 @@ class SettingsActivity : AppCompatActivity() {
                     RecipeBookTheme {
                         SettingsView(
                             state = it,
-                            onBackClick = ::onBackPressed,
+                            onBackClick = { onBackPressedDispatcher.onBackPressed() },
                             onItemClick = ::onItemClick,
                         )
                     }
