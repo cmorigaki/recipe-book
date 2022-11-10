@@ -12,12 +12,9 @@ import br.com.recipebook.settings.presentation.SettingsAction
 import br.com.recipebook.settings.presentation.SettingsCommand
 import br.com.recipebook.settings.presentation.SettingsViewModel
 import br.com.recipebook.settings.presentation.model.SettingsItem
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.collect
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-@ExperimentalCoroutinesApi
 class SettingsActivity : AppCompatActivity() {
     private val viewModel: SettingsViewModel by viewModel()
     private val mainNavigator: MainNavigator by inject()

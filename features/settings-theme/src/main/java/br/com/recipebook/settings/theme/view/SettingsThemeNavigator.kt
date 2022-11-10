@@ -4,9 +4,7 @@ import android.content.Context
 import br.com.recipebook.navigation.Navigator
 import br.com.recipebook.navigation.intent.NavIntent
 import br.com.recipebook.navigation.intent.SettingsThemeIntent
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 
-@ExperimentalCoroutinesApi
 class SettingsThemeNavigator : Navigator {
     override var intentList = listOf(SettingsThemeIntent::class.java)
 

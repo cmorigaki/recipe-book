@@ -9,11 +9,8 @@ import androidx.lifecycle.lifecycleScope
 import br.com.recipebook.designsystem.compose.RecipeBookTheme
 import br.com.recipebook.settings.theme.presentation.SettingsThemeAction
 import br.com.recipebook.settings.theme.presentation.SettingsThemeViewModel
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.collect
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-@ExperimentalCoroutinesApi
 class SettingsThemeActivity : AppCompatActivity() {
     private val viewModel: SettingsThemeViewModel by viewModel()
 

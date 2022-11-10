@@ -9,11 +9,9 @@ import br.com.recipebook.settings.theme.domain.usecase.SetUserThemePreferenceUse
 import br.com.recipebook.utilityandroid.presentation.BaseViewModel
 import com.github.michaelbull.result.onFailure
 import com.github.michaelbull.result.onSuccess
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
-@ExperimentalCoroutinesApi
 class SettingsThemeViewModel(
     private val getUserThemePreference: GetUserThemePreferenceUseCase,
     private val setUserThemePreferenceUseCase: SetUserThemePreferenceUseCase,

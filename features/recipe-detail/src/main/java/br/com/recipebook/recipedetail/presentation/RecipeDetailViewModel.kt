@@ -13,11 +13,9 @@ import br.com.recipebook.recipedetail.view.RecipeDetailSafeArgs
 import br.com.recipebook.utilityandroid.presentation.BaseViewModel
 import com.github.michaelbull.result.onFailure
 import com.github.michaelbull.result.onSuccess
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
-@ExperimentalCoroutinesApi
 class RecipeDetailViewModel(
     private val safeArgs: RecipeDetailSafeArgs,
     private val getRecipeDetail: GetRecipeDetailUseCase,

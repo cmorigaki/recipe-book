@@ -10,11 +10,9 @@ import br.com.recipebook.recipecollection.view.RecipeItem
 import br.com.recipebook.utilityandroid.presentation.BaseViewModel
 import com.github.michaelbull.result.onFailure
 import com.github.michaelbull.result.onSuccess
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
-@ExperimentalCoroutinesApi
 class RecipeCollectionViewModel(
     private val getRecipeCollection: GetRecipeCollectionUseCase,
     private val analytics: Analytics,
@@ -28,7 +26,7 @@ class RecipeCollectionViewModel(
             if (checkInAppUpdate()) {
                 loadRecipeList()
             } else {
-                commandSender.send(RecipeCollectionCommand.FinishApp)
+                commandSender.emit(RecipeCollectionCommand.FinishApp)
             }
         }
     }
@@ -79,7 +77,7 @@ class RecipeCollectionViewModel(
         recipeId: String,
         title: String?
     ) = viewModelScope.launch {
-        commandSender.send(
+        commandSender.emit(
             RecipeCollectionCommand.OpenRecipeDetail(
                 recipeId = recipeId, title = title
             )
