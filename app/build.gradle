@@ -47,10 +47,10 @@ android {
 
 dependencies {
     implementation EnvironmentConfig.kotlinStdLib
-    implementation AndroidLibConfig.coroutinesCore
+    implementation libs.coroutines.core
 
-    implementation AndroidLibConfig.koinCore
-    implementation AndroidLibConfig.koinAndroidExt
+    implementation libs.koin.core
+    implementation libs.koin.android
 
     implementation project(ProjectConfig.coreAndroid)
     implementation project(ProjectConfig.utilityAndroid)
@@ -64,8 +64,8 @@ dependencies {
     implementation project(ProjectConfig.monitoring)
     implementation project(ProjectConfig.device)
 
-    implementation AndroidLibConfig.sentry
-    implementation AndroidLibConfig.timber
+    implementation libs.sentry
+    implementation libs.timber
 
     implementation project(Features.recipeCollection)
     implementation project(Features.recipeDetail)
@@ -77,5 +77,5 @@ dependencies {
     testImplementation TestConfig.mockk
 
     // debugImplementation because LeakCanary should only run in debug builds.
-    debugImplementation AndroidLibConfig.leakCanary
+    debugImplementation libs.leak.canary
 }

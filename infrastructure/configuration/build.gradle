@@ -23,16 +23,16 @@ android {
 
 dependencies {
     implementation EnvironmentConfig.kotlinJdk
-    implementation AndroidLibConfig.coroutinesCore
-    implementation AndroidLibConfig.kotlinResult
+    implementation libs.coroutines.core
+    implementation libs.kotlin.result
 
-    implementation AndroidLibConfig.koinCore
+    implementation libs.koin.core
 
     implementation project(ProjectConfig.utilityKotlin)
     implementation project(ProjectConfig.utilityAndroid)
 
-    implementation AndroidLibConfig.retrofit
-    implementation AndroidLibConfig.moshiConverter
-    implementation AndroidLibConfig.moshi
-    kapt AndroidLibConfig.moshiCodeGen
+    implementation libs.retrofit
+    implementation libs.moshi.converter
+    implementation libs.moshi
+    kapt libs.moshi.codegen
 }

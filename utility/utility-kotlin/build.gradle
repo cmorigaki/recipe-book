@@ -2,7 +2,7 @@ apply plugin: 'kotlin'
 
 dependencies {
     implementation EnvironmentConfig.kotlinJdk
-    implementation AndroidLibConfig.coroutinesCore
+    implementation libs.coroutines.core
 }
 
 java {

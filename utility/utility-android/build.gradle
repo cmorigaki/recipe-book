@@ -26,13 +26,13 @@ android {
 
 dependencies {
     implementation EnvironmentConfig.kotlinStdLib
-    implementation AndroidLibConfig.coroutinesCore
-    implementation AndroidLibConfig.kotlinResult
+    implementation libs.coroutines.core
+    implementation libs.kotlin.result
 
-    implementation AndroidLibConfig.retrofit
-    implementation AndroidLibConfig.moshiConverter
+    implementation libs.retrofit
+    implementation libs.moshi.converter
 
-    implementation AndroidLibConfig.appCompat
+    implementation libs.appCompat
 
     testImplementation TestConfig.jUnit
 

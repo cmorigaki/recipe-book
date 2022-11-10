@@ -25,7 +25,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion composeVersion
+        kotlinCompilerExtensionVersion libs.versions.compose.get()
     }
     namespace 'br.com.recipebook.designsystem'
 }
@@ -33,12 +33,12 @@ android {
 dependencies {
     implementation EnvironmentConfig.kotlinStdLib
 
-    implementation AndroidLibConfig.appCompat
+    implementation libs.appCompat
 
-    implementation AndroidLibConfig.material
-    implementation platform(AndroidLibConfig.composeBOM)
-    implementation AndroidLibConfig.composeTooling
-    implementation AndroidLibConfig.composeMaterial
+    implementation libs.material
+    implementation platform(libs.compose.bom)
+    implementation libs.compose.tooling
+    implementation libs.compose.material
 
     implementation project(ProjectConfig.utilityAndroid)
 }

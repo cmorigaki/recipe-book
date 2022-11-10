@@ -20,61 +20,6 @@ ext {
         minSdk: 23,
         targetSdk: 33
     ]
-    
-    AndroidLibConfig = [
-        coroutinesCore: "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4",
-        kotlinResult: "com.michael-bull.kotlin-result:kotlin-result:1.1.16",
-        kotlinResultCoroutines: "com.michael-bull.kotlin-result:kotlin-result-coroutines:1.1.12",
-
-        // Debug
-        leakCanary: "com.squareup.leakcanary:leakcanary-android:2.9.1",
-
-        // Network related libraries
-        retrofit: "com.squareup.retrofit2:retrofit:2.9.0",
-        okhttp: "com.squareup.okhttp3:okhttp:4.10.0",
-        moshiConverter: "com.squareup.retrofit2:converter-moshi:2.9.0",
-        moshiCodeGen: "com.squareup.moshi:moshi-kotlin-codegen:1.14.0",
-        moshi: "com.squareup.moshi:moshi:1.14.0",
-
-        // Android components
-        appCompat: "androidx.appcompat:appcompat:1.5.1",
-        viewmodel: "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1",
-        fragment: "androidx.fragment:fragment-ktx:1.5.4",
-        material: "com.google.android.material:material:1.7.0",
-
-        // Compose
-        composeBOM: "androidx.compose:compose-bom:2022.10.00",
-        compose: "androidx.compose.ui:ui",
-        composeFoundation: "androidx.compose.foundation:foundation",
-        composeMaterial: "androidx.compose.material:material",
-        composeMaterialIcons: "androidx.compose.material:material-icons-core",
-        composeMaterialIconsExt: "androidx.compose.material:material-icons-extended",
-        composeTooling: "androidx.compose.ui:ui-tooling",
-        composeActivity: 'androidx.activity:activity-compose:1.6.1',
-        composeSwipeRefresh: "com.google.accompanist:accompanist-swiperefresh:0.27.0",
-        composeCollapsingToolbar: "me.onebone:toolbar-compose:2.3.5",
-
-        // Android utilities
-        playCore: "com.google.android.play:core:1.10.3", // For in-App update
-        playCoreExtensions: "com.google.android.play:core-ktx:1.8.1",
-
-        // DI
-        koinCore: "io.insert-koin:koin-core:3.2.2", // Koin Core
-        koinAndroidExt: "io.insert-koin:koin-android:3.3.0", // Koin for Android
-    
-        // Image download library
-        coil: "io.coil-kt:coil:2.2.2",
-        coilCompose: "io.coil-kt:coil-compose:2.2.2",
-    
-        // Crash reporting library
-        sentry: "io.sentry:sentry-android:6.7.0",
-
-        // Analytics
-        amplitude: "com.amplitude:android-sdk:3.35.1",
-
-        // Logging
-        timber: 'com.jakewharton.timber:timber:5.0.1'
-    ]
 
     ProjectConfig = [
         utilityKotlin: ":utility:utility-kotlin",

@@ -23,11 +23,11 @@ android {
 dependencies {
     implementation EnvironmentConfig.kotlinStdLib
 
-    implementation AndroidLibConfig.koinCore
-    implementation AndroidLibConfig.koinAndroidExt
+    implementation libs.koin.core
+    implementation libs.koin.android
 
-    implementation AndroidLibConfig.amplitude
-    implementation AndroidLibConfig.timber
+    implementation libs.amplitude
+    implementation libs.timber
 
     implementation project(ProjectConfig.utilityAndroid)
     implementation project(ProjectConfig.utilityKotlin)

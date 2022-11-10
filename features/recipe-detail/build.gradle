@@ -6,7 +6,7 @@ android {
 }
 
 dependencies {
-    implementation AndroidLibConfig.composeCollapsingToolbar
+    implementation libs.compose.collapsingToolbar
 
     implementation project(ProjectConfig.analytics)
     implementation project(ProjectConfig.device)

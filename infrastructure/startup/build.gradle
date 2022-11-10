@@ -3,9 +3,9 @@ apply plugin: 'kotlin'
 dependencies {
     implementation EnvironmentConfig.kotlinJdk
     implementation EnvironmentConfig.kotlinStdLib
-    implementation AndroidLibConfig.coroutinesCore
+    implementation libs.coroutines.core
 
-    implementation AndroidLibConfig.koinCore
+    implementation libs.koin.core
 
     implementation project(ProjectConfig.utilityKotlin)
 

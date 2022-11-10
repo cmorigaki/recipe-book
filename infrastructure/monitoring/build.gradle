@@ -23,11 +23,11 @@ android {
 dependencies {
     implementation EnvironmentConfig.kotlinStdLib
 
-    implementation AndroidLibConfig.koinCore
+    implementation libs.koin.core
 
-    implementation AndroidLibConfig.timber
-    implementation AndroidLibConfig.sentry
-    implementation AndroidLibConfig.okhttp
+    implementation libs.timber
+    implementation libs.sentry
+    implementation libs.okhttp
 
     implementation project(ProjectConfig.analytics)
     implementation project(ProjectConfig.configuration)

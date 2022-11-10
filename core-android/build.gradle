@@ -27,11 +27,11 @@ android {
 dependencies {
     implementation EnvironmentConfig.kotlinStdLib
 
-    implementation AndroidLibConfig.koinCore
+    implementation libs.koin.core
 
-    implementation AndroidLibConfig.retrofit
-    implementation AndroidLibConfig.moshiConverter
-    implementation AndroidLibConfig.moshi
+    implementation libs.retrofit
+    implementation libs.moshi.converter
+    implementation libs.moshi
 
     implementation project(ProjectConfig.utilityAndroid)
     implementation project(ProjectConfig.utilityKotlin)
