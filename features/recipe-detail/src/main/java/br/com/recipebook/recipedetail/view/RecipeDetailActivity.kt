@@ -35,7 +35,7 @@ class RecipeDetailActivity : AppCompatActivity() {
                         RecipeDetailView(
                             state = it,
                             statusBarHeight = getStatusBarHeight().dp,
-                            onBackClick = ::onBackPressed,
+                            onBackClick = { onBackPressedDispatcher.onBackPressed() },
                         )
                     }
                 }

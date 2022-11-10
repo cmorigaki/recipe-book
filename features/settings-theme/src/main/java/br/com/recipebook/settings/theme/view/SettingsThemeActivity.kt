@@ -26,7 +26,7 @@ class SettingsThemeActivity : AppCompatActivity() {
                     RecipeBookTheme {
                         SettingsThemeView(
                             state = it,
-                            onBackClick = ::onBackPressed,
+                            onBackClick = { onBackPressedDispatcher.onBackPressed() },
                             onItemClick = ::onItemClick,
                         )
                     }
