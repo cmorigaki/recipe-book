@@ -1,9 +1,7 @@
 package br.com.recipebook.recipedetail.presentation
 
 import br.com.recipebook.recipedetail.presentation.model.RecipeDetailItem
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 
-@ExperimentalCoroutinesApi
 sealed class RecipeDetailViewState {
     abstract val title: String?
 

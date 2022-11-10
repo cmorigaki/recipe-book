@@ -12,13 +12,10 @@ import br.com.recipebook.recipecollection.presentation.RecipeCollectionAction
 import br.com.recipebook.recipecollection.presentation.RecipeCollectionCommand
 import br.com.recipebook.recipecollection.presentation.RecipeCollectionViewModel
 import br.com.recipebook.recipecollection.view.RecipeCollectionView
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.collect
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import kotlin.system.exitProcess
 
-@ExperimentalCoroutinesApi
 class RecipeCollectionActivity : AppCompatActivity() {
 
     private val viewModel: RecipeCollectionViewModel by viewModel()

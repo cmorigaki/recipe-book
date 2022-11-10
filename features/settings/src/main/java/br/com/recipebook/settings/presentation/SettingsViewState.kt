@@ -1,9 +1,7 @@
 package br.com.recipebook.settings.presentation
 
 import br.com.recipebook.settings.presentation.model.SettingsItem
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 
-@ExperimentalCoroutinesApi
 sealed class SettingsViewState {
     abstract val appVersion: String
 

@@ -10,11 +10,9 @@ import br.com.recipebook.settings.presentation.model.SettingsItem
 import br.com.recipebook.utilityandroid.presentation.BaseViewModel
 import com.github.michaelbull.result.onFailure
 import com.github.michaelbull.result.onSuccess
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
-@ExperimentalCoroutinesApi
 class SettingsViewModel(
     private val getSettingsList: GetSettingsUseCase,
     private val analytics: Analytics,
@@ -33,7 +31,7 @@ class SettingsViewModel(
         viewModelScope.launch {
             when (action) {
                 is SettingsAction.ItemClick ->
-                    commandSender.send(SettingsCommand.OpenItem(action.settingsItem.navIntent))
+                    commandSender.emit(SettingsCommand.OpenItem(action.settingsItem.navIntent))
             }
         }
     }

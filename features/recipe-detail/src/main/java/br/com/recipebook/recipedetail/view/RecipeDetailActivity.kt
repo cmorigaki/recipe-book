@@ -13,12 +13,9 @@ import br.com.recipebook.recipedetail.presentation.RecipeDetailViewModel
 import br.com.recipebook.utilityandroid.view.activitySafeArgs
 import br.com.recipebook.utilityandroid.view.getStatusBarHeight
 import br.com.recipebook.utilityandroid.view.putSafeArgs
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.collect
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
-@ExperimentalCoroutinesApi
 class RecipeDetailActivity : AppCompatActivity() {
     private val safeArgs by activitySafeArgs<RecipeDetailSafeArgs>()
 
