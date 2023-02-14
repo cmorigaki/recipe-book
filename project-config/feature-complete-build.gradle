@@ -72,7 +72,4 @@ dependencies {
     implementation libs.compose.material
     implementation libs.compose.tooling
     implementation libs.compose.activity
-
-    // UI Tests
-    androidTestImplementation 'androidx.compose.ui:ui-test-junit4:1.3.0'
 }
