@@ -1,20 +1,22 @@
-apply plugin: "com.android.application"
-apply plugin: 'kotlin-android'
-apply plugin: 'com.starter.easylauncher'
+plugins {
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.easylauncher)
+}
 
 apply from: "$rootDir/project-config/api-properties/api-properties.gradle"
 
 android {
-    compileSdkVersion AndroidConfig.compileSdk
-    buildToolsVersion AndroidConfig.buildTools
+    compileSdk libs.versions.compileSdk.get() as int
+    namespace 'br.com.recipebook'
 
     defaultConfig {
-        applicationId AndroidConfig.applicationId
+        applicationId "br.com.recipebook"
 
-        minSdkVersion AndroidConfig.minSdk
-        targetSdkVersion AndroidConfig.targetSdk
-        versionCode AndroidConfig.versionCode
-        versionName AndroidConfig.versionName
+        minSdk libs.versions.minSdk.get() as int
+        targetSdk libs.versions.compileSdk.get() as int
+        versionCode 10000001 // x.xxx.xx-xx
+        versionName "1.0.0"
     }
 
     buildTypes {
@@ -42,15 +44,14 @@ android {
     kotlinOptions {
         jvmTarget = jvmTargetVersion
     }
-    namespace 'br.com.recipebook'
 }
 
 dependencies {
-    implementation EnvironmentConfig.kotlinStdLib
-    implementation AndroidLibConfig.coroutinesCore
+    implementation libs.kotlin.stdlib
+    implementation libs.coroutines.core
 
-    implementation AndroidLibConfig.koinCore
-    implementation AndroidLibConfig.koinAndroidExt
+    implementation libs.koin.core
+    implementation libs.koin.android
 
     implementation project(ProjectConfig.coreAndroid)
     implementation project(ProjectConfig.utilityAndroid)
@@ -64,8 +65,8 @@ dependencies {
     implementation project(ProjectConfig.monitoring)
     implementation project(ProjectConfig.device)
 
-    implementation AndroidLibConfig.sentry
-    implementation AndroidLibConfig.timber
+    implementation libs.sentry
+    implementation libs.timber
 
     implementation project(Features.recipeCollection)
     implementation project(Features.recipeDetail)
@@ -73,9 +74,9 @@ dependencies {
     implementation project(Features.settingsTheme)
     implementation project(Features.inAppUpdate)
 
-    testImplementation TestConfig.jUnit
-    testImplementation TestConfig.mockk
+    testImplementation libs.junit
+    testImplementation libs.mockk
 
     // debugImplementation because LeakCanary should only run in debug builds.
-    debugImplementation AndroidLibConfig.leakCanary
+    debugImplementation libs.leak.canary
 }

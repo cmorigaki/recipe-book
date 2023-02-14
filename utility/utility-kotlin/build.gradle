@@ -1,8 +1,10 @@
-apply plugin: 'kotlin'
+plugins {
+    alias(libs.plugins.kotlin.jvm)
+}
 
 dependencies {
-    implementation EnvironmentConfig.kotlinJdk
-    implementation AndroidLibConfig.coroutinesCore
+    implementation libs.kotlin.jdk
+    implementation libs.coroutines.core
 }
 
 java {

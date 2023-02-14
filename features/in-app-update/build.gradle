@@ -6,9 +6,9 @@ android {
 }
 
 dependencies {
-    implementation AndroidLibConfig.playCore
-    implementation AndroidLibConfig.playCoreExtensions
-    implementation AndroidLibConfig.fragment
+    implementation libs.play.core
+    implementation libs.play.core.extensions
+    implementation libs.fragment
 
     implementation project(ProjectConfig.configuration)
     implementation project(ProjectConfig.monitoring)

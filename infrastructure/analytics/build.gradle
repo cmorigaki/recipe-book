@@ -1,5 +1,7 @@
-apply plugin: 'kotlin'
+plugins {
+    alias(libs.plugins.kotlin.jvm)
+}
 
 dependencies {
-    implementation EnvironmentConfig.kotlinJdk
+    implementation libs.kotlin.jdk
 }
