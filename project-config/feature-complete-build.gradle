@@ -1,16 +1,18 @@
 apply plugin: "com.android.library"
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
+//plugins {
+//    alias(libs.plugins.android.library)
+//    alias(libs.plugins.kotlin.android)
+//    alias(libs.plugins.kotlin.kapt)
+//}
 
 android {
-    compileSdkVersion AndroidConfig.compileSdk
-    buildToolsVersion AndroidConfig.buildTools
+    compileSdk libs.versions.compileSdk.get() as int
 
     defaultConfig {
-        minSdkVersion AndroidConfig.minSdk
-        targetSdkVersion AndroidConfig.targetSdk
-        versionCode AndroidConfig.versionCode
-        versionName AndroidConfig.versionName
+        minSdk libs.versions.minSdk.get() as int
+        targetSdk libs.versions.compileSdk.get() as int
     }
 
     buildFeatures {
@@ -37,7 +39,7 @@ android {
 }
 
 dependencies {
-    implementation EnvironmentConfig.kotlinStdLib
+    implementation libs.kotlin.stdlib
     implementation libs.coroutines.core
     implementation libs.kotlin.result
 
@@ -55,8 +57,8 @@ dependencies {
     implementation libs.coil
     implementation libs.coil.compose
 
-    testImplementation TestConfig.jUnit
-    testImplementation TestConfig.mockk
+    testImplementation libs.junit
+    testImplementation libs.mockk
 
     implementation project(ProjectConfig.utilityAndroid)
     implementation project(ProjectConfig.utilityKotlin)

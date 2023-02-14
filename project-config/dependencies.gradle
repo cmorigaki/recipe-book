@@ -1,25 +1,6 @@
 ext {
     jvmTargetVersion = "11"
     javaVersion = JavaVersion.VERSION_11
-    
-    EnvironmentConfig = [
-        gradlePlugin: "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion",
-        kotlinStdLib: "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion",
-        gradleApi: "com.android.tools.build:gradle-api:$gradleVersion",
-        kotlinJdk: "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion",
-        gradleTools: "com.android.tools.build:gradle:$gradleVersion"
-    ]
-    
-    AndroidConfig = [
-        applicationId: "br.com.recipebook",
-        versionCode: 10000001, // x.xxx.xx-xx
-        versionName: "1.0.0",
-
-        compileSdk: 33,
-        buildTools: "32.0.0",
-        minSdk: 23,
-        targetSdk: 33
-    ]
 
     ProjectConfig = [
         utilityKotlin: ":utility:utility-kotlin",
@@ -43,11 +24,4 @@ ext {
         settingsTheme: ":features:settings-theme",
         inAppUpdate: ":features:in-app-update"
     ]
-
-    TestConfig = [
-        jUnit: "junit:junit:4.13.2",
-        mockk: "io.mockk:mockk:1.13.2",
-        coroutinesTest: "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.2"
-    ]
-
 }

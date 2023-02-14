@@ -1,13 +1,14 @@
-apply plugin: "com.android.library"
-apply plugin: 'kotlin-android'
+plugins {
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.android)
+}
 
 android {
-    compileSdkVersion AndroidConfig.compileSdk
-    buildToolsVersion AndroidConfig.buildTools
+    compileSdk libs.versions.compileSdk.get() as int
 
     defaultConfig {
-        minSdkVersion AndroidConfig.minSdk
-        targetSdkVersion AndroidConfig.targetSdk
+        minSdk libs.versions.minSdk.get() as int
+        targetSdk libs.versions.compileSdk.get() as int
     }
 
     compileOptions {
@@ -21,7 +22,7 @@ android {
 }
 
 dependencies {
-    implementation EnvironmentConfig.kotlinJdk
+    implementation libs.kotlin.jdk
     implementation libs.coroutines.core
 
     implementation libs.koin.core
