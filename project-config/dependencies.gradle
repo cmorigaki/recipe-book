@@ -1,6 +1,6 @@
 ext {
-    jvmTargetVersion = "11"
-    javaVersion = JavaVersion.VERSION_11
+    jvmTargetVersion = "17"
+    javaVersion = JavaVersion.VERSION_17
 
     ProjectConfig = [
         utilityKotlin: ":utility:utility-kotlin",

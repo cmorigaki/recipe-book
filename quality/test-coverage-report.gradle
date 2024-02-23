@@ -58,9 +58,9 @@ def setupAndroidReport() {
 
         // These are the different report file formats that we have enabled jacoco to create reports for
         reports {
-            csv.enabled false
-            xml.enabled = false
-            html.enabled true
+            csv.required = false
+            xml.required = false
+            html.required = true
         }
     }
 }
@@ -88,9 +88,9 @@ def setupKotlinReport() {
         ])
 
         reports {
-            csv.enabled false
-            xml.enabled false
-            html.enabled true
+            csv.required = false
+            xml.required = false
+            html.required = true
         }
     }
 }
