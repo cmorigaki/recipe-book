@@ -8,7 +8,7 @@ on:
 jobs:
   test:
     name: Release - Run Unit Tests
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
@@ -27,7 +27,7 @@ jobs:
 
   apk:
     name: Generate APK
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v1
