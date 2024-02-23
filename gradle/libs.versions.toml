@@ -10,11 +10,11 @@ compose = "1.5.2"
 # Kotlin
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
 kotlin-jdk = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref = "kotlin" }
-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version = "1.6.4" }
-kotlin-result = { module = "com.michael-bull.kotlin-result:kotlin-result", version = "1.1.16" }
+coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version = "1.8.0" }
+kotlin-result = { module = "com.michael-bull.kotlin-result:kotlin-result", version = "1.1.18" }
 
 # Debug
-leak-canary = { module = "com.squareup.leakcanary:leakcanary-android", version = "2.12" }
+leak-canary = { module = "com.squareup.leakcanary:leakcanary-android", version = "2.13" }
 
 # Compose
 compose-bom = { module = "androidx.compose:compose-bom", version = "2024.02.01" }
@@ -25,15 +25,15 @@ compose-materialIcons = { module = "androidx.compose.material:material-icons-cor
 compose-materialIconsExt = { module = "androidx.compose.material:material-icons-extended" }
 compose-tooling = { module = "androidx.compose.ui:ui-tooling" }
 compose-activity = { module = "androidx.activity:activity-compose", version = "1.8.2" }
-compose-swipeRefresh = { module = "com.google.accompanist:accompanist-swiperefresh", version = "0.28.0" }
+compose-swipeRefresh = { module = "com.google.accompanist:accompanist-swiperefresh", version = "0.34.0" }
 compose-collapsingToolbar = { module = "me.onebone:toolbar-compose", version = "2.3.5" }
 
 # Network related libraries
 retrofit = { module = "com.squareup.retrofit2:retrofit", version = "2.9.0" }
-okhttp = { module = "com.squareup.okhttp3:okhttp", version = "4.11.0" }
+okhttp = { module = "com.squareup.okhttp3:okhttp", version = "4.12.0" }
 moshi-converter = { module = "com.squareup.retrofit2:converter-moshi", version = "2.9.0" }
-moshi-codegen = { module = "com.squareup.moshi:moshi-kotlin-codegen", version = "1.14.0" }
-moshi = { module = "com.squareup.moshi:moshi", version = "1.15.0" }
+moshi-codegen = { module = "com.squareup.moshi:moshi-kotlin-codegen", version = "1.15.1" }
+moshi = { module = "com.squareup.moshi:moshi", version = "1.15.1" }
 
 # Android components
 appCompat = { module = "androidx.appcompat:appcompat", version = "1.6.1" }
@@ -46,16 +46,16 @@ play-core = { module = "com.google.android.play:core", version = "1.10.3" } # Fo
 play-core-extensions = { module = "com.google.android.play:core-ktx", version = "1.8.1" }
 
 # DI
-koin-bom = { module = "io.insert-koin:koin-bom", version = "3.5.1" }
+koin-bom = { module = "io.insert-koin:koin-bom", version = "3.5.3" }
 koin-core = { module = "io.insert-koin:koin-core" }
 koin-android = { module = "io.insert-koin:koin-android" }
 
 # Image download library
-coil = { module = "io.coil-kt:coil", version = "2.2.2" }
-coil-compose = { module = "io.coil-kt:coil-compose", version = "2.2.2" }
+coil = { module = "io.coil-kt:coil", version = "2.5.0" }
+coil-compose = { module = "io.coil-kt:coil-compose", version = "2.5.0" }
 
 # Crash reporting library
-sentry = { module = "io.sentry:sentry-android", version = "6.13.1" }
+sentry = { module = "io.sentry:sentry-android", version = "7.4.0" }
 
 # Analytics
 amplitude = { module = "com.amplitude:android-sdk", version = "3.35.1" }
@@ -65,8 +65,8 @@ timber = { module = "com.jakewharton.timber:timber", version = "5.0.1" }
 
 # Testing
 junit = { module = "junit:junit", version = "4.13.2"}
-mockk = { module = "io.mockk:mockk", version = "1.13.4"}
-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version = "1.6.4"}
+mockk = { module = "io.mockk:mockk", version = "1.13.9"}
+coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version = "1.8.0"}
 
 [bundles]
 
@@ -76,5 +76,5 @@ android-library = { id = "com.android.library", version.ref = "gradleplugin" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
-easylauncher = { id = "com.starter.easylauncher", version = "6.1.0" }
-gradle-deps-update = { id = "com.github.ben-manes.versions", version = "0.45.0" }
+easylauncher = { id = "com.starter.easylauncher", version = "6.2.0" }
+gradle-deps-update = { id = "com.github.ben-manes.versions", version = "0.51.0" }
