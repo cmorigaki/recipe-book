@@ -1,10 +1,10 @@
 apply plugin: "com.android.library"
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-kapt'
+apply plugin: 'com.google.devtools.ksp'
 //plugins {
 //    alias(libs.plugins.android.library)
 //    alias(libs.plugins.kotlin.android)
-//    alias(libs.plugins.kotlin.kapt)
+//    alias(libs.plugins.kotlin.ksp)
 //}
 
 android {
@@ -43,13 +43,14 @@ dependencies {
     implementation libs.coroutines.core
     implementation libs.kotlin.result
 
+    implementation platform(libs.koin.bom)
     implementation libs.koin.core
     implementation libs.koin.android
 
     implementation libs.retrofit
     implementation libs.moshi.converter
     implementation libs.moshi
-    kapt libs.moshi.codegen
+    ksp libs.moshi.codegen
 
     implementation libs.appCompat
     implementation libs.viewmodel

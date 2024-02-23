@@ -28,6 +28,7 @@ android {
 dependencies {
     implementation libs.kotlin.stdlib
 
+    implementation platform(libs.koin.bom)
     implementation libs.koin.core
 
     implementation libs.retrofit

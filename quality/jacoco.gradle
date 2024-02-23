@@ -28,10 +28,10 @@ def setupAndroidReporting() {
         ]
     ) {
         reports {
-            csv.enabled false
-            xml.enabled false
+            csv.required = false
+            xml.required = false
             html {
-                enabled true
+                required = true
                 destination file("${buildDir}/coverage-report")
             }
         }
@@ -83,10 +83,10 @@ def setupKotlinReporting() {
     jacocoTestReport {
         dependsOn test
         reports {
-            csv.enabled false
-            xml.enabled false
+            csv.required = false
+            xml.required = false
             html {
-                enabled true
+                required = true
                 destination file("${buildDir}/coverage-report")
             }
         }
