@@ -6,5 +6,4 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class InAppUpdateSafeArgs(
     val appUpdateType: Int,
-    val requestCode: Int,
 ) : Parcelable

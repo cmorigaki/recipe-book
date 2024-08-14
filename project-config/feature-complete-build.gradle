@@ -1,10 +1,12 @@
 apply plugin: "com.android.library"
 apply plugin: 'kotlin-android'
 apply plugin: 'com.google.devtools.ksp'
+apply plugin: 'org.jetbrains.kotlin.plugin.compose'
 //plugins {
 //    alias(libs.plugins.android.library)
 //    alias(libs.plugins.kotlin.android)
 //    alias(libs.plugins.kotlin.ksp)
+//    alias(libs.plugins.compose)
 //}
 
 android {
@@ -31,10 +33,6 @@ android {
     }
     kotlinOptions {
         jvmTarget = jvmTargetVersion
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion libs.versions.compose.get()
     }
 }
 

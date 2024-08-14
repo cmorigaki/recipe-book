@@ -1,19 +1,40 @@
 package br.com.recipebook.inappupdate
 
-import android.content.Intent
+import android.os.Bundle
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import br.com.recipebook.utilityandroid.view.putSafeArgs
 import br.com.recipebook.utilityandroid.view.safeArgs
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
+import com.google.android.play.core.appupdate.AppUpdateOptions
 import com.google.android.play.core.install.model.UpdateAvailability
-import com.google.android.play.core.ktx.startUpdateFlowForResult
 import kotlinx.coroutines.CompletableDeferred
 
 internal class InAppUpdateHeadlessFragment : Fragment() {
     private val safeArgs by safeArgs<InAppUpdateSafeArgs>()
 
     lateinit var completableDeferred: CompletableDeferred<InAppUpdateResult>
+
+    /**
+     * This launcher needs to be registered before "start" lifecycle state.
+     */
+    private val activityResultLauncher = registerForActivityResult(
+        ActivityResultContracts.StartIntentSenderForResult()
+    ) { result ->
+        if (result.resultCode != AppCompatActivity.RESULT_OK) {
+            // If the update is cancelled or fails,
+            // you can request to start the update again.
+            completeAndRemoveFragment(InAppUpdateResult.UpdateFailed)
+        } else {
+            completeAndRemoveFragment(InAppUpdateResult.UpdateCompleted)
+        }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        checkInAppUpdate()
+    }
 
     override fun onResume() {
         super.onResume()
@@ -35,9 +56,8 @@ internal class InAppUpdateHeadlessFragment : Fragment() {
                 // Request the update.
                 appUpdateManager.startUpdateFlowForResult(
                     appUpdateInfo,
-                    safeArgs.appUpdateType,
-                    this,
-                    safeArgs.requestCode
+                    activityResultLauncher,
+                    AppUpdateOptions.newBuilder(safeArgs.appUpdateType).build(),
                 )
             } else {
                 completeAndRemoveFragment(InAppUpdateResult.UpdateNotAvailable)
@@ -48,23 +68,6 @@ internal class InAppUpdateHeadlessFragment : Fragment() {
     private fun isUpdateAvailable(updateAvailability: Int): Boolean {
         return updateAvailability == UpdateAvailability.UPDATE_AVAILABLE ||
             updateAvailability == UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS
-    }
-
-    override fun onActivityResult(
-        requestCode: Int,
-        resultCode: Int,
-        data: Intent?
-    ) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == safeArgs.requestCode) {
-            if (resultCode != AppCompatActivity.RESULT_OK) {
-                // If the update is cancelled or fails,
-                // you can request to start the update again.
-                completeAndRemoveFragment(InAppUpdateResult.UpdateFailed)
-            } else {
-                completeAndRemoveFragment(InAppUpdateResult.UpdateCompleted)
-            }
-        }
     }
 
     private fun completeAndRemoveFragment(result: InAppUpdateResult) {
@@ -90,12 +93,10 @@ internal class InAppUpdateHeadlessFragment : Fragment() {
     companion object {
         fun newInstance(
             appUpdateType: Int,
-            requestCode: Int
         ) = InAppUpdateHeadlessFragment()
             .putSafeArgs(
                 InAppUpdateSafeArgs(
                     appUpdateType = appUpdateType,
-                    requestCode = requestCode,
                 )
             )
     }
