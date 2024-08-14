@@ -7,13 +7,11 @@ private const val TAG = "InAppUpdateManager"
 
 suspend fun FragmentActivity.requestInAppUpdate(
     appUpdateType: Int,
-    requestCode: Int
 ): InAppUpdateResult {
     val fragment = supportFragmentManager.findFragmentByTag(TAG) as? InAppUpdateHeadlessFragment
     return if (fragment == null) {
         val inAppUpdate = InAppUpdateHeadlessFragment.newInstance(
             appUpdateType = appUpdateType,
-            requestCode = requestCode
         ).apply {
             completableDeferred = CompletableDeferred()
         }
