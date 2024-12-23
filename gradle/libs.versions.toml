@@ -3,7 +3,7 @@ gradleplugin = "8.7.3"
 kotlin = "2.1.0"
 ksp = "2.1.0-1.0.28"
 minSdk = "23"
-compileSdk = "34"
+compileSdk = "35"
 
 [libraries]
 # Kotlin

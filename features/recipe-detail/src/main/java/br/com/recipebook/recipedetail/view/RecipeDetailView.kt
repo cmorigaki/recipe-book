@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -34,12 +35,10 @@ import br.com.recipebook.recipedetail.presentation.model.DescriptionItem
 import br.com.recipebook.recipedetail.presentation.model.IngredientHeaderItem
 import br.com.recipebook.recipedetail.presentation.model.InstructionHeaderItem
 import coil.compose.rememberImagePainter
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import me.onebone.toolbar.CollapsingToolbarScaffold
 import me.onebone.toolbar.ScrollStrategy
 import me.onebone.toolbar.rememberCollapsingToolbarScaffoldState
 
-@OptIn(ExperimentalCoroutinesApi::class)
 @Composable
 fun RecipeDetailView(
     state: RecipeDetailViewState,
@@ -134,10 +133,15 @@ private fun RecipeDetailLoaded(
     ) {
         LazyColumn {
             items(state.listItems) {
+                val modifier = if(state.listItems.last() == it) {
+                    Modifier.navigationBarsPadding()
+                } else {
+                    Modifier
+                }
                 when (it) {
-                    IngredientHeaderItem -> ItemHeader(stringResource(id = R.string.recipeDetailIngredients))
-                    InstructionHeaderItem -> ItemHeader(stringResource(id = R.string.recipeDetailInstruction))
-                    is DescriptionItem -> Item(it.description)
+                    IngredientHeaderItem -> ItemHeader(modifier, stringResource(id = R.string.recipeDetailIngredients))
+                    InstructionHeaderItem -> ItemHeader(modifier, stringResource(id = R.string.recipeDetailInstruction))
+                    is DescriptionItem -> Item(modifier, it.description)
                 }
             }
         }
@@ -145,19 +149,25 @@ private fun RecipeDetailLoaded(
 }
 
 @Composable
-private fun ItemHeader(text: String) {
+private fun ItemHeader(
+    modifier: Modifier = Modifier,
+    text: String,
+) {
     Text(
         text = text,
-        modifier = Modifier.padding(Spacing.MarginNormal100),
+        modifier = modifier.padding(Spacing.MarginNormal100),
         style = MaterialTheme.typography.h6,
     )
 }
 
 @Composable
-private fun Item(text: String) {
+private fun Item(
+    modifier: Modifier = Modifier,
+    text: String,
+) {
     Text(
         text = text,
-        modifier = Modifier.padding(
+        modifier = modifier.padding(
             start = Spacing.MarginLarge100,
             top = Spacing.MarginSmall100,
             end = Spacing.MarginSmall100,
