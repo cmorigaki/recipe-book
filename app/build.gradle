@@ -15,8 +15,8 @@ android {
 
         minSdk libs.versions.minSdk.get() as int
         targetSdk libs.versions.compileSdk.get() as int
-        versionCode 10010001 // x.xxx.xx-xx
-        versionName "1.1.0"
+        versionCode 10020001 // x.xxx.xx-xx
+        versionName "1.2.0"
     }
 
     buildTypes {
