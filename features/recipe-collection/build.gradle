@@ -5,6 +5,7 @@ android {
 
 dependencies {
     implementation libs.compose.swipeRefresh
+    implementation libs.compose.materialIcons
 
     implementation project(ProjectConfig.analytics)
     implementation project(ProjectConfig.device)

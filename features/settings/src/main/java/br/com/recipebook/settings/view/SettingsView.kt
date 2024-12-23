@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeContentPadding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -51,7 +52,7 @@ fun SettingsView(
     onItemClick: (item: SettingsItem) -> Unit,
 ) {
     Surface {
-        Column(modifier = Modifier.fillMaxSize()) {
+        Column(modifier = Modifier.fillMaxSize().safeContentPadding()) {
             DSTopAppBar(
                 titleResId = R.string.settings_title,
                 onBackClick = onBackClick,

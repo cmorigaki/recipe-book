@@ -1,11 +1,7 @@
 package br.com.recipebook.utilityandroid.presentation
 
 import androidx.lifecycle.ViewModel
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.channels.BroadcastChannel
-import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.asSharedFlow
 
 abstract class BaseViewModel<ViewState, Action, Command> : ViewModel() {

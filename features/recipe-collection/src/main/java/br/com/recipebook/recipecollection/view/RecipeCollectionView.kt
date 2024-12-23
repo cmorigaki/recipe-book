@@ -8,8 +8,10 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.sizeIn
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.itemsIndexed
@@ -45,11 +47,9 @@ import coil.compose.rememberImagePainter
 import coil.size.OriginalSize
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 private const val RecipeImgRatio = 1.3333334f
 
-@OptIn(ExperimentalCoroutinesApi::class)
 @Composable
 fun RecipeCollectionView(
     state: RecipeCollectionViewState,
@@ -92,6 +92,11 @@ private fun RecipeCollectionViewLoaded(
             ) {
                 itemsIndexed(state.recipes) { index, item ->
                     RecipeCollectionItem(
+                        modifier = if (index == state.recipes.lastIndex) {
+                            Modifier.navigationBarsPadding()
+                        } else {
+                            Modifier
+                        },
                         recipe = item,
                         index = index,
                         onItemClick = onItemClick,
@@ -102,12 +107,11 @@ private fun RecipeCollectionViewLoaded(
     }
 }
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 private fun TopBar(
     onSettingsClick: () -> Unit,
 ) {
-    Row(modifier = Modifier.fillMaxWidth()) {
+    Row(modifier = Modifier.fillMaxWidth().statusBarsPadding()) {
         Text(
             modifier = Modifier
                 .weight(1f)
@@ -134,18 +138,19 @@ private fun TopBar(
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 private fun RecipeCollectionItem(
+    modifier: Modifier = Modifier,
     recipe: RecipeItem,
     index: Int,
     onItemClick: (item: RecipeItem) -> Unit,
 ) {
-    val modifier = if (index % 2 == 0) {
-        Modifier.padding(
+    val newModifier = if (index % 2 == 0) {
+        modifier.padding(
             start = Spacing.MarginNormal100,
             end = Spacing.MarginNormal100 / 2,
             bottom = Spacing.MarginNormal100,
         )
     } else {
-        Modifier.padding(
+        modifier.padding(
             start = Spacing.MarginNormal100 / 2,
             end = Spacing.MarginNormal100,
             bottom = Spacing.MarginNormal100,
@@ -153,7 +158,7 @@ private fun RecipeCollectionItem(
     }
 
     Card(
-        modifier = modifier,
+        modifier = newModifier,
         onClick = { onItemClick(recipe) },
         elevation = 2.dp
     ) {

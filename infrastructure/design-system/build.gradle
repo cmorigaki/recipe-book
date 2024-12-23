@@ -38,6 +38,7 @@ dependencies {
     implementation platform(libs.compose.bom)
     implementation libs.compose.tooling
     implementation libs.compose.material
+    implementation libs.compose.materialIcons
 
     implementation project(ProjectConfig.utilityAndroid)
 }

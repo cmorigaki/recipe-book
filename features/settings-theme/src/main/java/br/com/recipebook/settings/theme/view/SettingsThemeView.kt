@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeContentPadding
 import androidx.compose.material.RadioButton
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
@@ -28,7 +29,7 @@ fun SettingsThemeView(
     onItemClick: (item: SettingsThemeAction) -> Unit,
 ) {
     Surface {
-        Column(modifier = Modifier.fillMaxSize()) {
+        Column(modifier = Modifier.fillMaxSize().safeContentPadding()) {
             DSTopAppBar(
                 titleResId = R.string.settings_theme_title,
                 onBackClick = onBackClick,
